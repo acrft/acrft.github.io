@@ -37,108 +37,91 @@
 <meta name="keywords" content="Minecraft, AlamCraft, سيرفر ماينكرافت, ماينكرافت, سيرفر عربي, Minecraft Server">
 <meta property="og:locale" content="ar_AR">
 <style>
+
 body{
 font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-background-color:#ffffff;
+background:#ffffff;
 color:#222;
 text-align:center;
-transition:background .4s,color .4s;
 margin:0;
 padding:0;
+transition:.4s;
 }
 
 .dark-mode{
-background-color:#121212;
-color:#ffffff;
-}
-
-.dark-mode h1{
-color:#2e7d32;
-}
-
-.dark-mode p,
-.dark-mode h2,
-.dark-mode h3{
+background:#121212;
 color:#ffffff;
 }
 
 .container{
 width:90%;
-margin:auto;
 max-width:700px;
-text-align:center;
+margin:auto;
 animation:fadeIn .6s ease;
 }
 
-.container img{
+img{
 display:block;
 margin:20px auto;
 border-radius:12px;
+pointer-events:none;
 }
 
 h1{
 color:#2e7d32;
-margin-top:10px;
 }
 
 button{
-background-color:#2e7d32;
-color:#ffffff;
+background:#2e7d32;
+color:white;
 border:none;
 padding:12px 18px;
 border-radius:10px;
 cursor:pointer;
-margin:10px;
+margin:8px;
 font-size:16px;
-transition:background .3s,transform .2s,box-shadow .2s;
+transition:.25s;
 }
 
 button:hover{
-background-color:#1b5e20;
+background:#1b5e20;
 transform:translateY(-2px);
-box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
-button:active{
-transform:scale(.96);
-}
-
-button:focus,
-a:focus{
-outline:2px solid #4CAF50;
-outline-offset:2px;
-}
-
-a{
-color:#1b5e20;
-text-decoration:none;
+.ip-box{
+background:#e8f5e9;
+padding:14px;
+border-radius:12px;
 font-weight:bold;
+margin:15px 0;
 }
 
-.dark-mode a{
-color:#4CAF50;
- }
+.dark-mode .ip-box{
+background:#1e2e1e;
+}
 
 .rules{
-text-align:right;
-direction:rtl;
 background:#f0f0f0;
-color:#111;
 padding:15px;
 border-radius:12px;
-margin-top:15px;
- }
- .rules p{
-color:#111;
-}
-
-.dark-mode .rules p{
-color:#ffffff;
+text-align:right;
 }
 
 .dark-mode .rules{
 background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.1);
+}
+
+.link-item{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+margin:2px auto;
+}
+
+.link-icon{
+width:20px;
+height:20px;
 }
 
 #toast{
@@ -150,189 +133,209 @@ color:white;
 padding:10px 16px;
 border-radius:8px;
 opacity:0;
-transition:opacity .3s;
-font-size:14px;
-z-index:999;
+transition:.3s;
 }
 
 #toast.show{
 opacity:1;
 }
-.dark-mode p[style]{
-color:#aaa !important;
- }
-
- .ip-box{
-background:#e8f5e9;
-padding:14px;
-border-radius:12px;
-font-weight:bold;
-margin:15px 0;
-font-size:17px;
-}
-
-.dark-mode .ip-box{
-background:#1e2e1e;
- }
 
 @keyframes fadeIn{
 from{opacity:0; transform:translateY(10px);}
 to{opacity:1; transform:translateY(0);}
- }
-
- body{
-user-select:none;
--webkit-user-select:none;
--moz-user-select:none;
--ms-user-select:none;
- }
-
- img{
-pointer-events:none;
- }
-
-/* 🔗 تنسيق روابط السيرفر */
-.link-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;                  /* المسافة الأفقية بين الأيقونة والنص */
-  margin: 2px auto !important; /* المسافة العمودية بين الروابط (قللها لـ 0 للالتصاق التام) */
-  padding: 0 !important;
-  width: fit-content;
-  line-height: 1.2;            /* لتقليل الارتفاع الشفاف حول النص */
 }
 
-/* 🖼️ تنسيق الأيقونات لتشبه الإيموجي */
-.link-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  flex-shrink: 0;
-  display: block;
-}
-
-/* 标题 - تقليل المسافة تحت العنوان "روابط السيرفر" */
-h2 {
-  margin: 15px 0 5px !important; 
-}
-
-ul{
-margin:5px 0;
- }
-
-.container{
-line-height:1.4;
- }
 </style>
 </head>
+
 <body>
+
 <div id="toast">✔ تم نسخ IP السيرفر</div>
-<div class="container" role="main">
-<img src="images/logo.webp?v=1"
-width="100"
-height="100"
-alt="شعار سيرفر علم كرافت"
-decoding="async"
-draggable="false"
-oncontextmenu="return false;">
-<h1>سيرفر علم كرافت ☘️</h1>
+
+<div class="container">
+
+<img src="images/logo.webp" width="100" height="100" alt="logo">
+
+<h1 data-i18n="title">سيرفر علم كرافت ☘️</h1>
+
 <div class="ip-box">
 Alameldin.aternos.me:28303
 </div>
-<button onclick="copyIP()" data-nosnippet>
+
+<button onclick="copyIP()" data-i18n="copyIP">
 📋 نسخ IP:PORT السيرفر
 </button>
-<p>☕️ إصدار الجافا: 1.7 - 1.21.11</p>
-<p>🛏️ إصدار البيدروك: 1.21.111 - 26.0</p>
-<button onclick="window.location.href='https://add.aternos.org/Alameldin'"
-aria-label="إضافة السيرفر إلى Minecraft Bedrock">
-إضافة السرفر في Minecraft Bedrock
-</button>
-<h2>⭐ مميزات السيرفر</h2>
-<ul style="list-style:none;padding:0;">
-<li>✅ يدعم Java و Bedrock</li>
-<li>✅ قوانين واضحة وعادلة</li>
-<li>✅ تحديثات مستمرة</li>
-<li>✅ إدارة نشطة</li>
-</ul>
-<div class="rules">
-<h2>📜 القوانين</h2>
-<p>1️⃣ ممنوع السب أو الإهانة بجميع أشكالها 🤬<br>2️⃣ ممنوع أي محتوى +18 بجميع أنواعه 🔞<br>3️⃣ ممنوع التنمّر أو التقليل من الآخرين 🐅<br>4️⃣ ممنوع الخناقات أو إثارة المشاكل 🤼‍♂️<br>5️⃣ ممنوع السبام أو الإزعاج المتكرر 📢<br>6️⃣ ممنوع الكذب أو نشر معلومات مضللة 😵<br>7️⃣ ممنوع التسلّط أو استغلال الصلاحيات 👀<br>8️⃣ ممنوع طلب أدمن أو صلاحيات 🦸‍♂️<br>9️⃣ ممنوع الترويج لسيرفرات أو روابط خارجية بدون إذن الإدارة 📢<br>🔟 ممنوع الكلام في السياسة أو المواضيع الحساسة 👨‍⚖️<br>1️⃣1️⃣ ممنوع الإزعاج بالمكالمات المتكررة 📵<br>1️⃣2️⃣ الالتزام باحترام الإدارة والأعضاء 🤝<br>1️⃣3️⃣ قوانين الأدمن هي نفس قوانين الأعضاء 👑<br>1️⃣4️⃣ للإدارة الحق في اتخاذ القرار المناسب في الحالات غير المذكورة ⚖️<br>1️⃣5️⃣ نظام العقوبات:<br>إنذار🟩 ⬅️ إنذار🟨 ⬅️ طرد🟥</p>
-<h3>👑 المشرفين:</h3>
-<p>علم جيمر ☘️، سراج 🦊، سنو 👑❄️</p>
-</div>
-<h2>🔗 روابط السيرفر</h2>
 
-<div class="link-item">
-<img src="images/bedrock.png" class="link-icon" alt="">
-<a href="https://add.aternos.org/Alameldin">
+<p data-i18n="java">☕️ إصدار الجافا: 1.7 - 1.21.11</p>
+<p data-i18n="bedrock">🛏️ إصدار البيدروك: 1.21.111 - 26.0</p>
+
+<button onclick="window.location.href='https://add.aternos.org/Alameldin'" data-i18n="addBedrock">
 إضافة السيرفر في Minecraft Bedrock
-</a>
+</button>
+
+<h2 data-i18n="features">⭐ مميزات السيرفر</h2>
+
+<ul style="list-style:none;padding:0">
+<li data-i18n="f1">✅ يدعم Java و Bedrock</li>
+<li data-i18n="f2">✅ قوانين واضحة وعادلة</li>
+<li data-i18n="f3">✅ تحديثات مستمرة</li>
+<li data-i18n="f4">✅ إدارة نشطة</li>
+</ul>
+
+<div class="rules">
+
+<h2 data-i18n="rules">📜 القوانين</h2>
+
+<p data-i18n="rulesText">
+1️⃣ ممنوع السب أو الإهانة<br>
+2️⃣ ممنوع محتوى +18<br>
+3️⃣ ممنوع التنمر<br>
+4️⃣ ممنوع إثارة المشاكل<br>
+5️⃣ ممنوع السبام<br>
+6️⃣ ممنوع نشر معلومات مضللة<br>
+7️⃣ ممنوع استغلال الصلاحيات<br>
+8️⃣ ممنوع طلب أدمن<br>
+9️⃣ ممنوع الترويج لسيرفرات أخرى<br>
+🔟 ممنوع السياسة<br>
+</p>
+
+<h3 data-i18n="admins">👑 المشرفين</h3>
+
+<p data-i18n="adminsList">
+علم جيمر ☘️، سراج 🦊، سنو 👑❄️
+</p>
+
+</div>
+
+<h2 data-i18n="links">🔗 روابط السيرفر</h2>
+
+<div class="link-item">
+<img src="images/bedrock.png" class="link-icon">
+<a href="https://add.aternos.org/Alameldin">Minecraft Bedrock</a>
 </div>
 
 <div class="link-item">
-<img src="images/whatsapp.png" class="link-icon" alt="">
-<a href="https://chat.whatsapp.com/CbS8wvqbwci5gsddPTRQbC">
-مجموعة الواتساب
-</a>
+<img src="images/whatsapp.png" class="link-icon">
+<a href="https://chat.whatsapp.com/CbS8wvqbwci5gsddPTRQbC">WhatsApp</a>
 </div>
 
 <div class="link-item">
-<img src="images/telegram.png" class="link-icon" alt="">
-<a href="https://t.me/Alam_Craft">
-مجموعة التليجرام
-</a>
+<img src="images/telegram.png" class="link-icon">
+<a href="https://t.me/Alam_Craft">Telegram</a>
 </div>
 
 <div class="link-item">
-<img src="images/messenger.png" class="link-icon" alt="">
-<a href="https://m.me/j/AbYYA9YcBq-JUEdz">
-مجموعة الماسينجر
-</a>
+<img src="images/messenger.png" class="link-icon">
+<a href="https://m.me/j/AbYYA9YcBq-JUEdz">Messenger</a>
 </div>
 
 <div class="link-item">
-<img src="images/discord.png" class="link-icon" alt="">
-<a href="https://discord.gg/BKys3Eu8t8">
-سيرفر الديسكورد
-</a>
+<img src="images/discord.png" class="link-icon">
+<a href="https://discord.gg/BKys3Eu8t8">Discord</a>
 </div>
-<button id="modeBtn">🌙 تبديل المظهر</button>
-<p style="color:#555;font-size:14px;margin-top:30px">© 2026 AlamCraft Server  - جميع الحقوق محفوظة</p>
+
+<button id="modeBtn">🌙</button>
+<button id="langBtn">🌐</button>
+
+<p style="font-size:14px;margin-top:30px">
+© 2026 AlamCraft Server
+</p>
+
 </div>
+
 <script>
+
 function copyIP(){
 navigator.clipboard.writeText("Alameldin.aternos.me:28303");
+
 const toast=document.getElementById("toast");
+
 toast.classList.add("show");
-setTimeout(()=>{toast.classList.remove("show")},2000)
+
+setTimeout(()=>toast.classList.remove("show"),2000)
 }
+
+/* DARK MODE */
+
 const modeBtn=document.getElementById('modeBtn');
 const body=document.body;
+
 const savedMode=localStorage.getItem('mode');
+
 if(savedMode==='dark'){body.classList.add('dark-mode')}
-if(!savedMode){if(window.matchMedia('(prefers-color-scheme: dark)').matches){body.classList.add('dark-mode')}}
-modeBtn.addEventListener('click',()=>{
+
+modeBtn.onclick=()=>{
 body.classList.toggle('dark-mode');
-if(body.classList.contains('dark-mode')){localStorage.setItem('mode','dark')}
-else{localStorage.setItem('mode','light')}
-});
+localStorage.setItem('mode',body.classList.contains('dark-mode')?'dark':'light');
+}
+
+/* LANGUAGE SYSTEM */
+
+const translations={
+
+ar:{
+title:"سيرفر علم كرافت ☘️",
+copyIP:"📋 نسخ IP:PORT السيرفر",
+java:"☕️ إصدار الجافا: 1.7 - 1.21.11",
+bedrock:"🛏️ إصدار البيدروك: 1.21.111 - 26.0",
+addBedrock:"إضافة السيرفر في Minecraft Bedrock",
+features:"⭐ مميزات السيرفر",
+f1:"✅ يدعم Java و Bedrock",
+f2:"✅ قوانين واضحة وعادلة",
+f3:"✅ تحديثات مستمرة",
+f4:"✅ إدارة نشطة",
+rules:"📜 القوانين",
+rulesText:"1️⃣ ممنوع السب أو الإهانة<br>2️⃣ ممنوع محتوى +18<br>3️⃣ ممنوع التنمر<br>4️⃣ ممنوع إثارة المشاكل<br>5️⃣ ممنوع السبام<br>6️⃣ ممنوع نشر معلومات مضللة<br>7️⃣ ممنوع استغلال الصلاحيات<br>8️⃣ ممنوع طلب أدمن<br>9️⃣ ممنوع الترويج لسيرفرات أخرى<br>🔟 ممنوع السياسة",
+admins:"👑 المشرفين",
+adminsList:"علم جيمر ☘️، سراج 🦊، سنو 👑❄️",
+links:"🔗 روابط السيرفر"
+},
+
+en:{
+title:"AlamCraft Server ☘️",
+copyIP:"📋 Copy Server IP:PORT",
+java:"☕️ Java Version: 1.7 - 1.21.11",
+bedrock:"🛏️ Bedrock Version: 1.21.111 - 26.0",
+addBedrock:"Add Server to Minecraft Bedrock",
+features:"⭐ Server Features",
+f1:"✅ Supports Java and Bedrock",
+f2:"✅ Clear and fair rules",
+f3:"✅ Frequent updates",
+f4:"✅ Active administration",
+rules:"📜 Rules",
+rulesText:"1️⃣ No insults<br>2️⃣ No +18 content<br>3️⃣ No bullying<br>4️⃣ No starting fights<br>5️⃣ No spam<br>6️⃣ No misinformation<br>7️⃣ No abusing permissions<br>8️⃣ No asking for admin<br>9️⃣ No advertising other servers<br>🔟 No politics",
+admins:"👑 Moderators",
+adminsList:"Alam Gamer ☘️, Siraj 🦊, Snow 👑❄️",
+links:"🔗 Server Links"
+}
+
+}
+
+let lang=localStorage.getItem("lang")||"ar";
+
+function setLang(l){
+
+lang=l;
+
+localStorage.setItem("lang",l);
+
+document.documentElement.lang=l;
+document.documentElement.dir=l==="ar"?"rtl":"ltr";
+
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+el.innerHTML=translations[l][key];
+})
+
+}
+
+setLang(lang);
+
+document.getElementById("langBtn").onclick=()=>{
+setLang(lang==="ar"?"en":"ar")
+}
+
 </script>
-<script>
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-</script>
-<script>
-document.addEventListener('keydown', function(e) {
-  if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's')) {
-    e.preventDefault();
-  }
-  if (e.key === 'F12') {
-    e.preventDefault();
-  }
-});
-</script>
+
 </body>
 </html>
