@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (currentLang === 'en') {
+  if (currentLang === 'ar') {
     translatePage('en');
   }
 });
