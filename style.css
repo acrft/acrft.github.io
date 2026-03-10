@@ -1,204 +1,208 @@
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffffff;
-      color: #222;
-      text-align: center;
-      transition:
-        background 0.4s,
-        color 0.4s;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #222;
+  text-align: center;
+  transition:
+    background 0.4s,
+    color 0.4s;
+  margin: 0;
+  padding: 0;
+}
 
-    .dark-mode {
-      background-color: #121212;
-      color: #ffffff;
-    }
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
 
-    .dark-mode h1 {
-      color: #2e7d32;
-    }
+.dark-mode h1 {
+  color: #2e7d32;
+}
 
-    .dark-mode p,
-    .dark-mode h2,
-    .dark-mode h3 {
-      color: #ffffff;
-    }
+.dark-mode p,
+.dark-mode h2,
+.dark-mode h3 {
+  color: #ffffff;
+}
 
-    .container {
-      width: 90%;
-      margin: auto;
-      max-width: 700px;
-      text-align: center;
-      animation: fadeIn 0.6s ease;
-    }
+.container {
+  width: 90%;
+  margin: auto;
+  max-width: 700px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
 
-    .container img {
-      display: block;
-      margin: 20px auto;
-      border-radius: 12px;
-    }
+.container img {
+  display: block;
+  margin: 20px auto;
+  border-radius: 12px;
+}
 
-    h1 {
-      color: #2e7d32;
-      margin-top: 10px;
-    }
+h1 {
+  color: #2e7d32;
+  margin-top: 10px;
+}
 
-    button {
-      background-color: #2e7d32;
-      color: #ffffff;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 10px;
-      font-size: 16px;
-      transition:
-        background 0.3s,
-        transform 0.2s,
-        box-shadow 0.2s;
-    }
+button {
+  background-color: #2e7d32;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 16px;
+  transition:
+    background 0.3s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
 
-    button:hover {
-      background-color: #1b5e20;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-    button:active {
-      transform: scale(0.96);
-    }
+button:active {
+  transform: scale(0.96);
+}
 
-    button:focus,
-    a:focus {
-      outline: 2px solid #4caf50;
-      outline-offset: 2px;
-    }
+button:focus,
+a:focus {
+  outline: 2px solid #4caf50;
+  outline-offset: 2px;
+}
 
-    a {
-      color: #1b5e20;
-      text-decoration: none;
-      font-weight: bold;
-    }
+a {
+  color: #1b5e20;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    .dark-mode a {
-      color: #4caf50;
-    }
+.dark-mode a {
+  color: #4caf50;
+}
 
-    .rules {
-      text-align: right;
-      direction: rtl;
-      background: #f0f0f0;
-      color: #111;
-      padding: 15px;
-      border-radius: 12px;
-      margin-top: 15px;
-    }
+.rules {
+  text-align: right;
+  direction: rtl;
+  background: #f0f0f0;
+  color: #111;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
 
-    .rules li {
-      color: #111;
-    }
+.rules ul {
+  list-style: none;
+}
 
-    .dark-mode .rules li {
-      color: #ffffff;
-    }
+.rules li {
+  color: #111;
+}
 
-    .dark-mode .rules {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+.dark-mode .rules li {
+  color: #ffffff;
+}
 
-    #toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #4caf50;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 14px;
-      z-index: 999;
-    }
+.dark-mode .rules {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-    #toast.show {
-      opacity: 1;
-    }
+#toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+  z-index: 999;
+}
 
-    .dark-mode p[style] {
-      color: #aaa !important;
-    }
+#toast.show {
+  opacity: 1;
+}
 
-    .ip-box {
-      background: #e8f5e9;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: bold;
-      margin: 15px 0;
-      font-size: 17px;
-    }
+.dark-mode p[style] {
+  color: #aaa !important;
+}
 
-    .dark-mode .ip-box {
-      background: #1e2e1e;
-    }
+.ip-box {
+  background: #e8f5e9;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin: 15px 0;
+  font-size: 17px;
+}
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
+.dark-mode .ip-box {
+  background: #1e2e1e;
+}
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 
-    body {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    img {
-      pointer-events: none;
-    }
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
-    /* 🔗 تنسيق روابط السيرفر */
-    .link-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      /* المسافة الأفقية بين الأيقونة والنص */
-      margin: 2px auto !important;
-      /* المسافة العمودية بين الروابط (قللها لـ 0 للالتصاق التام) */
-      padding: 0 !important;
-      width: fit-content;
-      line-height: 1.2;
-      /* لتقليل الارتفاع الشفاف حول النص */
-    }
+img {
+  pointer-events: none;
+}
 
-    /* 🖼️ تنسيق الأيقونات لتشبه الإيموجي */
-    .link-icon {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      flex-shrink: 0;
-      display: block;
-    }
+/* 🔗 تنسيق روابط السيرفر */
+.link-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* المسافة الأفقية بين الأيقونة والنص */
+  margin: 2px auto !important;
+  /* المسافة العمودية بين الروابط (قللها لـ 0 للالتصاق التام) */
+  padding: 0 !important;
+  width: fit-content;
+  line-height: 1.2;
+  /* لتقليل الارتفاع الشفاف حول النص */
+}
 
-    /* 标题 - تقليل المسافة تحت العنوان "روابط السيرفر" */
-    h2 {
-      margin: 15px 0 5px !important;
-    }
+/* 🖼️ تنسيق الأيقونات لتشبه الإيموجي */
+.link-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
 
-    ul {
-      margin: 5px 0;
-    }
+/* 标题 - تقليل المسافة تحت العنوان "روابط السيرفر" */
+h2 {
+  margin: 15px 0 5px !important;
+}
 
-    .container {
-      line-height: 1.4;
-    }
+ul {
+  margin: 5px 0;
+}
+
+.container {
+  line-height: 1.4;
+}
