@@ -318,7 +318,7 @@
         <a id="discord" href="https://discord.gg/BKys3Eu8t8"> سيرفر الديسكورد </a>
       </div>
       <button id="modeBtn">🌙</button>
-      <button id="langBtn">🌐</button>
+      <button id="langBtn" onclick="setLanguage(ar)" >🌐</button>
       <p style="color: #555; font-size: 14px; margin-top: 30px">
         © 2026 AlamCraft Server - جميع الحقوق محفوظة
       </p>
@@ -438,11 +438,7 @@
         } else {
           document.documentElement.dir = "rtl";
         }
-      }
-
-      document.getElementById("langBtn").addEventListener("click", () => {
-        setLanguage(currentLang === "ar" ? "en" : "ar");
-      });
+      
 
       setLanguage(currentLang);
     </script>
