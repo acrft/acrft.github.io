@@ -275,18 +275,18 @@
       </ul>
       <div class="rules">
         <h2 data-i18n="rules">📜 القوانين</h2>
-        <p data-i18n="rulesText">
-          1️⃣ ممنوع السب أو الإهانة<br>
-          2️⃣ ممنوع محتوى +18<br>
-          3️⃣ ممنوع التنمر<br>
-          4️⃣ ممنوع إثارة المشاكل<br>
-          5️⃣ ممنوع السبام<br>
-          6️⃣ ممنوع نشر معلومات مضللة<br>
-          7️⃣ ممنوع استغلال الصلاحيات<br>
-          8️⃣ ممنوع طلب أدمن<br>
-          9️⃣ ممنوع الترويج لسيرفرات أخرى<br>
-          🔟 ممنوع السياسة<br>
-        </p>
+        <ul class="rules-list">
+          <li>1️⃣ ممنوع السب أو الإهانة</li>
+          <li>2️⃣ ممنوع محتوى +18</li>
+          <li>3️⃣ ممنوع التنمر</li>
+          <li>4️⃣ ممنوع إثارة المشاكل</li>
+          <li>5️⃣ ممنوع السبام</li>
+          <li>6️⃣ ممنوع نشر معلومات مضللة</li>
+          <li>7️⃣ ممنوع استغلال الصلاحيات</li>
+          <li>8️⃣ ممنوع طلب أدمن</li>
+          <li>9️⃣ ممنوع الترويج لسيرفرات أخرى</li>
+          <li>🔟 ممنوع السياسة</li>
+        </ul>
         <h3 data-i18n="admins">👑 المشرفين</h3>
         <p data-i18n="adminsList">
           علم جيمر ☘️، سراج 🦊، سنو 👑❄️
@@ -318,7 +318,7 @@
         <a id="discord" href="https://discord.gg/BKys3Eu8t8"> سيرفر الديسكورد </a>
       </div>
       <button id="modeBtn">🌙</button>
-      <button id="langBtn" onclick="setLanguage(ar)" >🌐</button>
+      <button id="langBtn" onclick="setLanguage(ar)">🌐</button>
       <p style="color: #555; font-size: 14px; margin-top: 30px">
         © 2026 AlamCraft Server - جميع الحقوق محفوظة
       </p>
@@ -366,81 +366,6 @@
           e.preventDefault();
         }
       });
-
-      const translations ={
-        ar: {
-          title: "سيرفر علم كرافت ☘️",
-          copyBtn: "📋 نسخ IP:PORT السيرفر",
-          javaVersion: "☕️ إصدار الجافا: 1.7 - 1.21.11",
-          bedrockVersion: "🛏️ إصدار البيدروك: 1.21.111 - 26.0",
-          featuresTitle: "⭐ مميزات السيرفر",
-          rulesTitle: "📜 القوانين",
-          linksTitle: "🔗 روابط السيرفر",
-          langBtn: "🌐 English",
-          addServer: "إضافة السيرفر في Minecraft Bedrock",
-          whatsapp: "مجموعة الواتساب",
-          telegram: "مجموعة التليجرام",
-          messenger: "مجموعة الماسينجر",
-          discord: "سيرفر الديسكورد",
-        },
-
-        en: {
-          title: "AlamCraft Server ☘️",
-          copyBtn: "📋 Copy Server IP:PORT",
-          javaVersion: "☕️ Java Version: 1.7 - 1.21.11",
-          bedrockVersion: "🛏️ Bedrock Version: 1.21.111 - 26.0",
-          featuresTitle: "⭐ Server Features",
-          rulesTitle: "📜 Rules",
-          linksTitle: "🔗 Server Links",
-          langBtn: "🌐 العربية",
-          addServer: "Add the server to Minecraft Bedrock",
-          whatsapp: "Whatsapp group",
-          telegram: "Telegram group",
-          messenger: "Messenger group",
-          discord: "Discord server",
-        },
-      };
-
-      let currentLang = localStorage.getItem("lang") || "ar";
-
-      function setLanguage(lang) {
-        currentLang = lang;
-        localStorage.setItem("lang", lang);
-
-        document.getElementById("title").innerText = translations[lang].title;
-        document.getElementById("copyBtn").innerText =
-          translations[lang].copyBtn;
-        document.getElementById("javaVersion").innerText =
-          translations[lang].javaVersion;
-        document.getElementById("bedrockVersion").innerText =
-          translations[lang].bedrockVersion;
-        document.getElementById("featuresTitle").innerText =
-          translations[lang].featuresTitle;
-        document.getElementById("rulesTitle").innerText =
-          translations[lang].rulesTitle;
-        document.getElementById("linksTitle").innerText =
-          translations[lang].linksTitle;
-        document.getElementById("addServer").innerText =
-          translations[lang].addServer;
-        document.getElementById("whatsapp").innerText =
-          translations[lang].whatsapp;
-        document.getElementById("telegram").innerText =
-          translations[lang].telegram;
-        document.getElementById("messenger").innerText =
-          translations[lang].messenger;
-        document.getElementById("discord").innerText =
-          translations[lang].discord;
-
-        document.documentElement.lang = lang;
-
-        if (lang === "en") {
-          document.documentElement.dir = "ltr";
-        } else {
-          document.documentElement.dir = "rtl";
-        }
-      }
-
-      setLanguage(currentLang);
     </script>
  </body>
 </html>
