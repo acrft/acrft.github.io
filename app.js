@@ -119,7 +119,7 @@ async function translatePage(target) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const langBtn = document.getElementById('langBtn');
+  const langBtn = document.querySelector(".langBtn");
 
   if (langBtn) {
     langBtn.addEventListener('click', () => {
