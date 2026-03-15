@@ -106,37 +106,52 @@ const translations = {
   }
 };
 
+// Initialize language from storage or default to Arabic
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
-  // 1. ترجمة كل العناصر التي تحتوي على data-i18n
+  console.log("Updating content to:", currentLang);
+
   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
     if (translations[currentLang][key]) {
-      // إذا كان العنصر زر أو رابط أو نص عادي
-      if (element.tagName === 'A' || element.tagName === 'BUTTON' || element.tagName === 'P' || element.tagName === 'LI' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'SPAN') {
+      // Update text based on element type
+      if (element.tagName === 'META') {
+        element.setAttribute('content', translations[currentLang][key]);
+      } else {
         element.innerText = translations[currentLang][key];
       }
     }
   });
 
-  // 2. تحديث اتجاه الصفحة (RTL/LTR)
+  // Update Page Direction and Language attribute
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-  // 3. تحديث رسالة الـ Toast (تغيير نص العنصر المخفي)
-  document.getElementById('toast').innerText = translations[currentLang].toastMsg;
+  // Specifically handle the toast since it might be hidden
+  const toast = document.getElementById('toast');
+  if (toast) toast.innerText = translations[currentLang].toastMsg;
 }
 
-// تبديل اللغة عند الضغط على الزر
-document.querySelector('.langBtn').addEventListener('click', () => {
+// Function to toggle language
+function toggleLanguage() {
   currentLang = currentLang === 'ar' ? 'en' : 'ar';
   localStorage.setItem('lang', currentLang);
   updateContent();
-});
+}
 
-// تشغيل الترجمة عند تحميل الصفحة
-window.addEventListener('DOMContentLoaded', updateContent);
+// Make sure the DOM is fully loaded before attaching events
+document.addEventListener('DOMContentLoaded', () => {
+  updateContent();
+
+  const langBtn = document.querySelector('.langBtn');
+  if (langBtn) {
+    langBtn.addEventListener('click', toggleLanguage);
+    console.log("Language button listener attached successfully.");
+  } else {
+    console.error("Language button (.langBtn) not found in HTML!");
+  }
+});
 
 
 
