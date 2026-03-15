@@ -110,28 +110,34 @@ const translations = {
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
-  console.log("Updating content to:", currentLang);
-
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
+  // 1. Update all text
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
     if (translations[currentLang][key]) {
-      // Update text based on element type
-      if (element.tagName === 'META') {
-        element.setAttribute('content', translations[currentLang][key]);
-      } else {
-        element.innerText = translations[currentLang][key];
-      }
+      el.innerText = translations[currentLang][key];
     }
   });
 
-  // Update Page Direction and Language attribute
+  // 2. THE FIX: Update Page Direction and Language attribute
+  // This flips the entire layout from Right-to-Left to Left-to-Right
+  document.documentElement.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
   document.documentElement.lang = currentLang;
-  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-  // Specifically handle the toast since it might be hidden
-  const toast = document.getElementById('toast');
-  if (toast) toast.innerText = translations[currentLang].toastMsg;
+  // 3. Optional: Flip text alignment specifically for containers
+  const container = document.querySelector('.container');
+  if (container) {
+    container.style.textAlign = (currentLang === 'ar') ? 'right' : 'left';
+  }
 }
+
+// Update Page Direction and Language attribute
+document.documentElement.lang = currentLang;
+document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+// Specifically handle the toast since it might be hidden
+const toast = document.getElementById('toast');
+if (toast) toast.innerText = translations[currentLang].toastMsg;
+
 
 // Function to toggle language
 function toggleLanguage() {
