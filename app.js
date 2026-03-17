@@ -123,27 +123,27 @@ const translations = {
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
-  console.log("Updating content to:", currentLang);
-
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
     if (translations[currentLang][key]) {
-      // Update text based on element type
-      if (element.tagName === 'META') {
-        element.setAttribute('content', translations[currentLang][key]);
-      } else {
-        element.innerText = translations[currentLang][key];
-      }
+      el.innerText = translations[currentLang][key];
     }
   });
 
-  // Update Page Direction and Language attribute
+  // This is the magic line that flips the text direction
+  document.documentElement.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
   document.documentElement.lang = currentLang;
-  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-  // Specifically handle the toast since it might be hidden
-  const toast = document.getElementById('toast');
-  if (toast) toast.innerText = translations[currentLang].toastMsg;
+  // Optional: specifically force the rules container if it's acting stubborn
+  const rulesList = document.querySelector('.rules-list');
+  if (rulesList) {
+    rulesList.style.textAlign = (currentLang === 'ar') ? 'right' : 'left';
+  }
+}
+
+// Specifically handle the toast since it might be hidden
+const toast = document.getElementById('toast');
+if (toast) toast.innerText = translations[currentLang].toastMsg;
 }
 
 // Function to toggle language
