@@ -214,3 +214,24 @@ ul {
   unicode-bidi: isolate;
   direction: rtl !important; /* Forces the emoji/text sequence to stay as written */
 }
+
+/* This container holds your 🌙 and 🌐 buttons */
+.controls {
+  display: flex;
+  gap: 15px;
+  /* Force this specific div to ALWAYS be Left-to-Right */
+  direction: ltr !important;
+  /* Optional: ensures it stays centered or pinned to a side */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Ensure the buttons don't inherit any weird padding when flipped */
+.controls button {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  /* This prevents the emojis inside from flipping */
+  unicode-bidi: isolate;
+}
