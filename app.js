@@ -108,7 +108,7 @@ const translations = {
     punishSystem: "🟥Warning🟩 ➡️ Warning🟨 ➡️ Kick",
     adminsTitle: "👑 Staff",
     // Keeping names and emojis in the specific order you prefer
-    adminsNames: "Alam Gamer ☘️, Lost_fox 🦊, Snow 👑❄️, Mohammed Mysticlad 💻, Zero X ❎, Mohammed Gamer X 🎮",
+    adminsNames: "Alam Gamer ☘️, Lost_fox 🦊, Snow 👑❄️, Mysticlad 💻, Zero X ❎, Mohammed Gamer X 🎮",
     linksTitle: "🔗 Server Links",
     whatsapp: "WhatsApp Group",
     telegram: "Telegram Group",
