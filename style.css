@@ -95,11 +95,11 @@ a {
 }
 
 .rules-list {
-  padding: 20px;
-  list-style: none; /* Removes any default dots */
-  margin: 0 auto;
-  max-width: 90%; /* Keeps it from stretching too wide */
-  text-align: start !important; /* Left for EN, Right for AR */
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  text-align: start !important;
+  max-width: fit-content;
 }
 
 .rules ul {
@@ -109,11 +109,17 @@ a {
 .rules li {
   color: #111;
   margin-bottom: 12px;
-  line-height: 1.6;
-  white-space: nowrap; /* Prevents the number emoji from breaking into two lines */
-  display: flex; /* Better for aligning the number with the text */
-  align-items: flex-start;
-  gap: 8px; /* Clean, consistent gap between the number and the rule */
+  line-height: 1.5;
+  white-space: normal;
+  display: block;
+}
+
+.rules h3,
+[data-i18n='punishSystem'],
+[data-i18n='adminsNames'] {
+  text-align: start !important;
+  display: block;
+  margin-top: 15px;
 }
 
 .dark-mode .rules li {
