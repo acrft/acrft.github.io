@@ -86,8 +86,7 @@ a {
 }
 
 .rules {
-  text-align: right;
-  direction: rtl;
+  text-align: start;
   background: #f0f0f0;
   color: #111;
   padding: 15px;
