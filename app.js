@@ -107,7 +107,6 @@ const translations = {
     rule15: "1️⃣5️⃣ Punishment System:",
     punishSystem: "🟥Warning🟩 ➡️ Warning🟨 ➡️ Kick",
     adminsTitle: "👑 Staff",
-    // Keeping names and emojis in the specific order you prefer
     adminsNames: "🎮 Alam Gamer ☘️, Lost_fox 🦊, Snow 👑❄️, Mysticlad 💻, Zerox ❎, Mohammed Gamer X",
     linksTitle: "🔗 Server Links",
     whatsapp: "WhatsApp Group",
