@@ -94,14 +94,12 @@ a {
   margin-top: 15px;
 }
 
+.rules ul {
+  list-style: none;
+}
+
 .rules li {
   color: #111;
-  margin-bottom: 12px;
-  line-height: 1.6;
-  white-space: nowrap; /* Prevents the number emoji from breaking into two lines */
-  display: flex; /* Better for aligning the number with the text */
-  align-items: flex-start;
-  gap: 8px; /* Clean, consistent gap between the number and the rule */
 }
 
 .dark-mode .rules li {
