@@ -144,7 +144,6 @@ function updateContent() {
 // Specifically handle the toast since it might be hidden
 const toast = document.getElementById('toast');
 if (toast) toast.innerText = translations[currentLang].toastMsg;
-}
 
 // Function to toggle language
 function toggleLanguage() {
