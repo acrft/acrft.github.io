@@ -232,6 +232,5 @@ ul {
   padding: 10px;
   border-radius: 8px;
   border: none;
-  /* This prevents the emojis inside from flipping */
-  unicode-bidi: isolate;
+  direction: ltr !important;
 }
