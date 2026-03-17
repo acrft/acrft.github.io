@@ -105,7 +105,7 @@ const translations = {
     rule13: "1️⃣3️⃣ Admin rules are the same as member rules 👑",
     rule14: "1️⃣4️⃣ Staff reserved the right to decide in unlisted cases ⚖️",
     rule15: "1️⃣5️⃣ Punishment System:",
-    punishSystem: "🟥Warning🟩 ⬅️ Warning🟨 ⬅️ Kick",
+    punishSystem: "🟥Warning🟩 ➡️ Warning🟨 ➡️ Kick",
     adminsTitle: "👑 Staff",
     // Keeping names and emojis in the specific order you prefer
     adminsNames: "👑❄️ Alam Gamer ☘️, Seraj 🦊, Snow",
