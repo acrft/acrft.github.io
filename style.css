@@ -208,3 +208,9 @@ ul {
 .container {
   line-height: 1.4;
 }
+
+.keep-order {
+    display: inline-block;
+    unicode-bidi: isolate;
+    direction: rtl !important; /* Forces the emoji/text sequence to stay as written */
+}
