@@ -185,15 +185,16 @@ img {
   /* لتقليل الارتفاع الشفاف حول النص */
 }
 
-
 .link-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain; /* يمنع تمدد الصورة ويحافظ على أبعادها الأصلية */
-  flex-shrink: 0;
+  width: 20px !important;
+  height: 20px !important;
+  /* This removes the circle effect */
+  border-radius: 0 !important;
+  /* This ensures the image isn't cropped into a circle by the container */
+  clip-path: none !important;
+  /* This prevents the icon from being squished */
+  object-fit: contain !important;
   display: block;
-  border-radius: 0; /* هذا السطر يضمن عدم وجود أي انحناء دائري */
-  margin-inline-end: 10px; /* مسافة بين الأيقونة والنص تدعم الاتجاهين */
 }
 
 /* 标题 - تقليل المسافة تحت العنوان "روابط السيرفر" */
@@ -210,7 +211,7 @@ ul {
 }
 
 .keep-order {
-    display: inline-block;
-    unicode-bidi: isolate;
-    direction: rtl !important; /* Forces the emoji/text sequence to stay as written */
+  display: inline-block;
+  unicode-bidi: isolate;
+  direction: rtl !important; /* Forces the emoji/text sequence to stay as written */
 }
