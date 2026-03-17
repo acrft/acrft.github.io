@@ -69,7 +69,7 @@ const translations = {
     rule15: "1️⃣5️⃣ نظام العقوبات:",
     punishSystem: "إنذار🟩 ⬅️ إنذار🟨 ⬅️ طرد🟥",
     adminsTitle: "👑 المشرفين",
-    adminsNames: "علم جيمر ☘️، سراج 🦊، سنو 👑❄️, محمد ميستيكلاد 💻",
+    adminsNames: " علم جيمر ☘️، سراج 🦊، سنو 👑❄️, محمد ميستيكلاد 💻, زيرو اكس ❎, محمد جيمر اكس 🎮",
     linksTitle: "🔗 روابط السيرفر",
     whatsapp: "مجموعة الواتساب",
     telegram: "مجموعة التليجرام",
@@ -108,7 +108,7 @@ const translations = {
     punishSystem: "🟥Warning🟩 ➡️ Warning🟨 ➡️ Kick",
     adminsTitle: "👑 Staff",
     // Keeping names and emojis in the specific order you prefer
-    adminsNames: "💻 Alam Gamer ☘️, Seraj 🦊, Snow 👑❄️, Mohamed aka Mysticlad",
+    adminsNames: "Alam Gamer ☘️, Lost_fox 🦊, Snow 👑❄️, Mohammed Mysticlad 💻, Zero X ❎, Mohammed Gamer X 🎮",
     linksTitle: "🔗 Server Links",
     whatsapp: "WhatsApp Group",
     telegram: "Telegram Group",
