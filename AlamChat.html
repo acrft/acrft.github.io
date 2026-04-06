@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlamChat PRO</title><style>
+body { margin:0; font-family: monospace; background:#0f3d0f; color:#fff; }
+.login { display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; }
+button { padding:10px; background:#55ff55; border:2px solid #003300; cursor:pointer; }
+.app { display:none; height:100vh; }
+.sidebar { width:30%; background:#123d12; overflow:auto; border-right:4px solid #00ff00; }
+.friend { padding:10px; border-bottom:1px solid #00ff00; cursor:pointer; }
+.chat-area { width:70%; display:flex; flex-direction:column; }
+.messages { flex:1; overflow:auto; padding:10px; }
+.message { margin:5px; padding:8px; border:2px solid #003300; }
+.sent { background:#00aa00; text-align:right; }
+.received { background:#1f5c1f; }
+</style></head>
+<body><div class="login" id="login">
+<h1>🎮 AlamChat</h1>
+<button onclick="login()">Login with Google</button>
+</div><div class="app" id="app">
+<div class="sidebar">
+<h3>Friends</h3>
+<div id="friends"></div>
+</div><div class="chat-area">
+<div id="chatName">اختار صديق</div>
+<div class="messages" id="messages"></div><input id="msgInput" placeholder="اكتب رسالة">
+<button onclick="sendMessage()">إرسال</button><input type="file" id="imgInput">
+<button onclick="sendImage()">📸 صورة</button><button onclick="recordAudio()">🎤 تسجيل 3 ثواني</button>
+
+</div>
+</div><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script><script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+  authDomain: "alamchat1.firebaseapp.com",
+  databaseURL: "https://alamchat1-default-rtdb.firebaseio.com",
+  projectId: "alamchat1",
+  storageBucket: "alamchat1.appspot.com",
+  messagingSenderId: "165465387126",
+  appId: "1:165465387126:web:74f4e993aad07bae8f2f57"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+let currentUser, currentChat, mediaRecorder, audioChunks=[];
+
+function login(){
+ const provider = new firebase.auth.GoogleAuthProvider();
+ firebase.auth().signInWithPopup(provider);
+}
+
+firebase.auth().onAuthStateChanged(user=>{
+ if(user){
+  currentUser=user;
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='flex';
+
+  setOnline(true);
+  loadFriends();
+ }
+});
+
+function setOnline(status){
+ firebase.database().ref("users/"+currentUser.uid).update({
+  uid: currentUser.uid,
+  name: currentUser.displayName,
+  online: status
+ });
+}
+
+window.onbeforeunload = ()=> setOnline(false);
+
+function loadFriends(){
+ firebase.database().ref("users").on("value", snap=>{
+  const div = document.getElementById("friends");
+  div.innerHTML="";
+
+  snap.forEach(child=>{
+   const u = child.val();
+   if(u.uid!==currentUser.uid){
+    const f=document.createElement("div");
+    f.className="friend";
+    f.innerHTML = u.name + (u.online?" 🟢":" ⚫");
+    f.onclick=()=>openChat(u.uid,u.name);
+    div.appendChild(f);
+   }
+  });
+ });
+}
+
+function openChat(uid,name){
+ currentChat=uid;
+ document.getElementById("chatName").innerText=name;
+ document.getElementById("messages").innerHTML="";
+
+ firebase.database().ref("messages").on("child_added", snap=>{
+  const m=snap.val();
+  if((m.from===currentUser.uid && m.to===uid)||(m.from===uid && m.to===currentUser.uid)){
+    const d=document.createElement("div");
+    d.classList.add("message", m.from===currentUser.uid?"sent":"received");
+
+    if(m.image){
+      d.innerHTML=`<img src="${m.image}" width="150">`;
+    }else if(m.audio){
+      d.innerHTML=`<audio controls src="${m.audio}"></audio>`;
+    }else{
+      d.innerText=m.text;
+    }
+
+    document.getElementById("messages").appendChild(d);
+  }
+ });
+}
+
+function sendMessage(){
+ const text=document.getElementById("msgInput").value;
+ if(!text) return;
+
+ firebase.database().ref("messages").push({
+  text,
+  from:currentUser.uid,
+  to:currentChat
+ });
+
+ document.getElementById("msgInput").value="";
+}
+
+function sendImage(){
+ const file=document.getElementById("imgInput").files[0];
+ if(!file) return;
+
+ const ref=firebase.storage().ref("images/"+Date.now());
+ ref.put(file).then(()=>{
+  ref.getDownloadURL().then(url=>{
+    firebase.database().ref("messages").push({
+      image:url,
+      from:currentUser.uid,
+      to:currentChat
+    });
+  });
+ });
+}
+
+function recordAudio(){
+ navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+  mediaRecorder=new MediaRecorder(stream);
+  mediaRecorder.start();
+
+  mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+
+  setTimeout(()=>{
+    mediaRecorder.stop();
+    mediaRecorder.onstop=()=>{
+      const blob=new Blob(audioChunks);
+      const ref=firebase.storage().ref("audio/"+Date.now());
+
+      ref.put(blob).then(()=>{
+        ref.getDownloadURL().then(url=>{
+          firebase.database().ref("messages").push({
+            audio:url,
+            from:currentUser.uid,
+            to:currentChat
+          });
+        });
+      });
+
+      audioChunks=[];
+    };
+  },3000);
+ });
+}
+</script></body>
+</html>
