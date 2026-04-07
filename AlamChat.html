@@ -2,106 +2,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat PRO</title><style>
+<title>AlamChat</title><style>
 body {
   margin:0;
-  font-family: monospace;
-  background:#0f3d0f;
-  color:#fff;
+  font-family:sans-serif;
+  background:#0b141a;
 }
 
-/* شاشة تسجيل الدخول */
+/* Login */
 .login {
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   flex-direction:column;
+  color:white;
 }
 
-/* التطبيق */
+/* App */
 .app {
   display:none;
   height:100vh;
+}
+
+/* Layout */
+.container {
   display:flex;
+  height:100%;
 }
 
-/* قائمة الأصدقاء */
+/* Sidebar */
 .sidebar {
-  width:30%;
-  background:#123d12;
-  overflow-y:auto;
-  border-right:3px solid #00ff00;
-}
-
-/* الشات */
-.chat-area {
-  width:70%;
+  width:35%;
+  background:#202c33;
+  color:white;
   display:flex;
   flex-direction:column;
 }
 
-/* الرسائل */
+.top {
+  padding:10px;
+  border-bottom:1px solid #333;
+}
+
+.friend {
+  padding:12px;
+  border-bottom:1px solid #333;
+  cursor:pointer;
+}
+
+.friend:hover {
+  background:#2a3942;
+}
+
+/* Chat */
+.chat {
+  width:65%;
+  display:flex;
+  flex-direction:column;
+}
+
+.header {
+  padding:15px;
+  background:#202c33;
+  color:white;
+}
+
 .messages {
   flex:1;
   overflow-y:auto;
   padding:10px;
-}
-
-/* الرسالة */
-.message {
-  margin:5px;
-  padding:8px;
-  border-radius:10px;
-  max-width:70%;
-}
-
-.sent {
-  background:#00aa00;
-  align-self:flex-end;
-}
-
-.received {
-  background:#1f5c1f;
-}
-
-/* منطقة الإدخال */
-.input-area {
-  position:sticky;
-  bottom:0;
-  background:#123d12;
-  padding:10px;
   display:flex;
   flex-direction:column;
+}
+
+/* Messages */
+.msg {
+  margin:5px;
+  padding:8px;
+  max-width:65%;
+  border-radius:10px;
+}
+
+.me {
+  background:#005c4b;
+  align-self:flex-end;
+  color:white;
+}
+
+.other {
+  background:#202c33;
+  color:white;
+}
+
+/* Input */
+.input {
+  display:flex;
+  padding:10px;
+  background:#202c33;
   gap:5px;
+}
+
+.input input {
+  flex:1;
+  padding:10px;
 }
 
 button {
   padding:8px;
-  background:#55ff55;
   border:none;
+  background:#25d366;
   cursor:pointer;
 }
-</style></head><body><div class="login" id="login">
+</style></head><body><!-- Login --><div class="login" id="login">
   <h1>🎮 AlamChat</h1>
   <button onclick="login()">Login with Google</button>
-</div><div class="app" id="app">  <div class="sidebar">
-    <h3>Friends</h3>
-    <div id="friends"></div>
-  </div>  <div class="chat-area">
-    <div id="chatName">اختار صديق</div><div class="messages" id="messages"></div>
+</div><!-- App --><div class="app" id="app">
+<div class="container">  <!-- Sidebar -->  <div class="sidebar">
+    <div class="top">
+      <input id="friendId" placeholder="UID صديق">
+      <button onclick="addFriend()">➕</button>
+    </div><div id="friends"></div>
 
-<div class="input-area">
+  </div>  <!-- Chat -->  <div class="chat">
+    <div class="header" id="chatName">اختار صديق</div><div class="messages" id="messages"></div>
+
+<div class="input">
   <input id="msgInput" placeholder="اكتب رسالة">
-  <button onclick="sendMessage()">إرسال</button>
-
+  <button onclick="sendMessage()">➤</button>
   <input type="file" id="imgInput">
-  <button onclick="sendImage()">📸 صورة</button>
-
-  <button onclick="recordAudio()">🎤 تسجيل</button>
+  <button onclick="sendImage()">📸</button>
+  <button onclick="recordAudio()">🎤</button>
 </div>
 
-  </div></div><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script><script>
+  </div></div>
+</div><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script><script>
 const firebaseConfig = {
   apiKey: "AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
   authDomain: "alamchat1.firebaseapp.com",
@@ -116,6 +151,7 @@ firebase.initializeApp(firebaseConfig);
 
 let currentUser, currentChat, mediaRecorder, audioChunks=[];
 
+/* Login */
 function login(){
  const provider = new firebase.auth.GoogleAuthProvider();
  firebase.auth().signInWithPopup(provider);
@@ -124,55 +160,66 @@ function login(){
 firebase.auth().onAuthStateChanged(user=>{
  if(user){
   currentUser=user;
-  document.getElementById('login').style.display='none';
-  document.getElementById('app').style.display='flex';
 
-  setOnline(true);
+  document.getElementById("login").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  firebase.database().ref("users/"+user.uid).set({
+    uid:user.uid,
+    name:user.displayName
+  });
+
   loadFriends();
  }
 });
 
-function setOnline(status){
- firebase.database().ref("users/"+currentUser.uid).set({
-  uid: currentUser.uid,
-  name: currentUser.displayName,
-  online: status
- });
+/* Add Friend */
+function addFriend(){
+ const id = document.getElementById("friendId").value;
+ if(!id) return;
+
+ firebase.database().ref("friends/"+currentUser.uid+"/"+id).set(true);
 }
 
-window.onbeforeunload = ()=> setOnline(false);
-
+/* Load Friends */
 function loadFriends(){
- firebase.database().ref("users").on("value", snap=>{
-  const div = document.getElementById("friends");
+ firebase.database().ref("friends/"+currentUser.uid).on("value", snap=>{
+  const div=document.getElementById("friends");
   div.innerHTML="";
 
   snap.forEach(child=>{
-   const u = child.val();
-   if(u.uid!==currentUser.uid){
-    const f=document.createElement("div");
-    f.className="friend";
-    f.innerHTML = u.name + (u.online?" 🟢":" ⚫");
-    f.onclick=()=>openChat(u.uid,u.name);
-    div.appendChild(f);
-   }
+    const uid=child.key;
+
+    firebase.database().ref("users/"+uid).once("value").then(s=>{
+      const u=s.val();
+
+      if(!u) return;
+
+      const f=document.createElement("div");
+      f.className="friend";
+      f.innerText=u.name;
+      f.onclick=()=>openChat(uid,u.name);
+
+      div.appendChild(f);
+    });
   });
  });
 }
 
+/* Open Chat */
 function openChat(uid,name){
  currentChat=uid;
  document.getElementById("chatName").innerText=name;
  document.getElementById("messages").innerHTML="";
 
- firebase.database().ref("messages").off(); // مهم جدًا
+ firebase.database().ref("messages").off();
 
  firebase.database().ref("messages").on("child_added", snap=>{
   const m=snap.val();
 
   if((m.from===currentUser.uid && m.to===uid)||(m.from===uid && m.to===currentUser.uid)){
     const d=document.createElement("div");
-    d.classList.add("message", m.from===currentUser.uid?"sent":"received");
+    d.classList.add("msg", m.from===currentUser.uid?"me":"other");
 
     if(m.image){
       d.innerHTML=`<img src="${m.image}" width="150">`;
@@ -187,6 +234,7 @@ function openChat(uid,name){
  });
 }
 
+/* Send Text */
 function sendMessage(){
  const text=document.getElementById("msgInput").value;
  if(!text || !currentChat) return;
@@ -200,6 +248,7 @@ function sendMessage(){
  document.getElementById("msgInput").value="";
 }
 
+/* Send Image */
 function sendImage(){
  const file=document.getElementById("imgInput").files[0];
  if(!file || !currentChat) return;
@@ -217,6 +266,7 @@ function sendImage(){
  });
 }
 
+/* Record Audio */
 function recordAudio(){
  navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
   mediaRecorder=new MediaRecorder(stream);
@@ -243,7 +293,6 @@ function recordAudio(){
 
       audioChunks=[];
     };
-
   },3000);
  });
 }
