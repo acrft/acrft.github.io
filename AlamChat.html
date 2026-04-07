@@ -141,15 +141,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 let currentUser;
 
 function login(){
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithRedirect(provider);
-}
+firebase.auth().signInWithPopup(provider);}
 
-firebase.auth().getRedirectResult();
-
+firebase.auth().getRedirectResult().then(result=>{
+  if(result.user){
+    currentUser = result.user;
+  }
+});
 firebase.auth().onAuthStateChanged(user=>{
   if(user){
     currentUser = user;
