@@ -134,7 +134,7 @@ let currentUser;
 /* Login */
 function login(){
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
+  firebase.auth().signInWithRedirect(provider);
 }
 
 /* After login */
