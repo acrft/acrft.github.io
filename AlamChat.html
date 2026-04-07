@@ -98,16 +98,25 @@ button {
   border-radius:50%;
   cursor:pointer;
 }
-</style></head><body><!-- Login --><div class="login" id="login">
+</style></head><body><!-- Login -->
+<div class="login" id="login">
   <button onclick="login()">Login with Google</button>
-<div>
-  <div id="myName">AlamCraft</div>
-  <small id="status">متصل الآن</small>
 </div>
+
+<!-- Chat -->
+<div id="chat" style="display:none;">
+
   <div class="header">
-    <img id="avatar" src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
-    <div id="name">AlamCraft</div>
-  </div>  <div class="messages" id="messages"></div>  <div class="input">
+    <img id="myAvatar" src="">
+    <div>
+      <div id="myName">...</div>
+      <small id="status">متصل الآن</small>
+    </div>
+  </div>
+
+  <div class="messages" id="messages"></div>
+
+  <div class="input">
     <input id="msgInput" placeholder="مراسلة...">
     <button onclick="sendMessage()">➤</button>
   </div>
