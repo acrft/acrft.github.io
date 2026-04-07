@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat</title><style>
+<title>AlamChat</title>
+
+<style>
 body {
   margin:0;
   font-family:sans-serif;
@@ -10,7 +13,6 @@ body {
   color:white;
 }
 
-/* Login */
 .login {
   display:flex;
   justify-content:center;
@@ -18,7 +20,6 @@ body {
   height:100vh;
 }
 
-/* Header */
 .header {
   background:#202c33;
   padding:10px;
@@ -33,47 +34,49 @@ body {
   border-radius:50%;
 }
 
-/* Messages */
 .messages {
   height:calc(100vh - 130px);
   overflow-y:auto;
   padding:10px;
-  padding-bottom:80px; /* 🔥 أهم سطر */
+  padding-bottom:80px;
   background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
   background-size:cover;
-  }
+}
 
-/* Bubble */
 .msg {
   max-width:65%;
-  padding:8px;
   margin:5px;
-  border-radius:10px;
 }
 
 .me {
-  background:#005c4b;
   margin-left:auto;
 }
 
 .other {
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+}
+
+.bubble {
+  padding:8px;
+  border-radius:10px;
+}
+
+.me .bubble {
+  background:#005c4b;
+}
+
+.other .bubble {
   background:#202c33;
 }
 
-/* Name */
-.name {
-  font-size:12px;
-  color:#aaa;
-}
-
-/* Time */
 .time {
   font-size:10px;
   color:#ccc;
   text-align:right;
 }
 
-/* Input */
 .input {
   position:fixed;
   bottom:0;
@@ -96,21 +99,23 @@ button {
   border:none;
   padding:10px;
   border-radius:50%;
-  cursor:pointer;
 }
-</style></head><body><!-- Login -->
+</style>
+</head>
+
+<body>
+
 <div class="login" id="login">
   <button onclick="login()">Login with Google</button>
 </div>
 
-<!-- Chat -->
 <div id="chat" style="display:none;">
 
   <div class="header">
-    <img id="myAvatar" src="">
+    <img id="myAvatar">
     <div>
-      <div id="myName">...</div>
-      <small id="status">متصل الآن</small>
+      <div id="myName"></div>
+      <small>متصل الآن</small>
     </div>
   </div>
 
@@ -120,7 +125,14 @@ button {
     <input id="msgInput" placeholder="مراسلة...">
     <button onclick="sendMessage()">➤</button>
   </div>
-</div><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><script>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
 const firebaseConfig = {
   apiKey: "AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
   authDomain: "alamchat1.firebaseapp.com",
@@ -131,13 +143,13 @@ firebase.initializeApp(firebaseConfig);
 
 let currentUser;
 
-/* Login */
 function login(){
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithRedirect(provider);
 }
 
-/* After login */
+firebase.auth().getRedirectResult();
+
 firebase.auth().onAuthStateChanged(user=>{
   if(user){
     currentUser = user;
@@ -150,7 +162,6 @@ firebase.auth().onAuthStateChanged(user=>{
   }
 });
 
-/* Send */
 function sendMessage(){
   const text = document.getElementById("msgInput").value;
   if(!text) return;
@@ -165,7 +176,6 @@ function sendMessage(){
   document.getElementById("msgInput").value="";
 }
 
-/* Receive */
 firebase.database().ref("chat").on("child_added", snap=>{
   const m = snap.val();
 
@@ -174,39 +184,29 @@ firebase.database().ref("chat").on("child_added", snap=>{
 
   if(currentUser && m.name === currentUser.displayName){
     div.classList.add("me");
+    div.innerHTML = `
+      <div class="bubble">
+        ${m.text}
+        <div class="time">${m.time}</div>
+      </div>
+    `;
   } else {
     div.classList.add("other");
+    div.innerHTML = `
+      <img src="${m.avatar}" width="30" height="30" style="border-radius:50%;">
+      <div class="bubble">
+        <div style="font-size:12px;color:#ccc">${m.name}</div>
+        ${m.text}
+        <div class="time">${m.time}</div>
+      </div>
+    `;
   }
 
-  if(m.name === currentUser.displayName){
-
-  // رسالتك (يمين - بدون اسم وصورة)
-  div.innerHTML = `
-    <div>${m.text}</div>
-    <div class="time">${m.time}</div>
-  `;
-
-} else {
-
-  // رسالة الشخص التاني (شمال + صورة + اسم)
-  div.innerHTML = `
-  <div style="display:flex;align-items:flex-end;gap:6px;">
-    
-    <img src="${m.avatar}" 
-         style="width:30px;height:30px;border-radius:50%;">
-    
-    <div style="background:#202c33;padding:8px;border-radius:10px;max-width:70%;">
-      <div style="font-size:12px;color:#ccc">${m.name}</div>
-      <div>${m.text}</div>
-      <div class="time">${m.time}</div>
-    </div>
-
-  </div>
-`;
-  {
-document.getElementById("messages").appendChild(div);
-document.getElementById("messages").scrollTop =
-document.getElementById("messages").scrollHeight;
-</script></body>
-</html>
+  document.getElementById("messages").appendChild(div);
+  document.getElementById("messages").scrollTop =
+    document.getElementById("messages").scrollHeight;
 });
+</script>
+
+</body>
+</html>
