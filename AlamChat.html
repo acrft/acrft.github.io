@@ -3,110 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat</title>
+<title>AlamChat 🔐</title>
 
 <style>
 body{margin:0;font-family:sans-serif;background:#0b141a;color:white}
 
-#loading{
-position:fixed;top:0;left:0;width:100%;height:100%;
-display:flex;justify-content:center;align-items:center;
-background:#0b141a;font-size:20px;z-index:9999
-}
-
 .login{
-display:flex;flex-direction:column;justify-content:center;
-align-items:center;height:100vh;
-background:linear-gradient(135deg,#0f3d2e,#0b141a);
-gap:20px
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+height:100vh;gap:10px
 }
 
-.login h1{font-size:28px}
+.login input{
+padding:10px;border:none;border-radius:20px;width:220px
+}
+
 .login button{
-background:#25d366;padding:12px 25px;
-border:none;border-radius:25px;font-size:16px
+padding:10px 20px;border:none;
+background:#25d366;border-radius:20px;cursor:pointer
 }
 
 .header{
 position:fixed;top:0;width:100%;
 background:#202c33;padding:10px;
-display:flex;justify-content:space-between;align-items:center;
-z-index:1000
+display:flex;justify-content:space-between;align-items:center
 }
-
-.header img{width:40px;height:40px;border-radius:50%}
 
 .messages{
-margin-top:60px;height:calc(100vh - 160px);
-overflow-y:auto;padding:10px;padding-bottom:80px;
-background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
-background-size:cover
+margin-top:60px;height:calc(100vh - 140px);
+overflow:auto;padding:10px
 }
 
-.msg{display:flex;margin:5px 0}
-.me{justify-content:flex-start}
-.other{justify-content:flex-end}
-
-.row{display:flex;align-items:flex-start;gap:6px}
-.other .row{flex-direction:row-reverse}
-
-.bubble{padding:8px;border-radius:10px;max-width:70%}
-.me .bubble{background:#005c4b}
-.other .bubble{background:#202c33}
-
-.name{font-size:12px;color:#ccc}
-.time{font-size:10px;color:#ccc;text-align:right}
+.msg{margin:5px}
+.me{text-align:left}
+.other{text-align:right}
 
 .input{
 position:fixed;bottom:0;width:100%;
-background:#202c33;padding:10px;
-display:flex;flex-direction:row-reverse;gap:5px
+background:#202c33;padding:10px;display:flex
 }
 
-.input input{
-flex:1;padding:10px;border-radius:20px;border:none
-}
-
-button{background:#25d366;border:none;padding:10px;border-radius:50%}
-
-.system{
-text-align:center;font-size:13px;color:#fff;
-background:rgba(0,0,0,0.5);
-padding:5px 10px;border-radius:10px;
-width:fit-content;margin:10px auto
-}
-
-#replyBox{
-position:fixed;bottom:60px;width:100%;
-background:#202c33;padding:5px;font-size:12px
-}
+.input input{flex:1;padding:10px;border-radius:20px;border:none}
 </style>
 </head>
 
 <body>
 
-<div id="loading">جاري التحميل...</div>
+<div class="login" id="login">
+<h2>AlamChat 🔐</h2>
 
-<div class="login" id="login" style="display:none">
-<h1>AlamChat 💬</h1>
-<button onclick="login()">تسجيل الدخول بجوجل</button>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<input id="name" placeholder="اسمك">
+<input id="image" type="file">
+
+<button onclick="register()">تسجيل</button>
+<button onclick="loginUser()">دخول</button>
+<button onclick="resetPassword()">نسيت كلمة السر؟</button>
 </div>
 
-<div id="chat" style="display:none;">
+<div id="chat" style="display:none">
 
 <div class="header">
-<div>AlamChat</div>
-<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+<div id="myName"></div>
+<img id="myAvatar" width="40">
 </div>
 
-<div id="typing" class="system" style="display:none"></div>
-
-<div class="messages" id="messages"></div>
-
-<div id="replyBox" style="display:none"></div>
+<div id="messages" class="messages"></div>
 
 <div class="input">
-<input id="msgInput" placeholder="مراسلة...">
+<input id="msgInput" placeholder="اكتب رسالة...">
 <button onclick="sendMessage()">➤</button>
 </div>
 
@@ -124,147 +90,116 @@ databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
 
 firebase.initializeApp(firebaseConfig)
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
-let currentUser,lastDay="",replyTo=null
+let currentUser=null
 
-function login(){
-const provider=new firebase.auth.GoogleAuthProvider()
-firebase.auth().signInWithRedirect(provider)
+// تسجيل
+function register(){
+const emailVal=email.value
+const pass=password.value
+const nameVal=name.value
+const file=image.files[0]
+
+if(!emailVal||!pass||!nameVal||!file){
+alert("املأ كل البيانات")
+return
 }
 
-firebase.auth().getRedirectResult().then(result=>{
-if(result.user) currentUser=result.user
+firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
+.then(res=>{
+const uid=res.user.uid
+
+// إرسال تأكيد الإيميل
+res.user.sendEmailVerification()
+
+const reader=new FileReader()
+reader.onload=function(){
+firebase.database().ref("users/"+uid).set({
+name:nameVal,
+avatar:reader.result
 })
+alert("تم التسجيل ✔️ تحقق من الإيميل")
+}
+reader.readAsDataURL(file)
+})
+.catch(e=>alert(e.message))
+}
 
+// دخول
+function loginUser(){
+firebase.auth().signInWithEmailAndPassword(email.value,password.value)
+.catch(e=>alert(e.message))
+}
+
+// نسيت الباسورد
+function resetPassword(){
+if(!email.value){
+alert("اكتب الإيميل الأول")
+return
+}
+firebase.auth().sendPasswordResetEmail(email.value)
+.then(()=>alert("تم إرسال رابط استعادة الباسورد"))
+}
+
+// حالة المستخدم
 firebase.auth().onAuthStateChanged(user=>{
-loading.style.display="none"
-
 if(user){
+
+// تحقق من الإيميل
+if(!user.emailVerified){
+alert("لازم تفعل الإيميل الأول ❗")
+firebase.auth().signOut()
+return
+}
+
 currentUser=user
+
+firebase.database().ref("users/"+user.uid).once("value",snap=>{
+const data=snap.val()
+
 login.style.display="none"
 chat.style.display="block"
 
-if(!localStorage.getItem("joined")){
-firebase.database().ref("chat").push({
-system:true,
-text:user.displayName+" انضم إلى الدردشة",
-time:Date.now()
+myName.innerText=data.name
+myAvatar.src=data.avatar
 })
-localStorage.setItem("joined","yes")
-}
-}else{
-login.style.display="flex"
 }
 })
 
-msgInput.addEventListener("input",()=>{
-firebase.database().ref("typing/"+currentUser.uid).set({
-name:currentUser.displayName
-})
-setTimeout(()=>{
-firebase.database().ref("typing/"+currentUser.uid).remove()
-},2000)
-})
-
-firebase.database().ref("typing").on("value",snap=>{
-const data=snap.val()
-typing.style.display="none"
-for(let id in data){
-if(id!==currentUser.uid){
-typing.innerText=data[id].name+" يكتب..."
-typing.style.display="block"
-}
-}
-})
-
+// ارسال رسالة
 function sendMessage(){
 const text=msgInput.value
 if(!text)return
 
 firebase.database().ref("chat").push({
-name:currentUser.displayName,
 uid:currentUser.uid,
-avatar:currentUser.photoURL,
 text:text,
-reply: replyTo ? replyTo.text : null,
-time:Date.now(),
-seenBy:[currentUser.displayName]
+time:Date.now()
 })
 
 msgInput.value=""
-replyTo=null
-replyBox.style.display="none"
 }
 
-firebase.database().ref("chat").orderByChild("time").on("child_added",snap=>{
+// استقبال
+firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
+
+firebase.database().ref("users/"+m.uid).once("value",s=>{
+const u=s.val()
+
 const div=document.createElement("div")
-const date=new Date(m.time)
-const day=date.toDateString()
+div.className="msg "+(m.uid===currentUser.uid?"me":"other")
 
-if(day!==lastDay){
-const d=document.createElement("div")
-d.className="system"
-d.innerText=(new Date().toDateString()===day)?"اليوم":
-(new Date(Date.now()-86400000).toDateString()===day)?"أمس":
-date.toLocaleDateString()
-messages.appendChild(d)
-lastDay=day
-}
-
-if(m.system){
-div.className="system"
-div.innerText=m.text
-messages.appendChild(div)
-return
-}
-
-div.classList.add("msg")
-const time=date.toLocaleTimeString()
-
-if(m.uid===currentUser.uid){
-div.classList.add("me")
 div.innerHTML=`
-<div class="row">
-<div class="bubble">
-${m.reply?`<div style="font-size:12px;color:#aaa">${m.reply}</div>`:""}
-${m.text}
-<div class="time">${time}</div>
-<div style="font-size:10px;color:#aaa">
-شوهد: ${m.seenBy.join(", ")}
-</div>
-</div>
-</div>`
-}else{
-div.classList.add("other")
-div.innerHTML=`
-<div class="row">
-<img src="${m.avatar}" width="30">
-<div class="bubble">
-<div class="name">${m.name}</div>
-${m.reply?`<div style="font-size:12px;color:#aaa">${m.reply}</div>`:""}
-${m.text}
-<div class="time">${time}</div>
-</div>
-</div>`
-
-if(!m.seenBy.includes(currentUser.displayName)){
-m.seenBy.push(currentUser.displayName)
-snap.ref.update({seenBy:m.seenBy})
-}
-}
-
-div.onclick=()=>{
-replyTo=m
-replyBox.style.display="block"
-replyBox.innerText="رد على: "+m.text
-}
+<img src="${u.avatar}" width="25" style="border-radius:50%">
+${u.name}: ${m.text}
+`
 
 messages.appendChild(div)
 messages.scrollTop=messages.scrollHeight
 })
+})
 </script>
 
 </body>
-  </html>
+</html>
