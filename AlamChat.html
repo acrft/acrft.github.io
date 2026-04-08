@@ -103,9 +103,67 @@ const pass=password.value
 const nameVal=name.value
 const file=image.files[0]
 
-if(!emailVal||!pass||!nameVal||!file){
-alert("املأ كل البيانات")
+if(!emailVal||!pass||!nameVal){
+alert("املأ البيانات")
 return
+}
+
+// 🟢 لو مفيش صورة
+if(!file){
+
+// نعمل صورة افتراضية (حرف من الاسم)
+const avatar = "https://ui-avatars.com/api/?name=" + encodeURIComponent(nameVal)
+
+firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
+.then(res=>{
+const uid=res.user.uid
+
+res.user.sendEmailVerification()
+
+firebase.database().ref("users/"+uid).set({
+name:nameVal,
+avatar:avatar,
+online:true
+})
+
+alert("تم التسجيل ✔️ فعل الإيميل")
+})
+
+return
+}
+
+// 🔵 لو فيه صورة
+const formData=new FormData()
+formData.append("image",file)
+
+fetch("https://api.imgbb.com/1/upload?key=3a9ef8e3be83e9934cc9019db6d0773e",{
+method:"POST",
+body:formData
+})
+.then(r=>r.json())
+.then(data=>{
+
+const imageUrl=data.data.url
+
+firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
+.then(res=>{
+const uid=res.user.uid
+
+res.user.sendEmailVerification()
+
+firebase.database().ref("users/"+uid).set({
+name:nameVal,
+avatar:imageUrl,
+online:true
+})
+
+alert("تم التسجيل ✔️ فعل الإيميل")
+})
+
+})
+.catch(()=>{
+alert("فشل رفع الصورة")
+})
 }
 
 firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
