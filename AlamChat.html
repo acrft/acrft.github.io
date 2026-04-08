@@ -5,12 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlamChat</title>
 
+<!-- خطوط -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
 <style>
+*{box-sizing:border-box}
+
 body{
 margin:0;
-font-family:sans-serif;
-background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
-background-size:cover;
+
+/* ✨ دمج خطين */
+font-family:"Cairo","Press Start 2P",sans-serif;
+
+background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png") center/cover fixed;
+color:#fff;
+}
+
+/* Blur احترافي */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(6px);
+z-index:-1;
 }
 
 /* تسجيل */
@@ -20,35 +39,53 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-gap:10px;
+gap:15px;
 }
 
 #start input{
-padding:12px;
-border-radius:25px;
+padding:14px;
+border-radius:30px;
 border:none;
-width:200px;
+width:70%;
+max-width:280px;
+font-size:16px;
 }
 
 #start button{
-padding:10px 20px;
+padding:12px 25px;
 border:none;
-border-radius:25px;
+border-radius:30px;
 background:#25d366;
 color:#fff;
+font-size:16px;
 }
 
 /* هيدر */
 .header{
-background:#202c33;
-color:#fff;
-padding:10px;
+position:fixed;
+top:0;
+width:100%;
 display:flex;
-justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:10px;
+background:rgba(32,44,51,0.85);
+backdrop-filter:blur(10px);
+}
+
+.header img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+.header span{
+font-weight:bold;
 }
 
 /* رسائل */
 .messages{
+margin-top:65px;
 height:calc(100vh - 130px);
 overflow:auto;
 padding:10px;
@@ -56,12 +93,14 @@ display:flex;
 flex-direction:column;
 }
 
+/* رسالة */
 .msg{
 display:flex;
 align-items:flex-end;
-gap:5px;
-margin:5px;
-max-width:75%;
+gap:6px;
+margin:6px;
+max-width:80%;
+animation:fade 0.2s ease;
 }
 
 .me{
@@ -74,49 +113,43 @@ align-self:flex-start;
 }
 
 .avatar{
-width:30px;
-height:30px;
+width:32px;
+height:32px;
 border-radius:50%;
-background:#555;
+background:#444;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#fff;
 }
 
+/* الفقاعة */
 .bubble{
 padding:10px;
-border-radius:10px;
-color:#fff;
+border-radius:12px;
+box-shadow:0 2px 5px rgba(0,0,0,0.3);
 }
 
+/* ألوان */
 .me .bubble{
 background:#005c4b;
-border-bottom-right-radius:0;
+border-bottom-right-radius:4px;
 }
 
 .other .bubble{
 background:#202c33;
-border-bottom-left-radius:0;
+border-bottom-left-radius:4px;
 }
 
+/* وقت + seen */
 .time{
 font-size:10px;
-text-align:right;
 opacity:0.7;
+text-align:right;
 }
 
 .seen{
 color:#4fc3f7;
 margin-left:5px;
-}
-
-.reply{
-font-size:12px;
-color:#ccc;
-border-left:3px solid #25d366;
-padding-left:5px;
-margin-bottom:5px;
 }
 
 /* إدخال */
@@ -125,27 +158,33 @@ position:fixed;
 bottom:0;
 width:100%;
 display:flex;
-padding:10px;
-background:#202c33;
-gap:5px;
+gap:8px;
+padding:8px;
+background:rgba(32,44,51,0.85);
+backdrop-filter:blur(10px);
 }
 
 .input input{
 flex:1;
-padding:10px;
+padding:12px;
 border-radius:25px;
 border:none;
 }
 
 .send{
-background:#25d366;
-border:none;
-border-radius:50%;
 width:45px;
 height:45px;
+border-radius:50%;
+border:none;
+background:#25d366;
 color:#fff;
 }
 
+/* animation */
+@keyframes fade{
+from{opacity:0;transform:translateY(5px)}
+to{opacity:1}
+}
 </style>
 </head>
 
@@ -159,7 +198,8 @@ color:#fff;
 <div id="chat" style="display:none">
 
 <div class="header">
-<span>AlamChat 💬</span>
+<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+<span>AlamChat</span>
 <span id="typing"></span>
 </div>
 
@@ -167,7 +207,6 @@ color:#fff;
 
 <div class="input">
 <input id="msgInput" placeholder="اكتب..." oninput="typing()">
-<input type="file" id="img">
 <button class="send" onclick="send()">➤</button>
 </div>
 
@@ -184,22 +223,16 @@ apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 })
 
-const start = document.getElementById("start")
-const chat = document.getElementById("chat")
-const messages = document.getElementById("messages")
-const msgInput = document.getElementById("msgInput")
-const typingSpan = document.getElementById("typing")
-
 let name=""
-let replyText=null
+const start=document.getElementById("start")
+const chat=document.getElementById("chat")
+const messages=document.getElementById("messages")
+const msgInput=document.getElementById("msgInput")
+const typingSpan=document.getElementById("typing")
 
 function startChat(){
-const input=document.getElementById("name")
-
-if(!input.value){
-alert("اكتب اسمك")
-return
-}
+let input=document.getElementById("name")
+if(!input.value){alert("اكتب اسمك");return}
 
 name=input.value
 start.style.display="none"
@@ -207,31 +240,16 @@ chat.style.display="block"
 }
 
 function send(){
-const text=msgInput.value.trim()
-const file=document.getElementById("img").files[0]
+let text=msgInput.value.trim()
+if(!text)return
 
-let msg={
-name,
-text,
+firebase.database().ref("chat").push({
+name,text,
 time:new Date().toLocaleTimeString(),
-seen:false,
-reply:replyText
-}
-
-if(file){
-const reader=new FileReader()
-reader.onload=e=>{
-msg.img=e.target.result
-firebase.database().ref("chat").push(msg)
-}
-reader.readAsDataURL(file)
-}else{
-firebase.database().ref("chat").push(msg)
-}
+seen:false
+})
 
 msgInput.value=""
-document.getElementById("img").value=""
-replyText=null
 }
 
 /* typing */
@@ -248,26 +266,23 @@ else typingSpan.innerText=""
 
 /* استقبال */
 firebase.database().ref("chat").on("child_added",snap=>{
-const m=snap.val()
-const id=snap.key
+let m=snap.val()
+let id=snap.key
+if(!m||!m.name)return
 
-if(!m || !m.name) return
+let isMe=m.name===name
 
-const isMe=m.name===name
-
-const div=document.createElement("div")
+let div=document.createElement("div")
 div.className="msg "+(isMe?"me":"other")
 
 div.innerHTML=`
 <div class="avatar">${m.name[0]}</div>
 
 <div class="bubble">
-${m.reply ? `<div class="reply">${m.reply}</div>`:""}
-${m.img ? `<img src="${m.img}" width="150">`:""}
-${m.text || ""}
+${m.text}
 <div class="time">
-${m.time || ""}
-${isMe ? `<span class="seen ${m.seen?'seen':''}">✔✔</span>`:""}
+${m.time}
+${isMe?`<span class="seen">✔✔</span>`:""}
 </div>
 </div>
 `
@@ -277,21 +292,8 @@ messages.scrollTop=messages.scrollHeight
 
 if(!isMe){
 document.getElementById("sound").play()
-if(navigator.vibrate) navigator.vibrate(100)
+if(navigator.vibrate) navigator.vibrate(80)
 firebase.database().ref("chat/"+id).update({seen:true})
-}
-
-/* حذف */
-div.onclick=()=>{
-if(isMe && confirm("حذف؟")){
-firebase.database().ref("chat/"+id).remove()
-}
-}
-
-/* رد */
-div.ondblclick=()=>{
-replyText=m.text || "رسالة"
-alert("هترد على: "+replyText)
 }
 })
 </script>
