@@ -8,16 +8,44 @@
 <style>
 body{margin:0;font-family:sans-serif;background:#0b141a;color:white}
 
-.login{display:flex;justify-content:center;align-items:center;height:100vh}
+/* شاشة تحميل */
+#loading{
+position:fixed;top:0;left:0;width:100%;height:100%;
+display:flex;justify-content:center;align-items:center;
+background:#0b141a;font-size:20px;z-index:9999
+}
 
+/* LOGIN احترافي */
+.login{
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+height:100vh;
+background:linear-gradient(135deg,#0f3d2e,#0b141a);
+gap:20px
+}
+
+.login h1{font-size:30px}
+
+.login button{
+background:#25d366;
+padding:12px 25px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* HEADER */
 .header{
 position:fixed;top:0;width:100%;
 background:#202c33;padding:10px;
-display:flex;justify-content:space-between;align-items:center;z-index:1000
+display:flex;justify-content:space-between;align-items:center;
+z-index:1000
 }
 
 .header img{width:40px;height:40px;border-radius:50%}
 
+/* MESSAGES */
 .messages{
 margin-top:60px;height:calc(100vh - 160px);
 overflow-y:auto;padding:10px;padding-bottom:80px;
@@ -39,6 +67,7 @@ background-size:cover
 .name{font-size:12px;color:#ccc}
 .time{font-size:10px;color:#ccc;text-align:right}
 
+/* INPUT */
 .input{
 position:fixed;bottom:0;width:100%;
 background:#202c33;padding:10px;
@@ -53,52 +82,37 @@ button{
 background:#25d366;border:none;padding:10px;border-radius:50%
 }
 
+/* system */
 .system{
 text-align:center;font-size:13px;color:#fff;
 background:rgba(0,0,0,0.5);
 padding:5px 10px;border-radius:10px;
 width:fit-content;margin:10px auto
 }
-
-#replyBox{
-position:fixed;
-bottom:60px;
-width:100%;
-background:#202c33;
-padding:5px;
-font-size:12px;
-}
-
-#typing{
-margin-top:60px;
-}
 </style>
 </head>
 
 <body>
 
-<div class="login" id="login">
-<button onclick="login()">Login with Google</button>
+<div id="loading">جاري التحميل...</div>
+
+<div class="login" id="login" style="display:none">
+<h1>AlamChat 💬</h1>
+<button onclick="login()">تسجيل الدخول بجوجل</button>
 </div>
 
 <div id="chat" style="display:none;">
-
 <div class="header">
 <div>AlamChat</div>
 <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
 </div>
 
-<div id="typing" class="system" style="display:none"></div>
-
 <div class="messages" id="messages"></div>
-
-<div id="replyBox" style="display:none"></div>
 
 <div class="input">
 <input id="msgInput" placeholder="مراسلة...">
 <button onclick="sendMessage()">➤</button>
 </div>
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -107,7 +121,7 @@ margin-top:60px;
 
 <script>
 const firebaseConfig={
-apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+apiKey:"AIzaSy...",
 authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
@@ -116,8 +130,6 @@ firebase.initializeApp(firebaseConfig)
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
 let currentUser
-let lastDay=""
-let replyTo=null
 
 function login(){
 const provider=new firebase.auth.GoogleAuthProvider()
@@ -125,40 +137,14 @@ firebase.auth().signInWithPopup(provider)
 }
 
 firebase.auth().onAuthStateChanged(user=>{
+loading.style.display="none"
+
 if(user){
 currentUser=user
-login.style.display="none"
 chat.style.display="block"
-
-if(!localStorage.getItem("joined")){
-firebase.database().ref("chat").push({
-system:true,
-text:user.displayName+" انضم إلى الدردشة",
-time:Date.now()
-})
-localStorage.setItem("joined","yes")
-}
-}
-})
-
-msgInput.addEventListener("input",()=>{
-firebase.database().ref("typing/"+currentUser.uid).set({
-name:currentUser.displayName
-})
-setTimeout(()=>{
-firebase.database().ref("typing/"+currentUser.uid).remove()
-},2000)
-})
-
-firebase.database().ref("typing").on("value",snap=>{
-const data=snap.val()
-typing.style.display="none"
-
-for(let id in data){
-if(id!==currentUser.uid){
-typing.innerText=data[id].name+" يكتب..."
-typing.style.display="block"
-}
+login.style.display="none"
+}else{
+login.style.display="flex"
 }
 })
 
@@ -168,55 +154,30 @@ if(!text)return
 
 firebase.database().ref("chat").push({
 name:currentUser.displayName,
+uid:currentUser.uid,
 avatar:currentUser.photoURL,
 text:text,
-reply: replyTo ? replyTo.text : null,
 time:Date.now(),
-seen:false
+seenBy:[currentUser.displayName]
 })
 
 msgInput.value=""
-replyTo=null
-replyBox.style.display="none"
 }
 
-firebase.database().ref("chat").orderByChild("time").on("child_added",snap=>{
+firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 const div=document.createElement("div")
 
-const date=new Date(m.time)
-const day=date.toDateString()
-
-if(day!==lastDay){
-const d=document.createElement("div")
-d.className="system"
-d.innerText=
-(new Date().toDateString()===day)?"اليوم":
-(new Date(Date.now()-86400000).toDateString()===day)?"أمس":
-date.toLocaleDateString()
-messages.appendChild(d)
-lastDay=day
-}
-
-if(m.system){
-div.className="system"
-div.innerText=m.text
-messages.appendChild(div)
-return
-}
-
 div.classList.add("msg")
 
-const time=date.toLocaleTimeString()
-
-if(m.name===currentUser.displayName){
+if(m.uid===currentUser.uid){
 div.classList.add("me")
 div.innerHTML=`
-<div class="row">
 <div class="bubble">
-${m.reply ? `<div style="font-size:12px;color:#aaa;border-left:2px solid #25d366;padding-left:5px;margin-bottom:5px">${m.reply}</div>` : ""}
 ${m.text}
-<div class="time">${time} ${m.seen?"✓✓":"✓"}</div>
+<div class="time">${new Date(m.time).toLocaleTimeString()}</div>
+<div style="font-size:10px;color:#aaa">
+شوهد بواسطة: ${m.seenBy.join(", ")}
 </div>
 </div>`
 }else{
@@ -226,18 +187,16 @@ div.innerHTML=`
 <img src="${m.avatar}" width="30" height="30" style="border-radius:50%;">
 <div class="bubble">
 <div class="name">${m.name}</div>
-${m.reply ? `<div style="font-size:12px;color:#aaa;border-left:2px solid #25d366;padding-left:5px;margin-bottom:5px">${m.reply}</div>` : ""}
 ${m.text}
-<div class="time">${time}</div>
+<div class="time">${new Date(m.time).toLocaleTimeString()}</div>
 </div>
 </div>`
-snap.ref.update({seen:true})
-}
 
-div.onclick=()=>{
-replyTo=m
-replyBox.style.display="block"
-replyBox.innerText="رد على: "+m.text
+// إضافة اسمك للي شافوا الرسالة
+if(!m.seenBy.includes(currentUser.displayName)){
+m.seenBy.push(currentUser.displayName)
+snap.ref.update({seenBy:m.seenBy})
+}
 }
 
 messages.appendChild(div)
