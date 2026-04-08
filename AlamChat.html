@@ -49,15 +49,16 @@ body {
 }
 
 .me {
-  margin-left:auto;
+  display:flex;
+  justify-content:flex-start;
 }
 
 .other {
   display:flex;
+  justify-content:flex-end;
   align-items:flex-end;
   gap:6px;
 }
-
 .bubble {
   padding:8px;
   border-radius:10px;
@@ -77,16 +78,11 @@ body {
   text-align:right;
 }
 
-.input {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#202c33;
-  padding:10px;
+.input.input {
   display:flex;
+  flex-direction:row-reverse;
   gap:5px;
-}
-
+    }
 .input input {
   flex:1;
   padding:10px;
@@ -112,10 +108,8 @@ button {
 <div id="chat" style="display:none;">
 
   <div class="header">
-    <img id="myAvatar">
-    <div>
-      <div id="myName"></div>
-      <small>متصل الآن</small>
+<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">    <div>
+      <div id="*AlamChat*"></div>
     </div>
   </div>
 
