@@ -6,104 +6,55 @@
 <title>AlamChat</title>
 
 <style>
-body {
-  margin:0;
-  font-family:sans-serif;
-  background:#0b141a;
-  color:white;
+body{margin:0;font-family:sans-serif;background:#0b141a;color:white}
+
+.login{display:flex;justify-content:center;align-items:center;height:100vh}
+
+.header{
+position:fixed;top:0;width:100%;
+background:#202c33;padding:10px;
+display:flex;justify-content:space-between;align-items:center;z-index:1000
 }
 
-.login {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+.header img{width:40px;height:40px;border-radius:50%}
+
+.messages{
+margin-top:60px;height:calc(100vh - 140px);
+overflow-y:auto;padding:10px;padding-bottom:80px;
+background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
+background-size:cover
 }
 
-.header {
-  position:fixed;
-  top:0;
-  width:100%;
-  background:#202c33;
-  padding:10px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  z-index:1000;
-  }
+.msg{display:flex;margin:5px 0}
+.me{justify-content:flex-start}
+.other{justify-content:flex-end}
 
-.header img {
-  width:40px;
-  height:40px;
-  border-radius:50%;
+.row{display:flex;align-items:flex-start;gap:6px}
+.other .row{flex-direction:row-reverse}
+
+.bubble{padding:8px;border-radius:10px;max-width:70%}
+.me .bubble{background:#005c4b}
+.other .bubble{background:#202c33}
+
+.name{font-size:12px;color:#ccc}
+.time{font-size:10px;color:#ccc;text-align:right}
+
+.input{
+position:fixed;bottom:0;width:100%;
+background:#202c33;padding:10px;
+display:flex;flex-direction:row-reverse;gap:5px
 }
 
-.messages {
-  margin-top:60px;
-  height:calc(100vh - 140px);
-  overflow-y:auto;
-  padding:10px;
-  padding-bottom:80px;
-  background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
-  background-size:cover;
-  }
-
-.me {
-  display:flex;
-  justify-content:flex-start;
+.input input{
+flex:1;padding:10px;border-radius:20px;border:none
 }
 
-.msg {
-  max-width:100%;
-  }
-
-.other {
-  display:flex;
-  justify-content:flex-end;
-  align-items:flex-end;
-  gap:6px;
-}
-  
-.bubble {
-  padding:8px;
-  border-radius:10px;
+button{
+background:#25d366;border:none;padding:10px;border-radius:50%
 }
 
-.me .bubble {
-  background:#005c4b;
-}
-
-.other .bubble {
-  background:#202c33;
-}
-
-.time {
-  font-size:10px;
-  color:#ccc;
-  text-align:right;
-}
-
-.input.input {
-  display:flex;
-  flex-direction:row-reverse;
-  gap:5px;
-    }
-.input {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#202c33;
-  padding:10px;
-  display:flex;
-  flex-direction:row-reverse;
-  gap:5px;
-  }
-
-button {
-  background:#25d366;
-  border:none;
-  padding:10px;
-  border-radius:50%;
+.system{
+text-align:center;font-size:12px;color:#aaa;margin:10px 0
 }
 </style>
 </head>
@@ -111,23 +62,22 @@ button {
 <body>
 
 <div class="login" id="login">
-  <button onclick="login()">Login with Google</button>
+<button onclick="login()">Login with Google</button>
 </div>
 
 <div id="chat" style="display:none;">
 
-  <div class="header">
-<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">    <div>
-      <div id="AlamChat"></div>
-    </div>
-  </div>
+<div class="header">
+<div>AlamChat</div>
+<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+</div>
 
-  <div class="messages" id="messages"></div>
+<div class="messages" id="messages"></div>
 
-  <div class="input">
-    <input id="msgInput" placeholder="مراسلة...">
-    <button onclick="sendMessage()">➤</button>
-  </div>
+<div class="input">
+<input id="msgInput" placeholder="مراسلة...">
+<button onclick="sendMessage()">➤</button>
+</div>
 
 </div>
 
@@ -136,82 +86,97 @@ button {
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-  authDomain: "alamchat1.firebaseapp.com",
-  databaseURL: "https://alamchat1-default-rtdb.firebaseio.com",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-let currentUser;
-
-function login(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-firebase.auth().signInWithPopup(provider);}
-
-firebase.auth().getRedirectResult().then(result=>{
-  if(result.user){
-    currentUser = result.user;
-  }
-});
-firebase.auth().onAuthStateChanged(user=>{
-  if(user){
-    currentUser = user;
-
-    document.getElementById("login").style.display="none";
-    document.getElementById("chat").style.display="block";
-
-    document.getElementById("myName").innerText = user.displayName;
-    document.getElementById("myAvatar").src = user.photoURL;
-  }
-});
-
-function sendMessage(){
-  const text = document.getElementById("msgInput").value;
-  if(!text) return;
-
-  firebase.database().ref("chat").push({
-    name: currentUser.displayName,
-    avatar: currentUser.photoURL,
-    text: text,
-    time: new Date().toLocaleTimeString()
-  });
-
-  document.getElementById("msgInput").value="";
+const firebaseConfig={
+apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+authDomain:"alamchat1.firebaseapp.com",
+databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
 
-firebase.database().ref("chat").on("child_added", snap=>{
-  const m = snap.val();
+firebase.initializeApp(firebaseConfig)
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
-  const div = document.createElement("div");
-  div.classList.add("msg");
+let currentUser
 
-  if(currentUser && m.name === currentUser.displayName){
-    div.classList.add("me");
-    div.innerHTML = `
-      <div class="bubble">
-        ${m.text}
-        <div class="time">${m.time}</div>
-      </div>
-    `;
-  } else {
-    div.classList.add("other");
-    div.innerHTML = `
-      <img src="${m.avatar}" width="30" height="30" style="border-radius:50%;">
-      <div class="bubble">
-        <div style="font-size:12px;color:#ccc">${m.name}</div>
-        ${m.text}
-        <div class="time">${m.time}</div>
-      </div>
-    `;
-  }
+function login(){
+const provider=new firebase.auth.GoogleAuthProvider()
+firebase.auth().signInWithPopup(provider)
+}
 
-  document.getElementById("messages").appendChild(div);
-  document.getElementById("messages").scrollTop =
-    document.getElementById("messages").scrollHeight;
-});
+firebase.auth().onAuthStateChanged(user=>{
+if(user){
+currentUser=user
+document.getElementById("login").style.display="none"
+document.getElementById("chat").style.display="block"
+
+firebase.database().ref("chat").push({
+system:true,
+text:user.displayName+" انضم إلى الدردشة"
+})
+}
+})
+
+function sendMessage(){
+const input=document.getElementById("msgInput")
+const text=input.value
+if(!text)return
+
+firebase.database().ref("chat").push({
+name:currentUser.displayName,
+avatar:currentUser.photoURL,
+text:text,
+time:new Date().toLocaleTimeString(),
+seen:false
+})
+
+input.value=""
+}
+
+firebase.database().ref("chat").on("child_added",snap=>{
+const m=snap.val()
+const div=document.createElement("div")
+
+if(m.system){
+div.className="system"
+div.innerText=m.text
+messages.appendChild(div)
+return
+}
+
+div.classList.add("msg")
+
+if(m.name===currentUser.displayName){
+div.classList.add("me")
+div.innerHTML=`
+<div class="row">
+<div class="bubble">
+${m.text}
+<div class="time">${m.time} ${m.seen?"✓✓":"✓"}</div>
+</div>
+</div>`
+}else{
+div.classList.add("other")
+div.innerHTML=`
+<div class="row">
+<img src="${m.avatar}" width="30" height="30" style="border-radius:50%;">
+<div class="bubble">
+<div class="name">${m.name}</div>
+${m.text}
+<div class="time">${m.time}</div>
+</div>
+</div>`
+snap.ref.update({seen:true})
+}
+
+div.onclick=()=>{
+if(confirm("حذف الرسالة؟")){
+snap.ref.remove()
+div.remove()
+}
+}
+
+messages.appendChild(div)
+messages.scrollTop=messages.scrollHeight
+})
 </script>
 
 </body>
