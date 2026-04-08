@@ -8,104 +8,155 @@
 <style>
 body{margin:0;background:#0b141a;color:#fff;font-family:sans-serif}
 
-.login{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:10px}
-input{padding:10px;border:none;border-radius:20px;width:200px}
-button{padding:10px;border:none;border-radius:20px;background:#25d366}
+/* شاشة البداية */
+.start{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+gap:10px
+}
 
-.messages{height:80vh;overflow:auto;padding:10px}
-.msg{margin:5px}
+input{
+padding:10px;
+border:none;
+border-radius:20px;
+width:200px
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:20px;
+background:#25d366;
+cursor:pointer
+}
+
+/* ايموجي */
+.emojis{
+display:flex;
+flex-wrap:wrap;
+max-width:250px;
+gap:5px;
+justify-content:center
+}
+
+.emoji{
+font-size:24px;
+cursor:pointer;
+padding:5px;
+border-radius:10px;
+}
+
+.selected{
+background:#25d366;
+}
+
+/* الشات */
+.messages{
+height:80vh;
+overflow:auto;
+padding:10px
+}
+
+.msg{
+margin:5px;
+}
+
 .me{text-align:left}
 .other{text-align:right}
+
 </style>
 </head>
 
 <body>
 
-<div id="login" class="login">
-<h2>AlamChat</h2>
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+<!-- بداية -->
+<div id="start" class="start">
+<h2>AlamChat 💬</h2>
+
 <input id="name" placeholder="اسمك">
-<button onclick="register()">تسجيل</button>
-<button onclick="loginUser()">دخول</button>
+
+<div class="emojis" id="emojiList"></div>
+
+<button onclick="enterChat()">دخول</button>
 </div>
 
+<!-- الشات -->
 <div id="chat" style="display:none">
 <h3 id="myName"></h3>
+
 <div id="messages" class="messages"></div>
 
-<input id="msgInput">
+<input id="msgInput" placeholder="اكتب رسالة...">
 <button onclick="sendMessage()">ارسال</button>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
 const config={
 apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
 firebase.initializeApp(config)
 
-// تسجيل
-function register(){
-const email=document.getElementById("email").value
-const pass=document.getElementById("password").value
-const name=document.getElementById("name").value
+// ايموجي
+const emojis = [
+"😀","😃","😄","😁","😆","😅","😂","🤣","🥲","☺️","😊","😇","🙂","🙃","😉","😌",
+"😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🤩","🥳",
+"😏","😒","😞","😔","😟","😕","🙁","☹️","😣","😖","😫","😩","🥺","😢","😭",
+"😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓",
+"🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄",
+"😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴",
+"🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠"
+];
+let selectedEmoji="😀"
 
-if(!email||!pass||!name){alert("املأ البيانات");return}
+const list=document.getElementById("emojiList")
 
-firebase.auth().createUserWithEmailAndPassword(email,pass)
-.then(res=>{
-const uid=res.user.uid
+emojis.forEach(e=>{
+const span=document.createElement("span")
+span.innerText=e
+span.className="emoji"
 
-// Avatar تلقائي
-const avatar="https://ui-avatars.com/api/?name="+encodeURIComponent(name)
-
-firebase.database().ref("users/"+uid).set({
-name:name,
-avatar:avatar
-})
-
-alert("تم التسجيل")
-})
-.catch(e=>alert(e.message))
+span.onclick=()=>{
+document.querySelectorAll(".emoji").forEach(x=>x.classList.remove("selected"))
+span.classList.add("selected")
+selectedEmoji=e
 }
+
+list.appendChild(span)
+})
+
+// بيانات المستخدم
+let myName=""
+let myAvatar=""
 
 // دخول
-function loginUser(){
-const email=document.getElementById("email").value
-const pass=document.getElementById("password").value
+function enterChat(){
+const name=document.getElementById("name").value.trim()
+if(!name){alert("اكتب اسمك");return}
 
-firebase.auth().signInWithEmailAndPassword(email,pass)
-.catch(()=>alert("بيانات غلط"))
-}
+myName=name
+myAvatar=selectedEmoji
 
-// حالة المستخدم
-firebase.auth().onAuthStateChanged(user=>{
-if(user){
+document.getElementById("myName").innerText=myAvatar+" "+myName
 
-firebase.database().ref("users/"+user.uid).once("value",s=>{
-const data=s.val()
-
-document.getElementById("myName").innerText=data.name
-})
-
-document.getElementById("login").style.display="none"
+document.getElementById("start").style.display="none"
 document.getElementById("chat").style.display="block"
 }
-})
 
 // ارسال
 function sendMessage(){
-const text=document.getElementById("msgInput").value
+const text=document.getElementById("msgInput").value.trim()
 if(!text)return
 
 firebase.database().ref("chat").push({
-uid:firebase.auth().currentUser.uid,
+name:myName,
+avatar:myAvatar,
 text:text
 })
 
@@ -116,19 +167,16 @@ document.getElementById("msgInput").value=""
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 
-firebase.database().ref("users/"+m.uid).once("value",s=>{
-const u=s.val()
-
 const div=document.createElement("div")
-div.className="msg"
+div.className="msg "+(m.name===myName?"me":"other")
 
 div.innerHTML=`
-<img src="${u.avatar}" width="25">
-${u.name}: ${m.text}
+${m.avatar} ${m.name}: ${m.text}
 `
 
 document.getElementById("messages").appendChild(div)
-})
+document.getElementById("messages").scrollTop=
+document.getElementById("messages").scrollHeight
 })
 </script>
 
