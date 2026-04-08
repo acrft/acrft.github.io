@@ -38,6 +38,8 @@ cursor:pointer
 display:flex;
 flex-wrap:wrap;
 max-width:250px;
+max-height:120px;
+overflow-y:auto;
 gap:5px;
 justify-content:center
 }
@@ -53,26 +55,44 @@ border-radius:10px;
 background:#25d366;
 }
 
-/* الشات */
+/* الهيدر */
+.header{
+background:#202c33;
+padding:10px;
+}
+
+/* الرسائل */
 .messages{
-height:80vh;
+height:calc(100vh - 120px);
 overflow:auto;
-padding:10px
+padding:10px;
+margin-bottom:60px;
 }
 
-.msg{
-margin:5px;
-}
-
+.msg{margin:5px}
 .me{text-align:left}
 .other{text-align:right}
 
+/* الإدخال */
+.input{
+position:fixed;
+bottom:0;
+width:100%;
+display:flex;
+background:#202c33;
+padding:10px;
+gap:5px;
+}
+
+.input input{
+flex:1;
+}
 </style>
 </head>
 
 <body>
 
-<!-- بداية -->
+<!-- البداية -->
 <div id="start" class="start">
 <h2>AlamChat 💬</h2>
 
@@ -85,12 +105,18 @@ margin:5px;
 
 <!-- الشات -->
 <div id="chat" style="display:none">
-<h3 id="myName"></h3>
+
+<div class="header">
+AlamChat 💬 | <span id="myName"></span>
+</div>
 
 <div id="messages" class="messages"></div>
 
+<div class="input">
 <input id="msgInput" placeholder="اكتب رسالة...">
 <button onclick="sendMessage()">ارسال</button>
+</div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -103,8 +129,8 @@ databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
 firebase.initializeApp(config)
 
-// ايموجي
-const emojis = [
+/* ايموجي */
+const emojis=[
 "😀","😃","😄","😁","😆","😅","😂","🤣",
 "😊","🙂","😉","😍","🥰","😘",
 "😎","🤩","🥳",
@@ -113,7 +139,8 @@ const emojis = [
 "😢","😭","🥺",
 "😡","😤",
 "😱"
-];
+]
+
 let selectedEmoji="😀"
 
 const list=document.getElementById("emojiList")
@@ -132,11 +159,11 @@ selectedEmoji=e
 list.appendChild(span)
 })
 
-// بيانات المستخدم
+/* بياناتي */
 let myName=""
 let myAvatar=""
 
-// دخول
+/* دخول */
 function enterChat(){
 const name=document.getElementById("name").value.trim()
 if(!name){alert("اكتب اسمك");return}
@@ -150,7 +177,7 @@ document.getElementById("start").style.display="none"
 document.getElementById("chat").style.display="block"
 }
 
-// ارسال
+/* ارسال */
 function sendMessage(){
 const text=document.getElementById("msgInput").value.trim()
 if(!text)return
@@ -164,16 +191,16 @@ text:text
 document.getElementById("msgInput").value=""
 }
 
-// استقبال
+/* استقبال */
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
+
+if(!m.name || !m.text) return
 
 const div=document.createElement("div")
 div.className="msg "+(m.name===myName?"me":"other")
 
-div.innerHTML=`
-${m.avatar} ${m.name}: ${m.text}
-`
+div.innerHTML=`${m.avatar} ${m.name}: ${m.text}`
 
 document.getElementById("messages").appendChild(div)
 document.getElementById("messages").scrollTop=
