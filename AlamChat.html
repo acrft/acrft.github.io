@@ -11,18 +11,45 @@ margin:0;
 font-family:sans-serif;
 background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png");
 background-size:cover;
+}
+
+/* تسجيل */
+#start{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+gap:10px;
+}
+
+#start input{
+padding:12px;
+border-radius:25px;
+border:none;
+width:200px;
+}
+
+#start button{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+background:#25d366;
 color:#fff;
 }
 
+/* هيدر */
 .header{
-background:rgba(32,44,51,0.9);
+background:#202c33;
+color:#fff;
 padding:10px;
 display:flex;
 justify-content:space-between;
 }
 
+/* رسائل */
 .messages{
-height:calc(100vh - 150px);
+height:calc(100vh - 130px);
 overflow:auto;
 padding:10px;
 display:flex;
@@ -33,13 +60,18 @@ flex-direction:column;
 display:flex;
 align-items:flex-end;
 gap:5px;
-max-width:80%;
 margin:5px;
-animation:fadeIn 0.2s ease;
+max-width:75%;
 }
 
-.me{align-self:flex-end; flex-direction:row-reverse}
-.other{align-self:flex-start}
+.me{
+align-self:flex-end;
+flex-direction:row-reverse;
+}
+
+.other{
+align-self:flex-start;
+}
 
 .avatar{
 width:30px;
@@ -49,46 +81,34 @@ background:#555;
 display:flex;
 align-items:center;
 justify-content:center;
+color:#fff;
 }
 
 .bubble{
 padding:10px;
 border-radius:10px;
-position:relative;
+color:#fff;
 }
 
 .me .bubble{
 background:#005c4b;
+border-bottom-right-radius:0;
 }
+
 .other .bubble{
 background:#202c33;
-}
-
-.me .bubble::after{
-content:"";
-position:absolute;
-right:-6px;
-bottom:0;
-border-left:6px solid #005c4b;
-border-top:6px solid transparent;
-}
-
-.other .bubble::after{
-content:"";
-position:absolute;
-left:-6px;
-bottom:0;
-border-right:6px solid #202c33;
-border-top:6px solid transparent;
+border-bottom-left-radius:0;
 }
 
 .time{
 font-size:10px;
 text-align:right;
+opacity:0.7;
 }
 
 .seen{
 color:#4fc3f7;
+margin-left:5px;
 }
 
 .reply{
@@ -99,34 +119,33 @@ padding-left:5px;
 margin-bottom:5px;
 }
 
+/* إدخال */
 .input{
 position:fixed;
 bottom:0;
 width:100%;
 display:flex;
-background:#202c33;
 padding:10px;
+background:#202c33;
 gap:5px;
 }
 
-input{
+.input input{
 flex:1;
 padding:10px;
-border-radius:20px;
+border-radius:25px;
 border:none;
 }
 
-button{
-padding:10px;
+.send{
+background:#25d366;
 border:none;
 border-radius:50%;
-background:#25d366;
+width:45px;
+height:45px;
+color:#fff;
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(5px)}
-to{opacity:1; transform:translateY(0)}
-}
 </style>
 </head>
 
@@ -140,7 +159,7 @@ to{opacity:1; transform:translateY(0)}
 <div id="chat" style="display:none">
 
 <div class="header">
-<span id="status">متصل الآن</span>
+<span>AlamChat 💬</span>
 <span id="typing"></span>
 </div>
 
@@ -149,8 +168,7 @@ to{opacity:1; transform:translateY(0)}
 <div class="input">
 <input id="msgInput" placeholder="اكتب..." oninput="typing()">
 <input type="file" id="img">
-<button onclick="record()">🎤</button>
-<button onclick="send()">➤</button>
+<button class="send" onclick="send()">➤</button>
 </div>
 
 </div>
@@ -168,34 +186,28 @@ databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 
 const start = document.getElementById("start")
 const chat = document.getElementById("chat")
-const msgInput = document.getElementById("msgInput")
 const messages = document.getElementById("messages")
+const msgInput = document.getElementById("msgInput")
 const typingSpan = document.getElementById("typing")
 
-let name = localStorage.getItem("name") || ""
-let replyText = null
+let name=""
+let replyText=null
 
 function startChat(){
-if(!document.getElementById("name").value){
+const input=document.getElementById("name")
+
+if(!input.value){
 alert("اكتب اسمك")
 return
 }
 
-name = document.getElementById("name").value
-localStorage.setItem("name", name)
-
+name=input.value
 start.style.display="none"
 chat.style.display="block"
-
-firebase.database().ref("online/"+name).set(true)
-}
-
-window.onbeforeunload=()=>{
-firebase.database().ref("online/"+name).remove()
 }
 
 function send(){
-const text=msgInput.value
+const text=msgInput.value.trim()
 const file=document.getElementById("img").files[0]
 
 let msg={
@@ -222,32 +234,7 @@ document.getElementById("img").value=""
 replyText=null
 }
 
-function record(){
-navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
-const rec=new MediaRecorder(stream)
-rec.start()
-
-let chunks=[]
-rec.ondataavailable=e=>chunks.push(e.data)
-
-setTimeout(()=>{
-rec.stop()
-rec.onstop=()=>{
-const blob=new Blob(chunks)
-const reader=new FileReader()
-reader.onload=e=>{
-firebase.database().ref("chat").push({
-name,
-audio:e.target.result,
-time:new Date().toLocaleTimeString()
-})
-}
-reader.readAsDataURL(blob)
-}
-},3000)
-})
-}
-
+/* typing */
 function typing(){
 firebase.database().ref("typing").set(name)
 setTimeout(()=>firebase.database().ref("typing").set(""),1000)
@@ -259,9 +246,13 @@ if(t && t!==name) typingSpan.innerText=t+" يكتب..."
 else typingSpan.innerText=""
 })
 
+/* استقبال */
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 const id=snap.key
+
+if(!m || !m.name) return
+
 const isMe=m.name===name
 
 const div=document.createElement("div")
@@ -273,10 +264,9 @@ div.innerHTML=`
 <div class="bubble">
 ${m.reply ? `<div class="reply">${m.reply}</div>`:""}
 ${m.img ? `<img src="${m.img}" width="150">`:""}
-${m.audio ? `<audio controls src="${m.audio}"></audio>`:""}
-${m.text||""}
+${m.text || ""}
 <div class="time">
-${m.time}
+${m.time || ""}
 ${isMe ? `<span class="seen ${m.seen?'seen':''}">✔✔</span>`:""}
 </div>
 </div>
@@ -291,25 +281,17 @@ if(navigator.vibrate) navigator.vibrate(100)
 firebase.database().ref("chat/"+id).update({seen:true})
 }
 
+/* حذف */
 div.onclick=()=>{
-if(isMe && confirm("حذف الرسالة؟")){
+if(isMe && confirm("حذف؟")){
 firebase.database().ref("chat/"+id).remove()
 }
 }
 
+/* رد */
 div.ondblclick=()=>{
-replyText=m.text||"رسالة"
+replyText=m.text || "رسالة"
 alert("هترد على: "+replyText)
-}
-
-div.oncontextmenu=(e)=>{
-e.preventDefault()
-if(isMe){
-let newText=prompt("تعديل الرسالة", m.text)
-if(newText){
-firebase.database().ref("chat/"+id).update({text:newText})
-}
-}
 }
 })
 </script>
