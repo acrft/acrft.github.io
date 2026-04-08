@@ -8,77 +8,34 @@
 <style>
 body{margin:0;background:#0b141a;color:#fff;font-family:sans-serif}
 
-.login{
-display:flex;flex-direction:column;align-items:center;
-justify-content:center;height:100vh;gap:10px
-}
+.login{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:10px}
+input{padding:10px;border:none;border-radius:20px;width:200px}
+button{padding:10px;border:none;border-radius:20px;background:#25d366}
 
-.login input{
-padding:10px;border:none;border-radius:20px;width:220px
-}
-
-.login button{
-padding:10px;border:none;border-radius:20px;background:#25d366;cursor:pointer
-}
-
-.header{
-position:fixed;top:0;width:100%;
-background:#202c33;padding:10px;
-display:flex;justify-content:space-between;align-items:center
-}
-
-.messages{
-margin-top:60px;
-height:calc(100vh - 140px);
-overflow:auto;padding:10px
-}
-
+.messages{height:80vh;overflow:auto;padding:10px}
 .msg{margin:5px}
 .me{text-align:left}
 .other{text-align:right}
-
-.input{
-position:fixed;bottom:0;width:100%;
-display:flex;background:#202c33;padding:10px
-}
-
-.input input{
-flex:1;padding:10px;border-radius:20px;border:none
-}
-
-img{vertical-align:middle}
 </style>
 </head>
 
 <body>
 
 <div id="login" class="login">
-<h2>AlamChat 🔐</h2>
-
+<h2>AlamChat</h2>
 <input id="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
 <input id="name" placeholder="اسمك">
-<input id="image" type="file">
-
 <button onclick="register()">تسجيل</button>
 <button onclick="loginUser()">دخول</button>
-<button onclick="resetPassword()">نسيت كلمة السر</button>
 </div>
 
 <div id="chat" style="display:none">
-
-<div class="header">
-<span id="myName"></span>
-<button onclick="logout()">خروج</button>
-</div>
-
+<h3 id="myName"></h3>
 <div id="messages" class="messages"></div>
 
-<div class="input">
-<input id="msgInput" placeholder="اكتب رسالة...">
-<button onclick="sendMessage()">➤</button>
-</div>
-
+<input id="msgInput">
+<button onclick="sendMessage()">ارسال</button>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -86,169 +43,91 @@ img{vertical-align:middle}
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
-const firebaseConfig={
+const config={
 apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
 authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(config)
 
-let currentUser=null
-let lastSend=0
-
-// ================= تسجيل =================
+// تسجيل
 function register(){
-const emailVal=email.value.trim()
-const pass=password.value.trim()
-const nameVal=name.value.trim()
-const file=image.files[0]
+const email=document.getElementById("email").value
+const pass=document.getElementById("password").value
+const name=document.getElementById("name").value
 
-if(!emailVal||!pass||!nameVal){
-alert("املأ كل البيانات")
-return
-}
+if(!email||!pass||!name){alert("املأ البيانات");return}
 
-// Avatar تلقائي
-function createUser(avatar){
-firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
+firebase.auth().createUserWithEmailAndPassword(email,pass)
 .then(res=>{
 const uid=res.user.uid
 
-res.user.sendEmailVerification()
+// Avatar تلقائي
+const avatar="https://ui-avatars.com/api/?name="+encodeURIComponent(name)
 
 firebase.database().ref("users/"+uid).set({
-name:nameVal,
-avatar:avatar,
-online:true
+name:name,
+avatar:avatar
 })
 
-alert("تم التسجيل ✔️ فعل الإيميل")
+alert("تم التسجيل")
 })
 .catch(e=>alert(e.message))
 }
 
-// بدون صورة
-if(!file){
-const avatar="https://ui-avatars.com/api/?name="+encodeURIComponent(nameVal)
-createUser(avatar)
-return
-}
-
-// مع صورة
-const formData=new FormData()
-formData.append("image",file)
-
-fetch("https://api.imgbb.com/1/upload?key=3a9ef8e3be83e9934cc9019db6d0773e",{
-method:"POST",
-body:formData
-})
-.then(r=>r.json())
-.then(data=>{
-createUser(data.data.url)
-})
-.catch(()=>{
-alert("فشل رفع الصورة")
-})
-}
-
-// ================= دخول =================
+// دخول
 function loginUser(){
-firebase.auth().signInWithEmailAndPassword(email.value,password.value)
-.catch(e=>alert("بيانات غلط ❌"))
+const email=document.getElementById("email").value
+const pass=document.getElementById("password").value
+
+firebase.auth().signInWithEmailAndPassword(email,pass)
+.catch(()=>alert("بيانات غلط"))
 }
 
-// ================= خروج =================
-function logout(){
-firebase.auth().signOut()
-location.reload()
-}
-
-// ================= استعادة باسورد =================
-function resetPassword(){
-if(!email.value){
-alert("اكتب الإيميل")
-return
-}
-firebase.auth().sendPasswordResetEmail(email.value)
-.then(()=>alert("تم إرسال رابط"))
-}
-
-// ================= حالة المستخدم =================
+// حالة المستخدم
 firebase.auth().onAuthStateChanged(user=>{
 if(user){
 
-if(!user.emailVerified){
-alert("فعل الإيميل ❗")
-firebase.auth().signOut()
-return
-}
-
-currentUser=user
-
 firebase.database().ref("users/"+user.uid).once("value",s=>{
 const data=s.val()
-if(!data){
-alert("بيانات المستخدم غير موجودة ❌")
-return
-}
-myName.innerText=data.name
+
+document.getElementById("myName").innerText=data.name
 })
 
-login.style.display="none"
-chat.style.display="block"
-
-firebase.database().ref("users/"+user.uid).update({online:true})
+document.getElementById("login").style.display="none"
+document.getElementById("chat").style.display="block"
 }
 })
 
-// Offline
-window.onbeforeunload=()=>{
-if(currentUser){
-firebase.database().ref("users/"+currentUser.uid).update({online:false})
-}
-}
-
-// ================= ارسال =================
+// ارسال
 function sendMessage(){
-const text=msgInput.value.trim()
+const text=document.getElementById("msgInput").value
 if(!text)return
 
-if(Date.now()-lastSend<1000)return
-lastSend=Date.now()
-
 firebase.database().ref("chat").push({
-uid:currentUser.uid,
-text:text,
-time:Date.now(),
-seen:false
+uid:firebase.auth().currentUser.uid,
+text:text
 })
 
-msgInput.value=""
+document.getElementById("msgInput").value=""
 }
 
-// ================= استقبال =================
+// استقبال
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 
 firebase.database().ref("users/"+m.uid).once("value",s=>{
 const u=s.val()
-if(!u)return
 
 const div=document.createElement("div")
-div.className="msg "+(m.uid===currentUser.uid?"me":"other")
+div.className="msg"
 
 div.innerHTML=`
-<img src="${u.avatar}" width="25" style="border-radius:50%">
+<img src="${u.avatar}" width="25">
 ${u.name}: ${m.text}
-${m.uid===currentUser.uid ? (m.seen?"✔✔":"✔") : ""}
 `
 
-if(m.uid!==currentUser.uid){
-snap.ref.update({seen:true})
-}
-
-messages.appendChild(div)
-messages.scrollTop=messages.scrollHeight
+document.getElementById("messages").appendChild(div)
 })
 })
 </script>
