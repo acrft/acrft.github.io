@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat 🔐</title>
+<title>AlamChat</title>
 
 <style>
-body{margin:0;font-family:sans-serif;background:#0b141a;color:white}
+body{margin:0;background:#0b141a;color:#fff;font-family:sans-serif}
 
 .login{
 display:flex;flex-direction:column;
-justify-content:center;align-items:center;
+align-items:center;justify-content:center;
 height:100vh;gap:10px
 }
 
@@ -19,8 +19,7 @@ padding:10px;border:none;border-radius:20px;width:220px
 }
 
 .login button{
-padding:10px 20px;border:none;
-background:#25d366;border-radius:20px;cursor:pointer
+padding:10px;border:none;border-radius:20px;background:#25d366
 }
 
 .header{
@@ -30,7 +29,8 @@ display:flex;justify-content:space-between;align-items:center
 }
 
 .messages{
-margin-top:60px;height:calc(100vh - 140px);
+margin-top:60px;
+height:calc(100vh - 140px);
 overflow:auto;padding:10px
 }
 
@@ -40,16 +40,20 @@ overflow:auto;padding:10px
 
 .input{
 position:fixed;bottom:0;width:100%;
-background:#202c33;padding:10px;display:flex
+display:flex;background:#202c33;padding:10px
 }
 
-.input input{flex:1;padding:10px;border-radius:20px;border:none}
+.input input{
+flex:1;padding:10px;border-radius:20px;border:none
+}
+
+button{cursor:pointer}
 </style>
 </head>
 
 <body>
 
-<div class="login" id="login">
+<div id="login" class="login">
 <h2>AlamChat 🔐</h2>
 
 <input id="email" placeholder="Email">
@@ -59,14 +63,14 @@ background:#202c33;padding:10px;display:flex
 
 <button onclick="register()">تسجيل</button>
 <button onclick="loginUser()">دخول</button>
-<button onclick="resetPassword()">نسيت كلمة السر؟</button>
+<button onclick="resetPassword()">نسيت كلمة السر</button>
 </div>
 
 <div id="chat" style="display:none">
 
 <div class="header">
-<div id="myName"></div>
-<img id="myAvatar" width="40">
+<span id="myName"></span>
+<button onclick="logout()">خروج</button>
 </div>
 
 <div id="messages" class="messages"></div>
@@ -88,10 +92,9 @@ apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
 authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
-
 firebase.initializeApp(firebaseConfig)
 
-let currentUser=null
+let currentUser,lastSend=0
 
 // تسجيل
 function register(){
@@ -109,18 +112,27 @@ firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
 .then(res=>{
 const uid=res.user.uid
 
-// إرسال تأكيد الإيميل
 res.user.sendEmailVerification()
 
-const reader=new FileReader()
-reader.onload=function(){
+const formData=new FormData()
+formData.append("image",file)
+
+fetch("https://api.imgbb.com/1/upload?key=3a9ef8e3be83e9934cc9019db6d0773e",{
+method:"POST",
+body:formData
+})
+.then(r=>r.json())
+.then(data=>{
+const imageUrl=data.data.url
+
 firebase.database().ref("users/"+uid).set({
 name:nameVal,
-avatar:reader.result
+avatar:imageUrl,
+online:true
 })
-alert("تم التسجيل ✔️ تحقق من الإيميل")
-}
-reader.readAsDataURL(file)
+
+alert("تم التسجيل ✔️ فعل الإيميل")
+})
 })
 .catch(e=>alert(e.message))
 }
@@ -131,6 +143,12 @@ firebase.auth().signInWithEmailAndPassword(email.value,password.value)
 .catch(e=>alert(e.message))
 }
 
+// تسجيل خروج
+function logout(){
+firebase.auth().signOut()
+location.reload()
+}
+
 // نسيت الباسورد
 function resetPassword(){
 if(!email.value){
@@ -138,49 +156,58 @@ alert("اكتب الإيميل الأول")
 return
 }
 firebase.auth().sendPasswordResetEmail(email.value)
-.then(()=>alert("تم إرسال رابط استعادة الباسورد"))
+.then(()=>alert("تم إرسال رابط"))
 }
 
 // حالة المستخدم
 firebase.auth().onAuthStateChanged(user=>{
 if(user){
 
-// تحقق من الإيميل
 if(!user.emailVerified){
-alert("لازم تفعل الإيميل الأول ❗")
+alert("فعل الإيميل ❗")
 firebase.auth().signOut()
 return
 }
 
 currentUser=user
 
-firebase.database().ref("users/"+user.uid).once("value",snap=>{
-const data=snap.val()
+firebase.database().ref("users/"+user.uid).once("value",s=>{
+myName.innerText=s.val().name
+})
 
 login.style.display="none"
 chat.style.display="block"
 
-myName.innerText=data.name
-myAvatar.src=data.avatar
-})
+firebase.database().ref("users/"+user.uid).update({online:true})
 }
 })
 
+// خروج = Offline
+window.onbeforeunload=()=>{
+if(currentUser){
+firebase.database().ref("users/"+currentUser.uid).update({online:false})
+}
+}
+
 // ارسال رسالة
 function sendMessage(){
+if(Date.now()-lastSend<1000)return
+lastSend=Date.now()
+
 const text=msgInput.value
 if(!text)return
 
 firebase.database().ref("chat").push({
 uid:currentUser.uid,
 text:text,
-time:Date.now()
+time:Date.now(),
+seen:false
 })
 
 msgInput.value=""
 }
 
-// استقبال
+// استقبال الرسائل
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 
@@ -193,7 +220,12 @@ div.className="msg "+(m.uid===currentUser.uid?"me":"other")
 div.innerHTML=`
 <img src="${u.avatar}" width="25" style="border-radius:50%">
 ${u.name}: ${m.text}
+${m.uid===currentUser.uid ? (m.seen?"✔✔":"✔") : ""}
 `
+
+if(m.uid!==currentUser.uid){
+snap.ref.update({seen:true})
+}
 
 messages.appendChild(div)
 messages.scrollTop=messages.scrollHeight
@@ -202,4 +234,4 @@ messages.scrollTop=messages.scrollHeight
 </script>
 
 </body>
-</html>
+  </html>
