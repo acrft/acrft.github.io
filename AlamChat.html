@@ -9,9 +9,8 @@
 body{margin:0;background:#0b141a;color:#fff;font-family:sans-serif}
 
 .login{
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-height:100vh;gap:10px
+display:flex;flex-direction:column;align-items:center;
+justify-content:center;height:100vh;gap:10px
 }
 
 .login input{
@@ -19,7 +18,7 @@ padding:10px;border:none;border-radius:20px;width:220px
 }
 
 .login button{
-padding:10px;border:none;border-radius:20px;background:#25d366
+padding:10px;border:none;border-radius:20px;background:#25d366;cursor:pointer
 }
 
 .header{
@@ -47,7 +46,7 @@ display:flex;background:#202c33;padding:10px
 flex:1;padding:10px;border-radius:20px;border:none
 }
 
-button{cursor:pointer}
+img{vertical-align:middle}
 </style>
 </head>
 
@@ -94,26 +93,23 @@ databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 }
 firebase.initializeApp(firebaseConfig)
 
-let currentUser,lastSend=0
+let currentUser=null
+let lastSend=0
 
-// تسجيل
+// ================= تسجيل =================
 function register(){
-const emailVal=email.value
-const pass=password.value
-const nameVal=name.value
+const emailVal=email.value.trim()
+const pass=password.value.trim()
+const nameVal=name.value.trim()
 const file=image.files[0]
 
 if(!emailVal||!pass||!nameVal){
-alert("املأ البيانات")
+alert("املأ كل البيانات")
 return
 }
 
-// 🟢 لو مفيش صورة
-if(!file){
-
-// نعمل صورة افتراضية (حرف من الاسم)
-const avatar = "https://ui-avatars.com/api/?name=" + encodeURIComponent(nameVal)
-
+// Avatar تلقائي
+function createUser(avatar){
 firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
 .then(res=>{
 const uid=res.user.uid
@@ -128,11 +124,17 @@ online:true
 
 alert("تم التسجيل ✔️ فعل الإيميل")
 })
+.catch(e=>alert(e.message))
+}
 
+// بدون صورة
+if(!file){
+const avatar="https://ui-avatars.com/api/?name="+encodeURIComponent(nameVal)
+createUser(avatar)
 return
 }
 
-// 🔵 لو فيه صورة
+// مع صورة
 const formData=new FormData()
 formData.append("image",file)
 
@@ -142,82 +144,36 @@ body:formData
 })
 .then(r=>r.json())
 .then(data=>{
-
-const imageUrl=data.data.url
-
-firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
-.then(res=>{
-const uid=res.user.uid
-
-res.user.sendEmailVerification()
-
-firebase.database().ref("users/"+uid).set({
-name:nameVal,
-avatar:imageUrl,
-online:true
-})
-
-alert("تم التسجيل ✔️ فعل الإيميل")
-})
-
+createUser(data.data.url)
 })
 .catch(()=>{
 alert("فشل رفع الصورة")
 })
 }
 
-firebase.auth().createUserWithEmailAndPassword(emailVal,pass)
-.then(res=>{
-const uid=res.user.uid
-
-res.user.sendEmailVerification()
-
-const formData=new FormData()
-formData.append("image",file)
-
-fetch("https://api.imgbb.com/1/upload?key=3a9ef8e3be83e9934cc9019db6d0773e",{
-method:"POST",
-body:formData
-})
-.then(r=>r.json())
-.then(data=>{
-const imageUrl=data.data.url
-
-firebase.database().ref("users/"+uid).set({
-name:nameVal,
-avatar:imageUrl,
-online:true
-})
-
-alert("تم التسجيل ✔️ فعل الإيميل")
-})
-})
-.catch(e=>alert(e.message))
-}
-
-// دخول
+// ================= دخول =================
 function loginUser(){
 firebase.auth().signInWithEmailAndPassword(email.value,password.value)
-.catch(e=>alert(e.message))
+.catch(e=>alert("بيانات غلط ❌"))
 }
 
-// تسجيل خروج
+// ================= خروج =================
 function logout(){
 firebase.auth().signOut()
 location.reload()
 }
 
-// نسيت الباسورد
+// ================= استعادة باسورد =================
 function resetPassword(){
 if(!email.value){
-alert("اكتب الإيميل الأول")
+alert("اكتب الإيميل")
 return
 }
 firebase.auth().sendPasswordResetEmail(email.value)
 .then(()=>alert("تم إرسال رابط"))
 }
 
-// حالة المستخدم
+// ================= حالة المستخدم =================
 firebase.auth().onAuthStateChanged(user=>{
 if(user){
 
@@ -230,7 +186,12 @@ return
 currentUser=user
 
 firebase.database().ref("users/"+user.uid).once("value",s=>{
-myName.innerText=s.val().name
+const data=s.val()
+if(!data){
+alert("بيانات المستخدم غير موجودة ❌")
+return
+}
+myName.innerText=data.name
 })
 
 login.style.display="none"
@@ -240,20 +201,20 @@ firebase.database().ref("users/"+user.uid).update({online:true})
 }
 })
 
-// خروج = Offline
+// Offline
 window.onbeforeunload=()=>{
 if(currentUser){
 firebase.database().ref("users/"+currentUser.uid).update({online:false})
 }
 }
 
-// ارسال رسالة
+// ================= ارسال =================
 function sendMessage(){
+const text=msgInput.value.trim()
+if(!text)return
+
 if(Date.now()-lastSend<1000)return
 lastSend=Date.now()
-
-const text=msgInput.value
-if(!text)return
 
 firebase.database().ref("chat").push({
 uid:currentUser.uid,
@@ -265,12 +226,13 @@ seen:false
 msgInput.value=""
 }
 
-// استقبال الرسائل
+// ================= استقبال =================
 firebase.database().ref("chat").on("child_added",snap=>{
 const m=snap.val()
 
 firebase.database().ref("users/"+m.uid).once("value",s=>{
 const u=s.val()
+if(!u)return
 
 const div=document.createElement("div")
 div.className="msg "+(m.uid===currentUser.uid?"me":"other")
@@ -292,4 +254,4 @@ messages.scrollTop=messages.scrollHeight
 </script>
 
 </body>
-  </html>
+</html>
