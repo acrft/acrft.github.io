@@ -9,7 +9,7 @@
 /* Pixel Arabic Font */
 @font-face {
   font-family: 'Arapix';
-  src: url('fonts/Arapix.ttf') format('truetype');
+  src: url('fonts/Arapix.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
