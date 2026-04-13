@@ -1,3 +1,19 @@
+/* Minecraft Font */
+@font-face {
+  font-family: 'Mojangles';
+  src: url('fonts/Mojangles.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Pixel Arabic Font */
+@font-face {
+  font-family: 'Arapix';
+  src: url('fonts/Arapix.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* =========================================
    1. VARIABLES & THEMES
    ========================================= */
@@ -9,6 +25,7 @@
   --primary: #22c55e; /* Green */
   --accent: #334155; /* Dark blue/grey */
   --shadow: rgba(0, 0, 0, 0.3);
+  --main-font: 'Arapix', sans-serif;
 }
 
 body.light-theme {
@@ -37,11 +54,11 @@ body.light-theme {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--main-font); /* This handles the switch automatically */
+  image-rendering: pixelated; /* Keeps pixel fonts crisp, not blurry */
+  transition:
+    background-color 0.3s,
+    color 0.3s;
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -51,6 +68,10 @@ body {
 .container {
   width: 100%;
   max-width: 900px;
+}
+
+html[lang='en'] {
+  --main-font: 'Mojangles', sans-serif;
 }
 
 /* =========================================
