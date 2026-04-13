@@ -1,236 +1,261 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;
-  color: #222;
-  text-align: center;
-  transition:
-    background 0.4s,
-    color 0.4s;
+/* =========================================
+   1. VARIABLES & THEMES
+   ========================================= */
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary: #22c55e; /* Green */
+  --accent: #334155; /* Dark blue/grey */
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+body.light-theme {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --primary: #16a34a; /* Darker green */
+  --accent: #e2e8f0; /* Light grey */
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   2. GLOBAL STYLES
+   ========================================= */
+* {
   margin: 0;
   padding: 0;
-}
-
-.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-.dark-mode h1 {
-  color: #2e7d32;
-}
-
-.dark-mode p,
-.dark-mode h2,
-.dark-mode h3 {
-  color: #ffffff;
-}
-
-.container {
-  width: 90%;
-  margin: auto;
-  max-width: 700px;
-  text-align: center;
-  animation: fadeIn 0.6s ease;
-}
-
-.container img {
-  display: block;
-  margin: 20px auto;
-  border-radius: 12px;
-}
-
-h1 {
-  color: #2e7d32;
-  margin-top: 10px;
-}
-
-button {
-  background-color: #2e7d32;
-  color: #ffffff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 10px;
-  font-size: 16px;
+  box-sizing: border-box;
   transition:
-    background 0.3s,
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-button:hover {
-  background-color: #1b5e20;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-button:active {
-  transform: scale(0.96);
-}
-
-button:focus,
-a:focus {
-  outline: 2px solid #4caf50;
-  outline-offset: 2px;
-}
-
-a {
-  color: #1b5e20;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.dark-mode a {
-  color: #4caf50;
-}
-
-.rules {
-  text-align: start;
-  background: #f0f0f0;
-  color: #111;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 15px;
-}
-
-.rules ul {
-  list-style: none;
-}
-
-.rules li {
-  color: #111;
-}
-
-.dark-mode .rules li {
-  color: #ffffff;
-}
-
-.dark-mode .rules {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#toast {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #2e7d32;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 14px;
-  z-index: 999;
-}
-
-#toast.show {
-  opacity: 1;
-}
-
-.dark-mode p[style] {
-  color: #aaa !important;
-}
-
-.ip-box {
-  background: #e8f5e9;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: bold;
-  margin: 15px 0;
-  font-size: 17px;
-}
-
-.dark-mode .ip-box {
-  background: #1e2e1e;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 body {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-img {
-  pointer-events: none;
-}
-
-/* 🔗 تنسيق روابط السيرفر */
-.link-item {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
-  /* المسافة الأفقية بين الأيقونة والنص */
-  margin: 2px auto !important;
-  /* المسافة العمودية بين الروابط (قللها لـ 0 للالتصاق التام) */
-  padding: 0 !important;
-  width: fit-content;
-  line-height: 1.2;
-  /* لتقليل الارتفاع الشفاف حول النص */
-}
-
-.link-icon {
-  width: 20px !important;
-  height: 20px !important;
-  /* This removes the circle effect */
-  border-radius: 0 !important;
-  /* This ensures the image isn't cropped into a circle by the container */
-  clip-path: none !important;
-  /* This prevents the icon from being squished */
-  object-fit: contain !important;
-  display: block;
-}
-
-/* 标题 - تقليل المسافة تحت العنوان "روابط السيرفر" */
-h2 {
-  margin: 15px 0 5px !important;
-}
-
-ul {
-  margin: 5px 0;
+  padding: 20px;
+  line-height: 1.6;
 }
 
 .container {
-  line-height: 1.4;
+  width: 100%;
+  max-width: 900px;
 }
 
-.keep-order {
-  display: inline-block;
-  unicode-bidi: isolate;
-  direction: rtl !important; /* Forces the emoji/text sequence to stay as written */
+/* =========================================
+   3. COMPONENTS (CARDS & BUTTONS)
+   ========================================= */
+.card {
+  background-color: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--accent);
+  box-shadow: 0 10px 15px -3px var(--shadow);
 }
 
-/* This container holds your 🌙 and 🌐 buttons */
-.controls {
+.hero {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.logo {
+  width: 100px;
+  filter: drop-shadow(0 0 10px var(--primary));
+  margin-bottom: 15px;
+}
+
+/* IP Connection Area */
+.ip-wrapper {
+  background-color: var(--bg);
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--primary) !important;
+  font-family: monospace;
+}
+
+.btn-copy,
+.btn-bedrock {
+  background-color: var(--primary) !important;
+  color: white !important;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-bedrock {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+.pulse {
+  list-style: none;
   display: flex;
   gap: 15px;
-  /* Force this specific div to ALWAYS be Left-to-Right */
-  direction: ltr !important;
-  /* Optional: ensures it stays centered or pinned to a side */
   justify-content: center;
   margin-top: 20px;
 }
 
-/* Ensure the buttons don't inherit any weird padding when flipped */
-.controls button {
-  cursor: pointer;
-  padding: 10px;
+/* =========================================
+   VERSION BADGES - THEME & ALIGNMENT FIX
+   ========================================= */
+.version-badges {
+  display: flex;
+  gap: 10px; /* Controls the space between the two badges */
+  justify-content: center;
+  margin: 10px 0 20px 0; /* Reduced top margin to stay close to the IP */
+}
+
+.badge {
+  /* Use variables instead of hardcoded colors */
+  background-color: var(--accent) !important;
+  color: var(--text) !important;
+  border: 1.5px solid var(--primary);
+
+  padding: 10px 18px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Fix for the label text (Java/Bedrock) to be readable in both modes */
+.badge .label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* This fixes the margin issue with the big Green Button below it */
+.btn-bedrock {
+  margin-top: 5px !important; /* Pulls the button closer to the badges */
+}
+
+/* =========================================
+   4. RULES & GRID (LAYOUT)
+   ========================================= */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rules-list {
+  list-style: none;
+  text-align: start !important; /* Respects LTR/RTL flip */
+}
+
+.rules-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--accent);
+  display: block;
+  unicode-bidi: isolate; /* Keeps emojis from flipping weirdly */
+}
+
+/* =========================================
+   5. SOCIAL LINKS & STAFF
+   ========================================= */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text) !important;
+  padding: 12px;
+  background-color: var(--accent) !important;
   border-radius: 8px;
+}
+
+.link-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 0 !important; /* FORCED SQUARE */
+  flex-shrink: 0;
+}
+
+/* =========================================
+   6. PERSISTENT CONTROLS (THEME/LANG)
+   ========================================= */
+.fixed-controls {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  gap: 12px;
+  direction: ltr !important; /* LOCKED: DO NOT SWITCH POSITIONS */
+  z-index: 1000;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   border: none;
-  direction: ltr !important;
+  background-color: var(--primary) !important;
+  color: white !important;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   7. UTILITY
+   ========================================= */
+#toast {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  z-index: 2000;
+  transition: top 0.4s ease;
+}
+
+#toast.show {
+  top: 30px;
+}
+
+.section-title {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+  color: var(--primary);
 }
