@@ -172,6 +172,24 @@ html[lang='en'] {
   margin-top: 5px !important; /* Pulls the button closer to the badges */
 }
 
+/* Force all interactive elements to use the pixel fonts */
+.badge,
+.social-item,
+.btn-copy,
+.btn-bedrock {
+  font-family: var(--main-font) !important;
+  /* This ensures the pixel font stays crisp on buttons */
+  -webkit-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+}
+
+/* Specifically for the Arabic Arapix font on buttons */
+html[lang='ar'] button,
+html[lang='ar'] .badge {
+  font-size: 1.1rem; /* Arapix sometimes needs to be a bit bigger to be readable */
+  line-height: 1.2;
+}
+
 /* =========================================
    4. RULES & GRID (LAYOUT)
    ========================================= */
