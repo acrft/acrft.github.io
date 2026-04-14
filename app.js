@@ -83,6 +83,36 @@ const translations = {
     }
 };
 
+async function updateServerStatus() {
+    const statusDot = document.getElementById('status-indicator');
+    const statusText = document.getElementById('status-text');
+    const playerNum = document.getElementById('player-num');
+    const maxPlayers = document.getElementById('max-players');
+
+    const serverIP = "Alameldin.aternos.me:28303";
+
+    try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        const data = await response.json();
+
+        if (data.online) {
+            statusDot.className = "status-dot dot-online";
+            // Use the translation key instead of hardcoded text
+            statusText.innerText = translations[currentLang].serverOnline + " ✅";
+            playerNum.innerText = data.players.online;
+            maxPlayers.innerText = data.players.max;
+        } else {
+            statusDot.className = "status-dot dot-offline";
+            // Use the translation key instead of hardcoded text
+            statusText.innerText = translations[currentLang].serverOffline + " ❌";
+            playerNum.innerText = "0";
+            maxPlayers.innerText = "0";
+        }
+    } catch (error) {
+        console.error("Status Error:", error);
+    }
+}
+
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
@@ -94,6 +124,7 @@ function updateContent() {
     });
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLang;
+    updateServerStatus();
 }
 
 function toggleLanguage() {
@@ -132,36 +163,7 @@ if (savedTheme === 'light') {
     if (modeBtn) modeBtn.innerText = '☀️';
 }
 
-async function updateServerStatus() {
-    const statusDot = document.getElementById('status-indicator');
-    const statusText = document.getElementById('status-text');
-    const playerNum = document.getElementById('player-num');
-    const maxPlayers = document.getElementById('max-players');
 
-    const serverIP = "Alameldin.aternos.me:28303";
 
-    try {
-        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
-        const data = await response.json();
 
-        if (data.online) {
-            statusDot.className = "status-dot dot-online";
-            // Use the translation key instead of hardcoded text
-            statusText.innerText = translations[currentLang].serverOnline + " ✅";
-            playerNum.innerText = data.players.online;
-            maxPlayers.innerText = data.players.max;
-        } else {
-            statusDot.className = "status-dot dot-offline";
-            // Use the translation key instead of hardcoded text
-            statusText.innerText = translations[currentLang].serverOffline + " ❌";
-            playerNum.innerText = "0";
-            maxPlayers.innerText = "0";
-        }
-    } catch (error) {
-        console.error("Status Error:", error);
-    }
-}
 
-// Update status on load and every 60 seconds
-updateServerStatus();
-setInterval(updateServerStatus, 60000);
