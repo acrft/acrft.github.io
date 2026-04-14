@@ -298,3 +298,46 @@ html[lang='ar'] .badge {
   font-size: 1.25rem;
   color: var(--primary);
 }
+
+/* =========================================
+   8. SERVER STATUS COLORS 
+   ========================================= */
+.status-card {
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #6b7280; /* Gray by default */
+  box-shadow: 0 0 10px rgba(107, 114, 128, 0.5);
+}
+
+/* Online Glow */
+.dot-online {
+  background-color: #22c55e;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.7);
+}
+
+/* Offline Glow */
+.dot-offline {
+  background-color: #ef4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.7);
+}
+
+.player-count {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--main-font);
+}
