@@ -35,6 +35,10 @@ const translations = {
         feature1: "✅ يدعم Java و Bedrock",
         feature2: "✅ قوانين واضحة وعادلة",
         feature3: "✅ تحديثات مستمرة",
+        serverOnline: "السيرفر متصل",
+        serverOffline: "السيرفر مغلق",
+        playersOnline: "اللاعبين المتصلين:",
+        loading: "جاري التحقق..."
     },
     en: {
         title: "AlamCraft Server ☘️",
@@ -72,6 +76,10 @@ const translations = {
         feature2: "✅ Clear and fair rules",
         feature3: "✅ Constant updates",
         feature4: "✅ Active Staff",
+        serverOnline: "Server Online",
+        serverOffline: "Server Offline",
+        playersOnline: "Players Online:",
+        loading: "Checking status..."
     }
 };
 
@@ -138,12 +146,14 @@ async function updateServerStatus() {
 
         if (data.online) {
             statusDot.className = "status-dot dot-online";
-            statusText.innerText = currentLang === 'ar' ? "متصل الآن ✅" : "Server Online ✅";
+            // Use the translation key instead of hardcoded text
+            statusText.innerText = translations[currentLang].serverOnline + " ✅";
             playerNum.innerText = data.players.online;
             maxPlayers.innerText = data.players.max;
         } else {
             statusDot.className = "status-dot dot-offline";
-            statusText.innerText = currentLang === 'ar' ? "السيرفر مغلق ❌" : "Server Offline ❌";
+            // Use the translation key instead of hardcoded text
+            statusText.innerText = translations[currentLang].serverOffline + " ❌";
             playerNum.innerText = "0";
             maxPlayers.innerText = "0";
         }
