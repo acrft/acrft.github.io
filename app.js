@@ -88,13 +88,10 @@ async function updateServerStatus() {
     const statusText = document.getElementById('status-text');
     const playerNum = document.getElementById('player-num');
     const maxPlayers = document.getElementById('max-players');
-
     const serverIP = "Alameldin.aternos.me:28303";
-
     try {
         const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
         const data = await response.json();
-
         if (data.online) {
             statusDot.className = "status-dot dot-online";
             // Use the translation key instead of hardcoded text
@@ -110,6 +107,25 @@ async function updateServerStatus() {
         }
     } catch (error) {
         console.error("Status Error:", error);
+    }
+    const pingDisplay = document.getElementById('ping-value');
+    // Start the timer
+    const startTime = Date.now();
+    try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        // Calculate the difference when the response arrives
+        const endTime = Date.now();
+        const ping = endTime - startTime;
+        // Update the display
+        if (pingDisplay) {
+            pingDisplay.innerText = ping;
+            // Color code the ping
+            pingDisplay.style.color = ping < 150 ? "#22c55e" : (ping < 300 ? "#f59e0b" : "#ef4444");
+        }
+        const data = await response.json();
+    } catch (error) {
+        if (pingDisplay) pingDisplay.innerText = "??";
+        console.error("Ping Error:", error);
     }
 }
 
@@ -143,16 +159,12 @@ function copyIP() {
 }
 
 window.onload = updateContent;
-
 const modeBtn = document.getElementById('modeBtn');
-
 modeBtn.onclick = () => {
     // This adds/removes 'light-theme' to the <body> tag
     document.body.classList.toggle('light-theme');
-
     const isLight = document.body.classList.contains('light-theme');
     modeBtn.innerText = isLight ? '☀️' : '🌙';
-
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
 };
 
