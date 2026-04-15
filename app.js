@@ -87,6 +87,7 @@ async function updateServerStatus() {
     const statusDot = document.getElementById('status-indicator');
     const statusText = document.getElementById('status-text');
     const pingDisplay = document.getElementById('ping-value');
+    const serverIP = "Alameldin.aternos.me:28303";
 
     // 1. Capture start time RIGHT before the fetch
     const startTime = performance.now();
