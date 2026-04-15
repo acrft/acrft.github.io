@@ -362,15 +362,6 @@ html[lang='ar'] .badge {
 /* =========================================
     10. FOOTER GRASS & DIRT DESIGN
    ========================================= */
-.minecraft-footer {
-  width: 100%;
-  position: relative;
-  left: 0;
-  bottom: 0;
-  margin-top: 50px; /* Space between your cards and the ground */
-  clear: both; /* Ensures it drops below all floating elements */
-  display: block;
-}
 
 .grass-top {
   width: 100%;
