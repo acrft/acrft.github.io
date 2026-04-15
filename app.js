@@ -86,46 +86,41 @@ const translations = {
 async function updateServerStatus() {
     const statusDot = document.getElementById('status-indicator');
     const statusText = document.getElementById('status-text');
-    const playerNum = document.getElementById('player-num');
-    const maxPlayers = document.getElementById('max-players');
-    const serverIP = "Alameldin.aternos.me:28303";
+    const pingDisplay = document.getElementById('ping-value');
+
+    // 1. Capture start time RIGHT before the fetch
+    const startTime = performance.now();
+
     try {
-        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        // Use a cache-buster (?t=) so the browser doesn't show "Old" data
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}?t=${Date.now()}`);
         const data = await response.json();
+
+        // 2. Capture end time ONLY after a successful response
+        const endTime = performance.now();
+        const pingMs = Math.round(endTime - startTime);
+
         if (data.online) {
             statusDot.className = "status-dot dot-online";
-            // Use the translation key instead of hardcoded text
             statusText.innerText = translations[currentLang].serverOnline + " ✅";
-            playerNum.innerText = data.players.online;
-            maxPlayers.innerText = data.players.max;
+
+            // Update Ping
+            if (pingDisplay) {
+                pingDisplay.innerText = pingMs;
+                pingDisplay.style.color = pingMs < 150 ? "#22c55e" : "#f59e0b";
+            }
+
+            document.getElementById('player-num').innerText = data.players.online;
+            document.getElementById('max-players').innerText = data.players.max;
         } else {
+            // Server is actually Offline or API is rate-limited
             statusDot.className = "status-dot dot-offline";
-            // Use the translation key instead of hardcoded text
             statusText.innerText = translations[currentLang].serverOffline + " ❌";
-            playerNum.innerText = "0";
-            maxPlayers.innerText = "0";
+            if (pingDisplay) pingDisplay.innerText = "--";
         }
     } catch (error) {
-        console.error("Status Error:", error);
-    }
-    const pingDisplay = document.getElementById('ping-value');
-    // Start the timer
-    const startTime = Date.now();
-    try {
-        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
-        // Calculate the difference when the response arrives
-        const endTime = Date.now();
-        const ping = endTime - startTime;
-        // Update the display
-        if (pingDisplay) {
-            pingDisplay.innerText = ping;
-            // Color code the ping
-            pingDisplay.style.color = ping < 150 ? "#22c55e" : (ping < 300 ? "#f59e0b" : "#ef4444");
-        }
-        const data = await response.json();
-    } catch (error) {
-        if (pingDisplay) pingDisplay.innerText = "??";
-        console.error("Ping Error:", error);
+        console.error("Status Update Failed:", error);
+        if (statusText) statusText.innerText = "Error ⚠️";
     }
 }
 
