@@ -87,40 +87,47 @@ async function updateServerStatus() {
     const statusDot = document.getElementById('status-indicator');
     const statusText = document.getElementById('status-text');
     const pingDisplay = document.getElementById('ping-value');
+
+    // IMPORTANT: Make sure this variable includes your Aternos Port!
+    // Example: "Alameldin.aternos.me:28303"
     const serverIP = "Alameldin.aternos.me:28303";
 
-    // 1. Capture start time RIGHT before the fetch
     const startTime = performance.now();
 
     try {
-        // Use a cache-buster (?t=) so the browser doesn't show "Old" data
+        // We use the 'debug' version of the API to get more info
         const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}?t=${Date.now()}`);
         const data = await response.json();
 
-        // 2. Capture end time ONLY after a successful response
         const endTime = performance.now();
         const pingMs = Math.round(endTime - startTime);
 
+        // LOG THIS: Open your browser console (F12) to see what the API says
+        console.log("Server Data:", data);
+
+        // Logic check: Some APIs return data.online as a boolean, some as 1/0
         if (data.online) {
             statusDot.className = "status-dot dot-online";
             statusText.innerText = translations[currentLang].serverOnline + " ✅";
 
-            // Update Ping
             if (pingDisplay) {
                 pingDisplay.innerText = pingMs;
                 pingDisplay.style.color = pingMs < 150 ? "#22c55e" : "#f59e0b";
             }
 
-            document.getElementById('player-num').innerText = data.players.online;
-            document.getElementById('max-players').innerText = data.players.max;
+            document.getElementById('player-num').innerText = data.players ? data.players.online : "0";
+            document.getElementById('max-players').innerText = data.players ? data.players.max : "0";
         } else {
-            // Server is actually Offline or API is rate-limited
+            // If it reaches here, the API successfully connected but found the server closed
             statusDot.className = "status-dot dot-offline";
             statusText.innerText = translations[currentLang].serverOffline + " ❌";
             if (pingDisplay) pingDisplay.innerText = "--";
+
+            console.warn("API connected, but says server is CLOSED. Is the Port correct?");
         }
     } catch (error) {
-        console.error("Status Update Failed:", error);
+        // If it reaches here, your CODE or the NETWORK failed
+        console.error("Fetch Error (Internet or API Down):", error);
         if (statusText) statusText.innerText = "Error ⚠️";
     }
 }
