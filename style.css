@@ -277,17 +277,20 @@ html[lang='ar'] .badge {
    7. UTILITY
    ========================================= */
 #toast {
-  position: fixed;
-  top: -60px;
+  position: absolute;
+  top: -30px; /* Positions it just above the button */
   left: 50%;
   transform: translateX(-50%);
   background: var(--primary);
   color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  z-index: 2000;
-  transition: top 0.4s ease;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-family: var(--main-font);
+  white-space: nowrap;
+  z-index: 10;
 }
+
 
 #toast.show {
   top: 30px;
@@ -308,6 +311,21 @@ html[lang='ar'] .badge {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.status-card:hover {
+    transform: translateY(-5px); /* Gentle lift */
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); /* Green glow */
+    border-color: #22c55e;
+}
+
+.status-card:has(.dot-offline):hover {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  border-color: #ef4444;
 }
 
 .status-header {
@@ -340,4 +358,42 @@ html[lang='ar'] .badge {
   font-size: 0.9rem;
   color: var(--text-muted);
   font-family: var(--main-font);
+}
+
+/* =========================================
+    10. FOOTER GRASS & DIRT DESIGN
+   ========================================= */
+.minecraft-footer {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.grass-top {
+  height: 10px;
+  background: #5aa13d; /* Classic MC Grass Green */
+  border-top: 4px solid #4d8a34;
+}
+
+.dirt-body {
+  height: 60px;
+  background-color: #795548;
+  /* This creates a subtle "blocky" pattern */
+  background-image:
+    linear-gradient(45deg, #6d4c41 25%, transparent 25%),
+    linear-gradient(-45deg, #6d4c41 25%, transparent 25%);
+  background-size: 10px 10px;
+}
+
+/* =========================================
+    11. SCROLL PROGRESS BAR
+   ========================================= */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%; /* Starts at 0 */
+    height: 5px;
+    background: #22c55e; /* Minecraft Green */
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
 }
