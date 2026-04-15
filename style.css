@@ -291,7 +291,6 @@ html[lang='ar'] .badge {
   z-index: 10;
 }
 
-
 #toast.show {
   top: 30px;
 }
@@ -318,9 +317,9 @@ html[lang='ar'] .badge {
 }
 
 .status-card:hover {
-    transform: translateY(-5px); /* Gentle lift */
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); /* Green glow */
-    border-color: #22c55e;
+  transform: translateY(-5px); /* Gentle lift */
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); /* Green glow */
+  border-color: #22c55e;
 }
 
 .status-card:has(.dot-offline):hover {
@@ -365,35 +364,43 @@ html[lang='ar'] .badge {
    ========================================= */
 .minecraft-footer {
   width: 100%;
-  margin-top: 50px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  margin-top: 50px; /* Space between your cards and the ground */
+  clear: both; /* Ensures it drops below all floating elements */
+  display: block;
 }
 
 .grass-top {
-  height: 10px;
-  background: #5aa13d; /* Classic MC Grass Green */
+  width: 100%;
+  height: 12px;
+  background: #5aa13d;
   border-top: 4px solid #4d8a34;
 }
 
 .dirt-body {
-  height: 60px;
+  width: 100%;
+  height: 80px; /* Make it a bit taller to feel like solid ground */
   background-color: #795548;
-  /* This creates a subtle "blocky" pattern */
   background-image:
     linear-gradient(45deg, #6d4c41 25%, transparent 25%),
-    linear-gradient(-45deg, #6d4c41 25%, transparent 25%);
-  background-size: 10px 10px;
+    linear-gradient(-45deg, #6d4c41 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #6d4c41 75%),
+    linear-gradient(-45deg, transparent 75%, #6d4c41 75%);
+  background-size: 20px 20px;
 }
 
 /* =========================================
     11. SCROLL PROGRESS BAR
    ========================================= */
 #scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%; /* Starts at 0 */
-    height: 5px;
-    background: #22c55e; /* Minecraft Green */
-    z-index: 1000;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%; /* Starts at 0 */
+  height: 5px;
+  background: #22c55e; /* Minecraft Green */
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
 }
