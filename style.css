@@ -380,6 +380,12 @@ html[lang='ar'] .badge {
     linear-gradient(45deg, transparent 75%, #6d4c41 75%),
     linear-gradient(-45deg, transparent 75%, #6d4c41 75%);
   background-size: 20px 20px;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  color: #ffffff; /* Makes sure text is readable on dirt */
+  text-shadow: 2px 2px 0px #000; /* Gives it that MC text "pop" */
+  font-family: var(--main-font);
 }
 
 /* =========================================
