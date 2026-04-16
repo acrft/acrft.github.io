@@ -1,150 +1,165 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="title">علم كرافت ☘️</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="images/OIG1.png" type="image/x-icon" />
-  </head>
-  <body class="dark-theme">
-    <div id="scroll-progress"></div>
-    <div id="toast" data-i18n="toastMsg">✔ تم نسخ IP السيرفر</div>
 
-    <main class="container">
-      <header class="hero">
-        <img src="images/logo.webp" alt="Logo" class="logo" draggable="false" />
-        <h1 data-i18n="title">سيرفر علم كرافت ☘️</h1>
-        <div class="server-status">
-          <ul class="pulse">
-            <li data-i18n="feature1">✅ يدعم Java و Bedrock</li>
-            <li data-i18n="feature2">✅ قوانين واضحة وعادلة</li>
-            <li data-i18n="feature3">✅ تحديثات مستمرة</li>
-            <li data-i18n="feature4">✅ إدارة نشطة</li>
-          </ul>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">علم كرافت ☘️</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="images/OIG1.png" type="image/x-icon" />
+</head>
 
-      <div class="card status-card">
-        <div class="status-header">
-          <span id="status-indicator" class="status-dot"></span>
-          <h2 id="status-text" data-i18n="loading">جاري التحقق...</h2>
-        </div>
-        <div class="player-count">
-          <span data-i18n="playersOnline">اللاعبين المتصلين:</span>
-          <span id="player-num">0</span>/<span id="max-players">0</span>
-          <span class="ping-container">
-           <i class="fas fa-signal"></i> <span id="ping-value">--</span>ms
-         </span>
-        </div>
+<body class="dark-theme">
+  <div id="scroll-progress"></div>
+  <div id="toast" data-i18n="toastMsg">✔ تم نسخ IP السيرفر</div>
+
+  <main class="container">
+    <header class="hero">
+      <img src="images/logo.webp" alt="Logo" class="logo" draggable="false" />
+      <h1 data-i18n="title">سيرفر علم كرافت ☘️</h1>
+      <div class="server-status">
+        <ul class="pulse">
+          <li data-i18n="feature1">✅ يدعم Java و Bedrock</li>
+          <li data-i18n="feature2">✅ قوانين واضحة وعادلة</li>
+          <li data-i18n="feature3">✅ تحديثات مستمرة</li>
+          <li data-i18n="feature4">✅ إدارة نشطة</li>
+        </ul>
       </div>
+    </header>
 
-      <section class="card connection">
-        <div class="ip-wrapper">
-          <span class="ip-text">Alameldin.aternos.me:28303</span>
-          <button onclick="copyIP()" class="btn-copy" data-i18n="copyBtn">
-            📋 نسخ IP
-          </button>
-        </div>
-        <div class="version-badges">
-          <div class="badge">
-            <span class="label" data-i18n="javaVersion">☕️ جافا:</span>
-            <span class="ver">1.7 - 1.21.1</span>
-          </div>
-          <div class="badge">
-            <span class="label" data-i18n="bedrockVersion">🛏️ بيدروك:</span>
-            <span class="ver">1.21.11+</span>
-          </div>
-        </div>
-        <button
-          onclick="window.location.href = 'https://add.aternos.org/Alameldin'"
-          class="btn-bedrock"
-          data-i18n="addBedrock"
-        >
-          إضافة السيرفر في Minecraft Bedrock
-        </button>
-      </section>
-
-      <div class="content-grid">
-        <section class="card rules-card">
-          <h2 class="section-title" data-i18n="rulesTitle">📜 القوانين</h2>
-          <ul class="rules-list">
-            <li data-i18n="rule1"></li>
-            <li data-i18n="rule2"></li>
-            <li data-i18n="rule3"></li>
-            <li data-i18n="rule4"></li>
-            <li data-i18n="rule5"></li>
-            <li data-i18n="rule6"></li>
-            <li data-i18n="rule7"></li>
-            <li data-i18n="rule8"></li>
-            <li data-i18n="rule9"></li>
-            <li data-i18n="rule10"></li>
-            <li data-i18n="rule11"></li>
-            <li data-i18n="rule12"></li>
-            <li data-i18n="rule13"></li>
-            <li data-i18n="rule14"></li>
-            <li data-i18n="rule15"></li>
-            <li data-i18n="punishSystem" class="punish-line"></li>
-          </ul>
-        </section>
-
-        <div class="side-column">
-          <section class="card social-card">
-            <h2 class="section-title" data-i18n="linksTitle">
-              🔗 روابط السيرفر
-            </h2>
-            <div class="social-links">
-              <a
-                href="https://chat.whatsapp.com/CbS8wvqbwci5gsddPTRQbC"
-                class="social-item"
-              >
-                <img src="images/whatsapp.png" class="link-icon" />
-                <span data-i18n="whatsapp">مجموعة الواتساب</span>
-              </a>
-              <a href="https://t.me/Alam_Craft" class="social-item">
-                <img src="images/telegram.png" class="link-icon" />
-                <span data-i18n="telegram">مجموعة التليجرام</span>
-              </a>
-              <a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item">
-                <img src="images/messenger.png" class="link-icon" />
-                <span data-i18n="messenger">مجموعة الماسينجر</span>
-              </a>
-              <a href="https://discord.gg/BKys3Eu8t8" class="social-item">
-                <img src="images/discord.png" class="link-icon" />
-                <span data-i18n="discord">سيرفر الديسكورد</span>
-              </a>
-            </div>
-          </section>
-
-          <section class="card staff-card">
-            <h2 class="section-title" data-i18n="adminsTitle">👑 المشرفين</h2>
-            <p data-i18n="adminsNames" class="admins-text"></p>
-          </section>
-        </div>
+    <div class="card status-card">
+      <div class="status-header">
+        <span id="status-indicator" class="status-dot"></span>
+        <h2 id="status-text" data-i18n="loading">جاري التحقق...</h2>
       </div>
-
-      <footer class="footer">
-      <div class="grass-top"></div>
-      <div class="dirt-body">        <p data-i18n="copyright">
-          © 2026 AlamCraft Server - جميع الحقوق محفوظة
-        </p></div>
-      </footer>
-    </main>
-
-    <div class="fixed-controls">
-      <button id="modeBtn" class="control-btn">🌙</button>
-      <button class="langBtn control-btn" onclick="toggleLanguage()">🌐</button>
-      <button
-        class="chatBtn control-btn"
-        onclick="window.location.href = 'AlamChat.html'"
-      >
-        💬
-      </button>
+      <div class="player-count">
+        <span data-i18n="playersOnline">اللاعبين المتصلين:</span>
+        <span id="player-num">0</span>/<span id="max-players">0</span>
+        <span class="ping-container">
+          <i class="fas fa-signal"></i> <span id="ping-value">--</span>ms
+        </span>
+      </div>
     </div>
 
-    <script src="app.js"></script>
+    <section class="card connection">
+      <div class="ip-wrapper">
+        <span class="ip-text">Alameldin.aternos.me:28303</span>
+        <button onclick="copyIP()" class="btn-copy" data-i18n="copyBtn">
+          📋 نسخ IP
+        </button>
+      </div>
+      <div class="version-badges">
+        <div class="badge">
+          <span class="label" data-i18n="javaVersion">☕️ جافا:</span>
+          <span class="ver">1.7 - 1.21.11</span>
+        </div>
+        <div class="badge">
+          <span class="label" data-i18n="bedrockVersion">🛏️ بيدروك:</span>
+          <span class="ver">1.21.11+</span>
+        </div>
+      </div>
+      <button onclick="window.location.href = 'https://add.aternos.org/Alameldin'" class="btn-bedrock"
+        data-i18n="addBedrock">
+        إضافة السيرفر في Minecraft Bedrock
+      </button>
+    </section>
 
+    <div class="content-grid">
+      <section class="card rules-card">
+        <h2 class="section-title" data-i18n="rulesTitle">📜 القوانين</h2>
+        <ul class="rules-list">
+          <li data-i18n="rule1"></li>
+          <li data-i18n="rule2"></li>
+          <li data-i18n="rule3"></li>
+          <li data-i18n="rule4"></li>
+          <li data-i18n="rule5"></li>
+          <li data-i18n="rule6"></li>
+          <li data-i18n="rule7"></li>
+          <li data-i18n="rule8"></li>
+          <li data-i18n="rule9"></li>
+          <li data-i18n="rule10"></li>
+          <li data-i18n="rule11"></li>
+          <li data-i18n="rule12"></li>
+          <li data-i18n="rule13"></li>
+          <li data-i18n="rule14"></li>
+          <li data-i18n="rule15"></li>
+          <li data-i18n="punishSystem" class="punish-line"></li>
+        </ul>
+      </section>
+
+      <div class="side-column">
+        <section class="card social-card">
+          <h2 class="section-title" data-i18n="linksTitle">
+            🔗 روابط السيرفر
+          </h2>
+          <div class="social-links">
+            <a href="https://chat.whatsapp.com/CbS8wvqbwci5gsddPTRQbC" class="social-item">
+              <img src="images/whatsapp.png" class="link-icon" />
+              <span data-i18n="whatsapp">مجموعة الواتساب</span>
+            </a>
+            <a href="https://t.me/Alam_Craft" class="social-item">
+              <img src="images/telegram.png" class="link-icon" />
+              <span data-i18n="telegram">مجموعة التليجرام</span>
+            </a>
+            <a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item">
+              <img src="images/messenger.png" class="link-icon" />
+              <span data-i18n="messenger">مجموعة الماسينجر</span>
+            </a>
+            <a href="https://discord.gg/BKys3Eu8t8" class="social-item">
+              <img src="images/discord.png" class="link-icon" />
+              <span data-i18n="discord">سيرفر الديسكورد</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="mods-section">
+          <h2 class="section-title" data-i18n="modsTitle"> المودات</h2>
+          <div class="mods-container">
+            <ul class="mods-list" data-i18n="modsList">
+              <li><span>مود القبر 🪦</span></li>
+              <li><span>مود الرئوس 💀</span></li>
+              <li><span>مود البيدروك مع الجافا 🖥️</span></li>
+              <li><span>مود النوم بلاعب واحد 😴</span></li>
+              <li><span>مود الNPC 🤖</span></li>
+              <li><span>مود الجلوس 🛋️</span></li>
+              <li><span>مود تغيير السكينات 👕</span></li>
+              <li><span>مود قطع الاشجار 🌳</span></li>
+              <li><span>مود الvein miner ⛏️</span></li>
+              <li><span>مود الفويس شات 💬</span></li>
+              <li><span>مود اماكن و بايومات جديدة 🌍</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card staff-card">
+          <h2 class="section-title" data-i18n="adminsTitle">👑 المشرفين</h2>
+          <p data-i18n="adminsNames" class="admins-text"></p>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="grass-top"></div>
+      <div class="dirt-body">
+        <p data-i18n="copyright">
+          © 2026 AlamCraft Server - جميع الحقوق محفوظة
+        </p>
+      </div>
     </footer>
-  </body>
+  </main>
+
+  <div class="fixed-controls">
+    <button id="modeBtn" class="control-btn">🌙</button>
+    <button class="langBtn control-btn" onclick="toggleLanguage()">🌐</button>
+    <button class="chatBtn control-btn" onclick="window.location.href = 'AlamChat.html'">
+      💬
+    </button>
+  </div>
+
+  <script src="app.js"></script>
+
+  </footer>
+</body>
+
 </html>

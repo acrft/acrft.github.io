@@ -436,3 +436,53 @@ html[lang='ar'] .badge {
   font-weight: bold;
   font-variant-numeric: tabular-nums; /* Keeps the numbers from jumping around */
 }
+
+/* =========================================
+    13. MODS SECTION
+   ========================================= */
+.mods-container {
+  /* Solid dark background instead of transparency */
+  background: #121212;
+  border: 2px solid #333; /* Slightly thicker, solid border */
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+}
+
+.mods-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  direction: rtl;
+}
+
+.mods-list li {
+  /* Solid background for each item */
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 14px;
+  border-radius: 6px;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mods-list li:hover {
+  /* Subtle highlight on hover without transparency */
+  background: #222;
+  border-color: #22c55e; /* Minecraft green highlight */
+  transform: translateY(-2px); /* Lifts up slightly */
+}
+
+.mods-list li span {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
