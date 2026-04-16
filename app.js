@@ -83,125 +83,75 @@ const translations = {
     }
 };
 
+function setOfflineUI(dot, text, pNum, pMax, ping) {
+    dot.className = "status-dot dot-offline";
+    text.innerText = translations[currentLang].serverOffline + " ❌";
+    if (pNum) pNum.innerText = "0";
+    if (pMax) pMax.innerText = "0";
+    if (ping) {
+        ping.innerText = "--";
+        ping.style.color = "inherit";
+    }
+}
+
 async function updateServerStatus() {
     const statusDot = document.getElementById('status-indicator');
     const statusText = document.getElementById('status-text');
     const playerNum = document.getElementById('player-num');
     const maxPlayers = document.getElementById('max-players');
-    const pingDisplay = document.getElementById('ping-value'); // Bring ping back
+    const pingDisplay = document.getElementById('ping-value');
 
     const serverIP = "alameldin.aternos.me";
-
-    // 1. Start the ping timer
     const startTime = performance.now();
 
+    // 1. We declare 'data' out here so the whole function can access it
+    let data = null;
+
     try {
-        async function updateServerStatus() {
-            const statusDot = document.getElementById('status-indicator');
-            const statusText = document.getElementById('status-text');
-            const playerNum = document.getElementById('player-num');
-            const maxPlayers = document.getElementById('max-players');
-            const pingDisplay = document.getElementById('ping-value'); // Bring ping back
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);
 
-            const serverIP = "Alameldin.aternos.me";
-
-            // 1. Start the ping timer
-            const startTime = performance.now();
-
-            try {
-                const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);
-                const data = await response.json();
-
-                // 2. Stop the timer and calculate ms
-                const endTime = performance.now();
-                const pingMs = Math.round(endTime - startTime);
-
-                // 3. The Strict Aternos Check
-                const versionText = data.version ? data.version : "";
-                const isActuallyOnline = data.online === true &&
-                    !versionText.includes("Offline") &&
-                    !versionText.includes("●");
-
-                if (isActuallyOnline) {
-                    // Server is definitely UP
-                    statusDot.className = "status-dot dot-online";
-                    statusText.innerText = translations[currentLang].serverOnline + " ✅";
-
-                    if (playerNum) playerNum.innerText = data.players ? data.players.online : "0";
-                    if (maxPlayers) maxPlayers.innerText = data.players ? data.players.max : "0";
-
-                    // Show the ping and color code it
-                    if (pingDisplay) {
-                        pingDisplay.innerText = pingMs;
-                        // Green if fast, orange if okay, red if lagging
-                        pingDisplay.style.color = pingMs < 150 ? "#22c55e" : (pingMs < 300 ? "#f59e0b" : "#ef4444");
-                    }
-
-                } else {
-                    // Server is DOWN
-                    statusDot.className = "status-dot dot-offline";
-                    statusText.innerText = translations[currentLang].serverOffline + " ❌";
-
-                    if (playerNum) playerNum.innerText = "0";
-                    if (maxPlayers) maxPlayers.innerText = "0";
-
-                    // Hide/reset the ping since they can't connect anyway
-                    if (pingDisplay) {
-                        pingDisplay.innerText = "--";
-                        pingDisplay.style.color = "inherit";
-                    }
-                }
-            } catch (error) {
-                console.error("Status Update Error:", error);
-                if (pingDisplay) pingDisplay.innerText = "??";
-            }
+        // Check if the response actually worked
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
         }
-        const data = await response.json();
 
-        // 2. Stop the timer and calculate ms
+        data = await response.json();
+
         const endTime = performance.now();
         const pingMs = Math.round(endTime - startTime);
 
-        // 3. The Strict Aternos Check
+        // 2. The Strict Aternos Check
         const versionText = data.version ? data.version : "";
         const isActuallyOnline = data.online === true &&
             !versionText.includes("Offline") &&
             !versionText.includes("●");
 
         if (isActuallyOnline) {
-            // Server is definitely UP
             statusDot.className = "status-dot dot-online";
             statusText.innerText = translations[currentLang].serverOnline + " ✅";
 
             if (playerNum) playerNum.innerText = data.players ? data.players.online : "0";
             if (maxPlayers) maxPlayers.innerText = data.players ? data.players.max : "0";
 
-            // Show the ping and color code it
             if (pingDisplay) {
                 pingDisplay.innerText = pingMs;
-                // Green if fast, orange if okay, red if lagging
                 pingDisplay.style.color = pingMs < 150 ? "#22c55e" : (pingMs < 300 ? "#f59e0b" : "#ef4444");
             }
 
         } else {
-            // Server is DOWN
-            statusDot.className = "status-dot dot-offline";
-            statusText.innerText = translations[currentLang].serverOffline + " ❌";
-
-            if (playerNum) playerNum.innerText = "0";
-            if (maxPlayers) maxPlayers.innerText = "0";
-
-            // Hide/reset the ping since they can't connect anyway
-            if (pingDisplay) {
-                pingDisplay.innerText = "--";
-                pingDisplay.style.color = "inherit";
-            }
+            // Set offline state
+            setOfflineUI(statusDot, statusText, playerNum, maxPlayers, pingDisplay);
         }
     } catch (error) {
         console.error("Status Update Error:", error);
+        setOfflineUI(statusDot, statusText, playerNum, maxPlayers, pingDisplay);
         if (pingDisplay) pingDisplay.innerText = "??";
     }
 }
+
+// Helper function to keep the code clean
+
+
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
