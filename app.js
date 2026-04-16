@@ -40,17 +40,17 @@ const translations = {
         playersOnline: "اللاعبين المتصلين:",
         loading: "جاري التحقق...",
         modsList: [
-            "Graveyard Mod 🪦",
-            "Player Heads 💀",
-            "Bedrock & Java Crossplay 🖥️",
-            "One Player Sleep 😴",
-            "NPCs 🤖",
-            "Sit Mod 🛋️",
-            "Skin Changer 👕",
-            "Tree Feller 🌳",
-            "Vein Miner ⛏️",
-            "Voice Chat 💬",
-            "New Biomes & Places 🌍"
+            "مود القبر 🪦",
+            "مود الرئوس 💀",
+            "مود البيدروك مع الجافا 🖥️",
+            "مود النوم بلاعب واحد 😴",
+            "مود الNPC 🤖",
+            "مود الجلوس 🛋️",
+            "مود تغيير السكينات 👕",
+            "مود قطع الاشجار 🌳",
+            "مود الvein miner ⛏️",
+            "مود الفويس شات 💬",
+            "مود اماكن و بايومات جديدة 🌍"
         ],
     },
     en: {
@@ -94,17 +94,17 @@ const translations = {
         playersOnline: "Players Online:",
         loading: "Checking status...",
         modsList: [
-            "مود القبر 🪦",
-            "مود الرئوس 💀",
-            "مود البيدروك مع الجافا 🖥️",
-            "مود النوم بلاعب واحد 😴",
-            "مود الNPC 🤖",
-            "مود الجلوس 🛋️",
-            "مود تغيير السكينات 👕",
-            "مود قطع الاشجار 🌳",
-            "مود الvein miner ⛏️",
-            "مود الفويس شات 💬",
-            "مود اماكن و بايومات جديدة 🌍"
+            "Graveyard Mod 🪦",
+            "Player Heads 💀",
+            "Bedrock & Java Crossplay 🖥️",
+            "One Player Sleep 😴",
+            "NPCs 🤖",
+            "Sit Mod 🛋️",
+            "Skin Changer 👕",
+            "Tree Feller 🌳",
+            "Vein Miner ⛏️",
+            "Voice Chat 💬",
+            "New Biomes & Places 🌍"
         ],
     }
 };
