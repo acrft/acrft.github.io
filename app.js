@@ -86,52 +86,122 @@ const translations = {
 async function updateServerStatus() {
     const statusDot = document.getElementById('status-indicator');
     const statusText = document.getElementById('status-text');
-    const pingDisplay = document.getElementById('ping-value');
+    const playerNum = document.getElementById('player-num');
+    const maxPlayers = document.getElementById('max-players');
+    const pingDisplay = document.getElementById('ping-value'); // Bring ping back
 
-    // IMPORTANT: Make sure this variable includes your Aternos Port!
-    // Example: "Alameldin.aternos.me:28303"
-    const serverIP = "Alameldin.aternos.me";
+    const serverIP = "alameldin.aternos.me";
 
+    // 1. Start the ping timer
     const startTime = performance.now();
 
     try {
-        // We use the 'debug' version of the API to get more info
-        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);
+        async function updateServerStatus() {
+            const statusDot = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            const playerNum = document.getElementById('player-num');
+            const maxPlayers = document.getElementById('max-players');
+            const pingDisplay = document.getElementById('ping-value'); // Bring ping back
+
+            const serverIP = "Alameldin.aternos.me";
+
+            // 1. Start the ping timer
+            const startTime = performance.now();
+
+            try {
+                const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);
+                const data = await response.json();
+
+                // 2. Stop the timer and calculate ms
+                const endTime = performance.now();
+                const pingMs = Math.round(endTime - startTime);
+
+                // 3. The Strict Aternos Check
+                const versionText = data.version ? data.version : "";
+                const isActuallyOnline = data.online === true &&
+                    !versionText.includes("Offline") &&
+                    !versionText.includes("●");
+
+                if (isActuallyOnline) {
+                    // Server is definitely UP
+                    statusDot.className = "status-dot dot-online";
+                    statusText.innerText = translations[currentLang].serverOnline + " ✅";
+
+                    if (playerNum) playerNum.innerText = data.players ? data.players.online : "0";
+                    if (maxPlayers) maxPlayers.innerText = data.players ? data.players.max : "0";
+
+                    // Show the ping and color code it
+                    if (pingDisplay) {
+                        pingDisplay.innerText = pingMs;
+                        // Green if fast, orange if okay, red if lagging
+                        pingDisplay.style.color = pingMs < 150 ? "#22c55e" : (pingMs < 300 ? "#f59e0b" : "#ef4444");
+                    }
+
+                } else {
+                    // Server is DOWN
+                    statusDot.className = "status-dot dot-offline";
+                    statusText.innerText = translations[currentLang].serverOffline + " ❌";
+
+                    if (playerNum) playerNum.innerText = "0";
+                    if (maxPlayers) maxPlayers.innerText = "0";
+
+                    // Hide/reset the ping since they can't connect anyway
+                    if (pingDisplay) {
+                        pingDisplay.innerText = "--";
+                        pingDisplay.style.color = "inherit";
+                    }
+                }
+            } catch (error) {
+                console.error("Status Update Error:", error);
+                if (pingDisplay) pingDisplay.innerText = "??";
+            }
+        }
         const data = await response.json();
 
+        // 2. Stop the timer and calculate ms
         const endTime = performance.now();
         const pingMs = Math.round(endTime - startTime);
 
-        // LOG THIS: Open your browser console (F12) to see what the API says
-        console.log("Server Data:", data);
+        // 3. The Strict Aternos Check
+        const versionText = data.version ? data.version : "";
+        const isActuallyOnline = data.online === true &&
+            !versionText.includes("Offline") &&
+            !versionText.includes("●");
 
-        // Logic check: Some APIs return data.online as a boolean, some as 1/0
-        if (data.online) {
+        if (isActuallyOnline) {
+            // Server is definitely UP
             statusDot.className = "status-dot dot-online";
             statusText.innerText = translations[currentLang].serverOnline + " ✅";
 
+            if (playerNum) playerNum.innerText = data.players ? data.players.online : "0";
+            if (maxPlayers) maxPlayers.innerText = data.players ? data.players.max : "0";
+
+            // Show the ping and color code it
             if (pingDisplay) {
                 pingDisplay.innerText = pingMs;
-                pingDisplay.style.color = pingMs < 150 ? "#22c55e" : "#f59e0b";
+                // Green if fast, orange if okay, red if lagging
+                pingDisplay.style.color = pingMs < 150 ? "#22c55e" : (pingMs < 300 ? "#f59e0b" : "#ef4444");
             }
 
-            document.getElementById('player-num').innerText = data.players ? data.players.online : "0";
-            document.getElementById('max-players').innerText = data.players ? data.players.max : "0";
         } else {
-            // If it reaches here, the API successfully connected but found the server closed
+            // Server is DOWN
             statusDot.className = "status-dot dot-offline";
             statusText.innerText = translations[currentLang].serverOffline + " ❌";
-            if (pingDisplay) pingDisplay.innerText = "--";
 
-            console.warn("API connected, but says server is CLOSED. Is the Port correct?");
+            if (playerNum) playerNum.innerText = "0";
+            if (maxPlayers) maxPlayers.innerText = "0";
+
+            // Hide/reset the ping since they can't connect anyway
+            if (pingDisplay) {
+                pingDisplay.innerText = "--";
+                pingDisplay.style.color = "inherit";
+            }
         }
     } catch (error) {
-        // If it reaches here, your CODE or the NETWORK failed
-        console.error("Fetch Error (Internet or API Down):", error);
-        if (statusText) statusText.innerText = "Error ⚠️";
+        console.error("Status Update Error:", error);
+        if (pingDisplay) pingDisplay.innerText = "??";
     }
 }
-
 let currentLang = localStorage.getItem('lang') || 'ar';
 
 function updateContent() {
