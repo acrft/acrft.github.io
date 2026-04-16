@@ -440,49 +440,43 @@ html[lang='ar'] .badge {
 /* =========================================
     13. MODS SECTION
    ========================================= */
-.mods-container {
-  /* Solid dark background instead of transparency */
-  background: #121212;
-  border: 2px solid #333; /* Slightly thicker, solid border */
-  border-radius: 12px;
-  padding: 25px;
-  max-width: 700px;
-  margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+/* The Main Container */
+.mods-section {
+  margin: 25px 0; /* Creates space between the section above and below */
 }
 
+.mods-container {
+  /* Background color matched to your screenshot */
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* The Actual List Logic */
 .mods-list {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  direction: rtl;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Forces them into a vertical list */
+  gap: 10px; /* Space between each mod */
 }
 
 .mods-list li {
-  /* Solid background for each item */
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  padding: 14px;
-  border-radius: 6px;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
+  background: rgba(255, 255, 255, 0.03); /* Very subtle contrast */
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'Minecraft', sans-serif; /* Use your server's font */
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.mods-list li:hover {
-  /* Subtle highlight on hover without transparency */
-  background: #222;
-  border-color: #22c55e; /* Minecraft green highlight */
-  transform: translateY(-2px); /* Lifts up slightly */
-}
-
-.mods-list li span {
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 500;
+/* Fix for Arabic alignment if needed */
+[lang='ar'] .mods-list li {
+  direction: rtl;
+  text-align: right;
 }
