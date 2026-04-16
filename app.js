@@ -90,13 +90,13 @@ async function updateServerStatus() {
 
     // IMPORTANT: Make sure this variable includes your Aternos Port!
     // Example: "Alameldin.aternos.me:28303"
-    const serverIP = "Alameldin.aternos.me:28303";
+    const serverIP = "Alameldin.aternos.me";
 
     const startTime = performance.now();
 
     try {
         // We use the 'debug' version of the API to get more info
-        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}?t=${Date.now()}`);
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);
         const data = await response.json();
 
         const endTime = performance.now();
