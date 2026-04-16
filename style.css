@@ -278,17 +278,43 @@ html[lang='ar'] .badge {
    ========================================= */
 #toast {
   position: absolute;
-  top: -30px; /* Positions it just above the button */
+  top: -35px; /* Adjust this to move it higher or lower */
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary);
+  background: #22c55e;
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  font-family: var(--main-font);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
   white-space: nowrap;
-  z-index: 10;
+  z-index: 100;
+  pointer-events: none; /* So it doesn't block clicks */
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}
+
+.ip-wrapper {
+    position: relative; /* This acts like an anchor for the text */
+    display: inline-block;
+    margin: 10px 0;
 }
 
 #toast.show {
