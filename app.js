@@ -52,6 +52,7 @@ const translations = {
             "مود الفويس شات 💬",
             "مود اماكن و بايومات جديدة 🌍"
         ],
+        modsTitle: "المودات",
     },
     en: {
         title: "AlamCraft Server ☘️",
@@ -106,6 +107,7 @@ const translations = {
             "Voice Chat 💬",
             "New Biomes & Places 🌍"
         ],
+        modsTitle: "Mods",
     }
 };
 
