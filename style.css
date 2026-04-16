@@ -311,12 +311,6 @@ html[lang='ar'] .badge {
   }
 }
 
-.ip-wrapper {
-    position: relative; /* This acts like an anchor for the text */
-    display: inline-block;
-    margin: 10px 0;
-}
-
 #toast.show {
   top: 30px;
 }
