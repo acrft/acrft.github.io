@@ -53,6 +53,7 @@ const translations = {
             "مود اماكن و بايومات جديدة 🌍"
         ],
         modsTitle: "المودات",
+        downloadCenterBtn: "مركز التحميل",
     },
     en: {
         title: "AlamCraft Server ☘️",
@@ -108,6 +109,7 @@ const translations = {
             "New Biomes & Places 🌍"
         ],
         modsTitle: "Mods",
+        downloadCenterBtn: "Download Center"
     }
 };
 

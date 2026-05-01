@@ -480,3 +480,34 @@ html[lang='ar'] .badge {
   direction: rtl;
   text-align: right;
 }
+
+
+.minecraft-btn {
+    display: inline-block;
+    background-color: #55AA55; /* Minecraft Green */
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive; /* Matches your download center font */
+    font-size: 12px;
+    
+    /* Pixel-art border style */
+    border-bottom: 4px solid #224422;
+    border-right: 4px solid #224422;
+    border-top: 4px solid #AAFFAA;
+    border-left: 4px solid #AAFFAA;
+    
+    text-shadow: 2px 2px #224422;
+    transition: all 0.1s ease;
+}
+
+.minecraft-btn:hover {
+    background-color: #66CC66;
+    transform: scale(1.05);
+}
+
+.minecraft-btn:active {
+    /* "Pressed" effect */
+    border: 4px solid #224422;
+    transform: translateY(2px);
+}
