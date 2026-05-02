@@ -513,42 +513,40 @@ html[lang='ar'] .badge {
 }
 
 .mods-container {
-    /* Match the light background of your other cards */
-    background: #ffffff !important; 
-    border: 1px solid #e5e7eb !important; /* Light gray border */
+    /* Instead of #ffffff, we use 'inherit' or a variable if your site uses them */
+    background: var(--card-bg, #111827) !important; 
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)) !important;
     border-radius: 12px;
     padding: 0;
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft shadow */
     overflow: hidden;
 }
 
-/* The container should be a vertical column */
 #mods-list-container {
     display: flex !important;
     flex-direction: column !important;
-    padding: 0;
+    width: 100% !important;
     margin: 0;
-    list-style: none;
-    width: 100%;
+    padding: 0;
 }
 
-/* Each item must take up 100% width to force a new line */
 .mod-item {
-    display: block !important;
-    width: 100%;
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    box-sizing: border-box;
-    text-align: right; /* Matches your Arabic screenshot */
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    padding: 14px 20px !important;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05)) !important;
+    /* Use 'var(--text-color)' so it turns dark in light mode and white in dark mode */
+    color: var(--text-color, #ffffff) !important; 
+    background: transparent !important;
+    text-align: right;
     direction: rtl;
 }
 
+/* Hover effect that works in both modes */
 .mod-item:hover {
-    background: #f9fafb !important; /* Subtle hover gray */
+    background: rgba(255, 255, 255, 0.03) !important;
 }
 
-/* Remove the line from the very last mod */
 .mod-item:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
 }
