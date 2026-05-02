@@ -1,7 +1,7 @@
 const translations = {
     ar: {
         title: "سيرفر علم كرافت ☘️",
-        copyBtn: "📋 نسخ IP",
+        copyBtn: "📋 نسخ IP:PORT",
         javaVersion: "☕️ جافا:",
         bedrockVersion: "🛏️ بيدروك:",
         addBedrock: "إضافة السيرفر في Minecraft Bedrock",
@@ -23,7 +23,7 @@ const translations = {
         rule15: "1️⃣5️⃣ نظام العقوبات:",
         punishSystem: "إنذار 🟩 ⬅️ إنذار 🟨 ⬅️ طرد🟥 ",
         linksTitle: "🔗 روابط السيرفر",
-        whatsapp: "مجموعة الواتساب",
+        whatsapp: "قناة الواتساب",
         telegram: "مجموعة التليجرام",
         messenger: "مجموعة الماسينجر",
         discord: "سيرفر الديسكورد",
@@ -52,7 +52,7 @@ const translations = {
             "مود الفويس شات 🎤",
             "مود اماكن و بايومات جديدة 🌍"
         ],
-        modsTitle: "المودات",
+        modsTitle: "المودات/الإضافات",
         downloadCenterBtn: "مركز التحميل",
     },
     en: {
@@ -79,7 +79,7 @@ const translations = {
         rule15: "1️⃣5️⃣ Punishment System:",
         punishSystem: "Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥",
         linksTitle: "🔗 Server Links",
-        whatsapp: "WhatsApp Group",
+        whatsapp: "WhatsApp Channel",
         telegram: "Telegram Group",
         messenger: "Messenger Group",
         discord: "Discord Server",
@@ -108,7 +108,7 @@ const translations = {
             "Voice Chat 🎤",
             "New Biomes & Places 🌍"
         ],
-        modsTitle: "Mods",
+        modsTitle: "Mods/Plugins",
         downloadCenterBtn: "Download Center"
     }
 };
