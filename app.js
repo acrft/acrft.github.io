@@ -191,6 +191,19 @@ function updateContent() {
             el.innerText = translations[currentLang][key];
         }
     });
+
+    const modsListContainer = document.getElementById('mods-list-container');
+    if (modsListContainer) {
+        modsListContainer.innerHTML = ''; // Clear the container
+        
+        // Loop through each item in your dictionary array
+        translations[currentLang].modsList.forEach(modText => {
+            const li = document.createElement('li');
+            li.className = "mod-item"; // Give it a specific class
+            li.innerHTML = `<span>${modText}</span>`; 
+            modsListContainer.appendChild(li);
+        });
+    }
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLang;
     updateServerStatus();
