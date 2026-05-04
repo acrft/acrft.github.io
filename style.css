@@ -255,11 +255,10 @@ html[lang='ar'] .badge {
    ========================================= */
 .fixed-controls {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 80px;
+  right: 20px;
   display: flex;
-  gap: 12px;
-  direction: ltr !important; /* LOCKED: DO NOT SWITCH POSITIONS */
+  gap: 10px;
   z-index: 1000;
 }
 
