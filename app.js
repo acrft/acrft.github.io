@@ -253,9 +253,11 @@ window.addEventListener("scroll", () => {
   const overlap = window.innerHeight - footerRect.top;
 
   if (overlap > 0) {
-    const maxLift = 120;
+    const base = 20;
+    const maxLift = 60; // مناسب جدًا
     const lift = Math.min(overlap, maxLift);
-    controls.style.bottom = 20 + lift + "px";
+
+    controls.style.bottom = base + lift + "px";
   } else {
     controls.style.bottom = "20px";
   }
