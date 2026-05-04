@@ -45,11 +45,11 @@ body.light-theme {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease;
-}
+
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  }
 
 body {
   background-color: var(--bg);
