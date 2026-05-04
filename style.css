@@ -536,13 +536,11 @@ html[lang='ar'] .badge {
 }
 
 .mod-item {
-    padding: 12px;
+  padding: 12px;
   border-radius: 10px;
 
   background: var(--accent);
   color: var(--text);
-
-  font-family: var(--main-font); /* ✔️ الحل الصح */
 
   text-align: center;
   direction: rtl;
@@ -552,7 +550,7 @@ html[lang='ar'] .badge {
   justify-content: center;
 
   border: 1px solid transparent;
-}
+  }
 
 .mod-item:hover {
   transform: translateY(-3px);
@@ -568,3 +566,13 @@ html[lang='ar'] .badge {
 .mod-item:last-child {
     border-bottom: none !important;
 }
+
+/* عربي */
+html[lang='ar'] .mod-item {
+  font-family: 'Arapix', sans-serif;
+}
+
+/* إنجليزي */
+html[lang='en'] .mod-item {
+  font-family: 'Mojangles', sans-serif;
+  }
