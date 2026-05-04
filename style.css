@@ -459,9 +459,10 @@ html[lang='ar'] .badge {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column; /* Forces them into a vertical list */
-  gap: 10px; /* Space between each mod */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
 }
 
 .mods-list li {
@@ -529,17 +530,28 @@ html[lang='ar'] .badge {
 }
 
 .mod-item {
-    display: flex !important;
-    align-items: center;
-    width: 100% !important;
-    padding: 14px 20px !important;
-    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05)) !important;
-    /* Use 'var(--text-color)' so it turns dark in light mode and white in dark mode */
-    color: var(--text-color, #ffffff) !important; 
-    background: transparent !important;
-    text-align: right;
-    direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  background: var(--accent);
+  color: var(--text);
+
+  text-align: center;
+  direction: rtl;
+
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
+
+.mod-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+      }
 
 /* Hover effect that works in both modes */
 .mod-item:hover {
