@@ -247,21 +247,15 @@ if (savedTheme === 'light') {
 
 window.addEventListener("scroll", () => {
   const controls = document.querySelector(".fixed-controls");
+  const footer = document.querySelector(".footer");
 
-  const scrollTop = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const fullHeight = document.documentElement.scrollHeight;
+  const footerTop = footer.getBoundingClientRect().top;
+  const screenHeight = window.innerHeight;
 
-  const isAtBottom = scrollTop + windowHeight >= fullHeight - 50;
-
-  if (isAtBottom) {
-    controls.style.bottom = "120px"; // يطلع فوق عند الفوتر
+  // لو الفوتر قرب يظهر
+  if (footerTop < screenHeight) {
+    controls.style.bottom = "140px"; // ارفع الأزرار
   } else {
-    controls.style.bottom = "20px"; // يرجع تحت
+    controls.style.bottom = "20px"; // الوضع الطبيعي
   }
 });
-
-
-
-
-
