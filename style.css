@@ -542,7 +542,7 @@ html[lang='ar'] .badge {
   background: var(--accent);
   color: var(--text);          /* ✔️ يتغير تلقائي */
 
-  font-family: var(--main-font); /* ✔️ الخط الصح */
+  font-family: 'Mojangles', sans-serif !important;
   text-align: center;
   direction: rtl;
 
