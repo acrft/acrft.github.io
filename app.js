@@ -249,13 +249,14 @@ window.addEventListener("scroll", () => {
   const controls = document.querySelector(".fixed-controls");
   const footer = document.querySelector(".footer");
 
-  const footerTop = footer.getBoundingClientRect().top;
-  const screenHeight = window.innerHeight;
+  const footerRect = footer.getBoundingClientRect();
+  const overlap = window.innerHeight - footerRect.top;
 
-  // لو الفوتر قرب يظهر
-  if (footerTop < screenHeight) {
-    controls.style.bottom = "140px"; // ارفع الأزرار
+  if (overlap > 0) {
+    const maxLift = 120;
+    const lift = Math.min(overlap, maxLift);
+    controls.style.bottom = 20 + lift + "px";
   } else {
-    controls.style.bottom = "20px"; // الوضع الطبيعي
+    controls.style.bottom = "20px";
   }
 });
