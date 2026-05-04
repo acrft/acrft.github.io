@@ -109,7 +109,10 @@ html[lang='en'] {
   font-family: monospace;
 }
 
-.btn-copy,
+.btn-copy {
+  position: relative;
+  top: -8px;
+  }
 .btn-bedrock {
   background-color: var(--primary) !important;
   color: white !important;
@@ -374,7 +377,7 @@ html[lang='ar'] .badge {
 }
 
 .player-count {
-  font-size: 0.9rem;
+  font-size: 0.9rem;.
   color: var(--text-muted);
   font-family: var(--main-font);
 }
