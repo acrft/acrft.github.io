@@ -475,7 +475,7 @@ html[lang='ar'] .badge {
   background: rgba(255, 255, 255, 0.03); /* Very subtle contrast */
   padding: 10px 15px;
   border-radius: 8px;
-  color: #fff;
+  color: var(--text); /* ✔️ يتغير حسب الثيم */
   font-family: 'Minecraft', sans-serif; /* Use your server's font */
   display: flex;
   align-items: center;
