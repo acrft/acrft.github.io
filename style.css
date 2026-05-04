@@ -109,10 +109,7 @@ html[lang='en'] {
   font-family: monospace;
 }
 
-.btn-copy {
-  position: relative;
-  top: -8px;
-  }
+.btn-copy,
 .btn-bedrock {
   background-color: var(--primary) !important;
   color: white !important;
@@ -121,6 +118,11 @@ html[lang='en'] {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  }
+
+.btn-copy {
+  top: -6px;
+  position: relative;
 }
 
 .btn-bedrock {
