@@ -4,15 +4,13 @@
   src: url('fonts/Mojangles.ttf') format('truetype');
 }
 
-/* Pixel Arabic Font */
+/* Arabic Pixel Font */
 @font-face {
   font-family: 'Arapix';
   src: url('fonts/MojanglesArab.ttf') format('truetype');
 }
 
-/* =========================================
-   VARIABLES & THEMES
-   ========================================= */
+/* ================= ROOT ================= */
 :root {
   --bg: #0f172a;
   --card: #1e293b;
@@ -20,7 +18,6 @@
   --text-muted: #94a3b8;
   --primary: #22c55e;
   --accent: #334155;
-  --shadow: rgba(0, 0, 0, 0.3);
   --main-font: 'Arapix', sans-serif;
 }
 
@@ -31,21 +28,13 @@ body.light-theme {
   --text-muted: #64748b;
   --primary: #16a34a;
   --accent: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.1);
 }
 
-html[lang='en'] {
-  --main-font: 'Mojangles', sans-serif;
-}
-
-/* =========================================
-   GLOBAL
-   ========================================= */
+/* ================= GLOBAL ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.3s;
 }
 
 body {
@@ -58,13 +47,24 @@ body {
 }
 
 .container {
-  max-width: 900px;
   width: 100%;
+  max-width: 900px;
 }
 
-/* =========================================
-   HERO
-   ========================================= */
+html[lang='en'] {
+  --main-font: 'Mojangles', sans-serif;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  margin-bottom: 20px;
+}
+
+/* ================= HERO ================= */
 .hero {
   text-align: center;
   padding: 40px 0;
@@ -72,35 +72,12 @@ body {
 
 .logo {
   width: 100px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.pulse {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-/* =========================================
-   CARD
-   ========================================= */
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 20px;
-  border: 1px solid var(--accent);
-  box-shadow: 0 10px 15px -3px var(--shadow);
-}
-
-/* =========================================
-   IP SECTION (رجّعناه مظبوط)
-   ========================================= */
+/* ================= IP ================= */
 .ip-wrapper {
-  background-color: var(--bg);
+  background: var(--bg);
   padding: 12px 20px;
   border-radius: 8px;
   display: flex;
@@ -110,41 +87,47 @@ body {
   font-family: monospace;
 }
 
-/* Buttons */
-.btn-copy,
-.btn-bedrock {
-  background-color: var(--primary);
+/* زر النسخ */
+.btn-copy {
+  background: var(--primary);
   color: white;
   border: none;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
 }
 
+/* زر بيدروك */
 .btn-bedrock {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/* =========================================
-   GRID
-   ========================================= */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 20px;
+/* ================= BADGES ================= */
+.version-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0 15px;
 }
 
-@media (max-width: 768px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
+.badge {
+  background: var(--accent);
+  color: var(--text);
+  border: 1px solid var(--primary);
+  padding: 10px 15px;
+  border-radius: 10px;
 }
 
-/* =========================================
-   RULES
-   ========================================= */
+/* ================= RULES ================= */
 .rules-list {
   list-style: none;
 }
@@ -154,79 +137,66 @@ body {
   border-bottom: 1px solid var(--accent);
 }
 
-/* =========================================
-   SOCIAL
-   ========================================= */
-.social-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ================= STATUS ================= */
+.status-card {
+  text-align: center;
 }
 
-.social-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: var(--accent);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--text);
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
-.link-icon {
-  width: 24px;
+.dot-online {
+  background: #22c55e;
 }
 
-/* =========================================
-   MODS (متصلح بدون تعارض)
-   ========================================= */
-.mods-container {
-  background: var(--card);
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  padding: 15px;
+.dot-offline {
+  background: #ef4444;
 }
 
+/* ================= MODS ================= */
 .mods-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
+  padding: 0;
 }
 
 .mod-item {
   background: var(--accent);
   color: var(--text);
+  font-family: var(--main-font);
   padding: 10px;
   border-radius: 8px;
   text-align: center;
-  font-family: var(--main-font);
+}
+
+/* ================= BUTTONS FLOAT ================= */
+.fixed-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s;
+  gap: 10px;
 }
 
-.mod-item:hover {
-  transform: translateY(-3px);
-  border: 1px solid var(--primary);
+.control-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 20px;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
+/* ================= FOOTER ================= */
 .footer {
   text-align: center;
   margin-top: 20px;
-  color: var(--text-muted);
-}
-
-/* =========================================
-   FIXES
-   ========================================= */
-.player-count {
-  font-size: 0.9rem;
+  font-size: 14px;
   }
