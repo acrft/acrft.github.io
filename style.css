@@ -513,9 +513,8 @@ html[lang='ar'] .badge {
 }
 
 .mods-container {
-    /* Instead of #ffffff, we use 'inherit' or a variable if your site uses them */
-    background: var(--card-bg, #111827) !important; 
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)) !important;
+    background: var(--card) !important;
+    border: 1px solid var(--accent) !important;
     border-radius: 12px;
     padding: 0;
     overflow: hidden;
