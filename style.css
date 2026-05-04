@@ -536,13 +536,14 @@ html[lang='ar'] .badge {
 }
 
 .mod-item {
-  padding: 12px;
+    padding: 12px;
   border-radius: 10px;
 
   background: var(--accent);
-  color: var(--text);          /* ✔️ يتغير تلقائي */
+  color: var(--text);
 
-  font-family: 'Mojangles', sans-serif !important;
+  font-family: var(--main-font); /* ✔️ الحل الصح */
+
   text-align: center;
   direction: rtl;
 
