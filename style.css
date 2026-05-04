@@ -4,15 +4,13 @@
   src: url('fonts/Mojangles.ttf') format('truetype');
 }
 
-/* Pixel Arabic Font */
+/* Arabic Pixel Font */
 @font-face {
   font-family: 'Arapix';
   src: url('fonts/MojanglesArab.ttf') format('truetype');
 }
 
-/* =========================================
-   VARIABLES & THEMES
-   ========================================= */
+/* ================= VARIABLES ================= */
 :root {
   --bg: #0f172a;
   --card: #1e293b;
@@ -20,7 +18,6 @@
   --text-muted: #94a3b8;
   --primary: #22c55e;
   --accent: #334155;
-  --shadow: rgba(0, 0, 0, 0.3);
   --main-font: 'Arapix', sans-serif;
 }
 
@@ -31,16 +28,13 @@ body.light-theme {
   --text-muted: #64748b;
   --primary: #16a34a;
   --accent: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 html[lang='en'] {
   --main-font: 'Mojangles', sans-serif;
 }
 
-/* =========================================
-   GLOBAL
-   ========================================= */
+/* ================= GLOBAL ================= */
 * {
   margin: 0;
   padding: 0;
@@ -61,20 +55,7 @@ body {
   width: 100%;
 }
 
-/* =========================================
-   CARDS
-   ========================================= */
-.card {
-  background: var(--card);
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid var(--accent);
-  margin-bottom: 20px;
-}
-
-/* =========================================
-   HERO
-   ========================================= */
+/* ================= HERO ================= */
 .hero {
   text-align: center;
   padding: 40px 0;
@@ -85,33 +66,52 @@ body {
   margin-bottom: 15px;
 }
 
-/* =========================================
-   IP BOX
-   ========================================= */
+.pulse {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* ================= CARDS ================= */
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--accent);
+}
+
+/* ================= IP BOX ================= */
 .ip-wrapper {
   background: var(--bg);
   border: 1px solid var(--primary);
-  padding: 12px 20px;
+  padding: 12px;
   border-radius: 8px;
+
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
+  justify-content: space-between;
 }
 
+.ip-text {
+  font-family: monospace;
+}
+
+/* BUTTONS */
 .btn-copy,
 .btn-bedrock {
   background: var(--primary);
   color: white;
   border: none;
-  padding: 10px 18px;
+  padding: 8px 14px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-}
-
-.btn-copy {
-  position: relative;
-  top: -4px;
 }
 
 .btn-bedrock {
@@ -119,9 +119,7 @@ body {
   margin-top: 10px;
 }
 
-/* =========================================
-   GRID
-   ========================================= */
+/* ================= GRID ================= */
 .content-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -134,17 +132,17 @@ body {
   }
 }
 
-/* =========================================
-   RULES
-   ========================================= */
+/* ================= RULES ================= */
+.rules-list {
+  list-style: none;
+}
+
 .rules-list li {
   padding: 10px 0;
   border-bottom: 1px solid var(--accent);
 }
 
-/* =========================================
-   SOCIAL
-   ========================================= */
+/* ================= SOCIAL ================= */
 .social-links {
   display: flex;
   flex-direction: column;
@@ -153,6 +151,7 @@ body {
 
 .social-item {
   display: flex;
+  align-items: center;
   gap: 10px;
   padding: 10px;
   background: var(--accent);
@@ -161,9 +160,11 @@ body {
   color: var(--text);
 }
 
-/* =========================================
-   MODS (المهم 🔥)
-   ========================================= */
+.link-icon {
+  width: 24px;
+}
+
+/* ================= MODS ================= */
 .mods-container {
   background: var(--card);
   border: 1px solid var(--accent);
@@ -171,27 +172,25 @@ body {
   padding: 15px;
 }
 
-/* GRID */
 .mods-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
 }
 
-/* ITEM */
 .mod-item {
-  padding: 12px;
-  border-radius: 10px;
   background: var(--accent);
   color: var(--text);
-  font-family: var(--main-font);
+  padding: 10px;
+  border-radius: 8px;
   text-align: center;
+  font-family: var(--main-font);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   transition: 0.2s;
 }
 
@@ -200,18 +199,14 @@ body {
   border: 1px solid var(--primary);
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
+/* ================= FOOTER ================= */
 .footer {
   text-align: center;
   margin-top: 20px;
   color: var(--text-muted);
 }
 
-/* =========================================
-   FIX
-   ========================================= */
+/* ================= FIX ================= */
 .player-count {
   font-size: 0.9rem;
-}
+  }
