@@ -262,3 +262,20 @@ window.addEventListener("scroll", () => {
     controls.style.bottom = "20px";
   }
 });
+
+// منع كليك يمين
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+// منع سحب الصور
+document.addEventListener("dragstart", (e) => {
+  e.preventDefault();
+});
+
+// منع اختصارات النسخ
+document.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && ["c", "u", "s"].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+  }
+});
