@@ -255,9 +255,9 @@ window.addEventListener("scroll", () => {
   const isAtBottom = scrollTop + windowHeight >= fullHeight - 50;
 
   if (isAtBottom) {
-    controls.style.bottom = "140px"; // يطلع لفوق
+    controls.style.bottom = "120px"; // يطلع فوق عند الفوتر
   } else {
-    controls.style.bottom = "80px"; // يرجع مكانه
+    controls.style.bottom = "20px"; // يرجع تحت
   }
 });
 
