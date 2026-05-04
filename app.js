@@ -204,7 +204,7 @@ function updateContent() {
         translations[currentLang].modsList.forEach(modText => {
             const li = document.createElement('li');
             li.className = "mod-item"; // Give it a specific class
-            li.innerHTML = `<span>${modText}</span>`; 
+            li.innerHTML = `✨ <span>${modText}</span>`; 
             modsListContainer.appendChild(li);
         });
     }
