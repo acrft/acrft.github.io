@@ -4,13 +4,15 @@
   src: url('fonts/Mojangles.ttf') format('truetype');
 }
 
-/* Arabic Pixel Font */
+/* Pixel Arabic Font */
 @font-face {
   font-family: 'Arapix';
   src: url('fonts/MojanglesArab.ttf') format('truetype');
 }
 
-/* ================= VARIABLES ================= */
+/* =========================================
+   VARIABLES & THEMES
+   ========================================= */
 :root {
   --bg: #0f172a;
   --card: #1e293b;
@@ -18,6 +20,7 @@
   --text-muted: #94a3b8;
   --primary: #22c55e;
   --accent: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
   --main-font: 'Arapix', sans-serif;
 }
 
@@ -28,17 +31,21 @@ body.light-theme {
   --text-muted: #64748b;
   --primary: #16a34a;
   --accent: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 html[lang='en'] {
   --main-font: 'Mojangles', sans-serif;
 }
 
-/* ================= GLOBAL ================= */
+/* =========================================
+   GLOBAL
+   ========================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.3s;
 }
 
 body {
@@ -55,7 +62,9 @@ body {
   width: 100%;
 }
 
-/* ================= HERO ================= */
+/* =========================================
+   HERO
+   ========================================= */
 .hero {
   text-align: center;
   padding: 40px 0;
@@ -75,40 +84,39 @@ body {
   margin-top: 20px;
 }
 
-/* ================= CARDS ================= */
+/* =========================================
+   CARD
+   ========================================= */
 .card {
   background: var(--card);
   border-radius: 12px;
-  padding: 20px;
+  padding: 24px;
   margin-bottom: 20px;
   border: 1px solid var(--accent);
+  box-shadow: 0 10px 15px -3px var(--shadow);
 }
 
-/* ================= IP BOX ================= */
+/* =========================================
+   IP SECTION (رجّعناه مظبوط)
+   ========================================= */
 .ip-wrapper {
-  background: var(--bg);
-  border: 1px solid var(--primary);
-  padding: 12px;
+  background-color: var(--bg);
+  padding: 12px 20px;
   border-radius: 8px;
-
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
   justify-content: space-between;
-}
-
-.ip-text {
+  align-items: center;
+  border: 1px solid var(--primary);
   font-family: monospace;
 }
 
-/* BUTTONS */
+/* Buttons */
 .btn-copy,
 .btn-bedrock {
-  background: var(--primary);
+  background-color: var(--primary);
   color: white;
   border: none;
-  padding: 8px 14px;
+  padding: 10px 18px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
@@ -119,7 +127,9 @@ body {
   margin-top: 10px;
 }
 
-/* ================= GRID ================= */
+/* =========================================
+   GRID
+   ========================================= */
 .content-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -132,7 +142,9 @@ body {
   }
 }
 
-/* ================= RULES ================= */
+/* =========================================
+   RULES
+   ========================================= */
 .rules-list {
   list-style: none;
 }
@@ -142,7 +154,9 @@ body {
   border-bottom: 1px solid var(--accent);
 }
 
-/* ================= SOCIAL ================= */
+/* =========================================
+   SOCIAL
+   ========================================= */
 .social-links {
   display: flex;
   flex-direction: column;
@@ -164,7 +178,9 @@ body {
   width: 24px;
 }
 
-/* ================= MODS ================= */
+/* =========================================
+   MODS (متصلح بدون تعارض)
+   ========================================= */
 .mods-container {
   background: var(--card);
   border: 1px solid var(--accent);
@@ -174,8 +190,10 @@ body {
 
 .mods-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
 }
 
@@ -186,11 +204,9 @@ body {
   border-radius: 8px;
   text-align: center;
   font-family: var(--main-font);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: 0.2s;
 }
 
@@ -199,14 +215,18 @@ body {
   border: 1px solid var(--primary);
 }
 
-/* ================= FOOTER ================= */
+/* =========================================
+   FOOTER
+   ========================================= */
 .footer {
   text-align: center;
   margin-top: 20px;
   color: var(--text-muted);
 }
 
-/* ================= FIX ================= */
+/* =========================================
+   FIXES
+   ========================================= */
 .player-count {
   font-size: 0.9rem;
   }
