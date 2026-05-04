@@ -535,20 +535,20 @@ html[lang='ar'] .badge {
 }
 
 .mod-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   padding: 12px;
   border-radius: 10px;
 
   background: var(--accent);
-  color: var(--text);
+  color: var(--text);          /* ✔️ يتغير تلقائي */
 
+  font-family: var(--main-font); /* ✔️ الخط الصح */
   text-align: center;
   direction: rtl;
 
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: 1px solid transparent;
 }
 
