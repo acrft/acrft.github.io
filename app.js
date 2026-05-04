@@ -245,11 +245,20 @@ if (savedTheme === 'light') {
     if (modeBtn) modeBtn.innerText = '☀️';
 }
 
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById("scroll-progress").style.width = scrolled + "%";
+window.addEventListener("scroll", () => {
+  const controls = document.querySelector(".fixed-controls");
+
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const fullHeight = document.documentElement.scrollHeight;
+
+  const isAtBottom = scrollTop + windowHeight >= fullHeight - 50;
+
+  if (isAtBottom) {
+    controls.style.bottom = "140px"; // يطلع لفوق
+  } else {
+    controls.style.bottom = "80px"; // يرجع مكانه
+  }
 });
 
 
