@@ -59,7 +59,7 @@ const translations = {
     },
     en: {
         title: "AlamCraft Server ☘️",
-        copyBtn: "📋 Copy IP",
+        copyBtn: "📋 Copy IP:PORT",
         javaVersion: "☕️ Java:",
         bedrockVersion: "🛏️ Bedrock:",
         addBedrock: "Add Server to Minecraft Bedrock",
