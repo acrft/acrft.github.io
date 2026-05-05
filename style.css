@@ -539,8 +539,12 @@ html[lang='ar'] .badge {
   padding: 12px;
   border-radius: 10px;
 
-  background: var(--accent);
+  background: var(--card); /* بدل accent */
+  border: 1px solid var(--accent);
+
   color: var(--text);
+
+  font-family: var(--main-font);
 
   text-align: center;
   direction: rtl;
@@ -548,15 +552,7 @@ html[lang='ar'] .badge {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid transparent;
-  }
-
-.mod-item:hover {
-  transform: translateY(-3px);
-  border-color: var(--primary);
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
-      }
+}
 
 /* Hover effect that works in both modes */
 .mod-item:hover {
