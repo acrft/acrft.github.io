@@ -255,14 +255,18 @@ html[lang='ar'] .badge {
    ========================================= */
 .fixed-controls {
   position: fixed;
-  bottom: 20px;   /* الطبيعي تحت */
+  bottom: 20px;
   left: 20px;
   right: auto;
+
   display: flex;
+  flex-direction: row;   /* مهم */
+  direction: ltr;        /* أهم حاجة 🔥 */
+
   gap: 10px;
   z-index: 1000;
   transition: bottom 0.3s ease;
-}
+  }
 
 .control-btn {
   width: 50px;
