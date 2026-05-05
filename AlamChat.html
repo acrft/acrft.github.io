@@ -83,6 +83,9 @@ background:#2a3942;color:#fff
 width:45px;height:45px;border-radius:50%;
 border:none;background:#25d366
 }
+.send:disabled{
+opacity:0.5;
+}
 .mob-list{
 display:flex;
 gap:8px;
@@ -202,18 +205,22 @@ msgInput.addEventListener("keydown", e=>{
 function send(){
   let text = msgInput.value.trim();
   if(!text || !currentUser) return;
+  sendBtn.disabled = true;
   chatRef.push({
     uid: currentUser.uid,
     name: currentUser.displayName || "بدون اسم",
     photo: currentUser.photoURL || "",
     text: text,
     time: Date.now()
+  }).then(()=>{
+    msgInput.value="";
+    sendBtn.disabled = false;
   });
-  msgInput.value="";
-}
+  }
 /* الرسائل */
 function loadMessages(){
-  chatRef.off();
+  chatRef.off("child_added");
+messagesEl.innerHTML = "";
 chatRef.limitToLast(100).on("child_added", snap=>{
 if(!currentUser) return;
   let m = snap.val();
@@ -265,8 +272,9 @@ selected.forEach(mob=>{
 });
 }
 /* خروج */
-logoutBtn.onclick = ()=>{
-  auth.signOut();
+logoutBtn.onclick = async ()=>{
+  logoutBtn.disabled = true;
+  await auth.signOut();
   messagesEl.innerHTML = "";
 };
 </script>
