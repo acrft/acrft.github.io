@@ -152,6 +152,7 @@ let currentUser
 
 /* حفظ الجلسة */
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
 /* login */
 function login(){
@@ -160,24 +161,7 @@ const provider=new firebase.auth.GoogleAuthProvider()
 auth.signInWithRedirect(provider)
 }
 
-/* redirect result */
-auth.onAuthStateChanged(user=>{
-if(user){
-currentUser=user
-
-login.style.display="none"
-chat.style.display="block"
-
-userInfo.innerHTML=`
-<img src="${user.photoURL}">
-<div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
-`
-}else{
-login.style.display="flex"
-chat.style.display="none"
-}
-})
-
+/* مهم */
 auth.getRedirectResult()
 .then((result)=>{
 if(result.user){
@@ -188,7 +172,7 @@ console.log("تم تسجيل الدخول");
 console.error(error);
 });
 
-/* state */
+/* حالة المستخدم */
 auth.onAuthStateChanged(user=>{
 if(user){
 currentUser = user;
@@ -198,8 +182,9 @@ chat.style.display = "block";
 
 userInfo.innerHTML = `
 <img src="${user.photoURL}">
-<div>${user.displayName}</div>
+<div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
 `;
+
 }else{
 login.style.display = "flex";
 chat.style.display = "none";
