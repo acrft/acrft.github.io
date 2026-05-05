@@ -116,6 +116,9 @@ html[lang='en'] {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  direction: ltr;        /* يخليه دايماً من الشمال */
+  text-align: left;      /* يثبت مكانه */
+  }
 }
 
 .btn-copy,
