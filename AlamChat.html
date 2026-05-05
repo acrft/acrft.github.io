@@ -193,8 +193,11 @@ let m = snap.val()
 let div=document.createElement("div")
 div.className="msg "+(m.uid===currentUser.uid?"me":"other")
 
-div.innerHTML=`
-<img class="avatar" src="${m.photo || 'https://via.placeholder.com/35'}">
+userInfo.innerHTML=`
+<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+<div>AlamCraft ☘️<br><small style="opacity:.6">متصل الآن</small></div>
+: `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
+}
 <div class="bubble">
 <div class="name">${m.name}</div>
 ${m.text}
