@@ -36,6 +36,26 @@ background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4
 width:100%;padding:14px;border:none;border-radius:30px;
 background:#25d366;color:#fff;font-size:16px;
 }
+.logout-big{
+background:#ff3b30;
+width:100%;
+margin-top:10px;
+padding:14px;
+border:none;
+border-radius:30px;
+color:#fff;
+font-size:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+.logout-big:active{
+transform:scale(0.97);
+}
+.logout-big:hover{
+background:#e02a20;
+                }
 .btn.loading{opacity:.6}
 /* chat */
 #chat{display:none}
@@ -136,7 +156,7 @@ transform:scale(0.95);
 <div id="chat">
   <div class="header">
     <div class="user" id="userInfo"></div>
-    <button id="logoutBtn" class="logout-btn">🚪</button>
+    <button id="logoutBtn" class="btn logout-big">🚪</button>
   </div>
   <div id="messages" class="messages"></div>
   <div class="input">
