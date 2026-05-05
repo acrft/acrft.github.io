@@ -31,7 +31,7 @@ const translations = {
         adminsNames: "علم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",
         copyright: "© 2026 AlamCraft Server - جميع الحقوق محفوظة",
         toastMsg: "✔ تم نسخ IP:PORT السيرفر",
-        feature4: "✅ إدارة نشطة",
+        feature4: "✅️ إدارة نشطة",
         feature1: "✅ يدعم الجافا و البيدروك",
         feature2: "✅ قوانين واضحة و عادلة",
         feature3: "✅ تحديثات مستمرة",
