@@ -104,20 +104,15 @@ html[lang='en'] {
   border-radius: 8px;
 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+  flex-direction: column;   /* يخلي IP فوق والزر تحت */
+  align-items: center;      /* يوسّطهم */
   gap: 10px;
-  overflow: hidden;
-  flex-wrap: wrap;
 }
 
 .ip-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  direction: ltr;
-  text-align: left;
+  direction: ltr;       /* يخلي الـ IP يتقري صح */
+  text-align: center;   /* يخليه في النص */
+  font-weight: bold;
 }
 
 .btn-copy,
@@ -135,9 +130,9 @@ html[lang='en'] {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 
-  direction: rtl;
+  direction: ltr; /* يخلي الإيموجي شمال والنص يمين */
 }
 
 .btn-copy span:first-child {
