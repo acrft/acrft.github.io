@@ -118,7 +118,6 @@ html[lang='en'] {
   white-space: nowrap;
   direction: ltr;        /* يخليه دايماً من الشمال */
   text-align: left;      /* يثبت مكانه */
-  }
 }
 
 .btn-copy,
