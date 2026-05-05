@@ -190,6 +190,7 @@ loginBtn.onclick = ()=>{
   loginBtn.classList.add("loading");
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider);
+  auth.getRedirectResult().catch(err=>console.log(err));
 };
 /* الحالة */
 auth.onAuthStateChanged(user=>{
