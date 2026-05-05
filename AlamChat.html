@@ -11,6 +11,26 @@
 
 <style>
 body{margin:0;font-family:sans-serif;background:#0b141a;color:#fff}
+
+/* login */
+#loginScreen{
+position:fixed;inset:0;
+display:flex;justify-content:center;align-items:center;
+background:#0b141a;
+}
+.box{
+background:#202c33;
+padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center;
+}
+.box input{
+width:100%;padding:12px;margin:8px 0;border:none;border-radius:25px;background:#2a3942;color:#fff;
+}
+.box button{
+width:100%;padding:12px;border:none;border-radius:25px;background:#25d366;color:#fff;
+}
+
+/* chat */
+#chat{display:none}
 .messages{margin-top:60px;margin-bottom:70px;padding:10px;display:flex;flex-direction:column}
 .msg{max-width:80%;margin:5px}
 .me{align-self:flex-end}
@@ -19,33 +39,45 @@ body{margin:0;font-family:sans-serif;background:#0b141a;color:#fff}
 .me .bubble{background:#005c4b}
 .other .bubble{background:#202c33}
 .sender{font-size:12px;opacity:.7}
+
+.input{
+position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
+}
+.input input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a3942;color:#fff}
+.send{width:45px;height:45px;border-radius:50%;border:none;background:#25d366}
 </style>
 </head>
 
 <body>
 
 <!-- LOGIN -->
-<div id="login">
-<input id="phone" placeholder="+2010...">
-<div id="recaptcha-container"></div>
-<button onclick="sendCode()">إرسال كود</button>
+<div id="loginScreen">
+<div class="box">
+<h3>تسجيل الدخول</h3>
+<input id="phone" placeholder="+2010XXXXXXXX">
+<button onclick="sendOTP()">إرسال الكود</button>
 <input id="code" placeholder="الكود">
-<button onclick="verifyCode()">دخول</button>
+<button onclick="verifyOTP()">تأكيد</button>
+<div id="recaptcha-container"></div>
+</div>
 </div>
 
 <!-- NAME -->
-<div id="nameBox" style="display:none">
+<div id="nameBox" style="display:none" class="box">
+<h3>اسمك</h3>
 <input id="username" placeholder="اكتب اسمك">
 <button onclick="saveName()">حفظ</button>
 </div>
 
 <!-- CHAT -->
-<div id="chat" style="display:none">
+<div id="chat">
 <button onclick="logout()">خروج</button>
 <div id="messages" class="messages"></div>
 
+<div class="input">
 <input id="msgInput">
-<button onclick="send()">إرسال</button>
+<button class="send" onclick="send()">➤</button>
+</div>
 </div>
 
 <script>
@@ -58,16 +90,22 @@ databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 const auth=firebase.auth()
 let currentUser
 let userName=""
-let canChangeName=true
+let confirmationResult
 
+/* recaptcha */
 window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container')
 
-function sendCode(){
-auth.signInWithPhoneNumber(phone.value,recaptchaVerifier)
-.then(res=>window.confirmationResult=res)
+function sendOTP(){
+let phoneVal=phone.value.trim()
+auth.signInWithPhoneNumber(phoneVal,recaptchaVerifier)
+.then(res=>{
+confirmationResult=res
+alert("تم إرسال الكود")
+})
+.catch(e=>alert(e.message))
 }
 
-function verifyCode(){
+function verifyOTP(){
 confirmationResult.confirm(code.value)
 }
 
@@ -79,11 +117,10 @@ firebase.database().ref("users/"+user.uid).once("value",snap=>{
 let data=snap.val()
 
 if(!data){
-login.style.display="none"
+loginScreen.style.display="none"
 nameBox.style.display="block"
 }else{
 userName=data.name
-canChangeName=(Date.now()-data.lastChange)>86400000
 startChat()
 }
 })
@@ -101,23 +138,28 @@ startChat()
 }
 
 function startChat(){
-login.style.display="none"
+loginScreen.style.display="none"
 nameBox.style.display="none"
 chat.style.display="block"
 }
 
+/* send */
 function send(){
 if(!msgInput.value)return
+
 firebase.database().ref("chat").push({
 uid:currentUser.uid,
 name:userName,
 text:msgInput.value
 })
+
 msgInput.value=""
 }
 
+/* receive */
 firebase.database().ref("chat").on("child_added",snap=>{
 let m=snap.val()
+
 let div=document.createElement("div")
 div.className="msg "+(m.uid==currentUser.uid?"me":"other")
 
@@ -128,11 +170,15 @@ ${m.text}
 </div>
 `
 
+/* حذف لصاحب الرسالة فقط */
 if(m.uid==currentUser.uid){
-div.onclick=()=>firebase.database().ref("chat/"+snap.key).remove()
+div.onclick=()=>{
+firebase.database().ref("chat/"+snap.key).remove()
+}
 }
 
 messages.appendChild(div)
+messages.scrollTop=messages.scrollHeight
 })
 
 function logout(){
