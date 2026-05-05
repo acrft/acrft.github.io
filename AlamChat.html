@@ -178,20 +178,33 @@ chat.style.display="none"
 }
 })
 
+auth.getRedirectResult()
+.then((result)=>{
+if(result.user){
+console.log("تم تسجيل الدخول");
+}
+})
+.catch((error)=>{
+console.error(error);
+});
+
 /* state */
 auth.onAuthStateChanged(user=>{
 if(user){
-currentUser=user
+currentUser = user;
 
-login.style.display="none"
-chat.style.display="block"
+login.style.display = "none";
+chat.style.display = "block";
 
-userInfo.innerHTML=`
+userInfo.innerHTML = `
 <img src="${user.photoURL}">
-<div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
-`
+<div>${user.displayName}</div>
+`;
+}else{
+login.style.display = "flex";
+chat.style.display = "none";
 }
-})
+});
 
 /* send */
 function send(){
