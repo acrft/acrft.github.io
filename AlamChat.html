@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlamChat</title>
 
+<!-- Firebase v8 -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -14,13 +15,10 @@ body{margin:0;font-family:sans-serif;background:#0b141a;color:#fff}
 
 /* login */
 #loginScreen{
-position:fixed;inset:0;
-display:flex;justify-content:center;align-items:center;
-background:#0b141a;
+position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0b141a;
 }
 .box{
-background:#202c33;
-padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center;
+background:#202c33;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center;
 }
 .box input{
 width:100%;padding:12px;margin:8px 0;border:none;border-radius:25px;background:#2a3942;color:#fff;
@@ -31,7 +29,10 @@ width:100%;padding:12px;border:none;border-radius:25px;background:#25d366;color:
 
 /* chat */
 #chat{display:none}
-.messages{margin-top:60px;margin-bottom:70px;padding:10px;display:flex;flex-direction:column}
+.messages{
+margin-top:60px;margin-bottom:70px;padding:10px;
+display:flex;flex-direction:column;
+}
 .msg{max-width:80%;margin:5px}
 .me{align-self:flex-end}
 .other{align-self:flex-start}
@@ -40,6 +41,7 @@ width:100%;padding:12px;border:none;border-radius:25px;background:#25d366;color:
 .other .bubble{background:#202c33}
 .sender{font-size:12px;opacity:.7}
 
+/* input */
 .input{
 position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
 }
@@ -54,10 +56,13 @@ position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
 <div id="loginScreen">
 <div class="box">
 <h3>تسجيل الدخول</h3>
+
 <input id="phone" placeholder="+2010XXXXXXXX">
 <button onclick="sendOTP()">إرسال الكود</button>
+
 <input id="code" placeholder="الكود">
 <button onclick="verifyOTP()">تأكيد</button>
+
 <div id="recaptcha-container"></div>
 </div>
 </div>
@@ -71,121 +76,161 @@ position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
 
 <!-- CHAT -->
 <div id="chat">
-<button onclick="logout()">خروج</button>
+<button onclick="logout()">🚪 خروج</button>
+
 <div id="messages" class="messages"></div>
 
 <div class="input">
-<input id="msgInput">
+<input id="msgInput" placeholder="اكتب...">
 <button class="send" onclick="send()">➤</button>
 </div>
 </div>
 
 <script>
+/* Firebase */
 firebase.initializeApp({
 apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
 authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
-})
+});
 
-const auth=firebase.auth()
-let currentUser
-let userName=""
-let confirmationResult
+const auth=firebase.auth();
+let currentUser=null;
+let userName="";
+let confirmationResult=null;
+let recaptchaVerifier=null;
 
-/* recaptcha */
-window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container')
+/* init recaptcha (invisible) */
+window.onload = function(){
+recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+  'recaptcha-container',
+  { size: 'invisible' }
+);
+recaptchaVerifier.render();
+};
 
+/* send OTP */
 function sendOTP(){
-let phoneVal=phone.value.trim()
-auth.signInWithPhoneNumber(phoneVal,recaptchaVerifier)
+let phoneVal = document.getElementById("phone").value.trim();
+
+if(!phoneVal.startsWith("+")){
+alert("اكتب الرقم كده: +2010...");
+return;
+}
+
+firebase.auth().signInWithPhoneNumber(phoneVal, recaptchaVerifier)
 .then(res=>{
-confirmationResult=res
-alert("تم إرسال الكود")
+confirmationResult = res;
+alert("تم إرسال الكود ✅");
 })
-.catch(e=>alert(e.message))
+.catch(err=>{
+console.error(err);
+alert("خطأ: " + err.message);
+});
 }
 
+/* verify OTP */
 function verifyOTP(){
-confirmationResult.confirm(code.value)
+let codeVal = document.getElementById("code").value.trim();
+if(!confirmationResult){ alert("اضغط إرسال الكود الأول"); return; }
+
+confirmationResult.confirm(codeVal)
+.then(res=>{
+// تم تسجيل الدخول
+})
+.catch(err=>{
+alert("الكود غلط ❌");
+});
 }
 
+/* auth state */
 auth.onAuthStateChanged(user=>{
 if(user){
-currentUser=user
+currentUser=user;
 
+// check user name
 firebase.database().ref("users/"+user.uid).once("value",snap=>{
-let data=snap.val()
+let data=snap.val();
 
 if(!data){
-loginScreen.style.display="none"
-nameBox.style.display="block"
+loginScreen.style.display="none";
+nameBox.style.display="block";
 }else{
-userName=data.name
-startChat()
+userName=data.name;
+startChat();
 }
-})
+});
 }
-})
+});
 
+/* save name */
 function saveName(){
-let n=username.value
+let n = username.value.trim();
+if(!n){ alert("اكتب اسمك"); return; }
+
 firebase.database().ref("users/"+currentUser.uid).set({
 name:n,
 lastChange:Date.now()
-})
-userName=n
-startChat()
+});
+
+userName=n;
+startChat();
 }
 
+/* start chat */
 function startChat(){
-loginScreen.style.display="none"
-nameBox.style.display="none"
-chat.style.display="block"
+loginScreen.style.display="none";
+nameBox.style.display="none";
+chat.style.display="block";
 }
 
-/* send */
+/* send message */
 function send(){
-if(!msgInput.value)return
+let text = msgInput.value.trim();
+if(!text) return;
 
 firebase.database().ref("chat").push({
 uid:currentUser.uid,
 name:userName,
-text:msgInput.value
-})
+text:text
+});
 
-msgInput.value=""
+msgInput.value="";
 }
 
-/* receive */
+/* receive messages */
 firebase.database().ref("chat").on("child_added",snap=>{
-let m=snap.val()
+let m=snap.val();
 
-let div=document.createElement("div")
-div.className="msg "+(m.uid==currentUser.uid?"me":"other")
+let div=document.createElement("div");
+div.className="msg "+(m.uid==currentUser.uid?"me":"other");
 
 div.innerHTML=`
 <div class="bubble">
 <div class="sender">${m.name}</div>
 ${m.text}
 </div>
-`
+`;
 
-/* حذف لصاحب الرسالة فقط */
+/* delete only own message */
 if(m.uid==currentUser.uid){
 div.onclick=()=>{
-firebase.database().ref("chat/"+snap.key).remove()
+if(confirm("حذف الرسالة؟")){
+firebase.database().ref("chat/"+snap.key).remove();
 }
+};
 }
 
-messages.appendChild(div)
-messages.scrollTop=messages.scrollHeight
-})
+messages.appendChild(div);
+messages.scrollTop=messages.scrollHeight;
+});
 
+/* logout */
 function logout(){
-auth.signOut()
-location.reload()
+auth.signOut();
+location.reload();
 }
 </script>
 
 </body>
-</html>
+  </html>
