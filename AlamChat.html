@@ -101,7 +101,8 @@ border:none;background:#25d366
 display:flex;
 gap:8px;
 margin-top:3px;
-flex-wrap:wrap;
+overflow-x:auto;     /* مهم */
+white-space:nowrap;  /* مهم */
 }
 
 .mob{
@@ -277,8 +278,7 @@ const container = document.getElementById("mobList");
 container.innerHTML = "";
 
 /* نعمل نسخة ونلخبطها */
-let shuffled = mobs.sort(() => 0.5 - Math.random());
-
+let shuffled = [...mobs].sort(() => 0.5 - Math.random());
 /* نختار أول 4 بدون تكرار */
 let selected = shuffled.slice(0,4);
 
