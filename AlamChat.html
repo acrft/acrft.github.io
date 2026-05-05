@@ -156,7 +156,7 @@ transform:scale(0.95);
 <div id="chat">
   <div class="header">
     <div class="user" id="userInfo"></div>
-    <button id="logoutBtn" class="btn logout-big">🚪</button>
+    <button id="logoutBtn" class="logout-btn">🚪</button>
   </div>
   <div id="messages" class="messages"></div>
   <div class="input">
@@ -193,15 +193,13 @@ loginBtn.onclick = ()=>{
 /* الحالة */
 auth.onAuthStateChanged(user=>{
   if(user){
+  messagesEl.innerHTML = "";
   currentUser = user;
   loginBtn.classList.remove("loading");
   logoutBtn.disabled = false;
   loginEl.style.display="none";
   chatEl.style.display="block";
-    currentUser = user;
-    loginEl.style.display="none";
-    chatEl.style.display="block";
-    userInfo.innerHTML=`
+  userInfo.innerHTML=`
 <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
 <div>
   AlamCraft ☘️
@@ -237,11 +235,10 @@ function send(){
     photo: currentUser.photoURL || "",
     text: text,
     time: Date.now()
-  }).then(()=>{
-    msgInput.value="";
-    if(sendBtn.disabled) return;
-    sendBtn.disabled = true;
-  });
+  .then(()=>{
+  msgInput.value="";
+  sendBtn.disabled = false;
+});
   }
 /* الرسائل */
 function loadMessages(){
@@ -299,7 +296,7 @@ selected.forEach(mob=>{
 }
 /* خروج */
 logoutBtn.onclick = async ()=>{
-  logoutBtn.disabled = true;
+  if(logoutBtn) logoutBtn.disabled = false;
   await auth.signOut();
   messagesEl.innerHTML = "";
 };
