@@ -173,6 +173,11 @@ loginBtn.onclick = ()=>{
 /* الحالة */
 auth.onAuthStateChanged(user=>{
   if(user){
+  currentUser = user;
+  loginBtn.classList.remove("loading");
+  logoutBtn.disabled = false;
+  loginEl.style.display="none";
+  chatEl.style.display="block";
     currentUser = user;
     loginEl.style.display="none";
     chatEl.style.display="block";
@@ -214,7 +219,8 @@ function send(){
     time: Date.now()
   }).then(()=>{
     msgInput.value="";
-    sendBtn.disabled = false;
+    if(sendBtn.disabled) return;
+    sendBtn.disabled = true;
   });
   }
 /* الرسائل */
