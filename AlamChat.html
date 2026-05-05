@@ -161,9 +161,20 @@ auth.signInWithRedirect(provider)
 }
 
 /* redirect result */
-auth.getRedirectResult().then((result)=>{
-if(result.user){
-currentUser=result.user
+auth.onAuthStateChanged(user=>{
+if(user){
+currentUser=user
+
+login.style.display="none"
+chat.style.display="block"
+
+userInfo.innerHTML=`
+<img src="${user.photoURL}">
+<div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
+`
+}else{
+login.style.display="flex"
+chat.style.display="none"
 }
 })
 
