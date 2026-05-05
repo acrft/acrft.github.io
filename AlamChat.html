@@ -97,6 +97,23 @@ background:#2a3942;color:#fff
 width:45px;height:45px;border-radius:50%;
 border:none;background:#25d366
 }
+.mob-list{
+display:flex;
+gap:8px;
+margin-top:3px;
+flex-wrap:wrap;
+}
+
+.mob{
+display:flex;
+align-items:center;
+gap:3px;
+font-size:11px;
+background:#2a3942;
+padding:2px 6px;
+border-radius:10px;
+white-space:nowrap;
+}
 </style>
 </head>
 
@@ -170,14 +187,16 @@ auth.onAuthStateChanged(user=>{
     chatEl.style.display="block";
 
     // هيدر ثابت
-    userInfo.innerHTML=`
-      <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
-      <div>AlamCraft ☘️<br><small id="mobStatus" style="opacity:.6"></small></div>
-    `;
+userInfo.innerHTML=`
+<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+<div>
+  AlamCraft ☘️
+  <div id="mobList" class="mob-list"></div>
+</div>
+`;
 
-    startMobStatus(); // تشغيل الموبات
     loadMessages();
-
+    loadMobs();
   }else{
     loginEl.style.display="flex";
     chatEl.style.display="none";
@@ -210,51 +229,62 @@ function send(){
 function loadMessages(){
   chatRef.off();
 
-  chatRef.limitToLast(100).on("child_added", snap=>{
-    let m = snap.val();
+chatRef.limitToLast(100).on("child_added", snap=>{
+  let m = snap.val();
 
-    let div=document.createElement("div");
-    div.className="msg "+(m.uid===currentUser.uid?"me":"other");
+  let div=document.createElement("div");
+  div.className="msg "+(m.uid===currentUser.uid?"me":"other");
 
-    div.innerHTML=`
-      ${m.photo 
-        ? `<img class="avatar" src="${m.photo}">` 
-        : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
-      }
-      <div class="bubble">
-        <div class="name">${m.name}</div>
-        ${m.text}
-      </div>
-    `;
+  div.innerHTML=`
+    ${m.photo 
+      ? `<img class="avatar" src="${m.photo}">` 
+      : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
+    }
+    <div class="bubble">
+      <div class="name">${m.name}</div>
+      ${m.text}
+    </div>
+  `;
 
-    messagesEl.appendChild(div);
+  const isAtBottom =
+  messagesEl.scrollHeight - messagesEl.scrollTop <= messagesEl.clientHeight + 50;
+
+  messagesEl.appendChild(div);
+
+  if(isAtBottom){
     messagesEl.scrollTo({
-  top: messagesEl.scrollHeight,
-  behavior: "smooth"
+      top: messagesEl.scrollHeight,
+      behavior: "smooth"
+    });
+  }
 });
-  });
 }
 
 /* الموبات */
-function startMobStatus(){
-  const mobs = [
-    "🧟 Zombie",
-    "💣 Creeper",
-    "👁️ Enderman",
-    "🕷️ Spider",
-    "💀 Skeleton",
-    "🔥 Blaze",
-    "🐷 Piglin",
-    "🐉 Ender Dragon"
-  ];
+function loadMobs(){
+const mobs = [
+{emoji:"🧟", name:"Zombie"},
+{emoji:"💣", name:"Creeper"},
+{emoji:"👁️", name:"Enderman"},
+{emoji:"🕷️", name:"Spider"},
+{emoji:"💀", name:"Skeleton"},
+{emoji:"🔥", name:"Blaze"},
+{emoji:"🐷", name:"Piglin"},
+{emoji:"🐉", name:"Dragon"}
+];
 
-  function update(){
-    const mob = mobs[Math.floor(Math.random()*mobs.length)];
-    document.getElementById("mobStatus").innerText = mob;
-  }
+const container = document.getElementById("mobList");
+container.innerHTML = "";
 
-  update();
-  setInterval(update, 4000);
+for(let i=0;i<4;i++){
+  let mob = mobs[Math.floor(Math.random()*mobs.length)];
+
+  let div = document.createElement("div");
+  div.className = "mob";
+  div.innerText = mob.emoji + " " + mob.name;
+
+  container.appendChild(div);
+}
 }
 
 /* خروج */
