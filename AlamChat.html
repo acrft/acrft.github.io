@@ -4,11 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlamChat v1.7</title>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
 <style>
 *{box-sizing:border-box}
 body{
@@ -18,7 +16,6 @@ background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c
 body::before{
 content:"";position:fixed;inset:0;background:rgba(11,20,26,.85);z-index:-1;
 }
-
 /* login */
 #login{
 position:fixed;inset:0;
@@ -40,7 +37,6 @@ width:100%;padding:14px;border:none;border-radius:30px;
 background:#25d366;color:#fff;font-size:16px;
 }
 .btn.loading{opacity:.6}
-
 /* chat */
 #chat{display:none}
 .header{
@@ -51,40 +47,30 @@ padding:0 10px;
 }
 .user{display:flex;align-items:center;gap:10px}
 .user img{width:40px;height:40px;border-radius:50%}
-
 .messages{
 position:fixed;
 top:60px;
 bottom:70px;
 width:100%;
-
 overflow-y:auto;              /* أهم حاجة */
 overflow-x:hidden;
-
 padding:10px;
 display:flex;
 flex-direction:column;
 gap:6px;
-
 /* سكرول ناعم */
 scroll-behavior:smooth;
-
 /* يخلي السحب بالموبايل طبيعي */
 -webkit-overflow-scrolling: touch;
-  }
-
+}
 .msg{display:flex;max-width:85%}
 .me{align-self:flex-end;flex-direction:row-reverse}
 .other{align-self:flex-start}
-
 .avatar{width:35px;height:35px;border-radius:50%;margin:0 5px}
-
 .bubble{padding:8px 10px;border-radius:12px}
 .me .bubble{background:#005c4b}
 .other .bubble{background:#202c33}
-
 .name{font-size:12px;color:#25d366;margin-bottom:2px}
-
 .input{
 position:fixed;bottom:0;width:100%;
 display:flex;padding:8px;background:#202c33;
@@ -104,7 +90,6 @@ margin-top:3px;
 overflow-x:auto;     /* مهم */
 white-space:nowrap;  /* مهم */
 }
-
 .mob{
 display:flex;
 align-items:center;
@@ -115,11 +100,15 @@ padding:2px 6px;
 border-radius:10px;
 white-space:nowrap;
 }
+.logout{
+background:#ff3b30; /* أحمر */
+}
+.logout:hover{
+background:#e02a20;
+}
 </style>
 </head>
-
 <body>
-
 <!-- LOGIN -->
 <div id="login">
   <div class="card">
@@ -128,32 +117,26 @@ white-space:nowrap;
     <button id="loginBtn" class="btn">الدخول بجوجل</button>
   </div>
 </div>
-
 <!-- CHAT -->
 <div id="chat">
   <div class="header">
     <div class="user" id="userInfo"></div>
-    <button id="logoutBtn">🚪</button>
+    <button id="logoutBtn" class="btn logout">تسجيل الخروج</button>
   </div>
-
   <div id="messages" class="messages"></div>
-
   <div class="input">
     <input id="msgInput" placeholder="اكتب...">
     <button class="send" id="sendBtn">➤</button>
   </div>
 </div>
-
 <script>
 firebase.initializeApp({
   apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
   authDomain:"alamchat1.firebaseapp.com",
   databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 });
-
 const auth = firebase.auth();
 const db = firebase.database();
-
 const loginEl = document.getElementById("login");
 const chatEl = document.getElementById("chat");
 const loginBtn = document.getElementById("loginBtn");
@@ -162,31 +145,24 @@ const sendBtn = document.getElementById("sendBtn");
 const msgInput = document.getElementById("msgInput");
 const messagesEl = document.getElementById("messages");
 const userInfo = document.getElementById("userInfo");
-
 let currentUser;
 let chatRef = db.ref("chat");
-
 /* حفظ الجلسة */
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-
 /* تسجيل الدخول */
 loginBtn.onclick = ()=>{
   loginBtn.classList.add("loading");
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider);
 };
-
 /* استقبال الرجوع */
 auth.getRedirectResult().catch(err=>console.log(err));
-
 /* الحالة */
 auth.onAuthStateChanged(user=>{
   if(user){
     currentUser = user;
-
     loginEl.style.display="none";
     chatEl.style.display="block";
-
     // هيدر ثابت
 userInfo.innerHTML=`
 <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
@@ -195,7 +171,6 @@ userInfo.innerHTML=`
   <div id="mobList" class="mob-list"></div>
 </div>
 `;
-
     loadMessages();
     loadMobs();
   }else{
@@ -204,17 +179,14 @@ userInfo.innerHTML=`
     loginBtn.classList.remove("loading");
   }
 });
-
 /* إرسال */
 sendBtn.onclick = send;
 msgInput.addEventListener("keypress", e=>{
   if(e.key==="Enter") send();
 });
-
 function send(){
   let text = msgInput.value.trim();
   if(!text || !currentUser) return;
-
   chatRef.push({
     uid: currentUser.uid,
     name: currentUser.displayName || "بدون اسم",
@@ -222,20 +194,15 @@ function send(){
     text: text,
     time: Date.now()
   });
-
   msgInput.value="";
 }
-
 /* الرسائل */
 function loadMessages(){
   chatRef.off();
-
 chatRef.limitToLast(100).on("child_added", snap=>{
   let m = snap.val();
-
   let div=document.createElement("div");
   div.className="msg "+(m.uid===currentUser.uid?"me":"other");
-
   div.innerHTML=`
     ${m.photo 
       ? `<img class="avatar" src="${m.photo}">` 
@@ -246,12 +213,9 @@ chatRef.limitToLast(100).on("child_added", snap=>{
       ${m.text}
     </div>
   `;
-
   const isAtBottom =
   messagesEl.scrollHeight - messagesEl.scrollTop <= messagesEl.clientHeight + 50;
-
   messagesEl.appendChild(div);
-
   if(isAtBottom){
     messagesEl.scrollTo({
       top: messagesEl.scrollHeight,
@@ -260,7 +224,6 @@ chatRef.limitToLast(100).on("child_added", snap=>{
   }
 });
 }
-
 /* الموبات */
 function loadMobs(){
 const mobs = [
@@ -273,29 +236,23 @@ const mobs = [
 {emoji:"🐷", name:"Piglin"},
 {emoji:"🐉", name:"Dragon"}
 ];
-
 const container = document.getElementById("mobList");
 container.innerHTML = "";
-
 /* نعمل نسخة ونلخبطها */
 let shuffled = [...mobs].sort(() => 0.5 - Math.random());
 /* نختار أول 4 بدون تكرار */
 let selected = shuffled.slice(0,4);
-
 selected.forEach(mob=>{
   let div = document.createElement("div");
   div.className = "mob";
   div.innerText = mob.emoji + " " + mob.name;
-
   container.appendChild(div);
 });
 }
-
 /* خروج */
 logoutBtn.onclick = ()=>{
   auth.signOut();
 };
 </script>
-
 </body>
   </html>
