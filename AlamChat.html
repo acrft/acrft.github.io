@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat v1.3</title>
+<title>AlamChat v1.4</title>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -20,53 +19,30 @@ body::before{
 content:"";position:fixed;inset:0;background:rgba(11,20,26,.85);z-index:-1;
 }
 
-/* ===== Login UI ===== */
+/* login */
 #login{
 position:fixed;inset:0;
 display:flex;align-items:center;justify-content:center;
-padding:20px;
 }
 .card{
 width:100%;max-width:360px;
 background:rgba(32,44,51,.9);
-backdrop-filter: blur(10px);
 border-radius:20px;
-padding:25px;
-text-align:center;
-box-shadow:0 10px 40px rgba(0,0,0,.5);
-animation:fadeIn .4s ease;
+padding:25px;text-align:center;
 }
 .logo{
 width:80px;height:80px;border-radius:50%;
 margin:auto;margin-bottom:10px;
 background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png") center/cover;
 }
-.title{font-size:22px;margin:10px 0}
-.sub{font-size:13px;opacity:.7;margin-bottom:20px}
-
 .btn{
-width:100%;
-padding:14px;
-border:none;border-radius:30px;
-background:#25d366;color:#fff;
-font-size:16px;
-display:flex;align-items:center;justify-content:center;gap:10px;
+width:100%;padding:14px;border:none;border-radius:30px;
+background:#25d366;color:#fff;font-size:16px;
 }
-.btn.loading{opacity:.6;pointer-events:none}
-.spinner{
-width:18px;height:18px;
-border:3px solid #fff;border-top:3px solid transparent;
-border-radius:50%;animation:spin 1s linear infinite;
-display:none;
-}
-.btn.loading .spinner{display:block}
+.btn.loading{opacity:.6}
 
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
-
-/* ===== Chat ===== */
+/* chat */
 #chat{display:none}
-
 .header{
 position:fixed;top:0;width:100%;height:60px;
 background:#202c33;
@@ -93,10 +69,9 @@ overflow:auto;padding:10px;display:flex;flex-direction:column;gap:6px;
 
 .name{font-size:12px;color:#25d366;margin-bottom:2px}
 
-/* input */
 .input{
 position:fixed;bottom:0;width:100%;
-display:flex;padding:8px;background:#202c33;gap:5px;
+display:flex;padding:8px;background:#202c33;
 }
 .input input{
 flex:1;padding:10px;border-radius:20px;border:none;
@@ -111,21 +86,14 @@ border:none;background:#25d366
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="card">
 <div class="logo"></div>
-<div class="title">AlamChat</div>
-<div class="sub">دردشة سريعة وآمنة</div>
-
-<button id="loginBtn" class="btn" onclick="login()">
-<span>الدخول بجوجل</span>
-<div class="spinner"></div>
-</button>
+<h3>AlamChat</h3>
+<button id="loginBtn" class="btn" onclick="login()">الدخول بجوجل</button>
 </div>
 </div>
 
-<!-- CHAT -->
 <div id="chat">
 <div class="header">
 <div class="user" id="userInfo"></div>
@@ -135,7 +103,7 @@ border:none;background:#25d366
 <div id="messages" class="messages"></div>
 
 <div class="input">
-<input id="msgInput" placeholder="اكتب رسالة...">
+<input id="msgInput" placeholder="اكتب...">
 <button class="send" onclick="send()">➤</button>
 </div>
 </div>
@@ -152,46 +120,38 @@ let currentUser
 
 /* حفظ الجلسة */
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
-/* login */
+/* تسجيل الدخول */
 function login(){
 loginBtn.classList.add("loading")
 const provider=new firebase.auth.GoogleAuthProvider()
 auth.signInWithRedirect(provider)
 }
 
-/* مهم */
-auth.getRedirectResult()
-.then((result)=>{
-if(result.user){
-console.log("تم تسجيل الدخول");
-}
-})
-.catch((error)=>{
-console.error(error);
-});
+/* مهم: استقبال نتيجة الرجوع */
+auth.getRedirectResult().catch(err=>console.log(err))
 
-/* حالة المستخدم */
+/* الحالة الحقيقية */
 auth.onAuthStateChanged(user=>{
 if(user){
-currentUser = user;
+currentUser=user
 
-login.style.display = "none";
-chat.style.display = "block";
+login.style.display="none"
+chat.style.display="block"
 
-userInfo.innerHTML = `
+userInfo.innerHTML=`
 <img src="${user.photoURL}">
 <div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
-`;
+`
 
 }else{
-login.style.display = "flex";
-chat.style.display = "none";
+login.style.display="flex"
+chat.style.display="none"
+loginBtn.classList.remove("loading")
 }
-});
+})
 
-/* send */
+/* إرسال */
 function send(){
 let text=msgInput.value.trim()
 if(!text)return
@@ -206,7 +166,7 @@ text:text
 msgInput.value=""
 }
 
-/* receive */
+/* استقبال */
 firebase.database().ref("chat").on("child_added",snap=>{
 let m=snap.val()
 
@@ -225,7 +185,7 @@ messages.appendChild(div)
 messages.scrollTop=messages.scrollHeight
 })
 
-/* logout */
+/* خروج */
 function logout(){
 auth.signOut()
 location.reload()
