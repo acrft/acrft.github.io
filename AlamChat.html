@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat v1.4</title>
+<title>AlamChat v1.6</title>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -19,7 +19,6 @@ body::before{
 content:"";position:fixed;inset:0;background:rgba(11,20,26,.85);z-index:-1;
 }
 
-/* login */
 #login{
 position:fixed;inset:0;
 display:flex;align-items:center;justify-content:center;
@@ -41,7 +40,6 @@ background:#25d366;color:#fff;font-size:16px;
 }
 .btn.loading{opacity:.6}
 
-/* chat */
 #chat{display:none}
 .header{
 position:fixed;top:0;width:100%;height:60px;
@@ -90,21 +88,21 @@ border:none;background:#25d366
 <div class="card">
 <div class="logo"></div>
 <h3>AlamChat</h3>
-<button id="loginBtn" class="btn" onclick="login()">الدخول بجوجل</button>
+<button id="loginBtn" class="btn">الدخول بجوجل</button>
 </div>
 </div>
 
 <div id="chat">
 <div class="header">
 <div class="user" id="userInfo"></div>
-<button onclick="logout()">🚪</button>
+<button id="logoutBtn">🚪</button>
 </div>
 
 <div id="messages" class="messages"></div>
 
 <div class="input">
 <input id="msgInput" placeholder="اكتب...">
-<button class="send" onclick="send()">➤</button>
+<button class="send" id="sendBtn">➤</button>
 </div>
 </div>
 
@@ -115,80 +113,102 @@ authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 })
 
-const auth=firebase.auth()
-let currentUser
+const auth = firebase.auth()
+const db = firebase.database()
 
-/* حفظ الجلسة */
+const loginEl = document.getElementById("login")
+const chatEl = document.getElementById("chat")
+const loginBtn = document.getElementById("loginBtn")
+const logoutBtn = document.getElementById("logoutBtn")
+const sendBtn = document.getElementById("sendBtn")
+const msgInput = document.getElementById("msgInput")
+const messagesEl = document.getElementById("messages")
+const userInfo = document.getElementById("userInfo")
+
+let currentUser
+let chatRef = db.ref("chat")
+
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
-/* تسجيل الدخول */
-function login(){
+/* login */
+loginBtn.onclick = ()=>{
 loginBtn.classList.add("loading")
-const provider=new firebase.auth.GoogleAuthProvider()
+const provider = new firebase.auth.GoogleAuthProvider()
 auth.signInWithRedirect(provider)
 }
 
-/* مهم: استقبال نتيجة الرجوع */
+/* redirect */
 auth.getRedirectResult().catch(err=>console.log(err))
 
-/* الحالة الحقيقية */
+/* auth state */
 auth.onAuthStateChanged(user=>{
 if(user){
-currentUser=user
+currentUser = user
 
-login.style.display="none"
-chat.style.display="block"
+loginEl.style.display="none"
+chatEl.style.display="block"
 
 userInfo.innerHTML=`
-<img src="${user.photoURL}">
-<div>${user.displayName}<br><small style="opacity:.6">متصل الآن</small></div>
+<img src="${user.photoURL || 'https://via.placeholder.com/40'}">
+<div>${user.displayName || "بدون اسم"}<br><small style="opacity:.6">متصل الآن</small></div>
 `
 
+loadMessages()
+
 }else{
-login.style.display="flex"
-chat.style.display="none"
+loginEl.style.display="flex"
+chatEl.style.display="none"
 loginBtn.classList.remove("loading")
 }
 })
 
-/* إرسال */
-function send(){
-let text=msgInput.value.trim()
-if(!text)return
+/* send */
+sendBtn.onclick = send
+msgInput.addEventListener("keypress", e=>{
+if(e.key==="Enter") send()
+})
 
-firebase.database().ref("chat").push({
-uid:currentUser.uid,
-name:currentUser.displayName,
-photo:currentUser.photoURL,
-text:text
+function send(){
+let text = msgInput.value.trim()
+if(!text || !currentUser) return
+
+chatRef.push({
+uid: currentUser.uid,
+name: currentUser.displayName || "بدون اسم",
+photo: currentUser.photoURL || "",
+text: text,
+time: Date.now()
 })
 
 msgInput.value=""
 }
 
-/* استقبال */
-firebase.database().ref("chat").on("child_added",snap=>{
-let m=snap.val()
+/* load messages */
+function loadMessages(){
+chatRef.off() // يمنع التكرار
+
+chatRef.limitToLast(100).on("child_added", snap=>{
+let m = snap.val()
 
 let div=document.createElement("div")
-div.className="msg "+(m.uid==currentUser.uid?"me":"other")
+div.className="msg "+(m.uid===currentUser.uid?"me":"other")
 
 div.innerHTML=`
-<img class="avatar" src="${m.photo}">
+<img class="avatar" src="${m.photo || 'https://via.placeholder.com/35'}">
 <div class="bubble">
 <div class="name">${m.name}</div>
 ${m.text}
 </div>
 `
 
-messages.appendChild(div)
-messages.scrollTop=messages.scrollHeight
+messagesEl.appendChild(div)
+messagesEl.scrollTop = messagesEl.scrollHeight
 })
+}
 
-/* خروج */
-function logout(){
+/* logout */
+logoutBtn.onclick = ()=>{
 auth.signOut()
-location.reload()
 }
 </script>
 
