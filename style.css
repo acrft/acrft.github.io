@@ -112,6 +112,12 @@ html[lang='en'] {
   flex-wrap: wrap;
 }
 
+.ip-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .btn-copy,
 .btn-bedrock {
   background-color: var(--primary) !important;
@@ -124,8 +130,12 @@ html[lang='en'] {
   }
 
 .btn-copy {
-  top: -6px;
   position: relative;
+  top: -6px;
+
+  max-width: 120px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .btn-bedrock {
