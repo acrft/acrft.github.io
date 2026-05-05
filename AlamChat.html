@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat v1.6</title>
+<title>AlamChat v1.7</title>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -19,6 +19,7 @@ body::before{
 content:"";position:fixed;inset:0;background:rgba(11,20,26,.85);z-index:-1;
 }
 
+/* login */
 #login{
 position:fixed;inset:0;
 display:flex;align-items:center;justify-content:center;
@@ -40,6 +41,7 @@ background:#25d366;color:#fff;font-size:16px;
 }
 .btn.loading{opacity:.6}
 
+/* chat */
 #chat{display:none}
 .header{
 position:fixed;top:0;width:100%;height:60px;
@@ -84,144 +86,163 @@ border:none;background:#25d366
 
 <body>
 
+<!-- LOGIN -->
 <div id="login">
-<div class="card">
-<div class="logo"></div>
-<h3>AlamChat</h3>
-<button id="loginBtn" class="btn">الدخول بجوجل</button>
-</div>
+  <div class="card">
+    <div class="logo"></div>
+    <h3>AlamChat</h3>
+    <button id="loginBtn" class="btn">الدخول بجوجل</button>
+  </div>
 </div>
 
+<!-- CHAT -->
 <div id="chat">
-<div class="header">
-<div class="user" id="userInfo"></div>
-<button id="logoutBtn">🚪</button>
-</div>
+  <div class="header">
+    <div class="user" id="userInfo"></div>
+    <button id="logoutBtn">🚪</button>
+  </div>
 
-<div id="messages" class="messages"></div>
+  <div id="messages" class="messages"></div>
 
-<div class="input">
-<input id="msgInput" placeholder="اكتب...">
-<button class="send" id="sendBtn">➤</button>
-</div>
+  <div class="input">
+    <input id="msgInput" placeholder="اكتب...">
+    <button class="send" id="sendBtn">➤</button>
+  </div>
 </div>
 
 <script>
 firebase.initializeApp({
-apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-authDomain:"alamchat1.firebaseapp.com",
-databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
-})
+  apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+  authDomain:"alamchat1.firebaseapp.com",
+  databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
+});
 
-const auth = firebase.auth()
-const db = firebase.database()
+const auth = firebase.auth();
+const db = firebase.database();
 
-const loginEl = document.getElementById("login")
-const chatEl = document.getElementById("chat")
-const loginBtn = document.getElementById("loginBtn")
-const logoutBtn = document.getElementById("logoutBtn")
-const sendBtn = document.getElementById("sendBtn")
-const msgInput = document.getElementById("msgInput")
-const messagesEl = document.getElementById("messages")
-const userInfo = document.getElementById("userInfo")
+const loginEl = document.getElementById("login");
+const chatEl = document.getElementById("chat");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const sendBtn = document.getElementById("sendBtn");
+const msgInput = document.getElementById("msgInput");
+const messagesEl = document.getElementById("messages");
+const userInfo = document.getElementById("userInfo");
 
-let currentUser
-let chatRef = db.ref("chat")
+let currentUser;
+let chatRef = db.ref("chat");
 
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+/* حفظ الجلسة */
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-/* login */
+/* تسجيل الدخول */
 loginBtn.onclick = ()=>{
-loginBtn.classList.add("loading")
-const provider = new firebase.auth.GoogleAuthProvider()
-auth.signInWithRedirect(provider)
-}
+  loginBtn.classList.add("loading");
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithRedirect(provider);
+};
 
-/* redirect */
-auth.getRedirectResult().catch(err=>console.log(err))
+/* استقبال الرجوع */
+auth.getRedirectResult().catch(err=>console.log(err));
 
-/* auth state */
+/* الحالة */
 auth.onAuthStateChanged(user=>{
-if(user){
-currentUser = user
+  if(user){
+    currentUser = user;
 
-loginEl.style.display="none"
-chatEl.style.display="block"
+    loginEl.style.display="none";
+    chatEl.style.display="block";
 
-userInfo.innerHTML=`
-<img src="${user.photoURL || 'https://via.placeholder.com/40'}">
-<div>${user.displayName || "بدون اسم"}<br><small style="opacity:.6">متصل الآن</small></div>
-`
+    // هيدر ثابت
+    userInfo.innerHTML=`
+      <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+      <div>AlamCraft ☘️<br><small id="mobStatus" style="opacity:.6"></small></div>
+    `;
 
-loadMessages()
+    startMobStatus(); // تشغيل الموبات
+    loadMessages();
 
-div.innerHTML=`
-<img class="avatar" src="${m.photo}">
-<div class="bubble">
-<div class="name">${m.name}</div>
-${m.text}
-</div>
-`
+  }else{
+    loginEl.style.display="flex";
+    chatEl.style.display="none";
+    loginBtn.classList.remove("loading");
+  }
+});
 
-}else{
-loginEl.style.display="flex"
-chatEl.style.display="none"
-loginBtn.classList.remove("loading")
-}
-})
-
-/* send */
-sendBtn.onclick = send
+/* إرسال */
+sendBtn.onclick = send;
 msgInput.addEventListener("keypress", e=>{
-if(e.key==="Enter") send()
-})
+  if(e.key==="Enter") send();
+});
 
 function send(){
-let text = msgInput.value.trim()
-if(!text || !currentUser) return
+  let text = msgInput.value.trim();
+  if(!text || !currentUser) return;
 
-chatRef.push({
-uid: currentUser.uid,
-name: currentUser.displayName || "بدون اسم",
-photo: currentUser.photoURL || "",
-text: text,
-time: Date.now()
-})
+  chatRef.push({
+    uid: currentUser.uid,
+    name: currentUser.displayName || "بدون اسم",
+    photo: currentUser.photoURL || "",
+    text: text,
+    time: Date.now()
+  });
 
-msgInput.value=""
+  msgInput.value="";
 }
 
-/* load messages */
+/* الرسائل */
 function loadMessages(){
-chatRef.off() // يمنع التكرار
+  chatRef.off();
 
-chatRef.limitToLast(100).on("child_added", snap=>{
-let m = snap.val()
+  chatRef.limitToLast(100).on("child_added", snap=>{
+    let m = snap.val();
 
-let div=document.createElement("div")
-div.className="msg "+(m.uid===currentUser.uid?"me":"other")
+    let div=document.createElement("div");
+    div.className="msg "+(m.uid===currentUser.uid?"me":"other");
 
-div.innerHTML=`
-${m.photo 
-? `<img class="avatar" src="${m.photo}">` 
-: `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
+    div.innerHTML=`
+      ${m.photo 
+        ? `<img class="avatar" src="${m.photo}">` 
+        : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
+      }
+      <div class="bubble">
+        <div class="name">${m.name}</div>
+        ${m.text}
+      </div>
+    `;
+
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
 }
-<div class="bubble">
-<div class="name">${m.name}</div>
-${m.text}
-</div>
-`
 
-messagesEl.appendChild(div)
-messagesEl.scrollTop = messagesEl.scrollHeight
-})
+/* الموبات */
+function startMobStatus(){
+  const mobs = [
+    "🧟 Zombie",
+    "💣 Creeper",
+    "👁️ Enderman",
+    "🕷️ Spider",
+    "💀 Skeleton",
+    "🔥 Blaze",
+    "🐷 Piglin",
+    "🐉 Ender Dragon"
+  ];
+
+  function update(){
+    const mob = mobs[Math.floor(Math.random()*mobs.length)];
+    document.getElementById("mobStatus").innerText = mob;
+  }
+
+  update();
+  setInterval(update, 4000);
 }
 
-/* logout */
+/* خروج */
 logoutBtn.onclick = ()=>{
-auth.signOut()
-}
+  auth.signOut();
+};
 </script>
 
 </body>
-</html>
+  </html>
