@@ -276,15 +276,19 @@ const mobs = [
 const container = document.getElementById("mobList");
 container.innerHTML = "";
 
-for(let i=0;i<4;i++){
-  let mob = mobs[Math.floor(Math.random()*mobs.length)];
+/* نعمل نسخة ونلخبطها */
+let shuffled = mobs.sort(() => 0.5 - Math.random());
 
+/* نختار أول 4 بدون تكرار */
+let selected = shuffled.slice(0,4);
+
+selected.forEach(mob=>{
   let div = document.createElement("div");
   div.className = "mob";
   div.innerText = mob.emoji + " " + mob.name;
 
   container.appendChild(div);
-}
+});
 }
 
 /* خروج */
