@@ -5,78 +5,129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlamChat</title>
 
-<!-- Firebase v8 -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <style>
-body{margin:0;font-family:sans-serif;background:#0b141a;color:#fff}
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:sans-serif;
+color:#fff;
+
+/* 🎮 رجعنا خلفية ماينكرافت */
+background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png") center/cover fixed;
+}
+body::before{
+content:"";
+position:fixed;inset:0;
+background:rgba(11,20,26,.85);
+z-index:-1;
+}
 
 /* login */
-#loginScreen{
-position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0b141a;
+#login{
+position:fixed;inset:0;
+display:flex;justify-content:center;align-items:center;
 }
-.box{
-background:#202c33;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center;
+.login-box{
+background:#202c33;
+padding:20px;
+border-radius:15px;
+text-align:center;
 }
-.box input{
-width:100%;padding:12px;margin:8px 0;border:none;border-radius:25px;background:#2a3942;color:#fff;
-}
-.box button{
-width:100%;padding:12px;border:none;border-radius:25px;background:#25d366;color:#fff;
+.login-box button{
+padding:12px 20px;
+border:none;
+border-radius:25px;
+background:#25d366;
+color:#fff;
+font-size:16px;
 }
 
 /* chat */
 #chat{display:none}
-.messages{
-margin-top:60px;margin-bottom:70px;padding:10px;
-display:flex;flex-direction:column;
+
+.header{
+position:fixed;top:0;width:100%;
+background:#202c33;
+padding:10px;
+display:flex;justify-content:space-between;align-items:center;
 }
-.msg{max-width:80%;margin:5px}
-.me{align-self:flex-end}
+
+.messages{
+margin-top:60px;
+margin-bottom:70px;
+padding:10px;
+display:flex;
+flex-direction:column;
+}
+
+.msg{
+display:flex;
+max-width:85%;
+margin:6px 0;
+}
+
+.me{align-self:flex-end;flex-direction:row-reverse}
 .other{align-self:flex-start}
-.bubble{padding:8px;border-radius:10px}
+
+.avatar{
+width:35px;height:35px;
+border-radius:50%;
+margin:0 5px;
+}
+
+.bubble{
+padding:8px 10px;
+border-radius:12px;
+}
+
 .me .bubble{background:#005c4b}
 .other .bubble{background:#202c33}
-.sender{font-size:12px;opacity:.7}
+
+.name{
+font-size:12px;
+color:#25d366;
+margin-bottom:2px;
+}
 
 /* input */
 .input{
-position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
+position:fixed;bottom:0;width:100%;
+display:flex;padding:10px;background:#202c33;
 }
-.input input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a3942;color:#fff}
-.send{width:45px;height:45px;border-radius:50%;border:none;background:#25d366}
+.input input{
+flex:1;padding:10px;
+border-radius:20px;border:none;
+background:#2a3942;color:#fff;
+}
+.send{
+width:45px;height:45px;
+border-radius:50%;
+border:none;
+background:#25d366;
+}
 </style>
 </head>
 
 <body>
 
 <!-- LOGIN -->
-<div id="loginScreen">
-<div class="box">
+<div id="login">
+<div class="login-box">
 <h3>تسجيل الدخول</h3>
-
-<input id="phone" placeholder="+2010XXXXXXXX">
-<button onclick="sendOTP()">إرسال الكود</button>
-
-<input id="code" placeholder="الكود">
-<button onclick="verifyOTP()">تأكيد</button>
-
-<div id="recaptcha-container"></div>
+<button onclick="login()">الدخول بجوجل</button>
 </div>
-</div>
-
-<!-- NAME -->
-<div id="nameBox" style="display:none" class="box">
-<h3>اسمك</h3>
-<input id="username" placeholder="اكتب اسمك">
-<button onclick="saveName()">حفظ</button>
 </div>
 
 <!-- CHAT -->
 <div id="chat">
-<button onclick="logout()">🚪 خروج</button>
+<div class="header">
+<div id="userInfo"></div>
+<button onclick="logout()">🚪</button>
+</div>
 
 <div id="messages" class="messages"></div>
 
@@ -87,150 +138,86 @@ position:fixed;bottom:0;width:100%;display:flex;padding:10px;background:#202c33;
 </div>
 
 <script>
-/* Firebase */
 firebase.initializeApp({
 apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
 authDomain:"alamchat1.firebaseapp.com",
 databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
-});
-
-const auth=firebase.auth();
-let currentUser=null;
-let userName="";
-let confirmationResult=null;
-let recaptchaVerifier=null;
-
-/* init recaptcha (invisible) */
-window.onload = function(){
-recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-  'recaptcha-container',
-  { size: 'invisible' }
-);
-recaptchaVerifier.render();
-};
-
-/* send OTP */
-function sendOTP(){
-let phoneVal = document.getElementById("phone").value.trim();
-
-if(!phoneVal.startsWith("+")){
-alert("اكتب الرقم كده: +2010...");
-return;
-}
-
-firebase.auth().signInWithPhoneNumber(phoneVal, recaptchaVerifier)
-.then(res=>{
-confirmationResult = res;
-alert("تم إرسال الكود ✅");
 })
-.catch(err=>{
-console.error(err);
-alert("خطأ: " + err.message);
-});
+
+const auth=firebase.auth()
+let currentUser
+
+/* 🔥 Google login */
+function login(){
+const provider = new firebase.auth.GoogleAuthProvider()
+auth.signInWithPopup(provider)
 }
 
-/* verify OTP */
-function verifyOTP(){
-let codeVal = document.getElementById("code").value.trim();
-if(!confirmationResult){ alert("اضغط إرسال الكود الأول"); return; }
-
-confirmationResult.confirm(codeVal)
-.then(res=>{
-// تم تسجيل الدخول
-})
-.catch(err=>{
-alert("الكود غلط ❌");
-});
-}
-
-/* auth state */
+/* state */
 auth.onAuthStateChanged(user=>{
 if(user){
-currentUser=user;
+currentUser=user
 
-// check user name
-firebase.database().ref("users/"+user.uid).once("value",snap=>{
-let data=snap.val();
+login.style.display="none"
+chat.style.display="block"
 
-if(!data){
-loginScreen.style.display="none";
-nameBox.style.display="block";
-}else{
-userName=data.name;
-startChat();
+/* عرض اسمك وصورتك */
+userInfo.innerHTML=`
+<img src="${user.photoURL}" width="30" style="border-radius:50%">
+${user.displayName}
+`
 }
-});
-}
-});
-
-/* save name */
-function saveName(){
-let n = username.value.trim();
-if(!n){ alert("اكتب اسمك"); return; }
-
-firebase.database().ref("users/"+currentUser.uid).set({
-name:n,
-lastChange:Date.now()
-});
-
-userName=n;
-startChat();
-}
-
-/* start chat */
-function startChat(){
-loginScreen.style.display="none";
-nameBox.style.display="none";
-chat.style.display="block";
-}
+})
 
 /* send message */
 function send(){
-let text = msgInput.value.trim();
-if(!text) return;
+let text=msgInput.value.trim()
+if(!text)return
 
 firebase.database().ref("chat").push({
 uid:currentUser.uid,
-name:userName,
+name:currentUser.displayName,
+photo:currentUser.photoURL,
 text:text
-});
+})
 
-msgInput.value="";
+msgInput.value=""
 }
 
-/* receive messages */
+/* receive */
 firebase.database().ref("chat").on("child_added",snap=>{
-let m=snap.val();
+let m=snap.val()
 
-let div=document.createElement("div");
-div.className="msg "+(m.uid==currentUser.uid?"me":"other");
+let div=document.createElement("div")
+div.className="msg "+(m.uid==currentUser.uid?"me":"other")
 
 div.innerHTML=`
+<img class="avatar" src="${m.photo}">
 <div class="bubble">
-<div class="sender">${m.name}</div>
+<div class="name">${m.name}</div>
 ${m.text}
 </div>
-`;
+`
 
-/* delete only own message */
+/* حذف الرسالة لصاحبها فقط */
 if(m.uid==currentUser.uid){
 div.onclick=()=>{
-if(confirm("حذف الرسالة؟")){
-firebase.database().ref("chat/"+snap.key).remove();
+if(confirm("حذف؟")){
+firebase.database().ref("chat/"+snap.key).remove()
 }
-};
+}
 }
 
-messages.appendChild(div);
-messages.scrollTop=messages.scrollHeight;
-});
+messages.appendChild(div)
+messages.scrollTop=messages.scrollHeight
+})
 
 /* logout */
 function logout(){
-auth.signOut();
-location.reload();
+auth.signOut()
+location.reload()
 }
 </script>
 
 </body>
-  </html>
+</html>
