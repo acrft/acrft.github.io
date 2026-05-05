@@ -100,9 +100,6 @@ padding:2px 6px;
 border-radius:10px;
 white-space:nowrap;
 }
-.logout{
-background:#ff3b30; /* أحمر */
-}
 .logout:hover{
 background:#e02a20;
 }
@@ -170,16 +167,13 @@ loginBtn.onclick = ()=>{
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider);
 };
-/* استقبال الرجوع */
-auth.getRedirectResult().catch(err=>console.log(err));
 /* الحالة */
 auth.onAuthStateChanged(user=>{
   if(user){
     currentUser = user;
     loginEl.style.display="none";
     chatEl.style.display="block";
-    // هيدر ثابت
-userInfo.innerHTML=`
+    userInfo.innerHTML=`
 <img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
 <div>
   AlamCraft ☘️
@@ -189,9 +183,9 @@ userInfo.innerHTML=`
     loadMessages();
     loadMobs();
     if(!window.mobInterval){
-  window.mobInterval = setInterval(loadMobs, 5000);
-  }
-  else{
+      window.mobInterval = setInterval(loadMobs, 5000);
+    }
+  }else{
     loginEl.style.display="flex";
     chatEl.style.display="none";
     loginBtn.classList.remove("loading");
