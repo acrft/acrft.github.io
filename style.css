@@ -146,7 +146,7 @@ html[lang='en'] {
 
 .btn-bedrock {
   width: 100%;
-  margin-top: 15px;
+  margin-top: 5px;
   font-size: 1rem;
 }
 
@@ -189,11 +189,6 @@ html[lang='en'] {
   color: var(--text-muted);
   font-size: 0.85rem;
   text-transform: uppercase;
-}
-
-/* This fixes the margin issue with the big Green Button below it */
-.btn-bedrock {
-  margin-top: 5px !important; /* Pulls the button closer to the badges */
 }
 
 /* Force all interactive elements to use the pixel fonts */
@@ -479,15 +474,6 @@ html[lang='ar'] .control-btn {
   margin: 25px 0; /* Creates space between the section above and below */
 }
 
-.mods-container {
-  /* Background color matched to your screenshot */
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
 /* The Actual List Logic */
 .mods-list {
   list-style: none;
@@ -548,19 +534,11 @@ html[lang='ar'] .control-btn {
 }
 
 .mods-container {
-    background: var(--card) !important;
-    border: 1px solid var(--accent) !important;
-    border-radius: 12px;
-    padding: 0;
-    overflow: hidden;
-}
-
-#mods-list-container {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    margin: 0;
-    padding: 0;
+  background: var(--card) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .mod-item {
@@ -570,7 +548,6 @@ html[lang='ar'] .control-btn {
   background: var(--card);
   border: 1px solid var(--accent);
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-
 
   color: var(--text);
 
