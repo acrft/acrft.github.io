@@ -183,7 +183,8 @@ const userInfo = document.getElementById("userInfo");
 let currentUser;
 let chatRef = db.ref("chat");
 /* حفظ الجلسة */
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+.catch(err=>console.log(err));
 /* تسجيل الدخول */
 loginBtn.onclick = ()=>{
   loginBtn.classList.add("loading");
@@ -193,7 +194,6 @@ loginBtn.onclick = ()=>{
 /* الحالة */
 auth.onAuthStateChanged(user=>{
   if(user){
-  messagesEl.innerHTML = "";
   currentUser = user;
   loginBtn.classList.remove("loading");
   logoutBtn.disabled = false;
@@ -230,12 +230,12 @@ function send(){
   if(!text || !currentUser) return;
   sendBtn.disabled = true;
   chatRef.push({
-    uid: currentUser.uid,
-    name: currentUser.displayName || "بدون اسم",
-    photo: currentUser.photoURL || "",
-    text: text,
-    time: Date.now()
-  .then(()=>{
+  uid: currentUser.uid,
+  name: currentUser.displayName || "بدون اسم",
+  photo: currentUser.photoURL || "",
+  text: text,
+  time: Date.now()
+}).then(()=>{
   msgInput.value="";
   sendBtn.disabled = false;
 });
@@ -283,6 +283,7 @@ const mobs = [
 {emoji:"🐉", name:"Dragon"}
 ];
 const container = document.getElementById("mobList");
+if(!container) return;
 container.innerHTML = "";
 /* نعمل نسخة ونلخبطها */
 let shuffled = [...mobs].sort(() => Math.random() - 0.5);/* نختار أول 4 بدون تكرار */
@@ -296,7 +297,7 @@ selected.forEach(mob=>{
 }
 /* خروج */
 logoutBtn.onclick = async ()=>{
-  if(logoutBtn) logoutBtn.disabled = false;
+  logoutBtn.disabled = true;
   await auth.signOut();
   messagesEl.innerHTML = "";
 };
