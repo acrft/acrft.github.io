@@ -106,6 +106,21 @@ background:#ff3b30; /* أحمر */
 .logout:hover{
 background:#e02a20;
 }
+.logout-btn{
+width:40px;
+height:40px;
+border:none;
+border-radius:50%;
+background:#ff3b30;
+color:#fff;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.logout-btn:active{
+transform:scale(0.95);
+}
 </style>
 </head>
 <body>
@@ -121,7 +136,7 @@ background:#e02a20;
 <div id="chat">
   <div class="header">
     <div class="user" id="userInfo"></div>
-    <button id="logoutBtn" class="btn logout">🚪</button>
+    <button id="logoutBtn" class="logout-btn">🚪</button>
   </div>
   <div id="messages" class="messages"></div>
   <div class="input">
@@ -173,7 +188,10 @@ userInfo.innerHTML=`
 `;
     loadMessages();
     loadMobs();
-  }else{
+    if(!window.mobInterval){
+  window.mobInterval = setInterval(loadMobs, 5000);
+  }
+  else{
     loginEl.style.display="flex";
     chatEl.style.display="none";
     loginBtn.classList.remove("loading");
@@ -181,8 +199,11 @@ userInfo.innerHTML=`
 });
 /* إرسال */
 sendBtn.onclick = send;
-msgInput.addEventListener("keypress", e=>{
-  if(e.key==="Enter") send();
+msgInput.addEventListener("keydown", e=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    send();
+  }
 });
 function send(){
   let text = msgInput.value.trim();
@@ -200,6 +221,7 @@ function send(){
 function loadMessages(){
   chatRef.off();
 chatRef.limitToLast(100).on("child_added", snap=>{
+if(!currentUser) return;
   let m = snap.val();
   let div=document.createElement("div");
   div.className="msg "+(m.uid===currentUser.uid?"me":"other");
@@ -214,7 +236,7 @@ chatRef.limitToLast(100).on("child_added", snap=>{
     </div>
   `;
   const isAtBottom =
-  messagesEl.scrollHeight - messagesEl.scrollTop <= messagesEl.clientHeight + 50;
+messagesEl.scrollTop + messagesEl.clientHeight >= messagesEl.scrollHeight - 100;
   messagesEl.appendChild(div);
   if(isAtBottom){
     messagesEl.scrollTo({
@@ -239,8 +261,7 @@ const mobs = [
 const container = document.getElementById("mobList");
 container.innerHTML = "";
 /* نعمل نسخة ونلخبطها */
-let shuffled = [...mobs].sort(() => 0.5 - Math.random());
-/* نختار أول 4 بدون تكرار */
+let shuffled = [...mobs].sort(() => Math.random() - 0.5);/* نختار أول 4 بدون تكرار */
 let selected = shuffled.slice(0,4);
 selected.forEach(mob=>{
   let div = document.createElement("div");
@@ -252,6 +273,7 @@ selected.forEach(mob=>{
 /* خروج */
 logoutBtn.onclick = ()=>{
   auth.signOut();
+  messagesEl.innerHTML = "";
 };
 </script>
 </body>
