@@ -284,6 +284,10 @@ html[lang='ar'] .badge {
   justify-content: center;
 }
 
+html[lang='ar'] .control-btn {
+  font-size: 22px !important;
+}
+
 /* =========================================
    7. UTILITY
    ========================================= */
