@@ -1,7 +1,7 @@
 const translations = {
     ar: {
         title: "سيرفر علم كرافت ☘️",
-        copyBtn: " نسخ IP:PORT",
+        copyBtn: " IP:PORTنسخ الـ",
         javaVersion: "☕️ جافا:",
         bedrockVersion: "🛏️ بيدروك:",
         addBedrock: "إضافة السيرفر إلى ماينكرافت البيدروك",
