@@ -189,7 +189,13 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 loginBtn.onclick = ()=>{
   loginBtn.classList.add("loading");
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider);
+auth.signInWithPopup(provider)
+  .then(result=>{
+    console.log("تم تسجيل الدخول");
+  })
+  .catch(err=>{
+    console.log(err);
+  });
   auth.getRedirectResult().catch(err=>console.log(err));
 };
 /* الحالة */
