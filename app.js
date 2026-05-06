@@ -1,6 +1,6 @@
 const translations = {
     ar: {
-        title: "سيرفر علم كرافت ☘️",
+        title: "سيرفر علَم كرافت ☘️",
         copyBtn: " IP:PORTنسخ الـ",
         javaVersion: "☕️ جافا:",
         bedrockVersion: "🛏️ بيدروك:",
@@ -28,7 +28,7 @@ const translations = {
         messenger: "مجموعة الماسينجر",
         discord: "سيرفر الديسكورد",
         adminsTitle: "👑 المشرفين",
-        adminsNames: "علم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",
+        adminsNames: "علَم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",
         copyright: "© 2026 AlamCraft Server - جميع الحقوق محفوظة",
         toastMsg: "✔ تم نسخ IP:PORT السيرفر",
         feature4: "✅️ إدارة نشطة",
