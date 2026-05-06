@@ -40,19 +40,19 @@ const translations = {
         playersOnline: "اللاعبين المتصلين:",
         loading: "جاري التحقق...",
         modsList: [
-"مود المهارات ✨ ",
-"مود القبور 🪦 ",
-"مود الرؤوس 💀 ",
-"مود الأوامر الإضافية ⚙️ ",
-"مود دعم البيدروك مع الجافا 📱🖥️ ",
-"مود النوم بلاعب واحد 🛏😴 ",
-"مود الجلوس 🪑 ",
-"مود تغيير السكينات 👕 ",
-"مود قطع الأشجار 🌳🪓 ",
-"مود تكسير الموارد 🪨⛏️ ",
-"مود دعم جميع الإصدارات 🔄 ",
-"مود الكلايم 🚧 ",
-"مود الإن بي سي 🤖 "
+"مود المهارات ✨",
+"مود القبور 🪦",
+"مود الرؤوس 💀",
+"مود الأوامر الإضافية ⚙️",
+"مود دعم البيدروك مع الجافا 📱🖥️",
+"مود النوم بلاعب واحد 🛏😴",
+"مود الجلوس 🪑",
+"مود تغيير السكينات 👕",
+"مود قطع الأشجار 🌳🪓",
+"مود تكسير الموارد 🪨⛏️",
+"مود دعم جميع الإصدارات 🔄",
+"مود الكلايم 🚧",
+"مود الإن بي سي 🤖"
         ],
         modsTitle: "المودات/الإضافات",
         downloadCenterBtn: "مركز التحميل",
@@ -98,19 +98,19 @@ const translations = {
         playersOnline: "Players Online:",
         loading: "Checking status...",
         modsList: [
-"AuraSkills ✨ ",
-"AxGraves 🪦 ",
-"DropHeads 💀 ",
-"EssentialsX ⚙️ ",
-"GeyserMc 📱🖥️ ",
-"OnePlayerSleep 🛏😴 ",
-"Sit 🪑 ",
-"SkinsRestorer 👕 ",
-"TreeCapitator 🌳🪓 ",
-"VeinMiner 🪨⛏️ ",
-"ViaVersion 🔄 ",
-"GriefPrevention 🚧 ",
-"ZNPCs 🤖 ",
+"AuraSkills ✨",
+"AxGraves 🪦",
+"DropHeads 💀",
+"EssentialsX ⚙️",
+"GeyserMc 📱🖥️",
+"OnePlayerSleep 🛏😴",
+"Sit 🪑",
+"SkinsRestorer 👕",
+"TreeCapitator 🌳🪓",
+"VeinMiner 🪨⛏️",
+"ViaVersion 🔄",
+"GriefPrevention 🚧",
+"ZNPCs 🤖",
         ],
         modsTitle: "Mods/Plugins",
         downloadCenterBtn: "Download Center"
@@ -204,7 +204,7 @@ function updateContent() {
         translations[currentLang].modsList.forEach(modText => {
             const li = document.createElement('li');
             li.className = "mod-item"; // Give it a specific class
-            li.innerHTML = `✨ <span>${modText}</span>`; 
+            li.innerHTML = ` ✨ <span>${modText}</span>`; 
             modsListContainer.appendChild(li);
         });
     }
