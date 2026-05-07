@@ -294,7 +294,9 @@ if(!currentUser) return;
       ${m.image ? `
 <img loading="lazy" src="${m.image}"
 style="
-max-width:100%;
+max-width:220px;
+max-height:300px;
+object-fit:cover;
 border-radius:12px;
 margin-top:5px;
 display:block;
@@ -315,6 +317,7 @@ messagesEl.scrollTop + messagesEl.clientHeight >= messagesEl.scrollHeight - 100;
 }
 /* الموبات */
 function loadMobs(){
+
 const mobs = [
 {emoji:"🧟", name:"Zombie"},
 {emoji:"💣", name:"Creeper"},
@@ -325,18 +328,43 @@ const mobs = [
 {emoji:"🐷", name:"Piglin"},
 {emoji:"🐉", name:"Dragon"}
 ];
+
 const container = document.getElementById("mobList");
+
 if(!container) return;
+
 container.innerHTML = "";
-/* نعمل نسخة ونلخبطها */
-let shuffled = [...mobs].sort(() => Math.random() - 0.5);/* نختار أول 4 بدون تكرار */
-let selected = shuffled.slice(0,4);
+
+let saved = sessionStorage.getItem("savedMobs");
+
+let selected;
+
+if(saved){
+
+selected = JSON.parse(saved);
+
+}else{
+
+let shuffled = [...mobs].sort(() => Math.random() - 0.5);
+
+selected = shuffled.slice(0,4);
+
+sessionStorage.setItem("savedMobs", JSON.stringify(selected));
+
+}
+
 selected.forEach(mob=>{
-  let div = document.createElement("div");
-  div.className = "mob";
-  div.innerText = mob.emoji + " " + mob.name;
-  container.appendChild(div);
+
+let div = document.createElement("div");
+
+div.className = "mob";
+
+div.innerText = mob.emoji + " " + mob.name;
+
+container.appendChild(div);
+
 });
+
 }
 /* خروج */
 logoutBtn.onclick = async ()=>{
