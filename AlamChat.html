@@ -161,6 +161,8 @@ transform:scale(0.95);
   <div id="messages" class="messages"></div>
   <div class="input">
     <input id="msgInput" placeholder="اكتب...">
+    <input type="file" id="imageInput" accept="image/*" hidden>
+    <button class="send" id="imageBtn">🖼️</button>
     <button class="send" id="sendBtn">📤</button>
   </div>
 </div>
@@ -177,6 +179,8 @@ const chatEl = document.getElementById("chat");
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const sendBtn = document.getElementById("sendBtn");
+const imageBtn = document.getElementById("imageBtn");
+const imageInput = document.getElementById("imageInput");
 const msgInput = document.getElementById("msgInput");
 const messagesEl = document.getElementById("messages");
 const userInfo = document.getElementById("userInfo");
@@ -214,10 +218,7 @@ auth.onAuthStateChanged(user=>{
 </div>
 `;
     loadMessages();
-    loadMobs();
-    if(!window.mobInterval){
-      window.mobInterval = setInterval(loadMobs, 5000);
-    }
+    loadMobs(); 
   }else{
     loginEl.style.display="flex";
     chatEl.style.display="none";
@@ -226,6 +227,9 @@ auth.onAuthStateChanged(user=>{
 });
 /* إرسال */
 sendBtn.onclick = send;
+imageBtn.onclick = ()=>{
+  imageInput.click();
+};
 msgInput.addEventListener("keydown", e=>{
   if(e.key === "Enter"){
     e.preventDefault();
@@ -247,6 +251,28 @@ function send(){
   sendBtn.disabled = false;
 });
   }
+imageInput.addEventListener("change", async ()=>{
+
+const file = imageInput.files[0];
+if(!file || !currentUser) return;
+
+const reader = new FileReader();
+
+reader.onload = e=>{
+
+chatRef.push({
+  uid: currentUser.uid,
+  name: currentUser.displayName || "بدون اسم",
+  photo: currentUser.photoURL || "",
+  image: e.target.result,
+  time: Date.now()
+});
+
+};
+
+reader.readAsDataURL(file);
+
+});
 /* الرسائل */
 function loadMessages(){
   chatRef.off("child_added");
@@ -263,7 +289,16 @@ if(!currentUser) return;
     }
     <div class="bubble">
       <div class="name">${m.name}</div>
-      ${m.text}
+      ${m.text || ""}
+      ${m.image ? `
+<img src="${m.image}" 
+style="
+max-width:220px;
+border-radius:12px;
+margin-top:5px;
+display:block;
+">
+` : ""}
     </div>
   `;
   const isAtBottom =
