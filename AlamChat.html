@@ -36,26 +36,6 @@ background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4
 width:100%;padding:14px;border:none;border-radius:30px;
 background:#25d366;color:#fff;font-size:16px;
 }
-.logout-big{
-background:#ff3b30;
-width:100%;
-margin-top:10px;
-padding:14px;
-border:none;
-border-radius:30px;
-color:#fff;
-font-size:16px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-}
-.logout-big:active{
-transform:scale(0.97);
-}
-.logout-big:hover{
-background:#e02a20;
-                }
 .btn.loading{opacity:.6}
 /* chat */
 #chat{display:none}
@@ -200,6 +180,14 @@ auth.signInWithPopup(provider)
   .catch(err=>{
     console.log(err);
   });
+
+auth.getRedirectResult().catch(err=>console.log(err));
+  .then(result=>{
+    console.log("تم تسجيل الدخول");
+  })
+  .catch(err=>{
+    console.log(err);
+  });
   auth.getRedirectResult().catch(err=>console.log(err));
 };
 /* الحالة */
@@ -237,23 +225,42 @@ msgInput.addEventListener("keydown", e=>{
   }
 });
 function send(){
+
   let text = msgInput.value.trim();
+
   if(!text || !currentUser) return;
+
   sendBtn.disabled = true;
+
   chatRef.push({
-  uid: currentUser.uid,
-  name: currentUser.displayName || "بدون اسم",
-  photo: currentUser.photoURL || "",
-  text: text,
-  time: Date.now()
-}).then(()=>{
-  msgInput.value="";
-  sendBtn.disabled = false;
-});
-  }
+    uid: currentUser.uid,
+    name: currentUser.displayName || "بدون اسم",
+    photo: currentUser.photoURL || "",
+    text: text,
+    time: Date.now()
+
+  }).then(()=>{
+
+    msgInput.value="";
+
+  }).catch(err=>{
+
+    console.log(err);
+
+  }).finally(()=>{
+
+    sendBtn.disabled = false;
+
+  });
+
+}
 imageInput.addEventListener("change", async ()=>{
 
 const file = imageInput.files[0];
+if(file.size > 2 * 1024 * 1024){
+  alert("الصورة كبيرة جدًا");
+  return;
+    }
 if(!file || !currentUser) return;
 
 const reader = new FileReader();
@@ -271,11 +278,11 @@ chatRef.push({
 };
 
 reader.readAsDataURL(file);
-
+imageInput.value = "";
 });
 /* الرسائل */
 function loadMessages(){
-  chatRef.off("child_added");
+chatRef.off("child_added");
 messagesEl.innerHTML = "";
 chatRef.limitToLast(100).on("child_added", snap=>{
 if(!currentUser) return;
@@ -291,9 +298,9 @@ if(!currentUser) return;
       <div class="name">${m.name}</div>
       ${m.text || ""}
       ${m.image ? `
-<img src="${m.image}" 
+<img loading="lazy" src="${m.image}"
 style="
-max-width:220px;
+max-width:100%;
 border-radius:12px;
 margin-top:5px;
 display:block;
