@@ -171,24 +171,17 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 .catch(err=>console.log(err));
 /* تسجيل الدخول */
 loginBtn.onclick = ()=>{
+
   loginBtn.classList.add("loading");
+
   const provider = new firebase.auth.GoogleAuthProvider();
-auth.signInWithPopup(provider)
-  .then(result=>{
-    console.log("تم تسجيل الدخول");
-  })
+
+  auth.signInWithRedirect(provider)
   .catch(err=>{
     console.log(err);
+    loginBtn.classList.remove("loading");
   });
 
-auth.getRedirectResult().catch(err=>console.log(err));
-  .then(result=>{
-    console.log("تم تسجيل الدخول");
-  })
-  .catch(err=>{
-    console.log(err);
-  });
-  auth.getRedirectResult().catch(err=>console.log(err));
 };
 /* الحالة */
 auth.onAuthStateChanged(user=>{
@@ -257,12 +250,13 @@ function send(){
 imageInput.addEventListener("change", async ()=>{
 
 const file = imageInput.files[0];
+
+if(!file || !currentUser) return;
+
 if(file.size > 2 * 1024 * 1024){
   alert("الصورة كبيرة جدًا");
   return;
     }
-if(!file || !currentUser) return;
-
 const reader = new FileReader();
 
 reader.onload = e=>{
