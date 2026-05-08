@@ -339,12 +339,10 @@ function loadMobs(){
 const mobs = [
 {emoji:"🧟", name:"Zombie"},
 {emoji:"💣", name:"Creeper"},
-{emoji:"👁️", name:"Enderman"},
 {emoji:"🕷️", name:"Spider"},
 {emoji:"💀", name:"Skeleton"},
 {emoji:"🔥", name:"Blaze"},
 {emoji:"🐷", name:"Piglin"},
-{emoji:"🐉", name:"Dragon"}
 ];
 
 const container = document.getElementById("mobList");
@@ -365,7 +363,7 @@ selected = JSON.parse(saved);
 
 let shuffled = [...mobs].sort(() => Math.random() - 0.5);
 
-selected = shuffled.slice(0,4);
+selected = shuffled.slice(0,3);
 
 sessionStorage.setItem("savedMobs", JSON.stringify(selected));
 
