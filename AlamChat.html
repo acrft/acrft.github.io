@@ -170,7 +170,7 @@ let chatRef = db.ref("chat");
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 .catch(err=>console.log(err));
 /* تسجيل الدخول */
-/* تسجيل الدخول */
+
 loginBtn.onclick = ()=>{
 
   loginBtn.classList.add("loading");
@@ -179,13 +179,13 @@ loginBtn.onclick = ()=>{
 
   auth.signInWithPopup(provider)
 
-  .then(()=>{
+  .then((result)=>{
 
-    console.log("تم تسجيل الدخول");
+    console.log("تم تسجيل الدخول", result.user);
 
   })
 
-  .catch(err=>{
+  .catch((err)=>{
 
     console.log(err);
 
@@ -391,4 +391,4 @@ logoutBtn.onclick = async ()=>{
 };
 </script>
 </body>
-  </html>
+</html>
