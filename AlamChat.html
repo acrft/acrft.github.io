@@ -142,6 +142,7 @@ transform:scale(0.95);
   <div class="input">
     <input id="msgInput" placeholder="اكتب...">
     <input type="file" id="imageInput" accept="image/*" hidden>
+    <button class="send" id="siteBtn">☘️</button>
     <button class="send" id="imageBtn">🖼️</button>
     <button class="send" id="sendBtn">📤</button>
   </div>
@@ -160,6 +161,7 @@ const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const sendBtn = document.getElementById("sendBtn");
 const imageBtn = document.getElementById("imageBtn");
+const siteBtn = document.getElementById("siteBtn");
 const imageInput = document.getElementById("imageInput");
 const msgInput = document.getElementById("msgInput");
 const messagesEl = document.getElementById("messages");
@@ -226,7 +228,10 @@ auth.onAuthStateChanged(user=>{
 /* إرسال */
 sendBtn.onclick = send;
 imageBtn.onclick = ()=>{
-  imageInput.click();
+imageInput.click();
+};
+siteBtn.onclick = ()=>{
+window.open("https://alamcraft.github.io", "_blank");
 };
 msgInput.addEventListener("keydown", e=>{
   if(e.key === "Enter"){
