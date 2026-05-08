@@ -326,15 +326,11 @@ display:block;
 ` : ""}
     </div>
   `;
-  const isAtBottom =
-messagesEl.scrollTop + messagesEl.clientHeight >= messagesEl.scrollHeight - 100;
-  messagesEl.appendChild(div);
-  if(isAtBottom){
-    messagesEl.scrollTo({
-      top: messagesEl.scrollHeight,
-      behavior: "smooth"
-    });
-  }
+messagesEl.appendChild(div);
+
+setTimeout(()=>{
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+},50);
 });
 }
 /* الموبات */
