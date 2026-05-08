@@ -176,10 +176,24 @@ loginBtn.onclick = ()=>{
 
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  auth.signInWithRedirect(provider)
+  .then(()=>{
+
+    console.log("تم تسجيل الدخول");
+
+  })
+
   .catch(err=>{
+
     console.log(err);
+
+    alert(err.message);
+
+  })
+
+  .finally(()=>{
+
     loginBtn.classList.remove("loading");
+
   });
 
 };
