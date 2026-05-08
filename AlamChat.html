@@ -176,6 +176,8 @@ loginBtn.onclick = ()=>{
 
   const provider = new firebase.auth.GoogleAuthProvider();
 
+  auth.signInWithPopup(provider)
+
   .then(()=>{
 
     console.log("تم تسجيل الدخول");
