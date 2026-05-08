@@ -129,7 +129,7 @@ transform:scale(0.95);
   <div class="card">
     <div class="logo"></div>
     <h3>AlamChat</h3>
-    <button id="loginBtn" class="btn">الدخول بجوجل</button>
+    <button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button>
   </div>
 </div>
 <!-- CHAT -->
@@ -249,8 +249,8 @@ function send(){
 
   chatRef.push({
     uid: currentUser.uid,
-    name: currentUser.displayName || "بدون اسم",
-    photo: currentUser.photoURL || "",
+    name: currentUser.providerData[0]?.displayName || "بدون اسم",
+    photo: currentUser.providerData[0]?.photoURL || "👤",
     text: text,
     time: Date.now()
 
