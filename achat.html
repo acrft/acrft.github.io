@@ -2,51 +2,85 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlamChat v1.7</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AlamChat v1.8</title>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;font-family:sans-serif;color:#e9edef;
+margin:0;
+font-family:sans-serif;
+color:#e9edef;
 background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png") center/cover fixed;
 }
 body::before{
-content:"";position:fixed;inset:0;background:rgba(11,20,26,.40);z-index:-1;
+content:"";
+position:fixed;
+inset:0;
+background:rgba(11,20,26,.40);
+z-index:-1;
 }
-/* login */
 #login{
-position:fixed;inset:0;
-display:flex;align-items:center;justify-content:center;
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 .card{
-width:100%;max-width:360px;
+width:100%;
+max-width:360px;
 background:rgba(32,44,51,.9);
 border-radius:20px;
-padding:25px;text-align:center;
+padding:25px;
+text-align:center;
 }
 .logo{
-width:80px;height:80px;border-radius:50%;
-margin:auto;margin-bottom:10px;
+width:80px;
+height:80px;
+border-radius:50%;
+margin:auto;
+margin-bottom:10px;
 background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png") center/cover;
 }
 .btn{
-width:100%;padding:14px;border:none;border-radius:30px;
-background:#25d366;color:#fff;font-size:16px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:#25d366;
+color:#fff;
+font-size:16px;
 }
-.btn.loading{opacity:.6}
-/* chat */
-#chat{display:none}
+.btn.loading{
+opacity:.6;
+}
+#chat{
+display:none;
+}
 .header{
-position:fixed;top:0;width:100%;height:60px;
+position:fixed;
+top:0;
+width:100%;
+height:60px;
 background:#202c33;
-display:flex;align-items:center;justify-content:space-between;
+display:flex;
+align-items:center;
+justify-content:space-between;
 padding:0 10px;
 }
-.user{display:flex;align-items:center;gap:10px}
-.user img{width:40px;height:40px;border-radius:50%}
+.user{
+display:flex;
+align-items:center;
+gap:10px;
+}
+.user img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
 .messages{
 position:fixed;
 top:60px;
@@ -58,40 +92,76 @@ padding:10px;
 display:flex;
 flex-direction:column;
 gap:6px;
-/* سكرول ناعم */
 scroll-behavior:smooth;
-/* يخلي السحب بالموبايل طبيعي */
--webkit-overflow-scrolling: touch;
+-webkit-overflow-scrolling:touch;
 }
-.msg{display:flex;max-width:85%}
-.me{align-self:flex-end;flex-direction:row-reverse}
-.other{align-self:flex-start}
-.avatar{width:35px;height:35px;border-radius:50%;margin:0 5px}
-.bubble{padding:8px 10px;border-radius:12px}
-.me .bubble{background:#005c4b}
-.other .bubble{background:#202c33}
-.name{font-size:12px;color:#25d366;margin-bottom:2px}
+.msg{
+display:flex;
+max-width:85%;
+}
+.me{
+align-self:flex-end;
+flex-direction:row-reverse;
+}
+.other{
+align-self:flex-start;
+}
+.avatar{
+width:35px;
+height:35px;
+border-radius:50%;
+margin:0 5px;
+}
+.bubble{
+padding:8px 10px;
+border-radius:12px;
+white-space:pre-wrap;
+word-break:break-word;
+line-height:1.4;
+}
+.me .bubble{
+background:#005c4b;
+}
+.other .bubble{
+background:#202c33;
+}
+.name{
+font-size:12px;
+color:#25d366;
+margin-bottom:2px;
+}
 .input{
-position:fixed;bottom:0;width:100%;
-display:flex;padding:8px;background:#202c33;
+position:fixed;
+bottom:0;
+width:100%;
+display:flex;
+padding:8px;
+background:#202c33;
 }
 .input input{
-flex:1;padding:10px;border-radius:20px;border:none;
-background:#2a3942;color:#fff
+flex:1;
+padding:10px;
+border-radius:20px;
+border:none;
+background:#2a3942;
+color:#fff;
 }
 .send{
-width:45px;height:45px;border-radius:50%;
-border:none;background:#25d366
+width:45px;
+height:45px;
+border-radius:50%;
+border:none;
+background:#25d366;
 }
 .send:disabled{
-opacity:0.5;
+opacity:.5;
 }
 .mob-list{
 display:flex;
 gap:8px;
 margin-top:3px;
-overflow-x:auto;     /* مهم */
-white-space:nowrap;  /* مهم */
+overflow-x:auto;
+white-space:nowrap;
 }
 .mob{
 display:flex;
@@ -102,9 +172,6 @@ background:#2a3942;
 padding:2px 6px;
 border-radius:10px;
 white-space:nowrap;
-}
-.logout:hover{
-background:#e02a20;
 }
 .logout-btn{
 width:40px;
@@ -119,274 +186,192 @@ align-items:center;
 justify-content:center;
 }
 .logout-btn:active{
-transform:scale(0.95);
+transform:scale(.95);
 }
 </style>
 </head>
 <body>
-<!-- LOGIN -->
 <div id="login">
-  <div class="card">
-    <div class="logo"></div>
-    <h3>AlamChat</h3>
-    <button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button>
-  </div>
+<div class="card">
+<div class="logo"></div>
+<h3>AlamChat</h3>
+<button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button>
 </div>
-<!-- CHAT -->
+</div>
 <div id="chat">
-  <div class="header">
-    <div class="user" id="userInfo"></div>
-    <button id="logoutBtn" class="logout-btn">🚪</button>
-  </div>
-  <div id="messages" class="messages"></div>
-  <div class="input">
-    <input id="msgInput" placeholder="اكتب...">
-    <input type="file" id="imageInput" accept="image/*" hidden>
-    <button class="send" id="siteBtn">☘️</button>
-    <button class="send" id="imageBtn">🖼️</button>
-    <button class="send" id="sendBtn">📤</button>
-  </div>
+<div class="header">
+<div class="user" id="userInfo"></div>
+<button id="logoutBtn" class="logout-btn">🚪</button>
+</div>
+<div id="messages" class="messages"></div>
+<div class="input">
+<input id="msgInput" placeholder="اكتب...">
+<input type="file" id="imageInput" accept="image/*" hidden>
+<button class="send" id="siteBtn">☘️</button>
+<button class="send" id="imageBtn">🖼️</button>
+<button class="send" id="sendBtn">📤</button>
+</div>
 </div>
 <script>
 firebase.initializeApp({
-  apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-  authDomain:"alamchat1.firebaseapp.com",
-  databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
+apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+authDomain:"alamchat1.firebaseapp.com",
+databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
 });
-const auth = firebase.auth();
-const db = firebase.database();
-const loginEl = document.getElementById("login");
-const chatEl = document.getElementById("chat");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const sendBtn = document.getElementById("sendBtn");
-const imageBtn = document.getElementById("imageBtn");
-const siteBtn = document.getElementById("siteBtn");
-const imageInput = document.getElementById("imageInput");
-const msgInput = document.getElementById("msgInput");
-const messagesEl = document.getElementById("messages");
-const userInfo = document.getElementById("userInfo");
+const auth=firebase.auth();
+const db=firebase.database();
+const loginEl=document.getElementById("login");
+const chatEl=document.getElementById("chat");
+const loginBtn=document.getElementById("loginBtn");
+const logoutBtn=document.getElementById("logoutBtn");
+const sendBtn=document.getElementById("sendBtn");
+const imageBtn=document.getElementById("imageBtn");
+const siteBtn=document.getElementById("siteBtn");
+const imageInput=document.getElementById("imageInput");
+const msgInput=document.getElementById("msgInput");
+const messagesEl=document.getElementById("messages");
+const userInfo=document.getElementById("userInfo");
 let currentUser;
-let chatRef = db.ref("chat");
-/* حفظ الجلسة */
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-.catch(err=>console.log(err));
-/* تسجيل الدخول */
-
-loginBtn.onclick = ()=>{
-
-  loginBtn.classList.add("loading");
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  auth.signInWithRedirect(provider)
-
-  .then((result)=>{
-
-    console.log("تم تسجيل الدخول", result.user);
-
-  })
-
-  .catch((err)=>{
-
-    console.log(err);
-
-    alert(err.message);
-
-  })
-
-  .finally(()=>{
-
-    loginBtn.classList.remove("loading");
-
-  });
-
+let chatRef=db.ref("chat");
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err=>console.log(err));
+loginBtn.onclick=()=>{
+loginBtn.classList.add("loading");
+const provider=new firebase.auth.GoogleAuthProvider();
+auth.signInWithRedirect(provider).catch(err=>{
+console.log(err);
+alert(err.message);
+loginBtn.classList.remove("loading");
+});
 };
-/* الحالة */
 auth.onAuthStateChanged(user=>{
-  if(user){
-  currentUser = user;
-  loginBtn.classList.remove("loading");
-  logoutBtn.disabled = false;
-  loginEl.style.display="none";
-  chatEl.style.display="block";
-  userInfo.innerHTML=`
-<img src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+if(user){
+currentUser=user;
+loginBtn.classList.remove("loading");
+logoutBtn.disabled=false;
+loginEl.style.display="none";
+chatEl.style.display="block";
+userInfo.innerHTML=`
+<img src="${user.photoURL||'https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png'}">
 <div>
-  💬☘️AlamChat 
-  <div id="mobList" class="mob-list"></div>
+${user.displayName||"بدون اسم"}
+<div id="mobList" class="mob-list"></div>
 </div>
 `;
-    loadMessages();
-    loadMobs(); 
-  }else{
-    loginEl.style.display="flex";
-    chatEl.style.display="none";
-    loginBtn.classList.remove("loading");
-  }
+loadMessages();
+loadMobs();
+}else{
+loginEl.style.display="flex";
+chatEl.style.display="none";
+loginBtn.classList.remove("loading");
+}
 });
-/* إرسال */
-sendBtn.onclick = send;
-imageBtn.onclick = ()=>{
+sendBtn.onclick=send;
+imageBtn.onclick=()=>{
 imageInput.click();
 };
-siteBtn.onclick = ()=>{
-window.open("https://acrft.github.io", "_blank");
+siteBtn.onclick=()=>{
+window.open("https://acrft.github.io","_blank");
 };
-msgInput.addEventListener("keydown", e=>{
-  if(e.key === "Enter"){
-    e.preventDefault();
-    send();
-  }
+msgInput.addEventListener("keydown",e=>{
+if(e.key==="Enter"){
+e.preventDefault();
+send();
+}
 });
 function send(){
-
-  let text = msgInput.value.trim();
-
-  if(!text || !currentUser) return;
-
-  sendBtn.disabled = true;
-
-  chatRef.push({
-    uid: currentUser.uid,
-    name: currentUser.providerData[0]?.displayName || "بدون اسم",
-    photo: currentUser.providerData[0]?.photoURL || "👤",
-    text: text,
-    time: Date.now()
-
-  }).then(()=>{
-
-    msgInput.value="";
-
-  }).catch(err=>{
-
-    console.log(err);
-
-  }).finally(()=>{
-
-    sendBtn.disabled = false;
-
-  });
-
-}
-imageInput.addEventListener("change", async ()=>{
-
-const file = imageInput.files[0];
-
-if(!file || !currentUser) return;
-
-if(file.size > 2 * 1024 * 1024){
-  alert("الصورة كبيرة جدًا");
-  return;
-    }
-const reader = new FileReader();
-
-reader.onload = e=>{
-
+let text=msgInput.value.trim();
+if(!text||!currentUser)return;
+sendBtn.disabled=true;
 chatRef.push({
-  uid: currentUser.uid,
-  name: currentUser.displayName || "بدون اسم",
-  photo: currentUser.photoURL || "",
-  image: e.target.result,
-  time: Date.now()
+uid:currentUser.uid,
+name:currentUser.displayName||"بدون اسم",
+photo:currentUser.photoURL||"",
+text:text,
+time:Date.now()
+}).then(()=>{
+msgInput.value="";
+}).catch(err=>{
+console.log(err);
+}).finally(()=>{
+sendBtn.disabled=false;
 });
-
+}
+imageInput.addEventListener("change",()=>{
+const file=imageInput.files[0];
+if(!file||!currentUser)return;
+if(file.size>2*1024*1024){
+alert("الصورة كبيرة جدًا");
+return;
+}
+const reader=new FileReader();
+reader.onload=e=>{
+chatRef.push({
+uid:currentUser.uid,
+name:currentUser.displayName||"بدون اسم",
+photo:currentUser.photoURL||"",
+image:e.target.result,
+time:Date.now()
+});
 };
-
 reader.readAsDataURL(file);
-imageInput.value = "";
+imageInput.value="";
 });
-/* الرسائل */
 function loadMessages(){
 chatRef.off("child_added");
-messagesEl.innerHTML = "";
-chatRef.limitToLast(100).on("child_added", snap=>{
-if(!currentUser) return;
-  let m = snap.val();
-  let div=document.createElement("div");
-  div.className="msg "+(m.uid===currentUser.uid?"me":"other");
-  div.innerHTML=`
-    ${m.photo 
-      ? `<img class="avatar" src="${m.photo}">` 
-      : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`
-    }
-    <div class="bubble">
-      <div class="name">${m.name}</div>
-      ${m.text || ""}
-      ${m.image ? `
-<img loading="lazy" src="${m.image}"
-style="
-max-width:220px;
-max-height:300px;
-object-fit:cover;
-border-radius:12px;
-margin-top:5px;
-display:block;
-">
-` : ""}
-    </div>
-  `;
+messagesEl.innerHTML="";
+chatRef.limitToLast(100).on("child_added",snap=>{
+if(!currentUser)return;
+let m=snap.val();
+let div=document.createElement("div");
+div.className="msg "+(m.uid===currentUser.uid?"me":"other");
+div.innerHTML=`
+${m.photo?`<img class="avatar" src="${m.photo}">`:`<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`}
+<div class="bubble">
+<div class="name">${m.name}</div>
+${(m.text||"").replace(/\n/g,"<br>")}
+${m.image?`
+<img loading="lazy" src="${m.image}" style="max-width:220px;max-height:300px;object-fit:cover;border-radius:12px;margin-top:5px;display:block;">
+`:""}
+</div>
+`;
 messagesEl.appendChild(div);
-
 setTimeout(()=>{
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+messagesEl.scrollTop=messagesEl.scrollHeight;
 },50);
 });
 }
-/* الموبات */
 function loadMobs(){
-
-const mobs = [
-{emoji:"🧟", name:"Zombie"},
-{emoji:"💣", name:"Creeper"},
-{emoji:"🕷️", name:"Spider"},
-{emoji:"💀", name:"Skeleton"},
-{emoji:"🔥", name:"Blaze"},
-{emoji:"🐷", name:"Piglin"},
+const mobs=[
+{emoji:"🧟",name:"Zombie"},
+{emoji:"💣",name:"Creeper"},
+{emoji:"🕷️",name:"Spider"},
+{emoji:"💀",name:"Skeleton"},
+{emoji:"🔥",name:"Blaze"},
+{emoji:"🐷",name:"Piglin"}
 ];
-
-const container = document.getElementById("mobList");
-
-if(!container) return;
-
-container.innerHTML = "";
-
-let saved = sessionStorage.getItem("savedMobs");
-
+const container=document.getElementById("mobList");
+if(!container)return;
+container.innerHTML="";
+let saved=sessionStorage.getItem("savedMobs");
 let selected;
-
 if(saved){
-
-selected = JSON.parse(saved);
-
+selected=JSON.parse(saved);
 }else{
-
-let shuffled = [...mobs].sort(() => Math.random() - 0.5);
-
-selected = shuffled.slice(0,3);
-
-sessionStorage.setItem("savedMobs", JSON.stringify(selected));
-
+let shuffled=[...mobs].sort(()=>Math.random()-.5);
+selected=shuffled.slice(0,3);
+sessionStorage.setItem("savedMobs",JSON.stringify(selected));
 }
-
 selected.forEach(mob=>{
-
-let div = document.createElement("div");
-
-div.className = "mob";
-
-div.innerText = mob.emoji + " " + mob.name;
-
+let div=document.createElement("div");
+div.className="mob";
+div.innerText=mob.emoji+" "+mob.name;
 container.appendChild(div);
-
 });
-
 }
-/* خروج */
-logoutBtn.onclick = async ()=>{
-  logoutBtn.disabled = true;
-  await auth.signOut();
-  messagesEl.innerHTML = "";
+logoutBtn.onclick=async()=>{
+logoutBtn.disabled=true;
+await auth.signOut();
+messagesEl.innerHTML="";
 };
 </script>
 </body>
