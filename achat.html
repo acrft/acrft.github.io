@@ -3,206 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AlamChat v1.8</title>
+<title>AlamChat v1.9</title>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <style>
 *{box-sizing:border-box}
-body{
-margin:0;
-font-family:sans-serif;
-color:#e9edef;
-background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png") center/cover fixed;
-}
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:rgba(11,20,26,.40);
-z-index:-1;
-}
-#login{
-position:fixed;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-.card{
-width:100%;
-max-width:360px;
-background:rgba(32,44,51,.9);
-border-radius:20px;
-padding:25px;
-text-align:center;
-}
-.logo{
-width:80px;
-height:80px;
-border-radius:50%;
-margin:auto;
-margin-bottom:10px;
-background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png") center/cover;
-}
-.btn{
-width:100%;
-padding:14px;
-border:none;
-border-radius:30px;
-background:#25d366;
-color:#fff;
-font-size:16px;
-}
-.btn.loading{
-opacity:.6;
-}
-#chat{
-display:none;
-}
-.header{
-position:fixed;
-top:0;
-width:100%;
-height:60px;
-background:#202c33;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 10px;
-}
-.user{
-display:flex;
-align-items:center;
-gap:10px;
-}
-.user img{
-width:40px;
-height:40px;
-border-radius:50%;
-}
-.messages{
-position:fixed;
-top:60px;
-bottom:70px;
-width:100%;
-overflow-y:auto;
-overflow-x:hidden;
-padding:10px;
-display:flex;
-flex-direction:column;
-gap:6px;
-scroll-behavior:smooth;
--webkit-overflow-scrolling:touch;
-}
-.msg{
-display:flex;
-max-width:85%;
-}
-.me{
-align-self:flex-end;
-flex-direction:row-reverse;
-}
-.other{
-align-self:flex-start;
-}
-.avatar{
-width:35px;
-height:35px;
-border-radius:50%;
-margin:0 5px;
-}
-.bubble{
-padding:8px 10px;
-border-radius:12px;
-white-space:pre-wrap;
-word-break:break-word;
-line-height:1.4;
-}
-.me .bubble{
-background:#005c4b;
-}
-.other .bubble{
-background:#202c33;
-}
-.name{
-font-size:12px;
-color:#25d366;
-margin-bottom:2px;
-}
-.input{
-position:fixed;
-bottom:0;
-width:100%;
-display:flex;
-padding:8px;
-background:#202c33;
-}
-.input input{
-flex:1;
-padding:10px;
-border-radius:20px;
-border:none;
-background:#2a3942;
-color:#fff;
-}
-.send{
-width:45px;
-height:45px;
-border-radius:50%;
-border:none;
-background:#25d366;
-}
-.send:disabled{
-opacity:.5;
-}
-.mob-list{
-display:flex;
-gap:8px;
-margin-top:3px;
-overflow-x:auto;
-white-space:nowrap;
-}
-.mob{
-display:flex;
-align-items:center;
-gap:3px;
-font-size:11px;
-background:#2a3942;
-padding:2px 6px;
-border-radius:10px;
-white-space:nowrap;
-}
-.logout-btn{
-width:40px;
-height:40px;
-border:none;
-border-radius:50%;
-background:#ff3b30;
-color:#fff;
-font-size:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-.logout-btn:active{
-transform:scale(.95);
-}
+body{margin:0;font-family:sans-serif;color:#e9edef;background:url("https://image2url.com/r2/default/images/1775525811581-9dc91a60-c309-4cdd-ad97-7e786eb938b5.png") center/cover fixed}
+body::before{content:"";position:fixed;inset:0;background:rgba(11,20,26,.40);z-index:-1}
+#login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.card{width:100%;max-width:360px;background:rgba(32,44,51,.9);border-radius:20px;padding:25px;text-align:center}
+.logo{width:80px;height:80px;border-radius:50%;margin:auto;margin-bottom:10px;background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png") center/cover}
+.btn{width:100%;padding:14px;border:none;border-radius:30px;background:#25d366;color:#fff;font-size:16px}
+.btn.loading{opacity:.6}
+#chat{display:none}
+.header{position:fixed;top:0;width:100%;height:60px;background:#202c33;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.user{display:flex;align-items:center;gap:10px}
+.user img{width:40px;height:40px;border-radius:50%}
+.messages{position:fixed;top:60px;bottom:70px;width:100%;overflow-y:auto;overflow-x:hidden;padding:10px;display:flex;flex-direction:column;gap:6px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.msg{display:flex;max-width:85%}
+.me{align-self:flex-end;flex-direction:row-reverse}
+.other{align-self:flex-start}
+.avatar{width:35px;height:35px;border-radius:50%;margin:0 5px;object-fit:cover}
+.bubble{padding:8px 10px;border-radius:12px;white-space:pre-wrap;word-break:break-word;line-height:1.4}
+.me .bubble{background:#005c4b}
+.other .bubble{background:#202c33}
+.name{font-size:12px;color:#25d366;margin-bottom:2px}
+.input{position:fixed;bottom:0;width:100%;display:flex;padding:8px;background:#202c33;gap:5px}
+.input input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a3942;color:#fff;outline:none}
+.send{width:45px;height:45px;border-radius:50%;border:none;background:#25d366;font-size:18px}
+.send:disabled{opacity:.5}
+.mob-list{display:flex;gap:8px;margin-top:3px;overflow-x:auto;white-space:nowrap}
+.mob{display:flex;align-items:center;gap:3px;font-size:11px;background:#2a3942;padding:2px 6px;border-radius:10px;white-space:nowrap}
+.logout-btn{width:40px;height:40px;border:none;border-radius:50%;background:#ff3b30;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center}
+.logout-btn:active{transform:scale(.95)}
 </style>
 </head>
 <body>
-<div id="login">
-<div class="card">
-<div class="logo"></div>
-<h3>AlamChat</h3>
-<button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button>
-</div>
-</div>
+<div id="login"><div class="card"><div class="logo"></div><h3>AlamChat</h3><button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button></div></div>
 <div id="chat">
-<div class="header">
-<div class="user" id="userInfo"></div>
-<button id="logoutBtn" class="logout-btn">🚪</button>
-</div>
+<div class="header"><div class="user" id="userInfo"></div><button id="logoutBtn" class="logout-btn">🚪</button></div>
 <div id="messages" class="messages"></div>
 <div class="input">
 <input id="msgInput" placeholder="اكتب...">
@@ -213,11 +53,7 @@ transform:scale(.95);
 </div>
 </div>
 <script>
-firebase.initializeApp({
-apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-authDomain:"alamchat1.firebaseapp.com",
-databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
-});
+firebase.initializeApp({apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",authDomain:"alamchat1.firebaseapp.com",databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"});
 const auth=firebase.auth();
 const db=firebase.database();
 const loginEl=document.getElementById("login");
@@ -237,7 +73,7 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err=>console.log
 loginBtn.onclick=()=>{
 loginBtn.classList.add("loading");
 const provider=new firebase.auth.GoogleAuthProvider();
-auth.signInWithRedirect(provider).catch(err=>{
+auth.signInWithPopup(provider).catch(err=>{
 console.log(err);
 alert(err.message);
 loginBtn.classList.remove("loading");
@@ -247,11 +83,10 @@ auth.onAuthStateChanged(user=>{
 if(user){
 currentUser=user;
 loginBtn.classList.remove("loading");
-logoutBtn.disabled=false;
 loginEl.style.display="none";
 chatEl.style.display="block";
 userInfo.innerHTML=`
-<img src="${user.photoURL||'https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png'}">
+<img src="${user.photoURL||'https://i.imgur.com/HeIi0wU.png'}">
 <div>
 ${user.displayName||"بدون اسم"}
 <div id="mobList" class="mob-list"></div>
@@ -266,18 +101,17 @@ loginBtn.classList.remove("loading");
 }
 });
 sendBtn.onclick=send;
-imageBtn.onclick=()=>{
-imageInput.click();
-};
-siteBtn.onclick=()=>{
-window.open("https://acrft.github.io","_blank");
-};
+imageBtn.onclick=()=>{imageInput.click()};
+siteBtn.onclick=()=>{window.open("https://acrft.github.io","_blank")};
 msgInput.addEventListener("keydown",e=>{
 if(e.key==="Enter"){
 e.preventDefault();
 send();
 }
 });
+function escapeHTML(text){
+return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
 function send(){
 let text=msgInput.value.trim();
 if(!text||!currentUser)return;
@@ -285,7 +119,7 @@ sendBtn.disabled=true;
 chatRef.push({
 uid:currentUser.uid,
 name:currentUser.displayName||"بدون اسم",
-photo:currentUser.photoURL||"",
+photo:currentUser.photoURL||"https://i.imgur.com/HeIi0wU.png",
 text:text,
 time:Date.now()
 }).then(()=>{
@@ -308,7 +142,7 @@ reader.onload=e=>{
 chatRef.push({
 uid:currentUser.uid,
 name:currentUser.displayName||"بدون اسم",
-photo:currentUser.photoURL||"",
+photo:currentUser.photoURL||"https://i.imgur.com/HeIi0wU.png",
 image:e.target.result,
 time:Date.now()
 });
@@ -327,11 +161,9 @@ div.className="msg "+(m.uid===currentUser.uid?"me":"other");
 div.innerHTML=`
 ${m.photo?`<img class="avatar" src="${m.photo}">`:`<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`}
 <div class="bubble">
-<div class="name">${m.name}</div>
-${(m.text||"").replace(/\n/g,"<br>")}
-${m.image?`
-<img loading="lazy" src="${m.image}" style="max-width:220px;max-height:300px;object-fit:cover;border-radius:12px;margin-top:5px;display:block;">
-`:""}
+<div class="name">${escapeHTML(m.name||"بدون اسم")}</div>
+${escapeHTML(m.text||"").replace(/\n/g,"<br>")}
+${m.image?`<img loading="lazy" src="${m.image}" style="max-width:220px;max-height:300px;object-fit:cover;border-radius:12px;margin-top:5px;display:block;">`:""}
 </div>
 `;
 messagesEl.appendChild(div);
