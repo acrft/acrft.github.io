@@ -25,7 +25,7 @@ body::before{content:"";position:fixed;inset:0;background:rgba(11,20,26,.40);z-i
 .me{align-self:flex-end;flex-direction:row-reverse}
 .other{align-self:flex-start}
 .avatar{width:35px;height:35px;border-radius:50%;margin:0 5px;object-fit:cover}
-.bubble{padding:8px 10px;border-radius:12px;white-space:pre-wrap;word-break:break-word;line-height:1.4}
+.bubble{padding:8px 10px;border-radius:12px;word-break:break-word;line-height:1.4}
 .me .bubble{background:#005c4b}
 .other .bubble{background:#202c33}
 .name{font-size:12px;color:#25d366;margin-bottom:2px}
@@ -162,7 +162,7 @@ div.innerHTML=`
 ${m.photo?`<img class="avatar" src="${m.photo}">`:`<div class="avatar" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a3942;">🙂</div>`}
 <div class="bubble">
 <div class="name">${escapeHTML(m.name||"بدون اسم")}</div>
-${escapeHTML(m.text||"").replace(/\n/g,"<br>")}
+${escapeHTML((m.text||"").trim()).replace(/\n+/g,"<br>")}
 ${m.image?`<img loading="lazy" src="${m.image}" style="max-width:220px;max-height:300px;object-fit:cover;border-radius:12px;margin-top:5px;display:block;">`:""}
 </div>
 `;
