@@ -172,7 +172,6 @@ let chatRef = db.ref("chat");
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 .catch(err=>console.log(err));
 /* تسجيل الدخول */
-/* تسجيل الدخول */
 
 loginBtn.onclick = ()=>{
 
@@ -181,11 +180,22 @@ loginBtn.onclick = ()=>{
   const provider = new firebase.auth.GoogleAuthProvider();
 
   auth.signInWithRedirect(provider)
+
+  .then((result)=>{
+
+    console.log("تم تسجيل الدخول", result.user);
+
+  })
+
   .catch((err)=>{
 
     console.log(err);
 
     alert(err.message);
+
+  })
+
+  .finally(()=>{
 
     loginBtn.classList.remove("loading");
 
