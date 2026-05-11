@@ -70,14 +70,24 @@ const userInfo=document.getElementById("userInfo");
 let currentUser;
 let chatRef=db.ref("chat");
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err=>console.log(err));
-loginBtn.onclick=()=>{
+loginBtn.onclick=async()=>{
 loginBtn.classList.add("loading");
 const provider=new firebase.auth.GoogleAuthProvider();
-auth.signInWithPopup(provider).catch(err=>{
+try{
+await auth.signInWithPopup(provider);
+}catch(err){
 console.log(err);
+if(
+err.code==="auth/popup-blocked"||
+err.code==="auth/popup-closed-by-user"||
+err.code==="auth/cancelled-popup-request"
+){
+auth.signInWithRedirect(provider);
+}else{
 alert(err.message);
+}
+}
 loginBtn.classList.remove("loading");
-});
 };
 auth.onAuthStateChanged(user=>{
 if(user){
