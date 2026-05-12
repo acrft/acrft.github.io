@@ -184,6 +184,43 @@ text-align:center;
 }
 </style>
 </head>
+<script>
+document.querySelectorAll(".download-btn").forEach(btn => {
+
+btn.addEventListener("click", async e => {
+
+if(btn.href.includes("files.catbox.moe")){
+
+e.preventDefault();
+
+const fileName = btn.getAttribute("data-name");
+
+const response = await fetch(btn.href);
+
+const blob = await response.blob();
+
+const url = window.URL.createObjectURL(blob);
+
+const a = document.createElement("a");
+
+a.href = url;
+
+a.download = fileName;
+
+document.body.appendChild(a);
+
+a.click();
+
+a.remove();
+
+window.URL.revokeObjectURL(url);
+
+}
+
+});
+
+});
+</script>
 <body>
 <header class="topbar">
 <div class="logo">
@@ -462,18 +499,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/usc3vio1175cd7u/minecraft-1-12-1.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.11.4 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.11.4</div>
-<div class="info">Old Minecraft PE version with classic UI.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/sgdyftzke5a4cnk/minecraft-pe-1-11-4.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
-</div>
-
 <!-- MCPE 1.11.3 -->
 <div class="download-card">
 <div class="card-left">
@@ -519,7 +544,11 @@ Latest Minecraft APK Versions
 <div class="info">Classic Bedrock update with old multiplayer support.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/fxachv.apk" download="minecraft-1-8-1.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/fxachv.apk"
+data-name="minecraft-1-8-1.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 1.7.0 -->
@@ -579,7 +608,11 @@ Latest Minecraft APK Versions
 <div class="info">Stable Pocket Edition release for Android.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/jlhaqn.apk" download="minecraft-1-1-5.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/jlhaqn.apk"
+data-name="minecraft-1-1-5.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 1.0.9 -->
@@ -591,7 +624,11 @@ Latest Minecraft APK Versions
 <div class="info">Old Minecraft PE version with smooth gameplay.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/hmh3k6.apk" download="minecraft-1-0-9.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/hmh3k6.apk"
+data-name="minecraft-1-0-9.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.16.2 -->
@@ -603,7 +640,11 @@ Latest Minecraft APK Versions
 <div class="info">Popular old Pocket Edition update.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/kw2tqj.apk" download="minecraft-0-16-2.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/kw2tqj.apk"
+data-name="minecraft-0-16-2.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.14.3 -->
@@ -615,7 +656,11 @@ Latest Minecraft APK Versions
 <div class="info">Classic redstone update for Minecraft PE.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/r5l9h8.apk" download="minecraft-0-14-3.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/r5l9h8.apk"
+data-name="minecraft-0-14-3.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.12.3 -->
@@ -627,7 +672,11 @@ Latest Minecraft APK Versions
 <div class="info">One of the most famous old PE versions.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/3qu65o.apk" download="minecraft-0-12-3.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/3qu65o.apk"
+data-name="minecraft-0-12-3.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.11.1 -->
@@ -639,7 +688,11 @@ Latest Minecraft APK Versions
 <div class="info">Old-school Minecraft Pocket Edition build.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/gylrom.apk" download="minecraft-0-11-1.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/gylrom.apk"
+data-name="minecraft-0-11-1.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.10.5 -->
@@ -651,19 +704,11 @@ Latest Minecraft APK Versions
 <div class="info">Very old PE version with classic world generation.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/seuyay.apk" download="minecraft-0-10-5.apk" class="download-btn">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 0.9.5 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
-<div>
-<div class="version">MCPE 0.9.5</div>
-<div class="info">Legendary survival update for Minecraft PE.</div>
-</div>
-</div>
-<a href="https://files.catbox.moe/k9d0y7.apk" download="minecraft-0-9-5.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/seuyay.apk"
+data-name="minecraft-0-10-5.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.9.0 -->
@@ -675,19 +720,11 @@ Latest Minecraft APK Versions
 <div class="info">First infinite worlds update for Pocket Edition.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/y6jeuu.apk" download="minecraft-0-9-0.apk" class="download-btn">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 0.8.1 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 0.8.1</div>
-<div class="info">Very old Minecraft Pocket Edition release.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/n8c71sxzxp4yljr/minecraft-0-8-1.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
+<a href="https://files.catbox.moe/y6jeuu.apk"
+data-name="minecraft-0-9-0.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.8.0 -->
@@ -699,7 +736,11 @@ Latest Minecraft APK Versions
 <div class="info">Extremely old Minecraft PE release.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/3ltd9s.apk" download="minecraft-0-8-0.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/3ltd9s.apk"
+data-name="minecraft-0-8-0.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.7.5 -->
@@ -711,7 +752,11 @@ Latest Minecraft APK Versions
 <div class="info">Rare classic Pocket Edition version.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/syuzqx.apk" download="minecraft-0-7-5.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/syuzqx.apk"
+data-name="minecraft-0-7-5.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.6.1 -->
@@ -723,7 +768,11 @@ Latest Minecraft APK Versions
 <div class="info">Very rare old Minecraft PE build.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/cep96j.apk" download="minecraft-0-6-1.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/cep96j.apk"
+data-name="minecraft-0-6-1.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 <!-- MCPE 0.5.0 -->
@@ -735,7 +784,11 @@ Latest Minecraft APK Versions
 <div class="info">One of the oldest playable Minecraft PE versions.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/crzkqo.apk" download="minecraft-0-5-0.apk" class="download-btn">DOWNLOAD</a>
+<a href="https://files.catbox.moe/crzkqo.apk"
+data-name="minecraft-0-5-0.apk"
+class="download-btn">
+DOWNLOAD
+</a>
 </div>
 
 </div>
