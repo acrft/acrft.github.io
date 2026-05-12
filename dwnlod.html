@@ -8,246 +8,61 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-body{
-background:#f2f2f2;
-font-family:'Poppins',sans-serif;
-color:#111;
-}
-.topbar{
-width:100%;
-background:#17171d;
-padding:18px 25px;
-}
-.logo{
-color:white;
-font-size:32px;
-font-weight:800;
-}
-.logo span{
-color:#47c766;
-}
-.container{
-width:94%;
-max-width:1100px;
-margin:auto;
-padding:25px 0;
-}
-.hero{
-background:white;
-border-radius:24px;
-padding:35px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:30px;
-margin-bottom:25px;
-}
-.hero-left{
-flex:1;
-}
-.hero h1{
-font-size:48px;
-line-height:1.1;
-margin-bottom:18px;
-font-weight:800;
-}
-.hero h1 span{
-color:#2ea043;
-}
-.hero p{
-color:#666;
-font-size:17px;
-line-height:1.8;
-margin-bottom:25px;
-}
-.hero-btn{
-display:inline-block;
-background:#2ea043;
-color:white;
-text-decoration:none;
-padding:16px 30px;
-border-radius:14px;
-font-weight:700;
-}
-.hero-btn:hover{
-background:#238636;
-}
-.hero img{
-width:220px;
-border-radius:20px;
-}
-.posts{
-display:flex;
-flex-direction:column;
-gap:18px;
-}
-.section-title{
-font-size:30px;
-margin-bottom:8px;
-}
-.download-card{
-background:white;
-border-radius:20px;
-padding:18px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
-box-shadow:0 3px 10px rgba(0,0,0,.05);
-transition:.2s;
-}
-.download-card:hover{
-transform:translateY(-3px);
-}
-.card-left{
-display:flex;
-align-items:center;
-gap:16px;
-}
-.card-left img{
-width:75px;
-height:75px;
-border-radius:16px;
-object-fit:cover;
-}
-.version{
-font-size:24px;
-font-weight:700;
-margin-bottom:6px;
-}
-.info{
-color:#666;
-font-size:14px;
-}
-.download-btn{
-background:#58c472;
-color:white;
-text-decoration:none;
-padding:14px 24px;
-border-radius:12px;
-font-weight:700;
-white-space:nowrap;
-}
-.download-btn:hover{
-background:#45b961;
-}
-footer{
-text-align:center;
-color:#777;
-padding:35px 20px;
-font-size:14px;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f2f2f2;font-family:'Poppins',sans-serif;color:#111;}
+.topbar{width:100%;background:#17171d;padding:18px 25px;}
+.logo{color:white;font-size:32px;font-weight:800;}
+.logo span{color:#47c766;}
+.container{width:94%;max-width:1100px;margin:auto;padding:25px 0;}
+.hero{background:white;border-radius:24px;padding:35px;display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:25px;}
+.hero-left{flex:1;}
+.hero h1{font-size:48px;line-height:1.1;margin-bottom:18px;font-weight:800;}
+.hero h1 span{color:#2ea043;}
+.hero p{color:#666;font-size:17px;line-height:1.8;margin-bottom:25px;}
+.hero-btn{display:inline-block;background:#2ea043;color:white;text-decoration:none;padding:16px 30px;border-radius:14px;font-weight:700;}
+.hero-btn:hover{background:#238636;}
+.posts{display:flex;flex-direction:column;gap:18px;}
+.section-title{font-size:30px;margin-bottom:8px;}
+.download-card{background:white;border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 3px 10px rgba(0,0,0,.05);transition:.2s;}
+.download-card:hover{transform:translateY(-3px);}
+.card-left{display:flex;align-items:center;gap:16px;}
+.card-left img{width:75px;height:75px;border-radius:16px;object-fit:cover;}
+.version{font-size:24px;font-weight:700;margin-bottom:6px;}
+.info{color:#666;font-size:14px;}
+.download-btn{background:#58c472;color:white;text-decoration:none;padding:14px 24px;border-radius:12px;font-weight:700;white-space:nowrap;}
+.download-btn:hover{background:#45b961;}
+footer{text-align:center;color:#777;padding:35px 20px;font-size:14px;}
 @media(max-width:900px){
-.hero{
-flex-direction:column;
-text-align:center;
-}
-.hero h1{
-font-size:42px;
-}
-.hero img{
-width:200px;
-}
+.hero{flex-direction:column;text-align:center;}
+.hero h1{font-size:42px;}
 }
 @media(max-width:650px){
-.logo{
-font-size:26px;
-}
-.hero{
-padding:25px;
-}
-.hero h1{
-font-size:34px;
-}
-.hero p{
-font-size:15px;
-}
-.section-title{
-font-size:24px;
-}
-.download-card{
-flex-direction:column;
-align-items:flex-start;
-}
-.version{
-font-size:21px;
-}
-.download-btn{
-width:100%;
-text-align:center;
-}
+.logo{font-size:26px;}
+.hero{padding:25px;}
+.hero h1{font-size:34px;}
+.hero p{font-size:15px;}
+.section-title{font-size:24px;}
+.download-card{flex-direction:column;align-items:flex-start;}
+.version{font-size:21px;}
+.download-btn{width:100%;text-align:center;}
 }
 </style>
 </head>
-<script>
-document.querySelectorAll(".download-btn").forEach(btn => {
-
-btn.addEventListener("click", async e => {
-
-if(btn.href.includes("files.catbox.moe")){
-
-e.preventDefault();
-
-const fileName = btn.getAttribute("data-name");
-
-const response = await fetch(btn.href);
-
-const blob = await response.blob();
-
-const url = window.URL.createObjectURL(blob);
-
-const a = document.createElement("a");
-
-a.href = url;
-
-a.download = fileName;
-
-document.body.appendChild(a);
-
-a.click();
-
-a.remove();
-
-window.URL.revokeObjectURL(url);
-
-}
-
-});
-
-});
-</script>
 <body>
 <header class="topbar">
-<div class="logo">
-<span>Alam Craft to download Minecraft</span></span>
-</div>
+<div class="logo"><span>Alam Craft to download Minecraft</span></div>
 </header>
 <div class="container">
 <section class="hero">
 <div class="hero-left">
-<h1>
-Download Minecraft APK for
-<span>Android</span>
-</h1>
-<p>
-Download the latest Minecraft Bedrock APK versions with fast direct download links and smooth installation.
-</p>
-<a href="https://www.mediafire.com/file/8n4vhj7ekcckkoq/minecraft-26-20.apk/file" class="hero-btn" target="_blank">
-DOWNLOAD LATEST APK
-</a>
+<h1>Download Minecraft APK for <span>Android</span></h1>
+<p>Download the latest Minecraft Bedrock APK versions with fast direct download links and smooth installation.</p>
+<a href="https://www.mediafire.com/file/8n4vhj7ekcckkoq/minecraft-26-20.apk/file" class="hero-btn" target="_blank">DOWNLOAD LATEST APK</a>
 </div>
 </section>
 <div class="posts">
-<h2 class="section-title">
-Latest Minecraft APK Versions
-</h2>
+<h2 class="section-title">Latest Minecraft APK Versions</h2>
 
-<!-- MCPE 26.20 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -259,7 +74,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/8n4vhj7ekcckkoq/minecraft-26-20.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 26.13 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -271,7 +85,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/8j0t3qmh3bkqyew/minecraft-26-13.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 26.10 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -283,7 +96,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/2u7jkud05v4uvs1/minecraft-26-10.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 26.3 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -295,7 +107,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/puo576ol70pq2ei/minecraft-26-3.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 26.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -307,7 +118,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/8rxqdpihlk91i6h/minecraft-26-0.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.120 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -319,7 +129,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/wlzgyezdfaoeu01/minecraft-1-21-120.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.100 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -331,7 +140,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/ivrrt010oyfo5nq/minecraft-1-21-100.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.90 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -343,7 +151,17 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/o4aqucjw1fczill/minecraft-1-21-90.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.80 -->
+<div class="download-card">
+<div class="card-left">
+<img src="https://i.ibb.co/BHGj98H8/icon.png">
+<div>
+<div class="version">MCPE 1.21.81</div>
+<div class="info">Smooth gameplay and bug fixes.</div>
+</div>
+</div>
+<a href="https://www.mediafire.com/file/yus8ebk271m809s/minecraft-1-21-81.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
+</div>
+
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -355,7 +173,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/tphanp9hc1m2fzt/minecraft-1-21-80.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.71 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -367,7 +184,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/2fr05zme6do4vsq/minecraft-1-21-71.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.60 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -379,8 +195,7 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/bp1n76uq2opdjqh/minecraft-1-21-60.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.50 -->
-<div class="download-card">
+  <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
 <div>
@@ -391,7 +206,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/vuesgko6g9nqr28/minecraft-1-21-50.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.41 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -403,7 +217,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/0nzvjwm9lratuml/minecraft-1-21-41.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.21.20 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -415,7 +228,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/easnknw6sv2iceq/minecraft-1-21-20.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.20.41 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/BHGj98H8/icon.png">
@@ -427,7 +239,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/wh3dpg3rxc4duwq/minecraft-1-20-41.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.19.51 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -439,7 +250,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/nvxem1b4s7jw6mo/minecraft-1-19-51.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.17.41 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -451,7 +261,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/vjpyklw3lsccuw4/minecraft-1-17-41.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.14.60 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -463,7 +272,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/clgj2t32m8loa46/mcpe-1-14-60-5-xbox.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.13.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -475,7 +283,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/ak257uvrevn6kmo/minecraft-1-13-0-34-xbox-servers-skins.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.12.1 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -487,7 +294,17 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/usc3vio1175cd7u/minecraft-1-12-1.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.11.3 -->
+<div class="download-card">
+<div class="card-left">
+<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
+<div>
+<div class="version">MCPE 1.11.4</div>
+<div class="info">Old Minecraft PE version with classic UI.</div>
+</div>
+</div>
+<a href="https://www.mediafire.com/file/sgdyftzke5a4cnk/minecraft-pe-1-11-4.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
+</div>
+
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -499,7 +316,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/0lt9med1rzbtc7d/minecraft-1-11-3.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.10.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -511,7 +327,6 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/1nq6s1ghkv5ogtx/minecraft-1-10-0-7-xbox-servers-skins.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.9.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
@@ -523,119 +338,17 @@ Latest Minecraft APK Versions
 <a href="https://www.mediafire.com/file/7wwvx9xlgeeadq0/minecraft-1-9-0.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 1.8.1 -->
 <div class="download-card">
 <div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.8.1</div>
-<div class="info">Classic Bedrock update with old multiplayer support.</div>
-</div>
-</div>
-<a href="https://files.catbox.moe/fxachv.apk"
-data-name="minecraft-1-8-1.apk"
-class="download-btn">
-DOWNLOAD
-</a>
-</div>
-
-<!-- MCPE 1.7.0 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.7.0</div>
-<div class="info">Old Minecraft PE multiplayer update.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/7pugj9racewj809/minecraft-pe-1-7-0.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 1.6.1 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.6.1</div>
-<div class="info">Classic Minecraft PE with Xbox support.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/xm7vt07x69t4on7/minecraft-1-6-1-clone-xbox-servers-skins.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 1.5.3 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.5.3</div>
-<div class="info">Popular classic Bedrock version.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/1xdvnif9hrq5hvw/minecraft-1-5-3.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 1.2.0 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/gKgz6wy/33eef535b2ffa74da6a14c01834f2932.jpg">
-<div>
-<div class="version">MCPE 1.2.0</div>
-<div class="info">Legacy Pocket Edition release.</div>
-</div>
-</div>
-<a href="https://www.mediafire.com/file/vkfrb2zcixn47wg/minecraft-pe-1-2-0.apk/file" class="download-btn" target="_blank">DOWNLOAD</a>
-</div>
-
-<!-- MCPE 1.1.5 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/WWFj1f6d/7263d32d0ab64e4928d4939d556d74dc.jpg">
-<div>
-<div class="version">MCPE 1.1.5</div>
-<div class="info">Stable Pocket Edition release for Android.</div>
-</div>
-</div>
-<a href="https://files.catbox.moe/jlhaqn.apk"
-data-name="minecraft-1-1-5.apk"
-class="download-btn">
-DOWNLOAD
-</a>
-</div>
-
-<!-- MCPE 1.0.9 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/WWFj1f6d/7263d32d0ab64e4928d4939d556d74dc.jpg">
-<div>
-<div class="version">MCPE 1.0.9</div>
-<div class="info">Old Minecraft PE version with smooth gameplay.</div>
-</div>
-</div>
-<a href="https://files.catbox.moe/hmh3k6.apk"
-data-name="minecraft-1-0-9.apk"
-class="download-btn">
-DOWNLOAD
-</a>
-</div>
-
-<!-- MCPE 0.16.2 -->
-<div class="download-card">
-<div class="card-left">
-<img src="https://i.ibb.co/BV7dFms4/840abf231d218b01d1539af30e82725f.jpg">
+<img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
 <div>
 <div class="version">MCPE 0.16.2</div>
 <div class="info">Popular old Pocket Edition update.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/kw2tqj.apk"
-data-name="minecraft-0-16-2.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-16-2.apk/minecraft-0-16-2.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.14.3 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -644,14 +357,9 @@ DOWNLOAD
 <div class="info">Classic redstone update for Minecraft PE.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/r5l9h8.apk"
-data-name="minecraft-0-14-3.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-14-3.apk/minecraft-pe-0-14-3.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.12.3 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -660,14 +368,9 @@ DOWNLOAD
 <div class="info">One of the most famous old PE versions.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/3qu65o.apk"
-data-name="minecraft-0-12-3.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-12-3.apk/minecraft-0-12-3.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.11.1 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -676,14 +379,9 @@ DOWNLOAD
 <div class="info">Old-school Minecraft Pocket Edition build.</div>
 </div>
 </div>
-<a href="https://files.catbox.moe/gylrom.apk"
-data-name="minecraft-0-11-1.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-11-1.apk/minecraft-pe-0-11-1.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.10.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -692,13 +390,9 @@ DOWNLOAD
 <div class="info">Classic old Minecraft PE update.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-10-0.apk/minecraft-pe-0-10-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-10-0.apk/minecraft-pe-0-10-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.9.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -707,13 +401,9 @@ DOWNLOAD
 <div class="info">First infinite worlds update for Pocket Edition.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-9-0.apk/minecraft-0-9-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-9-0.apk/minecraft-0-9-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.8.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -722,13 +412,9 @@ DOWNLOAD
 <div class="info">Extremely old Minecraft PE release.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-8-0.apk/minecraft-0-8-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-8-0.apk/minecraft-0-8-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.7.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -737,13 +423,9 @@ DOWNLOAD
 <div class="info">Rare classic Pocket Edition version.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-7-0.apk/minecraft-pe-0-7-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-7-0.apk/minecraft-pe-0-7-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.6.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -752,13 +434,9 @@ DOWNLOAD
 <div class="info">Very rare old Minecraft PE build.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-6-0.apk/minecraft-pe-0-6-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-6-0.apk/minecraft-pe-0-6-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.5.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -767,13 +445,9 @@ DOWNLOAD
 <div class="info">One of the oldest playable Minecraft PE versions.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-5-0.apk/minecraft-pe-0-5-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-5-0.apk/minecraft-pe-0-5-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.4.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -782,13 +456,9 @@ DOWNLOAD
 <div class="info">Classic early Pocket Edition release.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-4-0.apk/minecraft-pe-0-4-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-4-0.apk/minecraft-pe-0-4-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.3.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -797,13 +467,9 @@ DOWNLOAD
 <div class="info">Very early Minecraft Pocket Edition build.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-3-0.apk/minecraft-pe-0-3-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-3-0.apk/minecraft-pe-0-3-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.2.0 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -812,13 +478,9 @@ DOWNLOAD
 <div class="info">Old alpha Minecraft PE version.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-2-0.apk/minecraft-pe-0-2-0.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-pe-0-2-0.apk/minecraft-pe-0-2-0.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
 
-<!-- MCPE 0.1.1 -->
 <div class="download-card">
 <div class="card-left">
 <img src="https://i.ibb.co/d0KJMmKQ/2ae497925b5870c3f8e39919ceb055ff.jpg">
@@ -827,13 +489,11 @@ DOWNLOAD
 <div class="info">One of the first Minecraft PE versions ever released.</div>
 </div>
 </div>
-<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-1-1.apk/minecraft-0-1-1.apk"
-class="download-btn">
-DOWNLOAD
-</a>
+<a href="https://github.com/acrft/Minecraft-versions/releases/download/minecraft-0-1-1.apk/minecraft-0-1-1.apk" class="download-btn" target="_blank">DOWNLOAD</a>
 </div>
-<footer>
-© MC Download APK - Not affiliated with Mojang Studios.
-</footer>
+
+</div>
+<footer>© MC Download APK - Not affiliated with Mojang Studios.</footer>
+</div>
 </body>
 </html>
