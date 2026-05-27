@@ -1,723 +1,905 @@
-/* Minecraft Font */
-@font-face {
-  font-family: 'Mojangles';
-  src: url('fonts/Mojangles.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@font-face{
+font-family:'Mojangles';
+src:url('fonts/Mojangles.ttf') format('truetype');
 }
-
-/* Pixel Arabic Font */
-@font-face {
-  font-family: 'Arapix';
-  src: url('fonts/MojanglesArab.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@font-face{
+font-family:'Arapix';
+src:url('fonts/MojanglesArab.ttf') format('truetype');
 }
-
-/* =========================================
-   1. VARIABLES & THEMES
-   ========================================= */
 :root{
-  --bg:#041321;
-  --card:rgba(17,32,53,.92);
-
-  --text:#fff7d1;
-  --text-muted:#c8d29b;
-
-  --primary:#d4af37;
-  --accent:#0f3b30;
-
-  --gold:#ffd966;
-
-  --shadow:rgba(255,217,102,.18);
-
-  --main-font:'Arapix',sans-serif;
+--bg:#041321;
+--card:rgba(17,32,53,.92);
+--text:#fff7d1;
+--text-muted:#c8d29b;
+--primary:#d4af37;
+--accent:#0f3b30;
+--gold:#ffd966;
+--shadow:rgba(255,217,102,.18);
+--main-font:'Arapix',sans-serif;
 }
-
-body.light-theme {
-  --bg: #f1f5f9;
-  --card: #ffffff;
-  --text: #1e293b;
-  --text-muted: #64748b;
-  --primary: #16a34a; /* Darker green */
-  --accent: #e2e8f0; /* Light grey */
-  --shadow: rgba(0, 0, 0, 0.1);
+body.light-theme{
+--bg:#f1f5f9;
+--card:#fff;
+--text:#1e293b;
+--text-muted:#64748b;
+--primary:#16a34a;
+--accent:#e2e8f0;
+--shadow:rgba(0,0,0,.1);
 }
-
-/* =========================================
-   2. GLOBAL STYLES
-   ========================================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  }
-
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+user-select:none;
+-webkit-user-select:none;
+}
 body{
-
-background:
-radial-gradient(circle at top,#0f2844,#041321 70%);
-
+background:radial-gradient(circle at top,#0f2844,#041321 70%);
 color:var(--text);
-
 font-family:var(--main-font);
-
 image-rendering:pixelated;
-
 display:flex;
-
 justify-content:center;
-
 padding:20px;
-
 line-height:1.6;
-
 position:relative;
-
 overflow-x:hidden;
-
 min-height:100vh;
 }
-
 body::before{
 content:"";
-
 position:fixed;
-
 inset:0;
-
-background:
-radial-gradient(#fff 1px,transparent 1px);
-
+background:radial-gradient(#fff 1px,transparent 1px);
 background-size:45px 45px;
-
 opacity:.08;
-
 pointer-events:none;
 }
-
 body::after{
-
 content:"🌙";
-
 position:fixed;
-
 left:-20px;
-
 bottom:-20px;
-
 font-size:160px;
-
 opacity:.15;
-
 filter:drop-shadow(0 0 25px gold);
-
 pointer-events:none;
 }
-
-.container {
-  width: 100%;
-  max-width: 900px;
+.container{
+width:100%;
+max-width:900px;
 }
-
-html[lang='en'] {
-  --main-font: 'Mojangles', sans-serif;
+html[lang='en']{
+--main-font:'Mojangles',sans-serif;
 }
-
-/* =========================================
-   3. COMPONENTS (CARDS & BUTTONS)
-   ========================================= */
 .card{
-
-background:
-linear-gradient(
-180deg,
-rgba(22,37,59,.95),
-rgba(10,20,36,.95)
-);
-
-border:
-
-2px solid rgba(212,175,55,.25);
-
+background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));
+border:2px solid rgba(212,175,55,.25);
 border-radius:22px;
-
 padding:24px;
-
 margin-bottom:20px;
-
-box-shadow:
-
-0 0 40px rgba(0,0,0,.5),
-
-0 0 20px rgba(255,215,0,.1);
-
+box-shadow:0 0 40px rgba(0,0,0,.5),0 0 20px rgba(255,215,0,.1);
 }
-
-.hero {
-  text-align: center;
-  padding: 40px 0;
+.hero{
+text-align:center;
+padding:40px 0;
 }
-
 .logo{
-
 width:140px;
-
 border-radius:24px;
-
-filter:
-
-drop-shadow(0 0 25px gold);
-
+filter:drop-shadow(0 0 25px gold);
 animation:eid 3s infinite;
 }
-
 @keyframes eid{
-
 50%{
-
-transform:
-translateY(-8px);
-
+transform:translateY(-8px);
 }
-
 }
-
-/* IP Connection Area */
-.ip-wrapper {
-  background-color: var(--bg);
-  padding: 12px 20px;
-  border-radius: 8px;
-
-  display: flex;
-  flex-direction: column;   /* يخلي IP فوق والزر تحت */
-  align-items: center;      /* يوسّطهم */
-  gap: 10px;
+.ip-wrapper{
+background:var(--bg);
+padding:12px 20px;
+border-radius:16px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
 }
-
-.ip-text {
-  direction: ltr;       /* يخلي الـ IP يتقري صح */
-  text-align: center;   /* يخليه في النص */
-  font-weight: bold;
+.ip-text{
+direction:ltr;
+text-align:center;
+font-weight:bold;
 }
-
 .btn-copy,
 .btn-bedrock,
-.control-btn,
 .minecraft-btn{
-
-background:
-
-linear-gradient(
-180deg,
-#e0c96f,
-#b68c22
-)!important;
-
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+padding:14px 20px;
+border:none!important;
+border-radius:18px!important;
+background:linear-gradient(180deg,#ffe082,#c79a1c)!important;
 color:#102236!important;
-
-border:
-
-2px solid #ffe082;
-
+text-decoration:none;
+font-family:var(--main-font)!important;
+font-size:1rem;
+font-weight:bold;
+box-shadow:0 0 25px rgba(255,215,0,.35);
+transition:.25s;
+cursor:pointer;
 }
-
-.btn-copy {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  direction: ltr; /* يخلي الإيموجي شمال والنص يمين */
+.btn-copy:hover,
+.btn-bedrock:hover,
+.minecraft-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 35px gold;
 }
-
-.btn-copy span:first-child {
-  direction: ltr;
+.control-btn{
+width:60px;
+height:60px;
+border:none;
+border-radius:50%!important;
+background:linear-gradient(180deg,#ffe082,#c79a1c)!important;
+color:#102236!important;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,215,0,.3);
 }
-
-.btn-bedrock {
-  width: 100%;
-  margin-top: 5px;
-  font-size: 1rem;
+.section-title{
+color:var(--gold);
+font-size:1.4rem;
+text-shadow:0 0 18px rgba(255,215,0,.7);
 }
-
-.pulse {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+.container::before{
+content:"🏮";
+position:fixed;
+right:15px;
+top:130px;
+font-size:60px;
+animation:float 4s infinite;
 }
-
-/* =========================================
-   VERSION BADGES - THEME & ALIGNMENT FIX
-   ========================================= */
-.version-badges {
-  display: flex;
-  gap: 10px; /* Controls the space between the two badges */
-  justify-content: center;
-  margin: 10px 0 20px 0; /* Reduced top margin to stay close to the IP */
+.container::after{
+content:"🏮";
+position:fixed;
+left:15px;
+top:250px;
+font-size:60px;
+animation:float 5s infinite;
 }
-
-.badge {
-  /* Use variables instead of hardcoded colors */
-  background-color: var(--accent) !important;
-  color: var(--text) !important;
-  border: 1.5px solid var(--primary);
-
-  padding: 10px 18px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
+@keyframes float{
+50%{
+transform:translateY(15px);
 }
-
-/* Fix for the label text (Java/Bedrock) to be readable in both modes */
-.badge .label {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  text-transform: uppercase;
+  }
+.version-badges{
+display:flex;
+gap:10px;
+justify-content:center;
+margin:10px 0 20px;
 }
-
-/* Force all interactive elements to use the pixel fonts */
+.badge{
+background:var(--accent)!important;
+color:var(--text)!important;
+border:1.5px solid var(--primary);
+padding:10px 18px;
+border-radius:10px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:.95rem;
+font-weight:600;
+transition:.3s;
+}
+.badge .label{
+color:var(--text-muted);
+font-size:.85rem;
+text-transform:uppercase;
+}
 .badge,
 .social-item,
 .btn-copy,
-.btn-bedrock {
-  font-family: var(--main-font) !important;
-  /* This ensures the pixel font stays crisp on buttons */
-  -webkit-font-smoothing: none;
-  text-rendering: optimizeSpeed;
+.btn-bedrock{
+font-family:var(--main-font)!important;
+-webkit-font-smoothing:none;
+text-rendering:optimizeSpeed;
 }
-
-/* Specifically for the Arabic Arapix font on buttons */
 html[lang='ar'] button,
-html[lang='ar'] .badge {
-  font-size: 1.1rem; /* Arapix sometimes needs to be a bit bigger to be readable */
-  line-height: 1.2;
+html[lang='ar'] .badge{
+font-size:1.1rem;
+line-height:1.2;
 }
-
-/* =========================================
-   4. RULES & GRID (LAYOUT)
-   ========================================= */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 20px;
+.content-grid{
+display:grid;
+grid-template-columns:1.4fr 1fr;
+gap:20px;
 }
-
-@media (max-width: 768px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
+@media(max-width:768px){
+.content-grid{
+grid-template-columns:1fr;
 }
-
-.rules-list {
-  list-style: none;
-  text-align: start !important; /* Respects LTR/RTL flip */
 }
-
-.rules-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--accent);
-  display: block;
-  unicode-bidi: isolate; /* Keeps emojis from flipping weirdly */
+.rules-list{
+list-style:none;
+text-align:start!important;
 }
-
-/* =========================================
-   5. SOCIAL LINKS & STAFF
-   ========================================= */
-.social-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.rules-list li{
+padding:10px 0;
+border-bottom:1px solid var(--accent);
+display:block;
+unicode-bidi:isolate;
 }
-
-.social-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--text) !important;
-  padding: 12px;
-  background-color: var(--accent) !important;
-  border-radius: 8px;
+.social-links{
+display:flex;
+flex-direction:column;
+gap:12px;
 }
-
-.link-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  border-radius: 0 !important; /* FORCED SQUARE */
-  flex-shrink: 0;
+.social-item{
+display:flex;
+align-items:center;
+gap:12px;
+text-decoration:none;
+color:var(--text)!important;
+padding:12px;
+background:var(--accent)!important;
+border-radius:12px;
+transition:.25s;
 }
-
-/* =========================================
-   6. PERSISTENT CONTROLS (THEME/LANG)
-   ========================================= */
-.fixed-controls {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: auto;
-
-  display: flex;
-  flex-direction: row;   /* مهم */
-  direction: ltr;        /* أهم حاجة 🔥 */
-
-  gap: 10px;
-  z-index: 1000;
-  transition: bottom 0.3s ease;
-  }
-
-.control-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background-color: var(--primary) !important;
-  color: white !important;
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.social-item:hover{
+transform:translateY(-3px);
+box-shadow:0 0 25px rgba(255,215,0,.2);
 }
-
-html[lang='ar'] .control-btn {
-  font-size: 22px !important;
+.link-icon{
+width:24px;
+height:24px;
+object-fit:contain;
+flex-shrink:0;
 }
-
-/* =========================================
-   7. UTILITY
-   ========================================= */
-#toast {
-  position: absolute;
-  top: -35px; /* Adjust this to move it higher or lower */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #22c55e;
-  color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  z-index: 100;
-  pointer-events: none; /* So it doesn't block clicks */
-  animation: fadeInOut 2s ease-in-out;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 10px);
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  80% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -10px);
-  }
-}
-
-#toast.show {
-  top: 30px;
-}
-
-.section-title{
-
-color:var(--gold);
-
-font-size:1.4rem;
-
-text-shadow:
-
-0 0 18px rgba(255,215,0,.7);
-
-}
-
-/* =========================================
-   8. SERVER STATUS COLORS 
-   ========================================= */
-.status-card {
-  padding: 15px 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.status-card:hover {
-  transform: translateY(-5px); /* Gentle lift */
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); /* Green glow */
-  border-color: #22c55e;
-}
-
-.status-card:has(.dot-offline):hover {
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-  border-color: #ef4444;
-}
-
-.status-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.status-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #6b7280; /* Gray by default */
-  box-shadow: 0 0 10px rgba(107, 114, 128, 0.5);
-}
-
-/* Online Glow */
-.dot-online {
-  background-color: #22c55e;
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.7);
-}
-
-/* Offline Glow */
-.dot-offline {
-  background-color: #ef4444;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.7);
-}
-
-.player-count {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-family: var(--main-font);
-}
-
-/* =========================================
-    10. FOOTER GRASS & DIRT DESIGN
-   ========================================= */
-
-.grass-top {
-  width: 100%;
-  height: 12px;
-  background: #5aa13d;
-  border-top: 4px solid #4d8a34;
-}
-
-.dirt-body {
-  width: 100%;
-  height: 80px; /* Make it a bit taller to feel like solid ground */
-  background-color: #795548;
-  background-image:
-    linear-gradient(45deg, #6d4c41 25%, transparent 25%),
-    linear-gradient(-45deg, #6d4c41 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #6d4c41 75%),
-    linear-gradient(-45deg, transparent 75%, #6d4c41 75%);
-  background-size: 20px 20px;
-  display: flex;
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-  color: #ffffff; /* Makes sure text is readable on dirt */
-  text-shadow: 2px 2px 0px #000; /* Gives it that MC text "pop" */
-  font-family: var(--main-font);
-}
-
-/* =========================================
-    11. SCROLL PROGRESS BAR
-   ========================================= */
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%; /* Starts at 0 */
-  height: 5px;
-  background: #22c55e; /* Minecraft Green */
-  z-index: 1000;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-}
-
-/* =========================================
-    12. PING DISPLAY
-   ========================================= */
-.ping-container {
-  margin-left: 10px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  opacity: 0.8;
-}
-
-#ping-value {
-  font-weight: bold;
-  font-variant-numeric: tabular-nums; /* Keeps the numbers from jumping around */
-}
-
-/* =========================================
-    13. MODS SECTION
-   ========================================= */
-/* The Main Container */
-.mods-section {
-  margin: 25px 0; /* Creates space between the section above and below */
-}
-
-/* The Actual List Logic */
-.mods-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
-
-.mods-list li {
-  background: rgba(255, 255, 255, 0.03); /* Very subtle contrast */
-  padding: 10px 15px;
-  border-radius: 8px;
-  color: var(--text); /* ✔️ يتغير حسب الثيم */
-  font-family: 'Minecraft', sans-serif; /* Use your server's font */
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Fix for Arabic alignment if needed */
-[lang='ar'] .mods-list li {
-  direction: rtl;
-  text-align: right;
-}
-
-
-.minecraft-btn {
-    display: inline-block;
-    background-color: #55AA55; /* Minecraft Green */
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    font-family: 'Press Start 2P', cursive; /* Matches your download center font */
-    font-size: 12px;
-    
-    /* Pixel-art border style */
-    border-bottom: 4px solid #224422;
-    border-right: 4px solid #224422;
-    border-top: 4px solid #AAFFAA;
-    border-left: 4px solid #AAFFAA;
-    
-    text-shadow: 2px 2px #224422;
-    transition: all 0.1s ease;
-}
-
-.minecraft-btn:hover {
-    background-color: #66CC66;
-    transform: scale(1.05);
-}
-
-.minecraft-btn:active {
-    /* "Pressed" effect */
-    border: 4px solid #224422;
-    transform: translateY(2px);
-}
-
-.mods-container {
-  background: var(--card) !important;
-  border: 1px solid var(--accent) !important;
-  border-radius: 12px;
-  padding: 0;
-  overflow: hidden;
-}
-
-.mod-item {
-  padding: 12px;
-  border-radius: 10px;
-
-  background: var(--card);
-  border: 1px solid var(--accent);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-
-  color: var(--text);
-
-  font-family: var(--main-font);
-
-  text-align: center;
-  direction: rtl;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Hover effect that works in both modes */
-.mod-item:hover {
-    background: rgba(255, 255, 255, 0.03) !important;
-}
-
-.mod-item:last-child {
-    border-bottom: none !important;
-}
-
-/* عربي */
-html[lang='ar'] .mod-item {
-  font-family: 'Arapix', sans-serif;
-}
-
-/* إنجليزي */
-html[lang='en'] .mod-item {
-  font-family: 'Mojangles', sans-serif;
-  }
-
- .container::before{
-
-content:"🏮";
-
+.fixed-controls{
 position:fixed;
-
-right:15px;
-
-top:130px;
-
-font-size:60px;
-
-animation:float 4s infinite;
+bottom:20px;
+left:20px;
+display:flex;
+gap:10px;
+z-index:1000;
+transition:.3s;
 }
-
-.container::after{
-
-content:"🏮";
-
+.control-btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 30px gold;
+}
+#toast{
+position:absolute;
+top:-35px;
+left:50%;
+transform:translateX(-50%);
+background:#22c55e;
+color:#fff;
+padding:6px 12px;
+border-radius:8px;
+font-size:12px;
+z-index:100;
+pointer-events:none;
+animation:fadeInOut 2s ease;
+}
+@keyframes fadeInOut{
+0%{
+opacity:0;
+transform:translate(-50%,10px);
+}
+20%{
+opacity:1;
+transform:translate(-50%,0);
+}
+80%{
+opacity:1;
+transform:translate(-50%,0);
+}
+100%{
+opacity:0;
+transform:translate(-50%,-10px);
+}
+}
+#toast.show{
+top:30px;
+  }
+.status-card{
+padding:15px 25px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+transition:transform .3s,box-shadow .3s;
+cursor:pointer;
+}
+.status-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 30px rgba(255,215,0,.35);
+border-color:var(--primary);
+}
+.status-header{
+display:flex;
+align-items:center;
+gap:15px;
+}
+.status-dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#6b7280;
+box-shadow:0 0 10px rgba(107,114,128,.5);
+}
+.dot-online{
+background:#22c55e;
+box-shadow:0 0 20px rgba(34,197,94,.8);
+}
+.dot-offline{
+background:#ef4444;
+box-shadow:0 0 20px rgba(239,68,68,.8);
+}
+.player-count{
+font-size:.9rem;
+color:var(--text-muted);
+font-family:var(--main-font);
+}
+.grass-top{
+width:100%;
+height:12px;
+background:linear-gradient(90deg,#69d44c,#4da537);
+border-top:4px solid #8fff5d;
+}
+.dirt-body{
+width:100%;
+height:80px;
+background:
+linear-gradient(45deg,#7a5640 25%,transparent 25%),
+linear-gradient(-45deg,#7a5640 25%,transparent 25%),
+linear-gradient(45deg,transparent 75%,#7a5640 75%),
+linear-gradient(-45deg,transparent 75%,#7a5640 75%);
+background-size:20px 20px;
+background-color:#5f4330;
+display:flex;
+justify-content:center;
+align-items:center;
+color:#fff;
+text-shadow:2px 2px 0 #000;
+font-family:var(--main-font);
+}
+#scroll-progress{
 position:fixed;
-
+top:0;
+left:0;
+width:0%;
+height:5px;
+background:linear-gradient(90deg,#ffe082,#c79a1c);
+z-index:1000;
+box-shadow:0 0 15px gold;
+}
+.ping-container{
+margin-left:10px;
+font-size:.9rem;
+opacity:.8;
+}
+#ping-value{
+font-weight:bold;
+font-variant-numeric:tabular-nums;
+}
+.mods-section{
+margin:25px 0;
+}
+.mods-list{
+list-style:none;
+padding:0;
+margin:0;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+}
+.mods-list li{
+background:rgba(255,255,255,.03);
+padding:10px 15px;
+border-radius:12px;
+color:var(--text);
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid rgba(255,215,0,.12);
+transition:.25s;
+}
+.mods-list li:hover{
+background:rgba(255,215,0,.08);
+transform:translateY(-2px);
+box-shadow:0 0 20px rgba(255,215,0,.15);
+}
+[lang='ar'] .mods-list li{
+direction:rtl;
+text-align:right;
+}
+.mods-container{
+background:var(--card)!important;
+border:1px solid var(--accent)!important;
+border-radius:18px;
+padding:10px;
+overflow:hidden;
+}
+.mod-item{
+padding:12px;
+border-radius:12px;
+background:var(--card);
+border:1px solid rgba(255,215,0,.15);
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+color:var(--text);
+font-family:var(--main-font);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.mod-item:hover{
+background:rgba(255,215,0,.05)!important;
+}
+.mod-item:last-child{
+border-bottom:none;
+}
+html[lang='ar'] .mod-item{
+font-family:'Arapix',sans-serif;
+}
+html[lang='en'] .mod-item{
+font-family:'Mojangles',sans-serif;
+  }
+.footer{
+margin-top:30px;
+overflow:hidden;
+border-radius:18px;
+}
+.footer p{
+font-size:.95rem;
+text-align:center;
+}
+.connection{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+.server-status{
+margin-top:15px;
+}
+.pulse{
+list-style:none;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+}
+.pulse li{
+padding:10px 16px;
+background:rgba(255,215,0,.08);
+border:1px solid rgba(255,215,0,.15);
+border-radius:999px;
+box-shadow:0 0 15px rgba(255,215,0,.08);
+font-size:.95rem;
+}
+.staff-card{
+text-align:center;
+}
+.admins-text{
+color:var(--text-muted);
+font-size:1rem;
+line-height:2;
+}
+.rules-card{
+position:relative;
+overflow:hidden;
+}
+.rules-card::before{
+content:"✨";
+position:absolute;
 left:15px;
-
-top:250px;
-
-font-size:60px;
-
-animation:float 5s infinite;
+top:15px;
+opacity:.3;
+font-size:40px;
 }
-
-@keyframes float{
-
+.rules-card::after{
+content:"🌙";
+position:absolute;
+right:20px;
+bottom:20px;
+opacity:.08;
+font-size:80px;
+}
+.status-card,
+.rules-card,
+.social-card,
+.staff-card,
+.mods-section{
+transition:transform .3s,box-shadow .3s;
+}
+.status-card:hover,
+.rules-card:hover,
+.social-card:hover,
+.staff-card:hover,
+.mods-section:hover{
+transform:translateY(-4px);
+box-shadow:0 0 30px rgba(255,215,0,.18);
+}
+@media(max-width:768px){
+.hero{
+padding:20px 0;
+}
+.logo{
+width:110px;
+}
+.section-title{
+font-size:1.15rem;
+}
+.control-btn{
+width:54px;
+height:54px;
+}
+.ip-wrapper{
+padding:12px;
+}
+.btn-copy,
+.btn-bedrock,
+.minecraft-btn{
+font-size:.92rem;
+}
+}
+html{
+scroll-behavior:smooth;
+}
+::-webkit-scrollbar{
+width:10px;
+}
+::-webkit-scrollbar-track{
+background:#08131f;
+}
+::-webkit-scrollbar-thumb{
+background:linear-gradient(180deg,#ffe082,#c79a1c);
+border-radius:999px;
+}
+::-webkit-scrollbar-thumb:hover{
+background:linear-gradient(180deg,#fff0b2,#d7a82d);
+}
+body.loaded{
+animation:pageFade .5s;
+}
+@keyframes pageFade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+  }
+.hero h1{
+color:var(--gold);
+font-size:2.2rem;
+text-shadow:0 0 25px rgba(255,215,0,.6);
+}
+.hero h1::before{
+content:"✨ ";
+}
+.hero h1::after{
+content:" ✨";
+}
+.connection .badge{
+background:rgba(255,215,0,.08)!important;
+border:1px solid rgba(255,215,0,.18);
+backdrop-filter:blur(6px);
+}
+.version-badges{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+.badge:hover{
+transform:translateY(-2px);
+box-shadow:0 0 20px rgba(255,215,0,.18);
+}
+#status-text{
+color:var(--gold);
+}
+.player-count{
+font-size:1rem;
+}
+.ping-container{
+opacity:.9;
+}
+#ping-value{
+color:#ffe082;
+}
+.link-icon{
+filter:drop-shadow(0 0 6px rgba(255,215,0,.4));
+}
+.social-card{
+overflow:hidden;
+position:relative;
+}
+.social-card::before{
+content:"🏮";
+position:absolute;
+top:10px;
+left:15px;
+opacity:.25;
+font-size:55px;
+}
+.mods-section{
+position:relative;
+}
+.mods-section::after{
+content:"⭐";
+position:absolute;
+top:15px;
+right:15px;
+font-size:26px;
+opacity:.4;
+}
+.footer{
+box-shadow:0 0 30px rgba(255,215,0,.12);
+}
+.dirt-body p{
+color:#ffe082;
+}
+.fixed-controls{
+backdrop-filter:blur(8px);
+}
+.control-btn:active{
+transform:scale(.95);
+}
+.logo:hover{
+transform:scale(1.05);
+filter:drop-shadow(0 0 40px gold);
+}
+.card:hover{
+border-color:rgba(255,215,0,.45);
+}
+body::selection{
+background:#ffe082;
+color:#102236;
+}
+img{
+user-select:none;
+-webkit-user-drag:none;
+}
+a{
+-webkit-tap-highlight-color:transparent;
+}
+button{
+outline:none;
+}
+button:focus{
+outline:none;
+  }
+.footer::before{
+content:"";
+display:block;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#ffe082,#c79a1c,#ffe082);
+}
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);
+pointer-events:none;
+}
+.card{
+position:relative;
+overflow:hidden;
+}
+.rules-list li:hover{
+padding-right:10px;
+color:#ffe082;
+transition:.2s;
+}
+.admins-text:hover{
+text-shadow:0 0 12px rgba(255,215,0,.5);
+}
+.ip-text{
+font-size:1.1rem;
+color:#ffe082;
+letter-spacing:1px;
+}
+.ip-wrapper:hover{
+box-shadow:0 0 25px rgba(255,215,0,.15);
+}
+.btn-copy span,
+.btn-bedrock span{
+pointer-events:none;
+}
+.status-dot{
+transition:.3s;
+}
+.dot-online{
+animation:onlineGlow 1.5s infinite;
+}
+@keyframes onlineGlow{
 50%{
-
-transform:
-translateY(15px);
-
+box-shadow:0 0 30px #22c55e;
 }
-
 }
+.dot-offline{
+animation:offlineGlow 1.5s infinite;
+}
+@keyframes offlineGlow{
+50%{
+box-shadow:0 0 30px #ef4444;
+}
+}
+.mods-list{
+margin-top:10px;
+}
+.mod-item{
+transition:.25s;
+}
+.mod-item:hover{
+transform:translateY(-2px);
+border-color:#ffe082;
+}
+.grass-top{
+box-shadow:0 0 20px rgba(106,255,90,.4);
+}
+.footer p{
+letter-spacing:.5px;
+}
+body::before{
+animation:starsMove 20s linear infinite;
+}
+@keyframes starsMove{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(60px);
+}
+}
+.container{
+position:relative;
+z-index:2;
+}
+.container>*{
+position:relative;
+z-index:2;
+}
+body::after{
+animation:moonFloat 6s ease infinite;
+}
+@keyframes moonFloat{
+50%{
+transform:translateY(-10px);
+}
+}
+.social-item img{
+transition:.25s;
+}
+.social-item:hover img{
+transform:scale(1.15);
+}
+.section-title::after{
+content:" ✨";
+}
+.section-title::before{
+content:"✨ ";
+  }
+.mods-container:hover{
+box-shadow:0 0 35px rgba(255,215,0,.15);
+}
+.badge:hover{
+transform:translateY(-2px);
+border-color:#ffe082;
+}
+.version-badges .badge:nth-child(1){
+background:rgba(255,196,0,.08)!important;
+}
+.version-badges .badge:nth-child(2){
+background:rgba(255,255,255,.03)!important;
+}
+.connection{
+position:relative;
+}
+.connection::before{
+content:"☪️";
+position:absolute;
+left:20px;
+top:15px;
+font-size:30px;
+opacity:.15;
+}
+.connection::after{
+content:"⭐";
+position:absolute;
+right:20px;
+bottom:15px;
+font-size:24px;
+opacity:.15;
+}
+.fixed-controls::before{
+content:"";
+position:absolute;
+inset:-10px;
+background:rgba(255,215,0,.05);
+filter:blur(20px);
+z-index:-1;
+border-radius:999px;
+}
+.control-btn:hover{
+transform:translateY(-3px) scale(1.06);
+}
+.social-links a{
+transition:.25s;
+}
+.social-links a:hover{
+transform:translateX(-5px);
+}
+.rules-list li:last-child{
+border-bottom:none;
+}
+.footer{
+position:relative;
+}
+.footer::after{
+content:"🌙 ⭐ 🏮";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+top:8px;
+font-size:20px;
+opacity:.4;
+}
+.logo{
+transition:.35s;
+}
+.logo:active{
+transform:scale(.95);
+}
+.hero{
+position:relative;
+}
+.hero::before{
+content:"";
+position:absolute;
+left:50%;
+top:50%;
+width:280px;
+height:280px;
+transform:translate(-50%,-50%);
+background:radial-gradient(circle,rgba(255,215,0,.08),transparent);
+filter:blur(30px);
+pointer-events:none;
+}
+body{
+animation:fadeBody .6s;
+}
+@keyframes fadeBody{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+@media(max-width:480px){
+.version-badges{
+flex-direction:column;
+}
+.pulse{
+flex-direction:column;
+}
+.control-btn{
+width:50px;
+height:50px;
+}
+.hero h1{
+font-size:1.7rem;
+}
+.logo{
+width:95px;
+}
+  }
