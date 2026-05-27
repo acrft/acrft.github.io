@@ -662,9 +662,6 @@ box-shadow:0 0 30px rgba(255,215,0,.12);
 .dirt-body p{
 color:#ffe082;
 }
-.fixed-controls{
-backdrop-filter:blur(8px);
-}
 .control-btn:active{
 transform:scale(.95);
 }
@@ -848,15 +845,6 @@ right:20px;
 bottom:15px;
 font-size:24px;
 opacity:.15;
-}
-.fixed-controls::before{
-content:"";
-position:absolute;
-inset:-10px;
-background:rgba(255,215,0,.05);
-filter:blur(20px);
-z-index:-1;
-border-radius:999px;
 }
 .control-btn:hover{
 transform:translateY(-3px) scale(1.06);
