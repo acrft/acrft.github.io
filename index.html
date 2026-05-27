@@ -5,13 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title data-i18n="title">سيرفر علم كرافت ☘️ AlamCraft Server</title>
-<link rel="stylesheet" href="style.css?v=9"/>
-<script src="app.js?v=8" defer></script>
+<link rel="stylesheet" href="style.css?v=2"/>
 <link rel="shortcut icon" href="images/OIG1.png" type="image/x-icon"/>
+<style>body{visibility:hidden}</style>
 </head>
-<body>
+<body class="dark-theme">
 <div id="scroll-progress"></div>
-<div id="toast" data-i18n="toastMsg">✔ تم نسخ IP:PORT السيرفر بنجاح</div>
+<div id="toast" data-i18n="toastMsg">✔ تم نسخ IP السيرفر</div>
 <button class="hamburger" onclick="toggleMenu()">☰</button>
 <nav class="side-menu" id="sideMenu">
 <a href="#rules" onclick="toggleMenu()">📜 القوانين</a>
@@ -57,14 +57,22 @@
 <a href="dwnlod" class="minecraft-btn" data-i18n="downloadCenterBtn">مركز التحميل</a>
 </div>
 </section>
-<section class="card mods-card" id="mods"><h2 class="section-title" data-i18n="modsTitle">المودات/الإضافات</h2><div class="mods-container"><ul id="mods-list-container" class="mods-list"></ul></div></section>
-<section class="card staff-card" id="staff"><h2 class="section-title" data-i18n="adminsTitle">👑 المشرفين</h2><p data-i18n="adminsNames" class="admins-text"></p></section>
+<section class="card mods-card" id="mods">
+<h2 class="section-title" data-i18n="modsTitle">المودات/الإضافات</h2>
+<div class="mods-container"><ul id="mods-list-container" class="mods-list"></ul></div>
+</section>
+<section class="card staff-card" id="staff">
+<h2 class="section-title" data-i18n="adminsTitle">👑 المشرفين</h2>
+<p data-i18n="adminsNames" class="admins-text"></p>
+</section>
 </div>
 </div>
-<footer class="footer"><div class="grass-top"></div><div class="dirt-body"><p data-i18n="copyright">© 2026 AlamCraft Server - جميع الحقوق محفوظة</p></div></footer>
+<footer class="footer">
+<div class="grass-top"></div>
+<div class="dirt-body"><p data-i18n="copyright">© 2026 AlamCraft Server - جميع الحقوق محفوظة</p></div>
+</footer>
 </main>
 <div class="fixed-controls"><button id="modeBtn" class="control-btn">🌙</button><button class="langBtn control-btn" onclick="toggleLanguage()">🌐</button><button class="chatBtn control-btn" onclick="window.location.href='achat'">💬</button></div>
-<script src="app.js" defer></script>
-<style>body{visibility:hidden}</style>
+<script src="app.js?v=2" defer></script>
 </body>
 </html>
