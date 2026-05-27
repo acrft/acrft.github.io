@@ -17,15 +17,21 @@
 /* =========================================
    1. VARIABLES & THEMES
    ========================================= */
-:root {
-  --bg: #0f172a;
-  --card: #1e293b;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary: #22c55e; /* Green */
-  --accent: #334155; /* Dark blue/grey */
-  --shadow: rgba(0, 0, 0, 0.3);
-  --main-font: 'Arapix', sans-serif;
+:root{
+  --bg:#041321;
+  --card:rgba(17,32,53,.92);
+
+  --text:#fff7d1;
+  --text-muted:#c8d29b;
+
+  --primary:#d4af37;
+  --accent:#0f3b30;
+
+  --gold:#ffd966;
+
+  --shadow:rgba(255,217,102,.18);
+
+  --main-font:'Arapix',sans-serif;
 }
 
 body.light-theme {
@@ -51,18 +57,66 @@ body.light-theme {
   -ms-user-select: none;
   }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--main-font); /* This handles the switch automatically */
-  image-rendering: pixelated; /* Keeps pixel fonts crisp, not blurry */
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  line-height: 1.6;
+body{
+
+background:
+radial-gradient(circle at top,#0f2844,#041321 70%);
+
+color:var(--text);
+
+font-family:var(--main-font);
+
+image-rendering:pixelated;
+
+display:flex;
+
+justify-content:center;
+
+padding:20px;
+
+line-height:1.6;
+
+position:relative;
+
+overflow-x:hidden;
+
+min-height:100vh;
+}
+
+body::before{
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+radial-gradient(#fff 1px,transparent 1px);
+
+background-size:45px 45px;
+
+opacity:.08;
+
+pointer-events:none;
+}
+
+body::after{
+
+content:"🌙";
+
+position:fixed;
+
+left:-20px;
+
+bottom:-20px;
+
+font-size:160px;
+
+opacity:.15;
+
+filter:drop-shadow(0 0 25px gold);
+
+pointer-events:none;
 }
 
 .container {
@@ -77,13 +131,31 @@ html[lang='en'] {
 /* =========================================
    3. COMPONENTS (CARDS & BUTTONS)
    ========================================= */
-.card {
-  background-color: var(--card);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 20px;
-  border: 1px solid var(--accent);
-  box-shadow: 0 10px 15px -3px var(--shadow);
+.card{
+
+background:
+linear-gradient(
+180deg,
+rgba(22,37,59,.95),
+rgba(10,20,36,.95)
+);
+
+border:
+
+2px solid rgba(212,175,55,.25);
+
+border-radius:22px;
+
+padding:24px;
+
+margin-bottom:20px;
+
+box-shadow:
+
+0 0 40px rgba(0,0,0,.5),
+
+0 0 20px rgba(255,215,0,.1);
+
 }
 
 .hero {
@@ -91,10 +163,28 @@ html[lang='en'] {
   padding: 40px 0;
 }
 
-.logo {
-  width: 100px;
-  filter: drop-shadow(0 0 10px var(--primary));
-  margin-bottom: 15px;
+.logo{
+
+width:140px;
+
+border-radius:24px;
+
+filter:
+
+drop-shadow(0 0 25px gold);
+
+animation:eid 3s infinite;
+}
+
+@keyframes eid{
+
+50%{
+
+transform:
+translateY(-8px);
+
+}
+
 }
 
 /* IP Connection Area */
@@ -116,15 +206,25 @@ html[lang='en'] {
 }
 
 .btn-copy,
-.btn-bedrock {
-  background-color: var(--primary) !important;
-  color: white !important;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  }
+.btn-bedrock,
+.control-btn,
+.minecraft-btn{
+
+background:
+
+linear-gradient(
+180deg,
+#e0c96f,
+#b68c22
+)!important;
+
+color:#102236!important;
+
+border:
+
+2px solid #ffe082;
+
+}
 
 .btn-copy {
   display: flex;
@@ -339,10 +439,16 @@ html[lang='ar'] .control-btn {
   top: 30px;
 }
 
-.section-title {
-  margin-bottom: 15px;
-  font-size: 1.25rem;
-  color: var(--primary);
+.section-title{
+
+color:var(--gold);
+
+font-size:1.4rem;
+
+text-shadow:
+
+0 0 18px rgba(255,215,0,.7);
+
 }
 
 /* =========================================
@@ -574,3 +680,44 @@ html[lang='ar'] .mod-item {
 html[lang='en'] .mod-item {
   font-family: 'Mojangles', sans-serif;
   }
+
+ .container::before{
+
+content:"🏮";
+
+position:fixed;
+
+right:15px;
+
+top:130px;
+
+font-size:60px;
+
+animation:float 4s infinite;
+}
+
+.container::after{
+
+content:"🏮";
+
+position:fixed;
+
+left:15px;
+
+top:250px;
+
+font-size:60px;
+
+animation:float 5s infinite;
+}
+
+@keyframes float{
+
+50%{
+
+transform:
+translateY(15px);
+
+}
+
+}
