@@ -659,7 +659,7 @@ filter:drop-shadow(0 0 40px gold);
 .card:hover{
 border-color:rgba(255,215,0,.45);
 }
-body::selection{
+::selection{
 background:#ffe082;
 color:#102236;
 }
@@ -686,10 +686,14 @@ background:linear-gradient(90deg,#ffe082,#c79a1c,#ffe082);
 .card::before{
 content:"";
 position:absolute;
-inset:0;
+top:0;
+left:0;
+right:0;
+height:100%;
 background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);
 pointer-events:none;
-}
+z-index:0;
+  }
 .card{
 position:relative;
 overflow:hidden;
