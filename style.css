@@ -18,13 +18,14 @@ src:url('fonts/MojanglesArab.ttf') format('truetype');
 --main-font:'Arapix',sans-serif;
 }
 body.light-theme{
---bg:#f1f5f9;
---card:#fff;
---text:#1e293b;
---text-muted:#64748b;
---primary:#16a34a;
---accent:#e2e8f0;
---shadow:rgba(0,0,0,.1);
+--bg:#f8fafc;
+--card:#ffffff;
+--text:#111827;
+--text-muted:#475569;
+--primary:#d4af37;
+--accent:#f8fafc;
+--gold:#d4af37;
+background:#f8fafc!important;
 }
 *{
 margin:0;
@@ -69,8 +70,15 @@ pointer-events:none;
 width:100%;
 max-width:900px;
 }
+html[lang='en'],
+html[lang='ar']{
+font-size:16px;
+}
 html[lang='en']{
 --main-font:'Mojangles',sans-serif;
+}
+html[lang='ar']{
+--main-font:'Arapix',sans-serif;
 }
 .card{
 background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));
@@ -136,18 +144,28 @@ transform:translateY(-3px);
 box-shadow:0 0 35px gold;
 }
 .control-btn{
-width:60px;
-height:60px;
+width:60px!important;
+height:60px!important;
+min-width:60px;
+min-height:60px;
+flex:0 0 60px;
 border:none;
 border-radius:50%!important;
-background:linear-gradient(180deg,#ffe082,#c79a1c)!important;
-color:#102236!important;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:22px;
+font-size:22px!important;
+line-height:1!important;
+background:linear-gradient(
+180deg,
+#ffe082,
+#c79a1c
+)!important;
+color:#102236!important;
 cursor:pointer;
-box-shadow:0 0 20px rgba(255,215,0,.3);
+box-shadow:
+0 0 20px rgba(255,215,0,.3);
+overflow:hidden;
 }
 .section-title{
 color:var(--gold);
@@ -206,11 +224,6 @@ text-transform:uppercase;
 font-family:var(--main-font)!important;
 -webkit-font-smoothing:none;
 text-rendering:optimizeSpeed;
-}
-html[lang='ar'] button,
-html[lang='ar'] .badge{
-font-size:1.1rem;
-line-height:1.2;
 }
 .content-grid{
 display:grid;
@@ -582,11 +595,12 @@ font-size:2.2rem;
 text-shadow:0 0 25px rgba(255,215,0,.6);
 }
 .hero h1::before{
-content:"✨ ";
+content:"✨";
+margin-inline-end:8px;
 }
 .hero h1::after{
-content:" ✨";
-}
+content:"";
+  }
 .connection .badge{
 background:rgba(255,215,0,.08)!important;
 border:1px solid rgba(255,215,0,.18);
@@ -791,12 +805,13 @@ transition:.25s;
 .social-item:hover img{
 transform:scale(1.15);
 }
-.section-title::after{
-content:" ✨";
-}
 .section-title::before{
-content:"✨ ";
-  }
+content:"✨";
+margin-inline-end:8px;
+}
+.section-title::after{
+content:"";
+}
 .mods-container:hover{
 box-shadow:0 0 35px rgba(255,215,0,.15);
 }
@@ -854,7 +869,7 @@ border-bottom:none;
 position:relative;
 }
 .footer::after{
-content:"🌙 ⭐ 🏮";
+content:"🌙🏮";
 position:absolute;
 left:50%;
 transform:translateX(-50%);
@@ -912,3 +927,21 @@ font-size:1.7rem;
 width:95px;
 }
   }
+html{
+font-size:16px!important;
+}
+button,
+.badge,
+.btn-copy,
+.btn-bedrock,
+.minecraft-btn,
+.mod-item,
+.social-item,
+.ip-text{
+font-size:16px!important;
+line-height:1.4!important;
+}
+*{
+text-size-adjust:100%;
+-webkit-text-size-adjust:100%;
+}
