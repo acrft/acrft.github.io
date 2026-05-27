@@ -1,5 +1,5 @@
-@font-face{font-family:'Mojangles';src:url('fonts/Mojangles.ttf') format('truetype');}
-@font-face{font-family:'Arapix';src:url('fonts/MojanglesArab.ttf') format('truetype');}
+@font-face{font-family:'Mojangles';src:url('fonts/Mojangles.ttf') format('truetype');font-display:block;}
+@font-face{font-family:'Arapix';src:url('fonts/MojanglesArab.ttf') format('truetype');font-display:block;}
 :root{--bg:#041321;--card:rgba(17,32,53,.92);--text:#fff7d1;--text-muted:#c8d29b;--primary:#d4af37;--accent:#0f3b30;--gold:#ffd966;--shadow:rgba(255,217,102,.18);--main-font:'Arapix',sans-serif;}
 body.light-theme{--bg:#f8fafc;--card:#ffffff;--text:#111827;--text-muted:#475569;--primary:#d4af37;--accent:#ffffff;--gold:#d4af37;--shadow:rgba(0,0,0,.08);background:#f8fafc!important;color:#111827!important;}
 *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;}
