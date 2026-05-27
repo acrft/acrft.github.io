@@ -1,24 +1,419 @@
-const translations={ar:{title:"سيرفر علَم كرافت ☘️",copyBtn:"نسخ الـ IP:PORT ",javaVersion:"☕️ جافا:",bedrockVersion:"🛏️ بيدروك:",addBedrock:"إضافة السيرفر إلى ماينكرافت",rulesTitle:"📜 القوانين",rule1:"1️⃣ ممنوع السب أو الإهانة بجميع أشكالها 🤬",rule2:"2️⃣ ممنوع أي محتوى +18 بجميع أنواعه 🔞",rule3:"3️⃣ ممنوع التنمّر أو التقليل من الآخرين 🐅",rule4:"4️⃣ ممنوع الخناقات أو إثارة المشاكل 🤼‍♂️",rule5:"5️⃣ ممنوع السبام أو الإزعاج المتكرر 📢",rule6:"6️⃣ ممنوع الكذب أو نشر معلومات مضللة 😵",rule7:"7️⃣ ممنوع التسلّط أو استغلال الصلاحيات 👀",rule8:"8️⃣ ممنوع طلب أدمن أو صلاحيات 🦸‍♂️",rule9:"9️⃣ ممنوع الترويج لسيرفرات أو روابط خارجية بدون إذن الإدارة 📢",rule10:"🔟 ممنوع الكلام في السياسة أو المواضيع الحساسة 👨‍⚖️",rule11:"1️⃣1️⃣ ممنوع الإزعاج بالمكالمات المتكررة 📵",rule12:"1️⃣2️⃣ الالتزام باحترام الإدارة والأعضاء 🤝",rule13:"1️⃣3️⃣ قوانين الأدمن هي نفس قوانين الأعضاء 👑",rule14:"1️⃣4️⃣ للإدارة الحق في اتخاذ القرار المناسب في الحالات غير المذكورة ⚖️",rule15:"1️⃣5️⃣ نظام العقوبات:",punishSystem:"إنذار 🟩 ⬅️ إنذار 🟨 ⬅️ طرد🟥",linksTitle:"🔗 روابط السيرفر",whatsapp:"قناة الواتساب",telegram:"مجموعة التليجرام",messenger:"مجموعة الماسينجر",discord:"سيرفر الديسكورد",adminsTitle:"👑 المشرفين",adminsNames:"علَم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",copyright:"© 2026 AlamCraft Server - جميع الحقوق محفوظة",toastMsg:"✔ تم نسخ IP:PORT السيرفر",feature4:"✅️ إدارة نشطة",feature1:"✅ يدعم الجافا و البيدروك",feature2:"✅ قوانين واضحة و عادلة",feature3:"✅ تحديثات مستمرة",serverOnline:"السيرفر متصل",serverOffline:"السيرفر مغلق",playersOnline:"اللاعبين المتصلين:",loading:"جاري التحقق...",modsList:["مود المهارات ✨","مود القبور 🪦","مود الرؤوس 💀","مود الأوامر الإضافية ⚙️","مود دعم البيدروك مع الجافا 📱🖥️","مود النوم بلاعب واحد 🛏😴","مود الجلوس 🪑","مود تغيير السكينات 👕","مود قطع الأشجار 🌳🪓","مود تكسير الموارد 🪨⛏️","مود دعم جميع الإصدارات 🔄","مود الكلايم 🚧","مود الإن بي سي 🤖"],modsTitle:"المودات/الإضافات",downloadCenterBtn:"مركز التحميل"},
-en:{title:"AlamCraft Server ☘️",copyBtn:" Copy IP:PORT",javaVersion:"☕️ Java:",bedrockVersion:"🛏️ Bedrock:",addBedrock:"Add Server to Minecraft",rulesTitle:"📜 Server Rules",rule1:"1️⃣ No swearing or insults in any form 🤬",rule2:"2️⃣ No +18 content of any kind 🔞",rule3:"3️⃣ No bullying or belittling others 🐅",rule4:"4️⃣ No fighting or causing trouble 🤼‍♂️",rule5:"5️⃣ No spamming or repeated annoyance 📢",rule6:"6️⃣ No lying or spreading misinformation 😵",rule7:"7️⃣ No bossiness or abuse of power 👀",rule8:"8️⃣ Don't ask for Admin or permissions 🦸‍♂️",rule9:"9️⃣ No promoting other servers or links without permission 📢",rule10:"🔟 No talking about politics or sensitive topics 👨‍⚖️",rule11:"1️⃣1️⃣ No constant annoying calls 📵",rule12:"1️⃣2️⃣ Respect staff and members 🤝",rule13:"1️⃣3️⃣ Admin rules are the same as member rules 👑",rule14:"1️⃣4️⃣ Staff reserved the right to decide in unlisted cases ⚖️",rule15:"1️⃣5️⃣ Punishment System:",punishSystem:"Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥",linksTitle:"🔗 Server Links",whatsapp:"WhatsApp Channel",telegram:"Telegram Group",messenger:"Messenger Group",discord:"Discord Server",adminsTitle:"👑 Staff",adminsNames:"AlamGamer ☘️, LostFox 🦊, KingSnow 👑❄️",copyright:"© 2026 AlamCraft Server - All Rights Reserved",toastMsg:"✔ Server IP:PORT Copied!",feature1:"✅ Supports Java & Bedrock",feature2:"✅ Clear & fair rules",feature3:"✅ Constant updates",feature4:"✅ Active Staff",serverOnline:"Server Online",serverOffline:"Server Offline",playersOnline:"Players Online:",loading:"Checking status...",modsList:["AuraSkills ✨","AxGraves 🪦","DropHeads 💀","EssentialsX ⚙️","GeyserMc 📱🖥️","OnePlayerSleep 🛏😴","Sit 🪑","SkinsRestorer 👕","TreeCapitator 🌳🪓","VeinMiner 🪨⛏️","ViaVersion 🔄","GriefPrevention 🚧","ZNPCs 🤖"],modsTitle:"Mods/Plugins",downloadCenterBtn:"Download Center"}};
-let currentLang=localStorage.getItem('lang')||'ar';
-function toggleMenu(){document.getElementById("sideMenu").classList.toggle("active");document.getElementById("menuOverlay").classList.toggle("active")}
-function setOfflineUI(dot,text,pNum,pMax,ping){dot.className="status-dot dot-offline";text.innerText=translations[currentLang].serverOffline+" ❌";if(pNum)pNum.innerText="0";if(pMax)pMax.innerText="0";if(ping){ping.innerText="--";ping.style.color="inherit"}}
-async function updateServerStatus(){const statusDot=document.getElementById('status-indicator');const statusText=document.getElementById('status-text');const playerNum=document.getElementById('player-num');const maxPlayers=document.getElementById('max-players');const pingDisplay=document.getElementById('ping-value');const serverIP="alameldin.aternos.me";const startTime=performance.now();let data=null;try{const response=await fetch(`https://api.mcsrvstat.us/2/${serverIP}:28303?t=${Date.now()}`);if(!response.ok)throw new Error("Network response was not ok");data=await response.json();const endTime=performance.now();const pingMs=Math.round(endTime-startTime);const versionText=data.version?data.version:"";const isActuallyOnline=data.online===true&&!versionText.includes("Offline")&&!versionText.includes("●");if(isActuallyOnline){statusDot.className="status-dot dot-online";statusText.innerText=translations[currentLang].serverOnline+" ✅";if(playerNum)playerNum.innerText=data.players?data.players.online:"0";if(maxPlayers)maxPlayers.innerText=data.players?data.players.max:"0";if(pingDisplay){pingDisplay.innerText=pingMs;pingDisplay.style.color=pingMs<150?"#22c55e":(pingMs<300?"#f59e0b":"#ef4444")}}else{setOfflineUI(statusDot,statusText,playerNum,maxPlayers,pingDisplay)}}catch(error){console.error("Status Update Error:",error);setOfflineUI(statusDot,statusText,playerNum,maxPlayers,pingDisplay);if(pingDisplay)pingDisplay.innerText="??"}}
-function updateContent(){document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(translations[currentLang][key])el.innerText=translations[currentLang][key]});const modsListContainer=document.getElementById('mods-list-container');if(modsListContainer){modsListContainer.innerHTML='';translations[currentLang].modsList.forEach(modText=>{const li=document.createElement('li');li.className="mod-item";li.innerHTML=` ✨ <span>${modText}</span>`;modsListContainer.appendChild(li)})}document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.documentElement.lang=currentLang;updateServerStatus()}
-function toggleLanguage(){currentLang=currentLang==='ar'?'en':'ar';localStorage.setItem('lang',currentLang);updateContent()}
-function copyIP(){const ip="Alameldin.aternos.me:28303";navigator.clipboard.writeText(ip).then(()=>{const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000)})}
-window.onload=updateContent;
-const modeBtn=document.getElementById('modeBtn');
-modeBtn.onclick=()=>{document.body.classList.toggle('light-theme');const isLight=document.body.classList.contains('light-theme');modeBtn.innerText=isLight?'☀️':'🌙';localStorage.setItem('theme',isLight?'light':'dark')};
-const savedTheme=localStorage.getItem('theme');
-if(savedTheme==='light'){document.body.classList.add('light-theme');if(modeBtn)modeBtn.innerText='☀️'}
-window.addEventListener("scroll",()=>{const controls=document.querySelector(".fixed-controls");const footer=document.querySelector(".footer");const footerRect=footer.getBoundingClientRect();const overlap=window.innerHeight-footerRect.top;if(overlap>0){const base=20;const maxLift=100;const lift=Math.min(overlap,maxLift);controls.style.bottom=(base+lift+10)+"px"}else{controls.style.bottom="20px"}});
-window.addEventListener("scroll",()=>{const scrollTop=document.documentElement.scrollTop||document.body.scrollTop;const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;const progress=(scrollTop/scrollHeight)*100;document.getElementById("scroll-progress").style.width=progress+"%"});
-document.addEventListener("contextmenu",e=>{e.preventDefault()});
-document.addEventListener("dragstart",e=>{e.preventDefault()});
-document.addEventListener("keydown",function(e){if(e.ctrlKey&&["c","u","s"].includes(e.key.toLowerCase()))e.preventDefault()});
-document.querySelectorAll(".side-menu a").forEach(link=>{link.addEventListener("click",()=>{document.getElementById("sideMenu").classList.remove("active");document.getElementById("menuOverlay").classList.remove("active")})});
-setInterval(updateServerStatus,30000);
-document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("loaded");updateContent()});
-window.addEventListener("load",()=>{updateServerStatus();document.body.classList.add("loaded")});
-window.addEventListener("load",()=>{document.body.style.visibility="visible";updateServerStatus();document.body.classList.add("loaded")});
+const translations={
+ar:{
+title:"سيرفر علَم كرافت ☘️",
+copyBtn:" IP:PORTنسخ الـ",
+javaVersion:"☕️ جافا:",
+bedrockVersion:"🛏️ بيدروك:",
+addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",
+rulesTitle:"📜 القوانين",
+rule1:"1️⃣ ممنوع السب أو الإهانة بجميع أشكالها 🤬",
+rule2:"2️⃣ ممنوع أي محتوى +18 بجميع أنواعه 🔞",
+rule3:"3️⃣ ممنوع التنمّر أو التقليل من الآخرين 🐅",
+rule4:"4️⃣ ممنوع الخناقات أو إثارة المشاكل 🤼‍♂️",
+rule5:"5️⃣ ممنوع السبام أو الإزعاج المتكرر 📢",
+rule6:"6️⃣ ممنوع الكذب أو نشر معلومات مضللة 😵",
+rule7:"7️⃣ ممنوع التسلّط أو استغلال الصلاحيات 👀",
+rule8:"8️⃣ ممنوع طلب أدمن أو صلاحيات 🦸‍♂️",
+rule9:"9️⃣ ممنوع الترويج لسيرفرات أو روابط خارجية بدون إذن الإدارة 📢",
+rule10:"🔟 ممنوع الكلام في السياسة أو المواضيع الحساسة 👨‍⚖️",
+rule11:"1️⃣1️⃣ ممنوع الإزعاج بالمكالمات المتكررة 📵",
+rule12:"1️⃣2️⃣ الالتزام باحترام الإدارة والأعضاء 🤝",
+rule13:"1️⃣3️⃣ قوانين الأدمن هي نفس قوانين الأعضاء 👑",
+rule14:"1️⃣4️⃣ للإدارة الحق في اتخاذ القرار المناسب في الحالات غير المذكورة ⚖️",
+rule15:"1️⃣5️⃣ نظام العقوبات:",
+punishSystem:"إنذار 🟩 ⬅️ إنذار 🟨 ⬅️ طرد🟥",
+linksTitle:"🔗 روابط السيرفر",
+whatsapp:"قناة الواتساب",
+telegram:"مجموعة التليجرام",
+messenger:"مجموعة الماسينجر",
+discord:"سيرفر الديسكورد",
+adminsTitle:"👑 المشرفين",
+adminsNames:"علَم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",
+copyright:"© 2026 AlamCraft Server - جميع الحقوق محفوظة",
+toastMsg:"✔ تم نسخ IP:PORT السيرفر",
+feature1:"✅ يدعم الجافا و البيدروك",
+feature2:"✅ قوانين واضحة و عادلة",
+feature3:"✅ تحديثات مستمرة",
+feature4:"✅️ إدارة نشطة",
+serverOnline:"السيرفر متصل",
+serverOffline:"السيرفر مغلق",
+playersOnline:"اللاعبين المتصلين:",
+loading:"جاري التحقق...",
+modsList:[
+"مود المهارات ✨",
+"مود القبور 🪦",
+"مود الرؤوس 💀",
+"مود الأوامر الإضافية ⚙️",
+"مود دعم البيدروك مع الجافا 📱🖥️",
+"مود النوم بلاعب واحد 🛏😴",
+"مود الجلوس 🪑",
+"مود تغيير السكينات 👕",
+"مود قطع الأشجار 🌳🪓",
+"مود تكسير الموارد 🪨⛏️",
+"مود دعم جميع الإصدارات 🔄",
+"مود الكلايم 🚧",
+"مود الإن بي سي 🤖"
+],
+modsTitle:"المودات/الإضافات",
+downloadCenterBtn:"مركز التحميل"
+},
+en:{
+title:"AlamCraft Server ☘️",
+copyBtn:" Copy IP:PORT",
+javaVersion:"☕️ Java:",
+bedrockVersion:"🛏️ Bedrock:",
+addBedrock:"Add Server to Minecraft Bedrock",
+rulesTitle:"📜 Server Rules",
+rule1:"1️⃣ No swearing or insults in any form 🤬",
+rule2:"2️⃣ No +18 content of any kind 🔞",
+rule3:"3️⃣ No bullying or belittling others 🐅",
+rule4:"4️⃣ No fighting or causing trouble 🤼‍♂️",
+rule5:"5️⃣ No spamming or repeated annoyance 📢",
+rule6:"6️⃣ No lying or spreading misinformation 😵",
+rule7:"7️⃣ No bossiness or abuse of power 👀",
+rule8:"8️⃣ Don't ask for Admin or permissions 🦸‍♂️",
+rule9:"9️⃣ No promoting other servers or links without permission 📢",
+rule10:"🔟 No talking about politics or sensitive topics 👨‍⚖️",
+rule11:"1️⃣1️⃣ No constant annoying calls 📵",
+rule12:"1️⃣2️⃣ Respect staff and members 🤝",
+rule13:"1️⃣3️⃣ Admin rules are the same as member rules 👑",
+rule14:"1️⃣4️⃣ Staff reserved the right to decide in unlisted cases ⚖️",
+rule15:"1️⃣5️⃣ Punishment System:",
+punishSystem:"Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥",
+linksTitle:"🔗 Server Links",
+whatsapp:"WhatsApp Channel",
+telegram:"Telegram Group",
+messenger:"Messenger Group",
+discord:"Discord Server",
+adminsTitle:"👑 Staff",
+adminsNames:"Alam Gamer ☘️, Lost Fox 🦊, King Snow 👑❄️",
+copyright:"© 2026 AlamCraft Server - All Rights Reserved",
+toastMsg:"✔ Server IP:PORT Copied!",
+feature1:"✅ Supports Java & Bedrock",
+feature2:"✅ Clear & fair rules",
+feature3:"✅ Constant updates",
+feature4:"✅ Active Staff",
+serverOnline:"Server Online",
+serverOffline:"Server Offline",
+playersOnline:"Players Online:",
+loading:"Checking status...",
+modsList:[
+"AuraSkills ✨",
+"AxGraves 🪦",
+"DropHeads 💀",
+"EssentialsX ⚙️",
+"GeyserMc 📱🖥️",
+"OnePlayerSleep 🛏😴",
+"Sit 🪑",
+"SkinsRestorer 👕",
+"TreeCapitator 🌳🪓",
+"VeinMiner 🪨⛏️",
+"ViaVersion 🔄",
+"GriefPrevention 🚧",
+"ZNPCs 🤖"
+],
+modsTitle:"Mods/Plugins",
+downloadCenterBtn:"Download Center"
+}
+};
+let currentLang=localStorage.getItem("lang")||"ar";
+
+const $=s=>document.querySelector(s);
+
+const statusIndicator=$("#status-indicator");
+const statusText=$("#status-text");
+const playerNum=$("#player-num");
+const maxPlayers=$("#max-players");
+const pingValue=$("#ping-value");
+const modsListContainer=$("#mods-list-container");
+const toast=$("#toast");
+const sideMenu=$("#sideMenu");
+const menuOverlay=$("#menuOverlay");
+const modeBtn=$("#modeBtn");
+const scrollProgress=$("#scroll-progress");
+const footer=$(".footer");
+const fixedControls=$(".fixed-controls");
+
+function toggleMenu(){
+sideMenu.classList.toggle("active");
+menuOverlay.classList.toggle("active");
+}
+
+function setOfflineUI(){
+statusIndicator.className="status-dot dot-offline";
+statusText.innerText=translations[currentLang].serverOffline+" ❌";
+playerNum.innerText="0";
+maxPlayers.innerText="0";
+pingValue.innerText="--";
+pingValue.style.color="inherit";
+}
+
+async function updateServerStatus(){
+
+try{
+
+const start=performance.now();
+
+const res=await fetch(`https://api.mcsrvstat.us/2/alameldin.aternos.me:28303?t=${Date.now()}`);
+
+if(!res.ok)throw new Error();
+
+const data=await res.json();
+
+const ping=Math.round(
+performance.now()-start
+);
+
+const online=
+data.online &&
+!String(data.version||"")
+.includes("Offline");
+
+if(!online){
+setOfflineUI();
+return;
+}
+
+statusIndicator.className=
+"status-dot dot-online";
+
+statusText.innerText=
+translations[currentLang]
+.serverOnline+" ✅";
+
+playerNum.innerText=
+data.players?.online||0;
+
+maxPlayers.innerText=
+data.players?.max||0;
+
+pingValue.innerText=ping;
+
+pingValue.style.color=
+ping<150?"#22c55e":
+ping<300?"#f59e0b":
+"#ef4444";
+
+}catch{
+
+setOfflineUI();
+
+}
+
+}
+
+function updateContent(){
+
+document
+.querySelectorAll("[data-i18n]")
+.forEach(el=>{
+
+const key=el.dataset.i18n;
+
+if(
+translations[currentLang][key]
+){
+el.innerText=
+translations[currentLang][key];
+}
+
+});
+
+if(modsListContainer){
+
+modsListContainer.innerHTML="";
+
+translations[currentLang]
+.modsList
+.forEach(mod=>{
+
+modsListContainer.innerHTML+=
+`<li class="mod-item">✨ <span>${mod}</span></li>`;
+
+});
+
+}
+
+document.documentElement.lang=
+currentLang;
+
+document.documentElement.dir=
+currentLang==="ar"?
+"rtl":
+"ltr";
+
+updateServerStatus();
+
+}
+
+function toggleLanguage(){
+
+currentLang=
+currentLang==="ar"?
+"en":
+"ar";
+
+localStorage.setItem(
+"lang",
+currentLang
+);
+
+updateContent();
+
+}
+
+function copyIP(){
+
+navigator.clipboard.writeText(
+"Alameldin.aternos.me:28303"
+);
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove(
+"show"
+);
+
+},3000);
+
+}
+
+modeBtn.onclick=()=>{
+
+document.body.classList.toggle(
+"light-theme"
+);
+
+const light=
+document.body.classList.contains(
+"light-theme"
+);
+
+modeBtn.innerText=
+light?"☀️":"🌙";
+
+localStorage.setItem(
+"theme",
+light?"light":"dark"
+);
+
+};
+
+if(
+localStorage.getItem("theme")
+==="light"
+){
+
+document.body.classList.add(
+"light-theme"
+);
+
+modeBtn.innerText="☀️";
+
+}
+
+document
+.querySelectorAll(".side-menu a")
+.forEach(link=>{
+
+link.onclick=()=>{
+
+sideMenu.classList.remove(
+"active"
+);
+
+menuOverlay.classList.remove(
+"active"
+);
+
+};
+
+});
+
+window.addEventListener(
+"scroll",
+()=>{
+
+const max=
+document.documentElement
+.scrollHeight-
+innerHeight;
+
+if(
+scrollProgress &&
+max>0
+){
+
+scrollProgress.style.width=
+(scrollY/max)*100+"%";
+
+}
+
+if(
+footer &&
+fixedControls
+){
+
+const overlap=
+innerHeight-
+footer
+.getBoundingClientRect()
+.top;
+
+fixedControls.style.bottom=
+(overlap>0?
+Math.min(overlap,100)+30:
+20
+)+"px";
+
+}
+
+}
+);
+
+document.addEventListener(
+"contextmenu",
+e=>e.preventDefault()
+);
+
+document.addEventListener(
+"dragstart",
+e=>e.preventDefault()
+);
+
+document.addEventListener(
+"keydown",
+e=>{
+
+if(
+e.ctrlKey &&
+["c","u","s"]
+.includes(
+e.key.toLowerCase()
+)
+){
+e.preventDefault();
+}
+
+}
+);
+
+window.onload=()=>{
+
+document.body.classList.add(
+"loaded"
+);
+
+document.body.style.visibility=
+"visible";
+
+updateContent();
+
+setInterval(
+updateServerStatus,
+30000
+);
+
+};
