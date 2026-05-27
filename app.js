@@ -21,3 +21,4 @@ document.querySelectorAll(".side-menu a").forEach(link=>{link.addEventListener("
 setInterval(updateServerStatus,30000);
 document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("loaded");updateContent()});
 window.addEventListener("load",()=>{updateServerStatus();document.body.classList.add("loaded")});
+window.addEventListener("load",()=>{document.body.style.visibility="visible";updateServerStatus();document.body.classList.add("loaded")});
