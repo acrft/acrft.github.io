@@ -100,7 +100,7 @@ html[lang='en'] .mod-item{font-family:'Mojangles',sans-serif;}
 .hero h1{color:var(--gold);font-size:2.2rem;text-shadow:0 0 25px rgba(255,215,0,.6);}
 .hero h1::before{content:"✨";margin-inline-end:8px;}
 .connection .badge{background:rgba(255,215,0,.08)!important;border:1px solid rgba(255,215,0,.18);backdrop-filter:blur(6px);}
-.version-badges .badge:nth-child(1){background:rgba(255,196,0,.08)!important;}
+.version-badges .badge:nth-child(1){background:rgba(255,255,255,.03)!important;}
 .version-badges .badge:nth-child(2){background:rgba(255,255,255,.03)!important;}
 .card:hover{border-color:rgba(255,215,0,.45);}
 ::selection{background:#ffe082;color:#102236;}
