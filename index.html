@@ -8,60 +8,37 @@
 <link rel="stylesheet" href="style.css"/>
 <link rel="shortcut icon" href="images/OIG1.png" type="image/x-icon"/>
 </head>
-<body class="dark-theme">
+<body>
 <div id="scroll-progress"></div>
 <div id="toast" data-i18n="toastMsg">✔ تم نسخ IP السيرفر</div>
 <button class="hamburger" onclick="toggleMenu()">☰</button>
 <nav class="side-menu" id="sideMenu">
-<a href="#rules">📜 القوانين</a>
-<a href="#links">🔗 روابط السيرفر</a>
-<a href="#mods">⚙️ المودات</a>
-<a href="#staff">👑 المشرفين</a>
+<a href="#rules" onclick="toggleMenu()">📜 القوانين</a>
+<a href="#links" onclick="toggleMenu()">🔗 روابط السيرفر</a>
+<a href="#mods" onclick="toggleMenu()">⚙️ المودات</a>
+<a href="#staff" onclick="toggleMenu()">👑 المشرفين</a>
 </nav>
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 <main class="container">
 <header class="hero">
 <img src="images/logo.webp" alt="Logo" class="logo" draggable="false"/>
 <h1 data-i18n="title">سيرفر علَم كرافت ☘️</h1>
-<div class="server-status">
-<ul class="pulse">
-<li data-i18n="feature1"></li>
-<li data-i18n="feature2"></li>
-<li data-i18n="feature3"></li>
-<li data-i18n="feature4"></li>
-</ul>
-</div>
+<div class="server-status"><ul class="pulse"><li data-i18n="feature1"></li><li data-i18n="feature2"></li><li data-i18n="feature3"></li><li data-i18n="feature4"></li></ul></div>
 </header>
 <div class="card status-card">
-<div class="status-header">
-<span id="status-indicator" class="status-dot"></span>
-<h2 id="status-text" data-i18n="loading">جاري التحقق...</h2>
-</div>
-<div class="player-count">
-<span data-i18n="playersOnline">اللاعبين المتصلين:</span>
-<span id="player-num">0</span>/<span id="max-players">0</span>
-<span class="ping-container"><span id="ping-value">--</span>ms</span>
-</div>
+<div class="status-header"><span id="status-indicator" class="status-dot"></span><h2 id="status-text" data-i18n="loading">جاري التحقق...</h2></div>
+<div class="player-count"><span data-i18n="playersOnline">اللاعبين المتصلين:</span><span id="player-num">0</span>/<span id="max-players">0</span><span class="ping-container"><span id="ping-value">--</span>ms</span></div>
 </div>
 <section class="card connection">
 <div class="ip-wrapper">
 <span class="ip-text">Alameldin.aternos.me:28303</span>
-<button onclick="copyIP()" class="btn-copy">
-<span class="icon">📋</span>
-<span data-i18n="copyBtn">نسخ الـ IP:PORT</span>
-</button>
+<button onclick="copyIP()" class="btn-copy"><span class="icon">📋</span><span data-i18n="copyBtn">نسخ الـ IP:PORT</span></button>
 </div>
 <div class="version-badges">
-<div class="badge">
-<span class="label" data-i18n="javaVersion">☕️ جافا:</span>
-<span class="ver">v1.7 - v26.1.2</span>
+<div class="badge"><span class="label" data-i18n="javaVersion">☕️ جافا:</span><span class="ver">v1.7 - v26.1.2</span></div>
+<div class="badge"><span class="label" data-i18n="bedrockVersion">🛏️ بيدروك:</span><span class="ver">v26.0 - v26.20</span></div>
 </div>
-<div class="badge">
-<span class="label" data-i18n="bedrockVersion">🛏️ بيدروك:</span>
-<span class="ver">v26.0 - v26.20</span>
-</div>
-</div>
-<button onclick="window.location.href='https://add.aternos.org/Alameldin'" class="btn-bedrock" data-i18n="addBedrock">إضافة السيرفر إلى Minecraft Bedrock</button>
+<button onclick="window.open('https://add.aternos.org/Alameldin','_blank')" class="btn-bedrock" data-i18n="addBedrock">إضافة السيرفر إلى Minecraft Bedrock</button>
 </section>
 <div class="content-grid">
 <section class="card rules-card" id="rules">
@@ -76,25 +53,16 @@
 <a href="https://t.me/Alam_Craft" class="social-item"><img src="images/telegram.png" class="link-icon"/><span data-i18n="telegram">مجموعة التليجرام</span></a>
 <a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item"><img src="images/messenger.png" class="link-icon"/><span data-i18n="messenger">مجموعة الماسينجر</span></a>
 <a href="https://discord.gg/BKys3Eu8t8" class="social-item"><img src="images/discord.png" class="link-icon"/><span data-i18n="discord">سيرفر الديسكورد</span></a>
-<a href="dwnlod" class="minecraft-btn" data-i18n="downloadCenterBtn">مركز التحميل</a>
+<a href="download" class="minecraft-btn" data-i18n="downloadCenterBtn">مركز التحميل</a>
 </div>
 </section>
 <section class="mods-section" id="mods"><h2 class="section-title" data-i18n="modsTitle">المودات/الإضافات</h2><div class="mods-container"><ul id="mods-list-container" class="mods-list"></ul></div></section>
 <section class="card staff-card" id="staff"><h2 class="section-title" data-i18n="adminsTitle">👑 المشرفين</h2><p data-i18n="adminsNames" class="admins-text"></p></section>
 </div>
 </div>
-<footer class="footer">
-<div class="grass-top"></div>
-<div class="dirt-body">
-<p data-i18n="copyright">© 2026 AlamCraft Server - جميع الحقوق محفوظة</p>
-</div>
-</footer>
+<footer class="footer"><div class="grass-top"></div><div class="dirt-body"><p data-i18n="copyright">© 2026 AlamCraft Server - جميع الحقوق محفوظة</p></div></footer>
 </main>
-<div class="fixed-controls">
-<button id="modeBtn" class="control-btn">🌙</button>
-<button class="langBtn control-btn" onclick="toggleLanguage()">🌐</button>
-<button class="chatBtn control-btn" onclick="window.location.href='achat'">💬</button>
-</div>
-<script src="app.js"></script>
+<div class="fixed-controls"><button id="modeBtn" class="control-btn">🌙</button><button class="langBtn control-btn" onclick="toggleLanguage()">🌐</button><button class="chatBtn control-btn" onclick="window.location.href='achat'">💬</button></div>
+<script src="app.js" defer></script>
 </body>
-</html>
+  </html>
