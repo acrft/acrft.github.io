@@ -683,20 +683,25 @@ width:100%;
 height:4px;
 background:linear-gradient(90deg,#ffe082,#c79a1c,#ffe082);
 }
-.card::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:100%;
-background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);
-pointer-events:none;
-z-index:0;
-  }
 .card{
 position:relative;
 overflow:hidden;
+}
+.card>*{
+position:relative;
+z-index:1;
+}
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.03),
+transparent
+);
+pointer-events:none;
+z-index:0;
 }
 .rules-list li:hover{
 padding-right:10px;
