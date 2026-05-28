@@ -8,7 +8,12 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 body.light-theme{--bg:#f8fafc;--card:#fff;--text:#111827;--text-muted:#475569;--accent:#fff;background:#f8fafc!important;color:#111827!important}
 body.light-theme::before,body.light-theme::after{display:none}
 *{margin:0;padding:0;box-sizing:border-box}
-.container{width:100%;max-width:900px;margin:auto}
+.container{
+width:100%;
+max-width:900px;
+margin:auto;
+min-height:100vh;
+}
 .card{
 background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));
 border:2px solid rgba(212,175,55,.25);
@@ -18,11 +23,16 @@ margin-bottom:20px;
 min-height:220px;
 }
 body.light-theme .card,body.light-theme .mods-container,body.light-theme .social-item{background:#fff!important;border-color:#e5e7eb!important}
-.hero{text-align:center;padding:40px 0}
 .logo{width:140px;border-radius:24px}
 .hero h1,.section-title{color:var(--gold)}
 .ip-wrapper{background:var(--bg);padding:12px;border-radius:16px;display:flex;flex-direction:column;gap:10px;align-items:center}
-.ip-text{direction:ltr;color:#ffe082;font-weight:bold}
+.ip-text{
+direction:ltr;
+color:#ffe082;
+font-weight:bold;
+word-break:break-word;
+text-align:center;
+}
 .btn-copy,.btn-bedrock,.minecraft-btn{width:100%;padding:14px;border:none;border-radius:18px;background:linear-gradient(180deg,#ffe082,#c79a1c);color:#102236;text-decoration:none;font-family:var(--main-font);font-weight:bold;cursor:pointer}
 .content-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
 .social-links{display:flex;flex-direction:column;gap:12px}
@@ -79,6 +89,13 @@ height:58px;
 min-width:58px;
 min-height:58px;
 border-radius:50%;
+border:none;
+background:linear-gradient(180deg,#ffe082,#c79a1c);
+font-size:24px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 .hamburger{width:55px;height:55px;border:none;border-radius:50%;background:linear-gradient(180deg,#ffe082,#c79a1c);font-size:24px}
 .hamburger{position:fixed;top:20px;right:20px;z-index:2000}
@@ -167,8 +184,10 @@ min-height:360px;
 min-height:220px;
 height:220px;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 }
 
 .connection{
@@ -218,6 +237,8 @@ min-height:72px;
 padding:16px;
 font-size:1.15rem;
 text-align:center;
+width:100%;
+overflow:hidden;
 }
 
 .ver{
@@ -235,12 +256,11 @@ flex-direction:column;
 gap:10px;
 width:100%;
 }
-
-.badge{
-width:100%;
-overflow:hidden;
-}
 img{
 max-width:100%;
 display:block;
+}
+
+body{
+overflow-x:hidden;
 }
