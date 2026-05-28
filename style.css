@@ -18,7 +18,28 @@ body.light-theme .card,body.light-theme .mods-container,body.light-theme .social
 .btn-copy,.btn-bedrock,.minecraft-btn{width:100%;padding:14px;border:none;border-radius:18px;background:linear-gradient(180deg,#ffe082,#c79a1c);color:#102236;text-decoration:none;font-family:var(--main-font);font-weight:bold;cursor:pointer}
 .content-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
 .social-links{display:flex;flex-direction:column;gap:12px}
-.social-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--accent);border-radius:12px;color:var(--text);text-decoration:none}
+.social-item{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+padding:12px 18px;
+background:var(--accent);
+border-radius:12px;
+color:var(--text);
+text-decoration:none;
+text-align:center;
+}
+.social-item span{
+flex:none;
+text-align:center;
+}
+
+.link-icon{
+width:24px;
+height:24px;
+object-fit:contain;
+}
 .mods-container{border:1px solid var(--accent);border-radius:18px;padding:10px}
 .mods-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .pulse{
