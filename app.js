@@ -1,7 +1,7 @@
 const translations={
 ar:{
 title:"سيرفر علَم كرافت ☘️",
-copyBtn:" IP:PORTنسخ الـ",
+copyBtn:"نسخ الـ IP:PORT ",
 javaVersion:"☕️ جافا:",
 bedrockVersion:"🛏️ بيدروك:",
 addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",
@@ -30,7 +30,7 @@ discord:"سيرفر الديسكورد",
 adminsTitle:"👑 المشرفين",
 adminsNames:"علَم جيمر ☘️، سراج 🦊، كينج سنو 👑❄️",
 copyright:"© 2026 AlamCraft Server - جميع الحقوق محفوظة",
-toastMsg:"✔ تم نسخ IP:PORT السيرفر",
+toastMsg:"✔ تم نسخ IP:PORT السيرفر بنجاح",
 feature1:"✅ يدعم الجافا و البيدروك",
 feature2:"✅ قوانين واضحة و عادلة",
 feature3:"✅ تحديثات مستمرة",
