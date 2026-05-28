@@ -3,12 +3,20 @@
 :root{--bg:#041321;--card:rgba(17,32,53,.92);--text:#fff7d1;--text-muted:#c8d29b;--primary:#d4af37;--accent:#0f3b30;--gold:#ffd966;--main-font:'Arapix',sans-serif}
 html{scroll-behavior:smooth;font-size:16px}
 html[lang='en']{--main-font:'Mojangles',sans-serif}
+html[lang='ar']{--main-font:'Arapix',sans-serif}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
 body.light-theme{--bg:#f8fafc;--card:#fff;--text:#111827;--text-muted:#475569;--accent:#fff;background:#f8fafc!important;color:#111827!important}
 body.light-theme::before,body.light-theme::after{display:none}
 *{margin:0;padding:0;box-sizing:border-box}
 .container{width:100%;max-width:900px;margin:auto}
-.card{background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:22px;padding:24px;margin-bottom:20px}
+.card{
+background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));
+border:2px solid rgba(212,175,55,.25);
+border-radius:22px;
+padding:24px;
+margin-bottom:20px;
+min-height:220px;
+}
 body.light-theme .card,body.light-theme .mods-container,body.light-theme .social-item{background:#fff!important;border-color:#e5e7eb!important}
 .hero{text-align:center;padding:40px 0}
 .logo{width:140px;border-radius:24px}
@@ -54,8 +62,8 @@ list-style:none!important;
 .mod-item{padding:12px;border-radius:12px;background:var(--card);border:1px solid rgba(255,215,0,.15);text-align:center}
 .fixed-controls{
 position:fixed;
-bottom:10px;
-left:20px;
+bottom:18px;
+left:18px;
 display:flex;
 flex-direction:row;
 direction:ltr;
@@ -66,6 +74,11 @@ z-index:1500;
 .control-btn{
 order:unset!important;
 flex:none!important;
+width:58px;
+height:58px;
+min-width:58px;
+min-height:58px;
+border-radius:50%;
 }
 .hamburger{width:55px;height:55px;border:none;border-radius:50%;background:linear-gradient(180deg,#ffe082,#c79a1c);font-size:24px}
 .hamburger{position:fixed;top:20px;right:20px;z-index:2000}
@@ -128,59 +141,106 @@ opacity:1;
 }
 .footer{margin-top:30px;border-radius:18px;overflow:hidden}
 .grass-top{height:12px;background:linear-gradient(90deg,#69d44c,#4da537)}
-.dirt-body{height:80px;background:#5f4330;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.content-grid{grid-template-columns:1fr}.logo{width:110px}.control-btn{width:50px;height:50px}}
-.card{
-min-height:220px;
-height:auto;
+.dirt-body{
+min-height:100px;
+padding:15px;
+background:#5f4330;
 display:flex;
-flex-direction:column;
+align-items:center;
 justify-content:center;
+text-align:center;
 }
-
+@media(max-width:768px){
+.content-grid{grid-template-columns:1fr}
+.logo{width:110px}
+.control-btn{
+width:52px;
+height:52px;
+min-width:52px;
+min-height:52px;
+}
+.hero{
+min-height:360px;
+}
+}
 .status-card{
 min-height:220px;
 height:220px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .connection{
-min-height:330px;
-height:330px;
+min-height:380px;
+height:auto;
 }
 
 .social-card{
-min-height:520px;
+min-height:420px;
 }
 
 .staff-card{
-min-height:230px;
+min-height:180px;
 }
 
 .hero{
+text-align:center;
+padding:40px 0;
 min-height:430px;
 display:flex;
 flex-direction:column;
 justify-content:center;
-}
-.hero h1{
-height:80px;
-display:flex;
-justify-content:center;
 align-items:center;
-font-size:clamp(2rem,5vw,3rem);
+}
+html[lang='ar'],
+html[lang='en']{
+font-size:16px;
+}
+
+.hero h1{
+min-height:80px;
+line-height:1.2;
+overflow-wrap:anywhere;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
+font-size:clamp(2rem,5vw,3rem);
 }
 .badge{
-min-height:70px;
-padding:14px 18px;
-font-size:1.1rem;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap;
+min-height:72px;
+padding:16px;
+font-size:1.15rem;
+text-align:center;
 }
 
 .ver{
-font-size:1.25rem;
+font-size:1.35rem;
 font-weight:bold;
+word-break:break-word;
 }
 
 .label{
 font-size:1rem;
+}
+.version-badges{
+display:flex;
+flex-direction:column;
+gap:10px;
+width:100%;
+}
+
+.badge{
+width:100%;
+overflow:hidden;
+}
+img{
+max-width:100%;
+display:block;
 }
