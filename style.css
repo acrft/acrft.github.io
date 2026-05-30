@@ -249,13 +249,24 @@ border-radius:1
   background:linear-gradient(90deg,#69d44c,#4da537);
 }
 .dirt-body{
-  min-height:100px;
-  padding:15px;
-  background:#5f4330;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+min-height:70px;
+padding:10px 20px;
+background:#5f4330;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+}
+.dirt-body p,
+.dirt-body span,
+.footer{
+font-size:.78rem;
+line-height:1;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+padding-inline:8px;
 }
 @media(max-width:768px){
 .content-grid{grid-template-columns:1fr}
