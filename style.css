@@ -41,3 +41,48 @@ body.light-theme{--bg:#f8fafc;--card:#fff;--text:#111827;--text-muted:#475569;--
 .dirt-body p,.dirt-body span{font-size:.68rem;white-space:nowrap;line-height:1.2}
 img{max-width:100%;display:block}
 @media(max-width:768px){.logo{width:110px}.content-grid{grid-template-columns:1fr}.control-btn{width:52px;height:52px}.hero{min-height:360px}}
+.content-grid{
+display:grid;grid-template-columns:1.4fr 1fr;gap:20px;
+}
+
+.status-card{
+min-height:220px;height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+}
+
+.connection{
+min-height:380px;height:auto;
+}
+
+.social-card{
+min-height:420px;
+}
+
+.version-badges{
+display:flex;flex-direction:column;gap:10px;width:100%;
+}
+
+.badge{
+display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden;
+}
+
+.ver{
+display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word;
+}
+
+.label{
+font-size:1rem;
+}
+
+body.light-theme .card,
+body.light-theme .mods-container,
+body.light-theme .social-item{
+background:#fff!important;border-color:#e5e7eb!important;
+}
+
+#toast{
+opacity:0;pointer-events:none;transition:.3s;z-index:9999;background:var(--card);color:var(--text);
+}
+
+.side-menu a{
+text-decoration:none;color:var(--text);background:rgba(255,255,255,.05);padding:14px;border-radius:12px;display:block;
+}
