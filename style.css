@@ -40,7 +40,7 @@ body.light-theme .card,body.light-theme .mods-container,body.light-theme .social
 .social-card{min-height:420px}
 .staff-card{min-height:180px;text-align:center}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%}
-.badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
+.badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden;}
 .ver{display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word}
 .label{font-size:1rem}
 .footer{margin-top:30px;border-radius:18px;overflow:hidden}
@@ -51,9 +51,12 @@ img{max-width:100%;display:block}
 @media(max-width:768px){.content-grid{grid-template-columns:1fr}.logo{width:110px}.control-btn{width:52px;height:52px;min-width:52px;min-height:52px}.hero{min-height:360px}.card{padding:18px;min-height:auto}.status-card{height:auto;min-height:200px}.connection{min-height:350px}.social-card{min-height:auto}}
 html{overflow-x:hidden}
 body.light-theme::before,body.light-theme::after{display:none}
-.hero h1{min-height:80px;line-height:1.2;overflow-wrap:anywhere;font-size:clamp(2rem,5vw,3rem);gap:10px}
+.hero h1{height:90px;min-height:90px;max-height:90px;line-height:1.2;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(2rem,5vw,3rem);}
 .staff-card .section-title{justify-content:center}
 .minecraft-btn,.btn-bedrock{text-decoration:none}
 .social-links,.mods-container{width:100%}
 html[lang='ar'],html[lang='en']{font-size:16px}
 body{overflow-x:hidden}
+.section-title,.admins-text,.social-item span,.btn-copy span,.minecraft-btn,.btn-bedrock{min-height:24px;display:flex;align-items:center;justify-content:center;}
+.version-badges{min-height:170px;}
+.social-card{height:420px;overflow:hidden;}
