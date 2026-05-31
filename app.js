@@ -1,5 +1,62 @@
-const translations={ar:{title:"سيرفر علَم كرافت ☘️",copyBtn:"نسخ الـ IP:PORT ",javaVersion:"☕️ جافا:",bedrockVersion:"🛏️ بيدروك:",addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",rulesTitle:"📜 القوانين",linksTitle:"🔗 روابط السيرفر",adminsTitle:"👑 المشرفين",adminsNames:"علَم جيمر ☘️، الثعلب المفقود 🦊، ملك الجليد 👑❄️",copyright:"© 2026 AlamCraft Server - جميع الحقوق محفوظة",toastMsg:"✔ تم نسخ IP:PORT السيرفر بنجاح",serverOnline:"السيرفر متصل",serverOffline:"السيرفر مغلق",playersOnline:"اللاعبين المتصلين:",loading:"جاري التحقق...",modsTitle:"المودات/الإضافات",downloadCenterBtn:"مركز التحميل"},en:{title:"AlamCraft Server ☘️",copyBtn:"Copy IP:PORT",javaVersion:"☕️ Java:",bedrockVersion:"🛏️ Bedrock:",addBedrock:"Add Server to Minecraft Bedrock",rulesTitle:"📜 Server Rules",linksTitle:"🔗 Server Links",adminsTitle:"👑 Staff",adminsNames:"AlamGamer ☘️,LostFox 🦊,KingSnow 👑❄️",copyright:"© 2026 AlamCraft Server-All Rights Reserved",toastMsg:"✔ Server IP:PORT Copied!",serverOnline:"Server Online",serverOffline:"Server Offline",playersOnline:"Players Online:",loading:"Checking status...",modsTitle:"Mods/Plugins",downloadCenterBtn:"Download Center"}};
+const translations={
+ar:{
+title:"سيرفر علَم كرافت ☘️",
+copyBtn:"نسخ الـ IP:PORT",
+javaVersion:"☕️ جافا:",
+bedrockVersion:"🛏️ بيدروك:",
+addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",
+rulesTitle:"📜 القوانين",
+linksTitle:"🔗 روابط السيرفر",
+whatsapp:"قناة الواتساب",
+telegram:"مجموعة التليجرام",
+messenger:"مجموعة الماسينجر",
+discord:"سيرفر الديسكورد",
+adminsTitle:"👑 المشرفين",
+adminsNames:"علَم جيمر ☘️، الثعلب المفقود 🦊، ملك الجليد 👑❄️",
+copyright:"© 2026 AlamCraft Server - جميع الحقوق محفوظة",
+toastMsg:"✔ تم نسخ IP:PORT السيرفر بنجاح",
+feature1:"✅ يدعم الجافا و البيدروك",
+feature2:"✅ قوانين واضحة و عادلة",
+feature3:"✅ تحديثات مستمرة",
+feature4:"✅ إدارة نشطة",
+serverOnline:"السيرفر متصل",
+serverOffline:"السيرفر مغلق",
+playersOnline:"اللاعبين المتصلين:",
+loading:"جاري التحقق...",
+modsTitle:"المودات/الإضافات",
+downloadCenterBtn:"مركز التحميل",
+alamChat:"منصة علم شات"
+},
 
+en:{
+title:"AlamCraft Server ☘️",
+copyBtn:"Copy IP:PORT",
+javaVersion:"☕️ Java:",
+bedrockVersion:"🛏️ Bedrock:",
+addBedrock:"Add Server to Minecraft Bedrock",
+rulesTitle:"📜 Server Rules",
+linksTitle:"🔗 Server Links",
+whatsapp:"WhatsApp Channel",
+telegram:"Telegram Group",
+messenger:"Messenger Group",
+discord:"Messenger Group",
+adminsTitle:"👑 Staff",
+adminsNames:"AlamGamer ☘️,LostFox 🦊,KingSnow 👑❄️",
+copyright:"© 2026 AlamCraft Server - All Rights Reserved",
+toastMsg:"✔ Server IP:PORT Copied!",
+feature1:"✅ Supports Java & Bedrock",
+feature2:"✅ Clear & Fair Rules",
+feature3:"✅ Constant Updates",
+feature4:"✅ Active Staff",
+serverOnline:"Server Online",
+serverOffline:"Server Offline",
+playersOnline:"Players Online:",
+loading:"Checking Status...",
+modsTitle:"Mods/Plugins",
+downloadCenterBtn:"Download Center",
+alamChat:"Alam Chat Platform"
+}
+};
 let currentLang=localStorage.getItem("lang")||"ar";
 
 const $=s=>document.querySelector(s);
