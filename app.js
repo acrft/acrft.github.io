@@ -191,7 +191,7 @@ try{
 
 const start=performance.now();
 
-const res=await fetch(`https://api.mcsrvstat.us/2/alameldin.aternos.me:28303?t=${Date.now()}`);
+const res=await fetch(`https://api.mcsrvstat.us/2/Alameldin.aternos.me:28303?t=${Date.now()}`);
 
 if(!res.ok)throw new Error();
 
@@ -201,7 +201,10 @@ const ping=Math.round(
 performance.now()-start
 );
 
-if(!data.online){
+const playersOnline=
+data.players?.online||0;
+
+if(playersOnline<=0){
 
 setOfflineUI();
 
@@ -211,13 +214,13 @@ return;
 
 if(statusIndicator){
 statusIndicator.className="status-dot dot-online";
+
 }
 
 statusText.innerText=
 translations[currentLang].serverOnline+" ✅";
 
-playerNum.innerText=
-data.players?.online||0;
+playerNum.innerText=playersOnline;
 
 maxPlayers.innerText=
 data.players?.max||0;
