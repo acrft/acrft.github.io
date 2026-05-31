@@ -9,7 +9,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 body.light-theme{--bg:#f8fafc;--card:#fff;--text:#111827;--text-muted:#475569;--accent:#fff;background:#f8fafc!important;color:#111827!important}
 body.light-theme .card,body.light-theme .mods-container,body.light-theme .social-item{background:#fff!important;border-color:#e5e7eb!important}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
-.card{background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:22px;padding:24px;margin-bottom:20px;min-height:220px}
+.card{background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:22px;padding:24px;margin-bottom:20px;height:220px;overflow:hidden;}
 .logo{width:140px;border-radius:24px}
 .hero{padding:40px 0;min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1,.section-title{color:var(--gold)}
@@ -35,10 +35,10 @@ body.light-theme .card,body.light-theme .mods-container,body.light-theme .social
 .menu-overlay.active{opacity:1;pointer-events:auto}
 #toast{position:fixed;top:-100px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;border:1px solid var(--primary);opacity:0;pointer-events:none;transition:.3s;z-index:9999;background:var(--card);color:var(--text)}
 #toast.show{top:20px;opacity:1}
-.status-card{min-height:220px;height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.connection{min-height:380px;height:auto}
-.social-card{min-height:420px}
-.staff-card{min-height:180px;text-align:center}
+.status-card{height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;}
+.connection{height:380px;overflow:hidden;}
+.social-card{height:420px;overflow:hidden;}
+.staff-card{height:180px;overflow:hidden;}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden;}
 .ver{display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word}
