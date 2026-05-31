@@ -8,27 +8,20 @@
 <link rel="icon" href="images/OIG1.png">
 </head>
 <body class="dark-theme">
-
 <div id="scroll-progress"></div>
 <div id="toast" data-i18n="toastMsg"></div>
-
 <button class="hamburger" onclick="toggleMenu()">☰</button>
-
 <nav class="side-menu" id="sideMenu">
 <a href="#rules">📜 القوانين</a>
 <a href="#links">🔗 الروابط</a>
 <a href="#mods">⚙️ المودات</a>
 <a href="#staff">👑 المشرفين</a>
 </nav>
-
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-
 <div class="container">
-
 <header class="hero">
 <img src="images/logo.webp" class="logo" draggable="false">
 <h1 data-i18n="title"></h1>
-
 <ul class="pulse">
 <li data-i18n="feature1"></li>
 <li data-i18n="feature2"></li>
@@ -36,38 +29,29 @@
 <li data-i18n="feature4"></li>
 </ul>
 </header>
-
 <section class="card status-card">
 <div class="status-header">
 <span id="status-indicator" class="status-dot"></span>
 <h2 id="status-text" data-i18n="loading"></h2>
 </div>
-
 <div class="player-count">
 <span data-i18n="playersOnline"></span>
 <span id="player-num">0</span>/<span id="max-players">0</span>
 <span id="ping-value">--</span>ms
 </div>
 </section>
-
 <section class="card connection">
-
 <div class="ip-wrapper">
 <span class="ip-text">Alameldin.aternos.me:28303</span>
 <button class="btn-copy" onclick="copyIP()">📋 <span data-i18n="copyBtn"></span></button>
 </div>
-
 <div class="version-badges">
 <div class="badge"><span data-i18n="javaVersion"></span><span>v1.7 - v26.1.2</span></div>
 <div class="badge"><span data-i18n="bedrockVersion"></span><span>v1.21.130 - v26.20</span></div>
 </div>
-
 <button class="btn-bedrock" onclick="window.open('https://add.aternos.org/Alameldin')" data-i18n="addBedrock"></button>
-
 </section>
-
 <div class="content-grid">
-
 <section class="card rules-card" id="rules">
 <h2 class="section-title" data-i18n="rulesTitle"></h2>
 <ul class="rules-list">
@@ -89,50 +73,37 @@
 <li data-i18n="punishSystem"></li>
 </ul>
 </section>
-
 <div class="side-column">
-
 <section class="card social-card" id="links">
 <h2 class="section-title" data-i18n="linksTitle"></h2>
-
 <div class="social-links">
-<a href="achat" class="social-item"><img src="images/achat.png" class="link-icon"/><span>منصة علَم شات</span></a>
 <a href="https://whatsapp.com/channel/0029Vb7ZwGYKAwEiSBouIq1Z" class="social-item"><img src="images/whatsapp.png" class="link-icon"><span data-i18n="whatsapp"></span></a>
 <a href="https://t.me/Alam_Craft" class="social-item"><img src="images/telegram.png" class="link-icon"><span data-i18n="telegram"></span></a>
 <a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item"><img src="images/messenger.png" class="link-icon"><span data-i18n="messenger"></span></a>
 <a href="https://discord.gg/BKys3Eu8t8" class="social-item"><img src="images/discord.png" class="link-icon"><span data-i18n="discord"></span></a>
 <a href="dwnlod" class="minecraft-btn" data-i18n="downloadCenterBtn"></a>
 </div>
-
 </section>
-
 <section class="card mods-card" id="mods">
 <h2 class="section-title" data-i18n="modsTitle"></h2>
 <div class="mods-container">
 <ul id="mods-list-container" class="mods-list"></ul>
 </div>
 </section>
-
 <section class="card staff-card" id="staff">
 <h2 class="section-title" data-i18n="adminsTitle"></h2>
 <p class="admins-text" data-i18n="adminsNames"></p>
 </section>
-
 </div>
 </div>
-
 <footer class="footer">
 <p data-i18n="copyright"></p>
 </footer>
-
 </div>
-
 <div class="fixed-controls">
 <button id="modeBtn" class="control-btn">🌙</button>
 <button class="control-btn" onclick="toggleLanguage()">🌐</button>
 </div>
-
 <script src="app.js?v=3"></script>
-
 </body>
-</html>
+  </html>
