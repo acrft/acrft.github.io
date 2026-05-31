@@ -260,6 +260,21 @@ translations[currentLang][k];
 
 });
 
+if(modsListContainer){
+
+modsListContainer.innerHTML="";
+
+translations[currentLang]
+.modsList
+.forEach(mod=>{
+
+modsListContainer.innerHTML+=
+`<li class="mod-item">✨ <span>${mod}</span></li>`;
+
+});
+
+}
+
 document.documentElement.lang=
 currentLang;
 
