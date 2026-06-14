@@ -128,6 +128,7 @@ const statusText=$("#status-text");
 const playerNum=$("#player-num");
 const maxPlayers=$("#max-players");
 const pingValue=$("#ping-value");
+const onlinePlayers=$("#online-players");
 const modsListContainer=$("#mods-list-container");
 const toast=$("#toast");
 const sideMenu=$("#sideMenu");
@@ -221,6 +222,24 @@ translations[currentLang].serverOnline+" ✅";
 
 playerNum.innerText=playersOnline;
 
+if(onlinePlayers){
+
+onlinePlayers.innerHTML="";
+
+const players=data.players?.list||[];
+
+players.forEach(name=>{
+
+onlinePlayers.innerHTML+=`
+<div class="player-card">
+<img class="player-head" src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/24">
+<span>${name}</span>
+</div>`;
+
+});
+
+}
+
 maxPlayers.innerText=
 data.players?.max||0;
 
@@ -251,6 +270,10 @@ const k=el.dataset.i18n;
 
 if(translations[currentLang][k]){
 el.innerText=translations[currentLang][k];
+}
+
+if(onlinePlayers){
+onlinePlayers.innerHTML="";
 }
 
 });
