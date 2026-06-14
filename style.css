@@ -51,7 +51,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 img{max-width:100%;display:block}
 html[lang='ar'],html[lang='en']{font-size:16px}
 @media(max-width:768px){.content-grid{grid-template-columns:1fr}.logo{width:110px}.control-btn{width:52px;height:52px;min-width:52px;min-height:52px}.hero{min-height:360px}.card{padding:18px}.status-card{height:220px}.connection{height:350px;min-height:350px;max-height:350px}.social-card{height:420px}}
-.status-header{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.status-header{display:flex;flex-direction:row-reverse;align-items:center;justify-content:center;gap:12px;}
 .status-dot{width:14px;height:14px;border-radius:50%;background:#6b7280;}
 .dot-online{background:#22c55e;box-shadow:0 0 10px #22c55e;}
 .dot-offline{background:#ef4444;box-shadow:0 0 10px #ef4444;}
@@ -63,3 +63,4 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .footer{margin-top:30px;}
 .footer p{text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
 .mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto;}
+.minecraft-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:4px;}
