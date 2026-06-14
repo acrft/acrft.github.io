@@ -190,7 +190,7 @@ try{
 
 const start=performance.now();
 
-const res=await fetch(`https://api.mcsrvstat.us/2/Alameldin.aternos.me:28303?t=${Date.now()}`);
+const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/alameldin.aternos.me:28303?t=${Date.now()}`);
 
 if(!res.ok)throw new Error();
 
