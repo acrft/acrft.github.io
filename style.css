@@ -61,3 +61,5 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
+.footer{margin-top:30px;}
+.footer p{text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
