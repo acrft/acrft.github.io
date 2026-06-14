@@ -6,9 +6,6 @@ html[lang='en']{--main-font:'Mojangles',sans-serif}
 html[lang='ar']{--main-font:'Arapix',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
-body.light-theme{--bg:#f8fafc;--card:#fff;--text:#111827;--text-muted:#475569;--accent:#fff;background:#f8fafc!important;color:#111827!important}
-body.light-theme::before,body.light-theme::after{display:none}
-body.light-theme .card,body.light-theme .mods-container,body.light-theme .social-item{background:#fff!important;border-color:#e5e7eb!important}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
 .card{background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:22px;padding:24px;margin-bottom:20px;overflow:hidden}
 .logo{width:140px;border-radius:24px}
