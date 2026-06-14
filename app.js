@@ -243,52 +243,14 @@ setOfflineUI();
 
 }
 
-function updateContent(){
-
-document
-.querySelectorAll("[data-i18n]")
-.forEach(el=>{
-
-const k=el.dataset.i18n;
-
-if(
-translations[currentLang][k]
-){
-
-el.innerText=
-translations[currentLang][k];
-
-}
-
-});
-
 if(modsListContainer){
-
 modsListContainer.innerHTML="";
-
-translations[currentLang]
-.modsList
-.forEach(mod=>{
-
-modsListContainer.innerHTML+=
-`<li class="mod-item">✨ <span>${mod}</span></li>`;
-
+translations[currentLang].modsList.forEach(mod=>{
+modsListContainer.innerHTML+=`<li class="mod-item">✨ <span>${mod}</span></li>`;
 });
-
 }
-
-document.documentElement.lang=
-currentLang;
-
-document.documentElement.dir=
-currentLang==="ar"?
-"rtl":
-"ltr";
-
 renderAlamChatBtn();
-
 updateServerStatus();
-
 }
 
 function toggleLanguage(){
