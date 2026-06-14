@@ -57,9 +57,9 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .dot-offline{background:#ef4444;box-shadow:0 0 10px #ef4444;}
 .player-count{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center;}
 .rules-list{display:flex;flex-direction:column;gap:10px;padding-top:10px;}
-.rules-card{overflow:auto;}
-.side-column{display:flex;flex-direction:column;gap:20px;}
+.rules-card{height:650px;min-height:650px;max-height:650px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
 .footer{margin-top:30px;}
 .footer p{text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
+.mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto;}
