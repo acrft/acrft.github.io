@@ -183,6 +183,10 @@ pingValue.innerText="--";
 pingValue.style.color="inherit";
 }
 
+if(onlinePlayers){
+onlinePlayers.innerHTML="";
+}
+
 }
 
 async function updateServerStatus(){
@@ -270,10 +274,6 @@ const k=el.dataset.i18n;
 
 if(translations[currentLang][k]){
 el.innerText=translations[currentLang][k];
-}
-
-if(onlinePlayers){
-onlinePlayers.innerHTML="";
 }
 
 });
