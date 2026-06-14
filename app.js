@@ -132,7 +132,6 @@ const modsListContainer=$("#mods-list-container");
 const toast=$("#toast");
 const sideMenu=$("#sideMenu");
 const menuOverlay=$("#menuOverlay");
-const modeBtn=$("#modeBtn");
 const socialLinks=$(".social-links");
 
 function renderAlamChatBtn(){
@@ -333,49 +332,9 @@ toast.classList.remove(
 
 }
 
-if(modeBtn){
-
-modeBtn.onclick=()=>{
-
-document.body.classList.toggle(
-"light-theme"
-);
-
-const light=
-document.body.classList.contains(
-"light-theme"
-);
-
-modeBtn.innerText=
-light?"☀️":"🌙";
-
-localStorage.setItem(
-"theme",
-light?"light":"dark"
-);
-
-};
-
-}
-
 window.addEventListener(
 "load",
 ()=>{
-
-if(
-localStorage.getItem("theme")
-==="light"
-){
-
-document.body.classList.add(
-"light-theme"
-);
-
-if(modeBtn){
-modeBtn.innerText="☀️";
-}
-
-}
 
 updateContent();
 
