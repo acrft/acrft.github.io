@@ -2,10 +2,11 @@
 @font-face{font-family:'Arapix';src:url('fonts/MojanglesArab.ttf') format('truetype')}
 :root{--bg:#041321;--card:rgba(17,32,53,.92);--text:#fff7d1;--text-muted:#c8d29b;--primary:#d4af37;--accent:#0f3b30;--gold:#ffd966;--main-font:'Arapix',sans-serif}
 html{scroll-behavior:smooth;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;overflow-x:hidden}
-html[lang='en']{--main-font:'Mojangles',sans-serif;font-size:14px}
+html[lang='en']{--main-font:'Mojangles',sans-serif}
 html[lang='ar']{--main-font:'Arapix',sans-serif;font-size:16px}
 html[lang='en'] .hero h1{font-size:48px;}
 html[lang='ar'] .hero h1{font-size:56px;}
+html[lang='en'] body{font-size:.88rem;}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
@@ -74,3 +75,4 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .social-item{height:52px}
 .btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
 .pulse{height:90px;min-height:90px;max-height:90px;display:flex;flex-direction:column;justify-content:center}
+.mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
