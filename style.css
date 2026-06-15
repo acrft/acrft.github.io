@@ -41,7 +41,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .connection{height:600px;min-height:600px;max-height:600px;overflow:auto}
 .social-card{height:470px;min-height:470px;max-height:470px;overflow:auto}
 .staff-card{height:120px;min-height:120px;max-height:120px;overflow:auto}
-.version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
+.version-badges{display:flex;flex-direction:column;gap:0;width:100%;min-height:auto}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
 .ver{display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word}
 .label{font-size:1rem}
