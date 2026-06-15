@@ -40,7 +40,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .status-card{height:220px;min-height:220px;max-height:300px;display:flex;flex-direction:column;text-align:center;overflow:auto}
 .connection{height:380px;min-height:380px;max-height:380px;overflow:auto}
 .social-card{height:420px;min-height:420px;max-height:420px;overflow:auto}
-.staff-card{height:200px;min-height:180px;max-height:180px;overflow:auto}
+.staff-card{height:120px;min-height:180px;max-height:180px;overflow:auto}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
 .ver{display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word}
