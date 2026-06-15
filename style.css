@@ -11,7 +11,7 @@ html[lang='en'] body{font-size:.88rem;}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
 .card{background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:22px;padding:24px;margin-bottom:20px;overflow:hidden}
-.logo{width:140px;border-radius:24px}
+.logo{width:200px;border-radius:24px}
 .hero{padding:40px 0;min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1,.section-title{color:var(--gold)}
 .hero h1,.section-title,.card h2,.staff-card h2{display:flex;justify-content:center;align-items:center;text-align:center;width:100%}
@@ -37,8 +37,8 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .menu-overlay.active{opacity:1;pointer-events:auto}
 #toast{position:fixed;top:-100px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;border:1px solid var(--primary);opacity:0;pointer-events:none;transition:.3s;z-index:9999;background:var(--card);color:var(--text)}
 #toast.show{top:20px;opacity:1}
-.status-card{height:300px;min-height:300px;max-height:300px;display:flex;flex-direction:column;text-align:center;overflow:auto}
-.connection{height:380px;min-height:380px;max-height:380px;overflow:auto}
+.status-card{height:100px;min-height:100px;max-height:100px;display:flex;flex-direction:column;text-align:center;overflow:auto}
+.connection{height:400px;min-height:400px;max-height:400px;overflow:auto}
 .social-card{height:470px;min-height:470px;max-height:470px;overflow:auto}
 .staff-card{height:120px;min-height:180px;max-height:180px;overflow:auto}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
