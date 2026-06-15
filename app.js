@@ -231,6 +231,7 @@ if(onlinePlayers){
 onlinePlayers.innerHTML="";
 
 const players=data.players?.list||[];
+console.log("Players:",players);
 
 players.forEach(name=>{
 
