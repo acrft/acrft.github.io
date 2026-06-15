@@ -37,10 +37,10 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .menu-overlay.active{opacity:1;pointer-events:auto}
 #toast{position:fixed;top:-100px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;border:1px solid var(--primary);opacity:0;pointer-events:none;transition:.3s;z-index:9999;background:var(--card);color:var(--text)}
 #toast.show{top:20px;opacity:1}
-.status-card{height:220px;min-height:220px;max-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
-.connection{height:380px;min-height:380px;max-height:380px;overflow:hidden}
-.social-card{height:420px;min-height:420px;max-height:420px;overflow:hidden}
-.staff-card{height:180px;min-height:180px;max-height:180px;overflow:hidden}
+.status-card{height:220px;min-height:220px;max-height:220px;display:flex;flex-direction:column;text-align:center;overflow:auto}
+.connection{height:380px;min-height:380px;max-height:380px;overflow:auto}
+.social-card{height:420px;min-height:420px;max-height:420px;overflow:auto}
+.staff-card{height:180px;min-height:180px;max-height:180px;overflow:auto}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
 .ver{display:block;width:100%;font-size:1.35rem;font-weight:bold;word-break:break-word}
@@ -65,8 +65,8 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .rules-card{height:650px;min-height:650px;max-height:650px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
-.footer p{{margin-top:30px;text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
-.mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto;}
+.footer p{margin-top:30px;text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
+.mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto}
 .minecraft-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:4px;}
 .online-players{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:15px;}
 .player-card{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:10px;}
@@ -77,3 +77,5 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
 .pulse{height:90px;min-height:90px;max-height:90px;display:flex;flex-direction:column;justify-content:center}
 .mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
+.card::-webkit-scrollbar{width:6px}
+.card::-webkit-scrollbar-thumb{background:rgba(212,175,55,.5);border-radius:999px}
