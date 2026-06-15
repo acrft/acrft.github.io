@@ -19,7 +19,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .ip-wrapper{background:var(--bg);padding:12px;border-radius:16px;display:flex;flex-direction:column;gap:10px;align-items:center}
 .ip-text{direction:ltr;color:#ffe082;font-weight:bold;word-break:break-word;text-align:center}
 .btn-copy,.btn-bedrock,.minecraft-btn{width:100%;padding:14px;border:none;border-radius:18px;background:linear-gradient(180deg,#ffe082,#c79a1c);color:#102236;font-family:var(--main-font);font-weight:bold;display:flex;justify-content:center;align-items:center;cursor:pointer;text-decoration:none}
-.content-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.content-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;direction:ltr;}
 .social-links{display:flex;flex-direction:column;gap:12px;width:100%}
 .social-item{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 18px;background:var(--accent);border-radius:12px;color:var(--text);text-align:center;min-height:52px;text-decoration:none}
 .social-item span{flex:none;text-align:center}
@@ -75,4 +75,4 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .social-item{height:52px}
 .btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
 .pulse{height:90px;min-height:90px;max-height:90px;display:flex;flex-direction:column;justify-content:center}
-.mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
+.mod-item{height:48px;min-height:48px;max-height:48px;white-space:nowrap;overflow:hidden;}
