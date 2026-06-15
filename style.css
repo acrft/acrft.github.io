@@ -2,8 +2,8 @@
 @font-face{font-family:'Arapix';src:url('fonts/MojanglesArab.ttf') format('truetype')}
 :root{--bg:#041321;--card:rgba(17,32,53,.92);--text:#fff7d1;--text-muted:#c8d29b;--primary:#d4af37;--accent:#0f3b30;--gold:#ffd966;--main-font:'Arapix',sans-serif}
 html{scroll-behavior:smooth;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;overflow-x:hidden}
-html[lang='en']{--main-font:'Mojangles',sans-serif}
-html[lang='ar']{--main-font:'Arapix',sans-serif}
+html[lang='en']{--main-font:'Mojangles',sans-serif;font-size:14px}
+html[lang='ar']{--main-font:'Arapix',sans-serif;font-size:16px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
@@ -67,3 +67,7 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .online-players{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:15px;}
 .player-card{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:10px;}
 .player-head{width:24px;height:24px;border-radius:4px;image-rendering:pixelated;}
+.hero h1{height:90px;display:flex;align-items:center;justify-content:center}
+.section-title{height:50px;display:flex;align-items:center;justify-content:center}
+.social-item{height:52px}
+.btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
