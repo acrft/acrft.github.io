@@ -4,6 +4,8 @@
 html{scroll-behavior:smooth;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;overflow-x:hidden}
 html[lang='en']{--main-font:'Mojangles',sans-serif;font-size:14px}
 html[lang='ar']{--main-font:'Arapix',sans-serif;font-size:16px}
+html[lang='en'] .hero h1{font-size:48px;}
+html[lang='ar'] .hero h1{font-size:56px;}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--text);font-family:var(--main-font);margin:0;padding:20px;min-height:100vh;overflow-x:hidden}
 .container{width:100%;max-width:900px;margin:auto;min-height:100vh}
@@ -12,7 +14,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .hero{padding:40px 0;min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1,.section-title{color:var(--gold)}
 .hero h1,.section-title,.card h2,.staff-card h2{display:flex;justify-content:center;align-items:center;text-align:center;width:100%}
-.hero h1{height:90px;min-height:90px;max-height:90px;line-height:1.2;overflow:hidden;font-size:clamp(2rem,5vw,3rem)}
+.hero h1{height:90px;min-height:90px;max-height:90px;line-height:1;overflow:hidden;font-size:56px;display:flex;align-items:center;justify-content:center;white-space:nowrap}
 .ip-wrapper{background:var(--bg);padding:12px;border-radius:16px;display:flex;flex-direction:column;gap:10px;align-items:center}
 .ip-text{direction:ltr;color:#ffe082;font-weight:bold;word-break:break-word;text-align:center}
 .btn-copy,.btn-bedrock,.minecraft-btn{width:100%;padding:14px;border:none;border-radius:18px;background:linear-gradient(180deg,#ffe082,#c79a1c);color:#102236;font-family:var(--main-font);font-weight:bold;display:flex;justify-content:center;align-items:center;cursor:pointer;text-decoration:none}
@@ -71,3 +73,4 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .section-title{height:50px;display:flex;align-items:center;justify-content:center}
 .social-item{height:52px}
 .btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
+.pulse{height:90px;min-height:90px;max-height:90px;display:flex;flex-direction:column;justify-content:center}
