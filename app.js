@@ -39,7 +39,7 @@ feature4:"✅ إدارة نشطة",
 serverOnline:"السيرفر متصل",
 serverOffline:"السيرفر مغلق",
 playersOnline:"اللاعبين المتصلين:",
-loading:"📡 جاري التحقق...",
+loading:"جاري التحقق... 📡",
 modsList:[
 "مود المهارات ✨",
 "مود القبور 🪦",
