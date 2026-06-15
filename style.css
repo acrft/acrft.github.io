@@ -15,8 +15,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .hero{padding:40px 0;min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1,.section-title{color:var(--gold)}
 .hero h1,.section-title,.card h2,.staff-card h2{display:flex;justify-content:center;align-items:center;text-align:center;width:100%}
-.hero h1{height:90px;min-height:90px;max-height:90px;line-height:1;overflow:hidden;font-size:56px;display:flex;align-items:center;justify-content:center;white-space:nowrap}
-.ip-wrapper{background:var(--bg);padding:12px;border-radius:16px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.hero h1{height:90px;min-height:90px;max-height:90px;line-height:1;overflow:hidden;font-size:clamp(1.8rem,6vw,3.5rem);display:flex;align-items:center;justify-content:center;text-align:center}.ip-wrapper{background:var(--bg);padding:12px;border-radius:16px;display:flex;flex-direction:column;gap:10px;align-items:center}
 .ip-text{direction:ltr;color:#ffe082;font-weight:bold;word-break:break-word;text-align:center}
 .btn-copy,.btn-bedrock,.minecraft-btn{width:100%;padding:14px;border:none;border-radius:18px;background:linear-gradient(180deg,#ffe082,#c79a1c);color:#102236;font-family:var(--main-font);font-weight:bold;display:flex;justify-content:center;align-items:center;cursor:pointer;text-decoration:none}
 .content-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;direction:ltr;}
@@ -49,11 +48,14 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .footer{margin-top:30px;border-radius:18px;overflow:hidden}
 .grass-top{height:12px;background:linear-gradient(90deg,#69d44c,#4da537)}
 .dirt-body{min-height:70px;padding:12px 28px;background:#5f4330;display:flex;justify-content:center;align-items:center;text-align:center;overflow:visible}
-.dirt-body p,.dirt-body span{font-size:.68rem;line-height:1.2;white-space:nowrap;text-align:center;padding-inline:12px}
+.dirt-body p,.dirt-body span{font-size:.68rem;line-height:1.2;text-align:center;padding-inline:12px}
 .section-title,.admins-text,.social-item span,.btn-copy span,.minecraft-btn,.btn-bedrock{min-height:24px;display:flex;align-items:center;justify-content:center}
 img{max-width:100%;display:block}
 html[lang='ar'],html[lang='en']{font-size:16px}
 @media(max-width:768px){.content-grid{grid-template-columns:1fr}.logo{width:110px}.control-btn{width:52px;height:52px;min-width:52px;min-height:52px}.hero{min-height:360px}.card{padding:18px}.status-card{height:220px}.connection{height:350px;min-height:350px;max-height:350px}.social-card{height:420px}}
+@media(max-width:480px){
+.hero h1{font-size:2rem;}
+}
 .status-header{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;}
 .status-dot{width:14px;height:14px;border-radius:50%;background:#6b7280;}
 .dot-online{background:#22c55e;box-shadow:0 0 10px #22c55e;}
@@ -63,8 +65,7 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .rules-card{height:650px;min-height:650px;max-height:650px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
-.footer{margin-top:30px;}
-.footer p{text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
+.footer p{{margin-top:30px;text-align:center;padding:20px;background:#5f4330;color:#fff7d1;border-radius:18px;}
 .mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto;}
 .minecraft-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:4px;}
 .online-players{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:15px;}
@@ -75,4 +76,4 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .social-item{height:52px}
 .btn-copy,.btn-bedrock,.minecraft-btn{height:52px}
 .pulse{height:90px;min-height:90px;max-height:90px;display:flex;flex-direction:column;justify-content:center}
-.mod-item{height:48px;min-height:48px;max-height:48px;white-space:nowrap;overflow:hidden;}
+.mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
