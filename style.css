@@ -39,7 +39,7 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 #toast.show{top:20px;opacity:1}
 .status-card{height:300px;min-height:300px;max-height:300px;display:flex;flex-direction:column;text-align:center;overflow:auto}
 .connection{height:380px;min-height:380px;max-height:380px;overflow:auto}
-.social-card{height:450px;min-height:450px;max-height:450px;overflow:auto}
+.social-card{height:460px;min-height:460px;max-height:460px;overflow:auto}
 .staff-card{height:120px;min-height:180px;max-height:180px;overflow:auto}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
@@ -53,16 +53,14 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 img{max-width:100%;display:block}
 html[lang='ar'],html[lang='en']{font-size:16px}
 @media(max-width:768px){.content-grid{grid-template-columns:1fr}.logo{width:110px}.control-btn{width:52px;height:52px;min-width:52px;min-height:52px}.hero{min-height:360px}.card{padding:18px}.status-card{height:220px}.connection{height:350px;min-height:350px;max-height:350px}.social-card{height:420px}}
-@media(max-width:480px){
-.hero h1{font-size:2rem;}
-}
+@media(max-width:480px){.hero h1{font-size:2rem;}}
 .status-header{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;}
 .status-dot{width:14px;height:14px;border-radius:50%;background:#6b7280;}
 .dot-online{background:#22c55e;box-shadow:0 0 10px #22c55e;}
 .dot-offline{background:#ef4444;box-shadow:0 0 10px #ef4444;}
 .player-count{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center;}
 .rules-list{display:flex;flex-direction:column;gap:10px;padding-top:10px;}
-.rules-card{height:680px;min-height:680px;max-height:680px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
+.rules-card{height:700px;min-height:700px;max-height:700px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
 .footer p{margin-top:30px;height:64px;display:flex;align-items:center;justify-content:center;background:#5f4330;color:#fff7d1;border-radius:18px;padding:0 20px;overflow:hidden;}
