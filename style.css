@@ -37,9 +37,9 @@ body{background:radial-gradient(circle at top,#0f2844,#041321 70%);color:var(--t
 .menu-overlay.active{opacity:1;pointer-events:auto}
 #toast{position:fixed;top:-100px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;border:1px solid var(--primary);opacity:0;pointer-events:none;transition:.3s;z-index:9999;background:var(--card);color:var(--text)}
 #toast.show{top:20px;opacity:1}
-.status-card{height:220px;min-height:220px;max-height:300px;display:flex;flex-direction:column;text-align:center;overflow:auto}
+.status-card{height:300px;min-height:300px;max-height:300px;display:flex;flex-direction:column;text-align:center;overflow:auto}
 .connection{height:380px;min-height:380px;max-height:380px;overflow:auto}
-.social-card{height:420px;min-height:420px;max-height:420px;overflow:auto}
+.social-card{height:450px;min-height:450px;max-height:450px;overflow:auto}
 .staff-card{height:120px;min-height:180px;max-height:180px;overflow:auto}
 .version-badges{display:flex;flex-direction:column;gap:10px;width:100%;min-height:170px}
 .badge{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;height:72px;min-height:72px;max-height:72px;padding:16px;font-size:1.15rem;width:100%;overflow:hidden}
@@ -62,7 +62,7 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .dot-offline{background:#ef4444;box-shadow:0 0 10px #ef4444;}
 .player-count{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center;}
 .rules-list{display:flex;flex-direction:column;gap:10px;padding-top:10px;}
-.rules-card{height:650px;min-height:650px;max-height:650px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
+.rules-card{height:660px;min-height:660px;max-height:660px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
 .footer p{margin-top:30px;height:64px;display:flex;align-items:center;justify-content:center;background:#5f4330;color:#fff7d1;border-radius:18px;padding:0 20px;overflow:hidden;}
