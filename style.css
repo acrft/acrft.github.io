@@ -66,7 +66,7 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
 .footer p{margin-top:30px;height:64px;display:flex;align-items:center;justify-content:center;background:#5f4330;color:#fff7d1;border-radius:18px;padding:0 20px;overflow:hidden;}
-.mods-card{height:520px;min-height:520px;max-height:520px;overflow:auto}
+.mods-card{height:700px;min-height:520px;max-height:520px;overflow:auto}
 .minecraft-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:4px;}
 .online-players{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:15px;}
 .player-card{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:10px;}
