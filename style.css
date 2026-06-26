@@ -91,3 +91,5 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .mc-ping span:nth-child(3){height:10px;}
 .mc-ping span:nth-child(4){height:13px;}
 .mc-ping span:nth-child(5){height:16px;}
+.mc-middle{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.mc-players{color:#aaa;font-size:16px;white-space:nowrap;}
