@@ -77,21 +77,21 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
 .card::-webkit-scrollbar{width:6px}
 .card::-webkit-scrollbar-thumb{background:rgba(212,175,55,.5);border-radius:999px}
-.mc-server{display:flex;align-items:center;gap:12px;background:#1b1b1b;border:2px solid #555;padding:10px 12px;margin:20px 0;cursor:pointer;transition:.15s;font-family:'Mojangles',sans-serif;box-shadow:inset 0 0 0 1px #000;}
+.mc-server{display:flex;align-items:center;gap:12px;background:#1b1b1b;border:2px solid #555;padding:10px 12px;margin:20px 0;cursor:pointer;transition:.15s;font-family:'Mojangles',sans-serif;box-shadow:inset 0 0 0 2px #000,0 0 0 1px #777;}
 .mc-server:hover{background:#2b2b2b;border-color:#fff;}
 .mc-icon img{width:64px;height:64px;image-rendering:pixelated;flex-shrink:0;}
-.mc-info{flex:1;overflow:hidden;}
-.mc-name{color:#fff;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mc-motd{display:flex;align-items:center;gap:6px;color:#55ff55;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px;}
-.mc-top{display:flex;justify-content:space-between;align-items:flex-start;}
-.mc-ping{display:flex;align-items:flex-end;gap:2px;height:18px;}
-.mc-ping span{width:4px;background:#55ff55;border-radius:1px;}
+.mc-info{flex:1;display:flex;flex-direction:column;gap:4px;overflow:hidden;}
+.mc-top{display:flex;justify-content:space-between;align-items:center;}
+.mc-name{color:#fff;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px #000;}
+.mc-middle{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.mc-motd{display:flex;align-items:center;gap:6px;color:#55ff55;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px #000;}
+.mc-arrow{color:#ffaa00;}
+.mc-players{color:#aaaaaa;font-size:16px;text-shadow:2px 2px #000;}
+.mc-ping{display:flex;align-items:flex-end;gap:2px;height:16px;}
+.mc-ping span{width:4px;background:#55ff55;}
 .mc-ping span:nth-child(1){height:4px;}
 .mc-ping span:nth-child(2){height:7px;}
 .mc-ping span:nth-child(3){height:10px;}
 .mc-ping span:nth-child(4){height:13px;}
 .mc-ping span:nth-child(5){height:16px;}
-.mc-middle{display:flex;justify-content:space-between;align-items:center;gap:10px;}
-.mc-players{color:#aaa;font-size:16px;white-space:nowrap;}
-.mc-arrow{color:#ffaa00;}
 #mc-status{color:#55ff55;}
