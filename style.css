@@ -83,3 +83,11 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .mc-info{flex:1;overflow:hidden;}
 .mc-name{color:#fff;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .mc-motd{color:#55ff55;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px;}
+.mc-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.mc-ping{display:flex;align-items:flex-end;gap:2px;height:18px;}
+.mc-ping span{width:4px;background:#55ff55;border-radius:1px;}
+.mc-ping span:nth-child(1){height:4px;}
+.mc-ping span:nth-child(2){height:7px;}
+.mc-ping span:nth-child(3){height:10px;}
+.mc-ping span:nth-child(4){height:13px;}
+.mc-ping span:nth-child(5){height:16px;}
