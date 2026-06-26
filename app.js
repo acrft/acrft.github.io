@@ -187,8 +187,10 @@ if(onlinePlayers){
 onlinePlayers.innerHTML="";
 }
 const mcStatus=document.getElementById("mc-status");
-if(mcStatus)mcStatus.textContent="OFFLINE";
+if(mcStatus){
+mcStatus.textContent="OFFLINE";
 }
+
 
 async function updateServerStatus(){
 
@@ -225,7 +227,9 @@ statusIndicator.className="status-dot dot-online";
 statusText.innerText=
 translations[currentLang].serverOnline+" ✅";
 const mcStatus=document.getElementById("mc-status");
-if(mcStatus)mcStatus.textContent="ONLINE";
+if(mcStatus){
+mcStatus.textContent=`ONLINE • ${playersOnline}/${data.players?.max||0}`;
+}
 playerNum.innerText=playersOnline;
 const mcPlayers=document.getElementById("mc-players");
 if(mcPlayers){
