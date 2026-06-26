@@ -77,3 +77,8 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .mod-item{height:48px;min-height:48px;max-height:48px;overflow:hidden;}
 .card::-webkit-scrollbar{width:6px}
 .card::-webkit-scrollbar-thumb{background:rgba(212,175,55,.5);border-radius:999px}
+.mc-server{display:flex;align-items:center;gap:12px;background:#000;border:2px solid #555;padding:10px;margin:20px 0;font-family:'Mojangles',sans-serif;}
+.mc-icon img{width:64px;height:64px;image-rendering:pixelated;}
+.mc-info{flex:1;}
+.mc-name{color:#fff;font-size:22px;margin-bottom:6px;}
+.mc-motd{color:#55ff55;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
