@@ -191,7 +191,7 @@ if(mcStatus){
 mcStatus.textContent="OFFLINE";
 }
 
-
+}
 async function updateServerStatus(){
 
 try{
