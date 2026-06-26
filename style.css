@@ -93,3 +93,6 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .mc-ping span:nth-child(5){height:16px;}
 .mc-middle{display:flex;justify-content:space-between;align-items:center;gap:10px;}
 .mc-players{color:#aaa;font-size:16px;white-space:nowrap;}
+.mc-motd{display:flex;align-items:center;gap:6px;font-size:18px;}
+.mc-arrow{color:#ffaa00;}
+#mc-status{color:#55ff55;}
