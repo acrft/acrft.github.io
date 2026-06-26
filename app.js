@@ -203,7 +203,7 @@ const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/alameldin.aternos.me:2
 if(!res.ok)throw new Error();
 
 const data=await res.json();
-
+console.log(data);
 const ping=Math.round(
 performance.now()-start
 );
