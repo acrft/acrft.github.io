@@ -225,7 +225,10 @@ statusText.innerText=
 translations[currentLang].serverOnline+" ✅";
 
 playerNum.innerText=playersOnline;
-
+const mcPlayers=document.getElementById("mc-players");
+if(mcPlayers){
+mcPlayers.textContent=`${playersOnline}/${data.players?.max||0}`;
+}
 if(onlinePlayers){
 
 onlinePlayers.innerHTML="";
