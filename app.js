@@ -1,7 +1,7 @@
 const translations={
 ar:{
 title:"سيرفر علم كرافت ☘️",
-copyBtn:"نسخ الـ IP:PORT ",
+copyBtn:"نسخ الـ IP:PORT",
 javaVersion:"☕️ جافا:",
 bedrockVersion:"🛏️ بيدروك:",
 addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",
@@ -27,7 +27,6 @@ whatsapp:"قناة الواتساب",
 telegram:"مجموعة التليجرام",
 messenger:"مجموعة الماسينجر",
 discord:"سيرفر الديسكورد",
-alamChat:"منصة علم شات",
 adminsTitle:"👑 المشرفين",
 adminsNames:"👑❄️ علَم جيمر ☘️، الثعلب المفقود 🦊، ملك الجليد",
 copyright:"© 2026 AlamCraft Server",
@@ -38,8 +37,10 @@ feature3:"✅ تحديثات مستمرة",
 feature4:"✅ إدارة نشطة",
 serverOnline:"السيرفر متصل",
 serverOffline:"السيرفر مغلق",
-playersOnline:"اللاعبين المتصلين:",
+playersOnline:"اللاعبون:",
 loading:"جاري التحقق... 📡",
+modsTitle:"المودات/الإضافات",
+downloadCenterBtn:"مركز التحميل",
 modsList:[
 "مود المهارات ✨",
 "مود القبور 🪦",
@@ -54,11 +55,8 @@ modsList:[
 "مود دعم جميع الإصدارات 🔄",
 "مود الكلايم 🚧",
 "مود الإن بي سي 🤖"
-],
-modsTitle:"المودات/الإضافات",
-downloadCenterBtn:"مركز التحميل"
+]
 },
-
 en:{
 title:"AlamCraft Server ☘️",
 copyBtn:"Copy IP:PORT",
@@ -66,40 +64,41 @@ javaVersion:"☕️ Java:",
 bedrockVersion:"🛏️ Bedrock:",
 addBedrock:"Add Server to Minecraft Bedrock",
 rulesTitle:"📜 Server Rules",
-rule1:"1️⃣ No swearing or insults in any form 🤬",
-rule2:"2️⃣ No +18 content of any kind 🔞",
-rule3:"3️⃣ No bullying or belittling others 🐅",
-rule4:"4️⃣ No fighting or causing trouble 🤼‍♂️",
-rule5:"5️⃣ No spamming or repeated annoyance 📢",
-rule6:"6️⃣ No lying or spreading misinformation 😵",
-rule7:"7️⃣ No bossiness or abuse of power 👀",
-rule8:"8️⃣ Don't ask for Admin or permissions 🦸‍♂️",
-rule9:"9️⃣ No promoting other servers or links without permission 📢",
-rule10:"🔟 No talking about politics or sensitive topics 👨‍⚖️",
-rule11:"1️⃣1️⃣ No constant annoying calls 📵",
-rule12:"1️⃣2️⃣ Respect staff and members 🤝",
-rule13:"1️⃣3️⃣ Admin rules are the same as member rules 👑",
-rule14:"1️⃣4️⃣ Staff reserve the right to decide in unlisted cases ⚖️",
+rule1:"1️⃣ No swearing or insults 🤬",
+rule2:"2️⃣ No +18 content 🔞",
+rule3:"3️⃣ No bullying 🐅",
+rule4:"4️⃣ No fighting 🤼‍♂️",
+rule5:"5️⃣ No spam 📢",
+rule6:"6️⃣ No misinformation 😵",
+rule7:"7️⃣ No abuse 👀",
+rule8:"8️⃣ Don't ask for Admin 🦸‍♂️",
+rule9:"9️⃣ No advertising 📢",
+rule10:"🔟 No politics 👨‍⚖️",
+rule11:"1️⃣1️⃣ No annoying calls 📵",
+rule12:"1️⃣2️⃣ Respect everyone 🤝",
+rule13:"1️⃣3️⃣ Admin rules apply to all 👑",
+rule14:"1️⃣4️⃣ Staff decisions are final ⚖️",
 rule15:"1️⃣5️⃣ Punishment System:",
 punishSystem:"Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥",
 linksTitle:"🔗 Server Links",
-whatsapp:"WhatsApp Channel",
-telegram:"Telegram Group",
-messenger:"Messenger Group",
-discord:"Discord Server",
-alamChat:"Alam Chat Platform",
+whatsapp:"WhatsApp",
+telegram:"Telegram",
+messenger:"Messenger",
+discord:"Discord",
 adminsTitle:"👑 Staff",
-adminsNames:"AlamGamer ☘️,LostFox 🦊,KingSnow 👑❄️",
+adminsNames:"AlamGamer ☘️, LostFox 🦊, KingSnow 👑❄️",
 copyright:"© 2026 AlamCraft Server",
-toastMsg:"✔ Server IP:PORT Copied!",
-feature1:"✅ Supports Java & Bedrock",
-feature2:"✅ Clear & Fair Rules",
+toastMsg:"✔ Server IP Copied!",
+feature1:"✅ Java & Bedrock",
+feature2:"✅ Fair Rules",
 feature3:"✅ Constant Updates",
 feature4:"✅ Active Staff",
 serverOnline:"Server Online",
 serverOffline:"Server Offline",
-playersOnline:"Players Online:",
-loading:"Checking Status... 📡",
+playersOnline:"Players:",
+loading:"Checking... 📡",
+modsTitle:"Mods/Plugins",
+downloadCenterBtn:"Download Center",
 modsList:[
 "AuraSkills ✨",
 "AxGraves 🪦",
@@ -114,114 +113,95 @@ modsList:[
 "ViaVersion 🔄",
 "GriefPrevention 🚧",
 "ZNPCs 🤖"
-],
-modsTitle:"Mods/Plugins",
-downloadCenterBtn:"Download Center"
+]
 }
 };
+
 let currentLang=localStorage.getItem("lang")||"ar";
+
 const $=s=>document.querySelector(s);
+
 const modsListContainer=$("#mods-list-container");
 const toast=$("#toast");
 const sideMenu=$("#sideMenu");
 const menuOverlay=$("#menuOverlay");
 const socialLinks=$(".social-links");
-function renderAlamChatBtn(){
-if(!socialLinks)return;
 
-const old=document.querySelector(".alamchat-btn");
-
-if(old)old.remove();
-
-const a=document.createElement("a");
-a.href="https://acrft.github.io/achat";
-a.className="social-item alamchat-btn";
-a.target="_blank";
-a.rel="noopener noreferrer";
-
-const img=document.createElement("img");
-img.src="images/achat.png";
-img.className="link-icon";
-
-const span=document.createElement("span");
-span.textContent=currentLang==="ar"?"منصة علم شات":"Alam Chat Platform";
-
-a.append(img,span);
-
-socialLinks.prepend(a);
-}
+const mcStatus=$("#mc-status");
+const mcPlayers=$("#mc-players");
+const mcPing=$("#mc-ping");
+const mcOnlinePlayers=$("#mc-online-players");
 
 function toggleMenu(){
-sideMenu?.classList.toggle("active");
-menuOverlay?.classList.toggle("active");
-}
-if(onlinePlayers){
-onlinePlayers.innerHTML="";
-}
-const mcStatus=document.getElementById("mc-status");
-if(mcStatus){
-mcStatus.textContent="OFFLINE";
+sideMenu.classList.toggle("active");
+menuOverlay.classList.toggle("active");
 }
 
+function renderAlamChatBtn(){
+if(!socialLinks)return;
+document.querySelector(".alamchat-btn")?.remove();
+const a=document.createElement("a");
+a.href="https://acrft.github.io/achat";
+a.target="_blank";
+a.className="social-item alamchat-btn";
+a.innerHTML=`<img src="images/achat.png" class="link-icon"><span>${currentLang==="ar"?"منصة علم شات":"Alam Chat Platform"}</span>`;
+socialLinks.prepend(a);
 }
+function setOfflineUI(){
+if(mcStatus)mcStatus.textContent="OFFLINE";
+if(mcPlayers)mcPlayers.textContent="0/0";
+if(mcPing)mcPing.textContent="-- ms";
+if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
+}
+
 async function updateServerStatus(){
-
 try{
-
 const start=performance.now();
-
 const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/alameldin.aternos.me:28303?t=${Date.now()}`);
-
 if(!res.ok)throw new Error();
-
 const data=await res.json();
-console.log(data);
-const ping=Math.round(
-performance.now()-start
-);
 
-const playersOnline=
-data.players?.online||0;
-if(playersOnline<=0){
+const ping=Math.round(performance.now()-start);
+const online=data.players?.online||0;
+const max=data.players?.max||0;
+
+if(!data.online){
 setOfflineUI();
 return;
 }
-maxPlayers.innerText=
-data.players?.max||0;
 
-if(pingValue){
+if(mcStatus)mcStatus.textContent=`ONLINE`;
+if(mcPlayers)mcPlayers.textContent=`${online}/${max}`;
+if(mcPing)mcPing.textContent=`${ping} ms`;
 
-pingValue.innerText=ping;
+if(mcOnlinePlayers){
+mcOnlinePlayers.innerHTML="";
+const players=data.players?.list||[];
 
-pingValue.style.color=
-ping<150?"#22c55e":
-ping<300?"#f59e0b":
-"#ef4444";
-
+players.slice(0,8).forEach(name=>{
+mcOnlinePlayers.innerHTML+=`
+<div class="mc-player">
+<img src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/16">
+<span>${name}</span>
+</div>`;
+});
 }
 
-}catch{
-
+}catch(e){
 setOfflineUI();
-
 }
-
 }
 
 function updateContent(){
-
-document.querySelectorAll("[data-i18n]").forEach(el=>{
-
-const k=el.dataset.i18n;
-
-if(translations[currentLang][k]){
-el.innerText=translations[currentLang][k];
-}
-
-});
-
 document.documentElement.lang=currentLang;
 document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.dataset.i18n;
+if(translations[currentLang][key]){
+el.textContent=translations[currentLang][key];
+}
+});
 
 if(modsListContainer){
 modsListContainer.innerHTML="";
@@ -232,59 +212,32 @@ modsListContainer.innerHTML+=`<li class="mod-item">✨ <span>${mod}</span></li>`
 
 renderAlamChatBtn();
 updateServerStatus();
-
 }
 function toggleLanguage(){
-
-currentLang=
-currentLang==="ar"?
-"en":
-"ar";
-
-localStorage.setItem(
-"lang",
-currentLang
-);
-
+currentLang=currentLang==="ar"?"en":"ar";
+localStorage.setItem("lang",currentLang);
 updateContent();
-
 }
 
 function copyIP(){
-
-navigator.clipboard.writeText(
-"Alameldin.aternos.me:28303"
-);
+navigator.clipboard.writeText("Alameldin.aternos.me:28303");
 
 if(toast){
-
-toast.innerText=
-translations[currentLang].toastMsg;
-
+toast.textContent=translations[currentLang].toastMsg;
 toast.classList.add("show");
-
-setTimeout(()=>{
-
-toast.classList.remove(
-"show"
-);
-
-},3000);
-
+setTimeout(()=>toast.classList.remove("show"),3000);
+}
 }
 
-}
+window.addEventListener("scroll",()=>{
+const progress=document.getElementById("scroll-progress");
+if(!progress)return;
+const max=document.documentElement.scrollHeight-window.innerHeight;
+const percent=max>0?window.scrollY/max*100:0;
+progress.style.width=percent+"%";
+});
 
-window.addEventListener(
-"load",
-()=>{
-
+window.addEventListener("load",()=>{
 updateContent();
-
-setInterval(
-updateServerStatus,
-30000
-);
-
-}
-);
+setInterval(updateServerStatus,30000);
+});
