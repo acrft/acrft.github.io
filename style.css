@@ -59,7 +59,8 @@ html[lang='ar'],html[lang='en']{font-size:16px}
 .dot-online{background:#22c55e;box-shadow:0 0 10px #22c55e;}
 .dot-offline{background:#ef4444;box-shadow:0 0 10px #ef4444;}
 .player-count{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center;}
-.rules-list{display:flex;flex-direction:column;gap:10px;padding-top:10px;}
+.rules-list{display:flex;flex-direction:column;gap:10px;padding-top:10px;align-items:center}
+.rules-list li{width:100%;text-align:center;display:flex;justify-content:center;align-items:center}
 .rules-card{height:710px;min-height:710px;max-height:710px;overflow:auto;}.side-column{display:flex;flex-direction:column;gap:20px;}
 #scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:99999;}
 .loaded{visibility:visible;opacity:1;transition:.3s;}
