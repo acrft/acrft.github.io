@@ -120,21 +120,12 @@ downloadCenterBtn:"Download Center"
 }
 };
 let currentLang=localStorage.getItem("lang")||"ar";
-
 const $=s=>document.querySelector(s);
-
-const statusIndicator=$("#status-indicator");
-const statusText=$("#status-text");
-const playerNum=$("#player-num");
-const maxPlayers=$("#max-players");
-const pingValue=$("#ping-value");
-const onlinePlayers=$("#online-players");
 const modsListContainer=$("#mods-list-container");
 const toast=$("#toast");
 const sideMenu=$("#sideMenu");
 const menuOverlay=$("#menuOverlay");
 const socialLinks=$(".social-links");
-
 function renderAlamChatBtn(){
 if(!socialLinks)return;
 
@@ -164,25 +155,6 @@ function toggleMenu(){
 sideMenu?.classList.toggle("active");
 menuOverlay?.classList.toggle("active");
 }
-
-function setOfflineUI(){
-
-if(statusIndicator){
-statusIndicator.className="status-dot dot-offline";
-}
-
-if(statusText){
-statusText.innerText=translations[currentLang].serverOffline+" ❌";
-}
-
-if(playerNum)playerNum.innerText="0";
-if(maxPlayers)maxPlayers.innerText="0";
-
-if(pingValue){
-pingValue.innerText="--";
-pingValue.style.color="inherit";
-}
-
 if(onlinePlayers){
 onlinePlayers.innerHTML="";
 }
@@ -210,50 +182,10 @@ performance.now()-start
 
 const playersOnline=
 data.players?.online||0;
-
 if(playersOnline<=0){
-
 setOfflineUI();
-
 return;
-
 }
-
-if(statusIndicator){
-statusIndicator.className="status-dot dot-online";
-
-}
-
-statusText.innerText=
-translations[currentLang].serverOnline+" ✅";
-const mcStatus=document.getElementById("mc-status");
-if(mcStatus){
-mcStatus.textContent=`ONLINE • ${playersOnline}/${data.players?.max||0}`;
-}
-playerNum.innerText=playersOnline;
-const mcPlayers=document.getElementById("mc-players");
-if(mcPlayers){
-mcPlayers.textContent=`${playersOnline}/${data.players?.max||0}`;
-}
-if(onlinePlayers){
-
-onlinePlayers.innerHTML="";
-
-const players=data.players?.list||[];
-console.log("Players:",players);
-
-players.forEach(name=>{
-
-onlinePlayers.innerHTML+=`
-<div class="player-card">
-<img class="player-head" src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/24">
-<span>${name}</span>
-</div>`;
-
-});
-
-}
-
 maxPlayers.innerText=
 data.players?.max||0;
 
