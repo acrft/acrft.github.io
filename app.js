@@ -157,7 +157,7 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/alameldin.aternos.me:28303?t=${Date.now()}`);
+const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/amc.falix.gg:28001?t=${Date.now()}`);
 if(!res.ok)throw new Error();
 const data=await res.json();
 
@@ -220,7 +220,7 @@ updateContent();
 }
 
 function copyIP(){
-navigator.clipboard.writeText("Alameldin.aternos.me:28303");
+navigator.clipboard.writeText("amc.falix.gg:28001");
 
 if(toast){
 toast.textContent=translations[currentLang].toastMsg;
