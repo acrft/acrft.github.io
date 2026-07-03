@@ -157,7 +157,7 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-const res=await fetch(`https://api.mcsrvstat.us/bedrock/2/amc.falix.gg:28001?t=${Date.now()}`);
+const res=await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:28001?t=${Date.now()}`);
 if(!res.ok)throw new Error();
 const data=await res.json();
 
