@@ -43,7 +43,6 @@ modsTitle:"المودات/الإضافات",
 downloadCenterBtn:"مركز التحميل",
 modsList:[
 "مود المهارات ✨",
-"مود القبور 🪦",
 "مود الرؤوس 💀",
 "مود الأوامر الإضافية ⚙️",
 "مود دعم البيدروك مع الجافا 📱🖥️",
@@ -54,7 +53,6 @@ modsList:[
 "مود تكسير الموارد 🪨⛏️",
 "مود دعم جميع الإصدارات 🔄",
 "مود الكلايم 🚧",
-"مود الإن بي سي 🤖"
 ]
 },
 en:{
@@ -101,7 +99,6 @@ modsTitle:"Mods/Plugins",
 downloadCenterBtn:"Download Center",
 modsList:[
 "AuraSkills ✨",
-"AxGraves 🪦",
 "DropHeads 💀",
 "EssentialsX ⚙️",
 "GeyserMc 📱🖥️",
@@ -112,7 +109,6 @@ modsList:[
 "VeinMiner 🪨⛏️",
 "ViaVersion 🔄",
 "GriefPrevention 🚧",
-"ZNPCs 🤖"
 ]
 }
 };
