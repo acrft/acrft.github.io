@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>AlamCraft ☘️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d1117;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        .container {
+
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+
+            font-size: 3rem;
+
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+
+            opacity: .8;
+        }
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 25px;
+        }
+
+        .card {
+
+            background: #161b22;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            transition: .3s;
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+        }
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #42d37d;
+
+        }
+
+        .card h2 {
+
+            margin-bottom: 15px;
+
+            color: #42d37d;
+        }
+
+        .card p {
+
+            opacity: .8;
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 14px 24px;
+
+            border-radius: 12px;
+
+            background: #42d37d;
+
+            color: #111;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: .3s;
+
+        }
+
+        .btn:hover {
+
+            background: #54e08d;
+        }
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 40px;
+
+            opacity: .6;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="hero">
+
+            <h1>AlamCraft ☘️</h1>
+
+            <p>Select a page to continue</p>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="card">
+
+                <h2>🌍 Server Page</h2>
+
+                <p>
+                    View server information, rules, staff members,
+                    versions, plugins, and community links.
+                </p>
+
+                <a class="btn" href="server.html">
+                    Open Server Page
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>📦 Download Center</h2>
+
+                <p>
+                    Resource packs, mods, plugins,
+                    recommended tools and client downloads.
+                </p>
+
+                <a class="btn" href="download.html">
+                    Open Download Center
+                </a>
+
+            </div>
+
+        </div>
+
+        <footer>
+
+            © 2026 AlamCraft Server
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
