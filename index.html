@@ -1,199 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <title>AlamCraft ☘️</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #0d1117;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 30px;
-        }
-
-        .container {
-
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .hero {
-
-            text-align: center;
-
-            margin-bottom: 40px;
-        }
-
-        .hero h1 {
-
-            font-size: 3rem;
-
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-
-            opacity: .8;
-        }
-
-        .grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(300px, 1fr));
-
-            gap: 25px;
-        }
-
-        .card {
-
-            background: #161b22;
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            transition: .3s;
-
-            border: 1px solid rgba(255, 255, 255, .08);
-
-        }
-
-        .card:hover {
-
-            transform: translateY(-5px);
-
-            border-color: #42d37d;
-
-        }
-
-        .card h2 {
-
-            margin-bottom: 15px;
-
-            color: #42d37d;
-        }
-        .card p {
-
-            opacity: .8;
-
-            margin-bottom: 25px;
-
-            line-height: 1.6;
-        }
-
-        .btn {
-
-            display: inline-block;
-
-            padding: 14px 24px;
-
-            border-radius: 12px;
-
-            background: #42d37d;
-
-            color: #111;
-
-            text-decoration: none;
-
-            font-weight: bold;
-
-            transition: .3s;
-
-        }
-
-        .btn:hover {
-
-            background: #54e08d;
-        }
-
-        footer {
-
-            text-align: center;
-
-            margin-top: 40px;
-
-            opacity: .6;
-
-        }
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="title">AlamCraft Server ☘️</title>
+<link rel="stylesheet" href="style.css?v=1">
+<link rel="icon" href="images/OIG1.png">
 </head>
-
-<body>
-
-    <div class="container">
-
-        <div class="hero">
-
-            <h1>AlamCraft ☘️</h1>
-
-            <p>Select a page to continue</p>
-
-        </div>
-
-
-        <div class="grid">
-
-            <div class="card">
-
-                <h2>🌍 Server Page</h2>
-
-                <p>
-                    View server information, rules, staff members,
-                    versions, plugins, and community links.
-                </p>
-
-                <a class="btn" href="server.html">
-                    Open Server Page
-                </a>
-
-            </div>
-
-
-            <div class="card">
-
-                <h2>📦 Download Center</h2>
-
-                <p>
-                    Resource packs, mods, plugins,
-                    recommended tools and client downloads.
-                </p>
-
-                <a class="btn" href="download.html">
-                    Open Download Center
-                </a>
-
-            </div>
-
-        </div>
-
-        <footer>
-
-            © 2026 AlamCraft Server
-
-        </footer>
-
-    </div>
-
+<body class="dark-theme">
+<div id="scroll-progress"></div>
+<div id="toast" data-i18n="toastMsg"></div>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+<nav class="side-menu" id="sideMenu">
+<a href="#rules">📜 القوانين</a>
+<a href="#links">🔗 الروابط</a>
+<a href="#mods">⚙️ المودات</a>
+<a href="#staff">👑 المشرفين</a>
+</nav>
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="container">
+<header class="hero">
+<div class="mc-server">
+<div class="mc-icon">
+<img src="images/logo.webp" alt="Server Icon">
+</div>
+<div class="mc-info">
+<div class="mc-top">
+<div class="mc-name" id="mc-name">AlamCraft Server</div>
+<div class="mc-ping">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<div class="mc-middle">
+<div class="mc-motd">
+<span class="mc-arrow">>>></span>
+<span id="mc-status">Checking server...</span>
+</div>
+<div class="mc-players" id="mc-players">0/0</div>
+</div>
+<div class="mc-bottom">
+<div id="mc-online-players"></div>
+<div class="mc-ping-text" id="mc-ping">-- ms</div>
+</div>
+</div>
+</div>
+<img src="images/logo.webp" class="logo" draggable="false">
+<h1 data-i18n="title"></h1>
+<ul class="pulse">
+<li data-i18n="feature1"></li>
+<li data-i18n="feature2"></li>
+<li data-i18n="feature3"></li>
+<li data-i18n="feature4"></li>
+</ul>
+</header>
+<section class="card connection">
+<div class="ip-wrapper">
+<span class="ip-text">amc.falix.gg:28001</span>
+<button class="btn-copy" onclick="copyIP()">📋 <span data-i18n="copyBtn"></span></button>
+</div>
+<div class="version-badges">
+<div class="badge"><span data-i18n="javaVersion"></span><span>v1.7 - v26.2</span></div>
+<div class="badge"><span data-i18n="bedrockVersion"></span><span>v26.0 - v26.30</span></div>
+</div>
+<button class="btn-bedrock" onclick="window.open('minecraft://?addExternalServer=ae1|amc.falix.gg%3A28001')" data-i18n="addBedrock"></button>
+</section>
+<div class="content-grid">
+<section class="card rules-card" id="rules">
+<h2 class="section-title" data-i18n="rulesTitle"></h2>
+<ul class="rules-list">
+<li data-i18n="rule1"></li>
+<li data-i18n="rule2"></li>
+<li data-i18n="rule3"></li>
+<li data-i18n="rule4"></li>
+<li data-i18n="rule5"></li>
+<li data-i18n="rule6"></li>
+<li data-i18n="rule7"></li>
+<li data-i18n="rule8"></li>
+<li data-i18n="rule9"></li>
+<li data-i18n="rule10"></li>
+<li data-i18n="rule11"></li>
+<li data-i18n="rule12"></li>
+<li data-i18n="rule13"></li>
+<li data-i18n="rule14"></li>
+<li data-i18n="rule15"></li>
+<li data-i18n="punishSystem"></li>
+</ul>
+</section>
+<div class="side-column">
+<section class="card social-card" id="links">
+<h2 class="section-title" data-i18n="linksTitle"></h2>
+<div class="social-links">
+<a href="https://whatsapp.com/channel/0029Vb7ZwGYKAwEiSBouIq1Z" class="social-item"><img src="images/whatsapp.png" class="link-icon"><span data-i18n="whatsapp"></span></a>
+<a href="https://t.me/Alam_Craft" class="social-item"><img src="images/telegram.png" class="link-icon"><span data-i18n="telegram"></span></a>
+<a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item"><img src="images/messenger.png" class="link-icon"><span data-i18n="messenger"></span></a>
+<a href="https://discord.gg/BKys3Eu8t8" class="social-item"><img src="images/discord.png" class="link-icon"><span data-i18n="discord"></span></a>
+<a href="https://acrft.github.io/dwnlod" class="minecraft-btn"><span data-i18n="downloadCenterBtn"></span></a>
+</div>
+</section>
+<section class="card mods-card" id="mods">
+<h2 class="section-title" data-i18n="modsTitle"></h2>
+<div class="mods-container">
+<ul id="mods-list-container" class="mods-list"></ul>
+</div>
+</section>
+<section class="card staff-card" id="staff">
+<h2 class="section-title" data-i18n="adminsTitle"></h2>
+<p class="admins-text" data-i18n="adminsNames"></p>
+</section>
+</div>
+</div>
+<footer class="footer">
+<p data-i18n="copyright"></p>
+</footer>
+</div>
+<div class="fixed-controls">
+<button class="control-btn" onclick="toggleLanguage()">🌐</button>
+</div>
+<script src="app.js?v=1"></script>
 </body>
-
 </html>
