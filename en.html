@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>AlamCraft Server ☘️</title>
+    <title data-i18n="title">AlamCraft Server ☘️</title>
     <link rel="stylesheet" href="assets/styles/style.css">
+    <link class="icon" rel="icon" href="images/OIG1.png">
 </head>
 
 <body class="dark-theme">
@@ -14,7 +15,7 @@
     <button class="hamburger" onclick="toggleMenu()">☰</button>
     <nav class="side-menu" id="sideMenu">
         <a href="#rules">📜 Rules</a>
-        <a href="#links">🔗 Server Links</a>
+        <a href="#links">🔗 Links</a>
         <a href="#mods">⚙️ Mods</a>
         <a href="#staff">👑 Staff</a>
     </nav>
@@ -49,153 +50,90 @@
                     </div>
                 </div>
             </div>
-            <div id="toast">✔ Server IP Copied!</div>
-
-            <div class="container">
-
-                <header class="hero">
-
-                    <img src="images/logo.webp" class="logo">
-
-                    <h1>AlamCraft Server ☘️</h1>
-
-                    <ul class="pulse">
-                        <li>✅ Java & Bedrock</li>
-                        <li>✅ Fair Rules</li>
-                        <li>✅ Constant Updates</li>
-                        <li>✅ Active Staff</li>
-                    </ul>
-
-                </header>
-
-
-                <section class="card connection">
-
-                    <div class="ip-wrapper">
-                        <span class="ip-text">amc.falix.gg:28001</span>
-
-                        <button class="btn-copy">
-                            📋 Copy IP:PORT
-                        </button>
-
-                    </div>
-
-                    <div class="version-badges">
-
-                        <div class="badge">
-                            ☕️ Java:
-                            <span>v1.7 - v26.2</span>
-                        </div>
-
-                        <div class="badge">
-                            🛏️ Bedrock:
-                            <span>v26.0 - v26.30</span>
-                        </div>
-
-                    </div>
-
-                    <button class="btn-bedrock">
-                        Add Server to Minecraft Bedrock
-                    </button>
-
-                </section>
-
-
-                <div class="content-grid">
-
-                    <section class="card rules-card">
-
-                        <h2>📜 Server Rules</h2>
-
-                        <ul class="rules-list">
-
-                            <li>1️⃣ No swearing or insults in any form 🤬</li>
-                            <li>2️⃣ No +18 content of any kind 🔞</li>
-                            <li>3️⃣ No bullying or belittling others 🐅</li>
-                            <li>4️⃣ No fighting or causing trouble 🤼‍♂️</li>
-                            <li>5️⃣ No spamming or repeated annoyance 📢</li>
-                            <li>6️⃣ No lying or spreading misinformation 😵</li>
-                            <li>7️⃣ No bossiness or abuse of power 👀</li>
-                            <li>8️⃣ Don't ask for Admin or permissions 🦸‍♂️</li>
-                            <li>9️⃣ No promoting without permission 📢</li>
-                            <li>🔟 No talking about politics 👨‍⚖️</li>
-                            <li>1️⃣1️⃣ No constant annoying calls 📵</li>
-                            <li>1️⃣2️⃣ Respect staff and members 🤝</li>
-                            <li>1️⃣3️⃣ Admin rules are the same as member rules 👑</li>
-                            <li>1️⃣4️⃣ Staff reserve the right to decide in unlisted cases ⚖️</li>
-                            <li>1️⃣5️⃣ Punishment System:</li>
-                            <li>Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥</li>
-
-                        </ul>
-
-                    </section>
-
-
-                    <div class="side-column">
-
-                        <section class="card social-card">
-
-                            <h2>🔗 Server Links</h2>
-
-                            <div class="social-links">
-
-                                <a class="social-item">
-                                    WhatsApp
-                                </a>
-
-                                <a class="social-item">
-                                    Telegram
-                                </a>
-
-                                <a class="social-item">
-                                    Messenger
-                                </a>
-
-                                <a class="social-item">
-                                    Discord
-                                </a>
-
-                                <a class="minecraft-btn">
-                                    Download Center
-                                </a>
-
-                            </div>
-
-                        </section>
-
-
-                        <section class="card mods-card">
-
-                            <h2>Mods/Plugins</h2>
-                            <ul class="mods-list">
-                                <li>AuraSkills ✨</li>
-                                <li>DropHeads 💀</li>
-                                <li>EssentialsX ⚙️</li>
-                                <li>GeyserMc 📱🖥️</li>
-                                <li>OnePlayerSleep 🛏😴</li>
-                                <li>Sit 🪑</li>
-                                <li>SkinsRestorer 👕</li>
-                                <li>TreeCapitator 🌳🪓</li>
-                                <li>VeinMiner 🪨⛏️</li>
-                                <li>ViaVersion 🔄</li>
-                                <li>GriefPrevention 🚧</li>
-                            </ul>
-                        </section>
-                        <section class="card staff-card">
-                            <h2>👑 Staff</h2>
-                            <p>
-                                AlamGamer ☘️, LostFox 🦊, KingSnow 👑❄️
-                            </p>
-                        </section>
-                    </div>
-                </div>
-                <div class="fixed-controls">
-                    <button class="control-btn"><a href="index.html">🌐</a></button>
-                </div>
-                <footer class="footer">
-                    © 2026 AlamCraft Server
-                </footer>
+            <img src="images/logo.webp" class="logo" draggable="false">
+            <h1 data-i18n="title"></h1>
+            <ul class="pulse">
+                <li data-i18n="feature1"></li>
+                <li data-i18n="feature2"></li>
+                <li data-i18n="feature3"></li>
+                <li data-i18n="feature4"></li>
+            </ul>
+        </header>
+        <section class="card connection">
+            <div class="ip-wrapper">
+                <span class="ip-text">amc.falix.gg:28001</span>
+                <button class="btn-copy" onclick="copyIP()">📋 <span data-i18n="copyBtn">Copy IP</span></button>
             </div>
-    <script src="assets/scripts/app.js"></script>
+            <div class="version-badges">
+                <div class="badge"><span data-i18n="javaVersion">Java Version </span><span>v1.7 - v26.2</span></div>
+                <div class="badge"><span data-i18n="bedrockVersion">Bedrock Version </span><span>v26.0 - v26.30</span></div>
+            </div>
+            <button class="btn-bedrock" onclick="window.open('minecraft://?addExternalServer=ae1|amc.falix.gg%3A28001')"
+                data-i18n="addBedrock">Add to Bedrock</button>
+        </section>
+        <div class="content-grid">
+            <section class="card rules-card" id="rules">
+                <h2 class="section-title" data-i18n="rulesTitle">Server Rules</h2>
+                <ul class="rules-list">
+                    <li data-i18n="rule1"></li>
+                    <li data-i18n="rule2"></li>
+                    <li data-i18n="rule3"></li>
+                    <li data-i18n="rule4"></li>
+                    <li data-i18n="rule5"></li>
+                    <li data-i18n="rule6"></li>
+                    <li data-i18n="rule7"></li>
+                    <li data-i18n="rule8"></li>
+                    <li data-i18n="rule9"></li>
+                    <li data-i18n="rule10"></li>
+                    <li data-i18n="rule11"></li>
+                    <li data-i18n="rule12"></li>
+                    <li data-i18n="rule13"></li>
+                    <li data-i18n="rule14"></li>
+                    <li data-i18n="rule15"></li>
+                    <li data-i18n="punishSystem">Punishment System</li>
+                </ul>
+            </section>
+            <div class="side-column">
+                <section class="card social-card" id="links">
+                    <h2 class="section-title" data-i18n="linksTitle">Important Links</h2>
+                    <div class="social-links">
+                        <a href="https://whatsapp.com/channel/0029Vb7ZwGYKAwEiSBouIq1Z" class="social-item">
+                            <img src="images/whatsapp.png" class="link-icon"><span data-i18n="whatsapp">WhatsApp Channel</span>
+                        </a>
+                        <a href="https://t.me/Alam_Craft" class="social-item">
+                            <img src="images/telegram.png" class="link-icon"><span data-i18n="telegram">Telegram Channel</span>
+                        </a>
+                        <a href="https://m.me/j/AbYYA9YcBq-JUEdz" class="social-item">
+                            <img src="images/messenger.png" class="link-icon"><span data-i18n="messenger">Messenger Group</span>
+                        </a>
+                        <a href="https://discord.gg/BKys3Eu8t8" class="social-item">
+                            <img src="images/discord.png" class="link-icon"><span data-i18n="discord">Discord Server</span>
+                        </a>
+                        <a href="https://acrft.github.io/dwnlod" class="minecraft-btn">
+                            <span data-i18n="downloadCenterBtn">Download Center</span>
+                        </a>
+                    </div>
+                </section>
+                <section class="card mods-card" id="mods">
+                    <h2 class="section-title" data-i18n="modsTitle">Server Mods</h2>
+                    <div class="mods-container">
+                        <ul id="mods-list-container" class="mods-list"></ul>
+                    </div>
+                </section>
+                <section class="card staff-card" id="staff">
+                    <h2 class="section-title" data-i18n="adminsTitle">Admins & Staff</h2>
+                    <p class="admins-text" data-i18n="adminsNames"></p>
+                </section>
+            </div>
+        </div>
+        <footer class="footer">
+            <p data-i18n="copyright"></p>
+        </footer>
+    </div>
+    <div class="fixed-controls">
+        <button class="control-btn"><a href="ar.html">🌐</a></button>
+    </div>
+    <script src="app.js?v=1"></script>
 </body>
+
 </html>
