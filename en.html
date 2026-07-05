@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AlamCraft Server ☘️</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+
+<body class="dark-theme">
+    <div id="scroll-progress"></div>
+    <div id="toast" data-i18n="toastMsg"></div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav class="side-menu" id="sideMenu">
+        <a href="#rules">📜 Rules</a>
+        <a href="#links">🔗 Server Links</a>
+        <a href="#mods">⚙️ Mods</a>
+        <a href="#staff">👑 Staff</a>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="container">
+        <header class="hero">
+            <div class="mc-server">
+                <div class="mc-icon">
+                    <img src="images/logo.webp" alt="Server Icon">
+                </div>
+                <div class="mc-info">
+                    <div class="mc-top">
+                        <div class="mc-name" id="mc-name">AlamCraft Server</div>
+                        <div class="mc-ping">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="mc-middle">
+                        <div class="mc-motd">
+                            <span class="mc-arrow">>>></span>
+                            <span id="mc-status">Checking server...</span>
+                        </div>
+                        <div class="mc-players" id="mc-players">0/0</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div id="mc-online-players"></div>
+                        <div class="mc-ping-text" id="mc-ping">-- ms</div>
+                    </div>
+                </div>
+            </div>
+            <div id="toast">✔ Server IP Copied!</div>
+
+            <div class="container">
+
+                <header class="hero">
+
+                    <img src="images/logo.webp" class="logo">
+
+                    <h1>AlamCraft Server ☘️</h1>
+
+                    <ul class="pulse">
+                        <li>✅ Java & Bedrock</li>
+                        <li>✅ Fair Rules</li>
+                        <li>✅ Constant Updates</li>
+                        <li>✅ Active Staff</li>
+                    </ul>
+
+                </header>
+
+
+                <section class="card connection">
+
+                    <div class="ip-wrapper">
+                        <span class="ip-text">amc.falix.gg:28001</span>
+
+                        <button class="btn-copy">
+                            📋 Copy IP:PORT
+                        </button>
+
+                    </div>
+
+                    <div class="version-badges">
+
+                        <div class="badge">
+                            ☕️ Java:
+                            <span>v1.7 - v26.2</span>
+                        </div>
+
+                        <div class="badge">
+                            🛏️ Bedrock:
+                            <span>v26.0 - v26.30</span>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-bedrock">
+                        Add Server to Minecraft Bedrock
+                    </button>
+
+                </section>
+
+
+                <div class="content-grid">
+
+                    <section class="card rules-card">
+
+                        <h2>📜 Server Rules</h2>
+
+                        <ul class="rules-list">
+
+                            <li>1️⃣ No swearing or insults in any form 🤬</li>
+                            <li>2️⃣ No +18 content of any kind 🔞</li>
+                            <li>3️⃣ No bullying or belittling others 🐅</li>
+                            <li>4️⃣ No fighting or causing trouble 🤼‍♂️</li>
+                            <li>5️⃣ No spamming or repeated annoyance 📢</li>
+                            <li>6️⃣ No lying or spreading misinformation 😵</li>
+                            <li>7️⃣ No bossiness or abuse of power 👀</li>
+                            <li>8️⃣ Don't ask for Admin or permissions 🦸‍♂️</li>
+                            <li>9️⃣ No promoting without permission 📢</li>
+                            <li>🔟 No talking about politics 👨‍⚖️</li>
+                            <li>1️⃣1️⃣ No constant annoying calls 📵</li>
+                            <li>1️⃣2️⃣ Respect staff and members 🤝</li>
+                            <li>1️⃣3️⃣ Admin rules are the same as member rules 👑</li>
+                            <li>1️⃣4️⃣ Staff reserve the right to decide in unlisted cases ⚖️</li>
+                            <li>1️⃣5️⃣ Punishment System:</li>
+                            <li>Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥</li>
+
+                        </ul>
+
+                    </section>
+
+
+                    <div class="side-column">
+
+                        <section class="card social-card">
+
+                            <h2>🔗 Server Links</h2>
+
+                            <div class="social-links">
+
+                                <a class="social-item">
+                                    WhatsApp
+                                </a>
+
+                                <a class="social-item">
+                                    Telegram
+                                </a>
+
+                                <a class="social-item">
+                                    Messenger
+                                </a>
+
+                                <a class="social-item">
+                                    Discord
+                                </a>
+
+                                <a class="minecraft-btn">
+                                    Download Center
+                                </a>
+
+                            </div>
+
+                        </section>
+
+
+                        <section class="card mods-card">
+
+                            <h2>Mods/Plugins</h2>
+                            <ul class="mods-list">
+                                <li>AuraSkills ✨</li>
+                                <li>DropHeads 💀</li>
+                                <li>EssentialsX ⚙️</li>
+                                <li>GeyserMc 📱🖥️</li>
+                                <li>OnePlayerSleep 🛏😴</li>
+                                <li>Sit 🪑</li>
+                                <li>SkinsRestorer 👕</li>
+                                <li>TreeCapitator 🌳🪓</li>
+                                <li>VeinMiner 🪨⛏️</li>
+                                <li>ViaVersion 🔄</li>
+                                <li>GriefPrevention 🚧</li>
+                            </ul>
+                        </section>
+                        <section class="card staff-card">
+                            <h2>👑 Staff</h2>
+                            <p>
+                                AlamGamer ☘️, LostFox 🦊, KingSnow 👑❄️
+                            </p>
+                        </section>
+                    </div>
+                </div>
+                <div class="fixed-controls">
+                    <button class="control-btn"><a href="index.html">🌐</a></button>
+                </div>
+                <footer class="footer">
+                    © 2026 AlamCraft Server
+                </footer>
+            </div>
+    <script src="assets/scripts/app.js"></script>
+</body>
+</html>
