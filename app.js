@@ -153,7 +153,7 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-const res=await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:28001?t=${Date.now()}`);
+const res=await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:20061?t=${Date.now()}`);
 if(!res.ok)throw new Error();
 const data=await res.json();
 
@@ -216,7 +216,7 @@ updateContent();
 }
 
 function copyIP(){
-navigator.clipboard.writeText("amc.falix.gg:28001");
+navigator.clipboard.writeText("amc.falix.gg:20061");
 
 if(toast){
 toast.textContent=translations[currentLang].toastMsg;
