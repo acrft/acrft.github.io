@@ -1,7 +1,7 @@
 const translations={
 ar:{
 title:"سيرفر علم كرافت ☘️",
-copyBtn:"نسخ الـ IP:PORT",
+copyBtn:"نسخ الـ IP",
 javaVersion:"☕️ جافا:",
 bedrockVersion:"🛏️ بيدروك:",
 addBedrock:"إضافة السيرفر إلى ماينكرافت البيدروك",
@@ -57,7 +57,7 @@ modsList:[
 },
 en:{
 title:"AlamCraft Server ☘️",
-copyBtn:"Copy IP:PORT",
+copyBtn:"Copy IP",
 javaVersion:"☕️ Java:",
 bedrockVersion:"🛏️ Bedrock:",
 addBedrock:"Add Server to Minecraft Bedrock",
@@ -216,7 +216,7 @@ updateContent();
 }
 
 function copyIP(){
-navigator.clipboard.writeText("amc.falix.gg:20061");
+navigator.clipboard.writeText("amc.falix.gg");
 
 if(toast){
 toast.textContent=translations[currentLang].toastMsg;
