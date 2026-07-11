@@ -30,7 +30,7 @@ discord:"سيرفر الديسكورد",
 adminsTitle:"👑 المشرفين",
 adminsNames:"❄️👑 علَم جيمر ☘️، الثعلب المفقود 🦊، ملك الجليد",
 copyright:"© 2026 AlamCraft Server",
-toastMsg:"✔ تم نسخ IP:PORT السيرفر بنجاح",
+toastMsg:"✔ تم نسخ  الـ IP السيرفر بنجاح",
 feature1:"✅ يدعم الجافا و البيدروك",
 feature2:"✅ قوانين واضحة و عادلة",
 feature3:"✅ تحديثات مستمرة",
@@ -129,8 +129,8 @@ const mcPing=$("#mc-ping");
 const mcOnlinePlayers=$("#mc-online-players");
 
 function toggleMenu(){
-sideMenu.classList.toggle("active");
-menuOverlay.classList.toggle("active");
+sideMenu?.classList.toggle("active");
+menuOverlay?.classList.toggle("active");
 }
 
 function renderAlamChatBtn(){
@@ -153,7 +153,7 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-const res=await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:20061?t=${Date.now()}`);
+(`https://api.mcsrvstat.us/bedrock/2/amc.falix.gg:20061?t=${Date.now()}`);
 if(!res.ok)throw new Error();
 const data=await res.json();
 
@@ -173,7 +173,6 @@ if(mcPing)mcPing.textContent=`${ping} ms`;
 if(mcOnlinePlayers){
 mcOnlinePlayers.innerHTML="";
 const players=data.players?.list||[];
-
 players.slice(0,8).forEach(name=>{
 mcOnlinePlayers.innerHTML+=`
 <div class="mc-player">
