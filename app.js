@@ -153,7 +153,7 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-(`https://api.mcsrvstat.us/2/amc.falix.gg:20121?t=${Date.now()}`);
+(`https://api.mcsrvstat.us/2/amc.falix.gg?t=${Date.now()}`);
 if(!res.ok)throw new Error();
 const data=await res.json();
 
