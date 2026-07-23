@@ -156,9 +156,15 @@ try{
 const start=performance.now();
 const res = await fetch("https://api.mcstatus.io/v2/status/java/amc.falix.gg:20033");
 const data = await res.json();
-const motd = data.motd?.clean || "Online";
+const mcIcon = $("#mc-icon");
+
+if(data.icon){
+    mcIcon.src = data.icon;
+}
+const motd = Array.isArray(data.motd?.clean)
+    ? data.motd.clean.join(" ")
+    : (data.motd?.clean || "Online");
 const ping = data.latency ?? "--";
-const ping=Math.round(performance.now()-start);
 const online = data.players?.online ?? 0;
 const max = data.players?.max ?? 0;
 
@@ -238,8 +244,3 @@ window.addEventListener("load",()=>{
 updateContent();
 setInterval(updateServerStatus,30000);
 });
-const mcIcon = $("#mc-icon");
-
-if(data.icon){
-    mcIcon.src = data.icon;
-}
