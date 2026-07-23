@@ -165,7 +165,9 @@ setOfflineUI();
 return;
 }
 
-mcStatus.textContent = translations[currentLang].serverOnline;
+mcStatus.textContent =
+data.motd?.clean?.join(" ") ||
+translations[currentLang].serverOnline;
 if(mcPlayers)mcPlayers.textContent=`${online}/${max}`;
 if(mcPing)mcPing.textContent=`${ping} ms`;
 
