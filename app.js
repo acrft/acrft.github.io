@@ -235,3 +235,8 @@ window.addEventListener("load",()=>{
 updateContent();
 setInterval(updateServerStatus,30000);
 });
+const mcIcon = $("#mc-icon");
+
+if(data.icon){
+    mcIcon.src = data.icon;
+}
