@@ -144,7 +144,7 @@ a.innerHTML=`<img src="images/achat.png" class="link-icon"><span>${currentLang==
 socialLinks.prepend(a);
 }
 function setOfflineUI(){
-if(mcStatus)mcStatus.textContent="OFFLINE";
+mcStatus.textContent = translations[currentLang].serverOffline;
 if(mcPlayers)mcPlayers.textContent="0/0";
 if(mcPing)mcPing.textContent="-- ms";
 if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
@@ -153,20 +153,19 @@ if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
 async function updateServerStatus(){
 try{
 const start=performance.now();
-(`https://api.mcsrvstat.us/2/amc.falix.gg?t=${Date.now()}`);
-if(!res.ok)throw new Error();
+const res = await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:20033?t=${Date.now()}`);
 const data=await res.json();
 
 const ping=Math.round(performance.now()-start);
-const online=data.players?.online||0;
-const max=data.players?.max||0;
+const online = data.players?.online ?? 0;
+const max = data.players?.max ?? 0;
 
 if(!data.online){
 setOfflineUI();
 return;
 }
 
-if(mcStatus)mcStatus.textContent=`ONLINE`;
+mcStatus.textContent = translations[currentLang].serverOnline;
 if(mcPlayers)mcPlayers.textContent=`${online}/${max}`;
 if(mcPing)mcPing.textContent=`${ping} ms`;
 
