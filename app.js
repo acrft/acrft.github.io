@@ -144,18 +144,20 @@ a.innerHTML=`<img src="images/achat.png" class="link-icon"><span>${currentLang==
 socialLinks.prepend(a);
 }
 function setOfflineUI(){
-mcStatus.textContent = translations[currentLang].serverOffline;
-if(mcPlayers)mcPlayers.textContent="0/0";
-if(mcPing)mcPing.textContent="-- ms";
-if(mcOnlinePlayers)mcOnlinePlayers.innerHTML="";
+mcStatus.textContent="OFFLINE";
+mcStatus.style.color="#ff5555";
+mcPlayers.textContent="0/0";
+mcPing.textContent="-- ms";
+mcOnlinePlayers.innerHTML="";
 }
 
 async function updateServerStatus(){
 try{
 const start=performance.now();
-const res = await fetch(`https://api.mcsrvstat.us/2/amc.falix.gg:20033?t=${Date.now()}`);
-const data=await res.json();
-
+const res = await fetch("https://api.mcstatus.io/v2/status/java/amc.falix.gg:20033");
+const data = await res.json();
+const motd = data.motd?.clean || "Online";
+const ping = data.latency ?? "--";
 const ping=Math.round(performance.now()-start);
 const online = data.players?.online ?? 0;
 const max = data.players?.max ?? 0;
@@ -165,9 +167,8 @@ setOfflineUI();
 return;
 }
 
-mcStatus.textContent =
-data.motd?.clean?.join(" ") ||
-translations[currentLang].serverOnline;
+mcStatus.textContent = motd;
+mcStatus.style.color = "#55ff55";
 if(mcPlayers)mcPlayers.textContent=`${online}/${max}`;
 if(mcPing)mcPing.textContent=`${ping} ms`;
 
