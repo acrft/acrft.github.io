@@ -6,21 +6,14 @@ const translations = {
         bedrockVersion: "🛏️ بيدروك:",
         addBedrock: "إضافة السيرفر إلى ماينكرافت البيدروك",
         rulesTitle: "📜 القوانين",
-        rule1: "1️⃣ ممنوع السب أو الإهانة بجميع أشكالها 🤬",
-        rule2: "2️⃣ ممنوع أي محتوى +18 بجميع أنواعه 🔞",
-        rule3: "3️⃣ ممنوع التنمّر أو التقليل من الآخرين 🐅",
-        rule4: "4️⃣ ممنوع الخناقات أو إثارة المشاكل 🤼‍♂️",
-        rule5: "5️⃣ ممنوع السبام أو الإزعاج المتكرر 📢",
-        rule6: "6️⃣ ممنوع الكذب أو نشر معلومات مضللة 😵",
-        rule7: "7️⃣ ممنوع التسلّط أو استغلال الصلاحيات 👀",
-        rule8: "8️⃣ ممنوع طلب أدمن أو صلاحيات 🦸‍♂️",
-        rule9: "9️⃣ ممنوع الترويج بدون إذن من الإدارة 📢",
-        rule10: "🔟 ممنوع الكلام في السياسة 👨‍⚖️",
-        rule11: "1️⃣1️⃣ ممنوع الإزعاج بالمكالمات المتكررة 📵",
-        rule12: "1️⃣2️⃣ الالتزام باحترام الإدارة والأعضاء 🤝",
-        rule13: "1️⃣3️⃣ قوانين الأدمن هي نفس قوانين الأعضاء 👑",
-        rule14: "1️⃣4️⃣ للإدارة الحق في اتخاذ القرار المناسب في الحالات الغير مذكورة ⚖️",
-        rule15: "1️⃣5️⃣ نظام العقوبات:",
+        rule1: "1️⃣ ممنوع الهاك و الـ X-Ray 🌐",
+        rule2: "2️⃣ ممنوع بناء اشكال +18 🔞",
+        rule3: "3️⃣ ممنوع السب والشتم 🤬",
+        rule4: "4️⃣ ممنوع طلب أدمن 👑",
+        rule5: "5️⃣ ممنوع الترويج بأي شكل 📢",
+        rule6: "6️⃣ ممنوع السبام في الشات 🤐",
+        rule7: "7️⃣ ممنوع استغلال الجلتشات 🔄",
+        rule8: "8️⃣ للإدارة الحق في اتخاذ القرار ⚖️",
         punishSystem: "🟥 إنذار 🟩 ⬅️ إنذار 🟨 ⬅️ طرد",
         linksTitle: "🔗 روابط السيرفر",
         whatsapp: "قناة الواتساب",
@@ -44,21 +37,14 @@ const translations = {
         bedrockVersion: "🛏️ Bedrock:",
         addBedrock: "Add Server to Minecraft Bedrock",
         rulesTitle: "📜 Server Rules",
-        rule1: "1️⃣ No swearing or insults in any form 🤬",
-        rule2: "2️⃣ No +18 content of any kind 🔞",
-        rule3: "3️⃣ No bullying or belittling others 🐅",
-        rule4: "4️⃣ No fighting or causing trouble 🤼‍♂️",
-        rule5: "5️⃣ No spamming or repeated annoyance 📢",
-        rule6: "6️⃣ No lying or spreading misinformation 😵",
-        rule7: "7️⃣ No bossiness or abuse of power 👀",
-        rule8: "8️⃣ Don't ask for Admin or permissions 🦸‍♂️",
-        rule9: "9️⃣ No promoting without permission 📢",
-        rule10: "🔟 No talking about politics 👨‍⚖️",
-        rule11: "1️⃣1️⃣ No constant annoying calls 📵",
-        rule12: "1️⃣2️⃣ Respect staff and members 🤝",
-        rule13: "1️⃣3️⃣ Admin rules are the same as member rules 👑",
-        rule14: "1️⃣4️⃣ Staff reserve the right to decide in unlisted cases ⚖️",
-        rule15: "1️⃣5️⃣ Punishment System:",
+        rule1: "1️⃣ No Hacking or X-Ray 🌐",
+        rule2: "2️⃣ No +18 builds 🔞",
+        rule3: "3️⃣ No swearing or insults 🤬",
+        rule4: "4️⃣ Do not ask for Admin status 👑",
+        rule5: "5️⃣ No self-promotion of any kind 📢",
+        rule6: "6️⃣ No chat spamming 🤐",
+        rule7: "7️⃣ No exploiting glitches 🔄",
+        rule8: "8️⃣ Staff reserve the right to decide ⚖️",
         punishSystem: "Warning 🟩 ➡️ Warning 🟨 ➡️ Kick 🟥",
         linksTitle: "🔗 Server Links",
         whatsapp: "WhatsApp",
@@ -110,8 +96,8 @@ async function updateServerStatus() {
         const data = await res.json();
         const mcIcon = document.getElementById("mc-icon");
 
-        mcIcon.src=data.icon||"images/logo.webp";
-        const motd=Array.isArray(data.motd?.html)?data.motd.html.join("<br>"):data.motd?.html||"";
+        mcIcon.src = data.icon || "images/logo.webp";
+        const motd = Array.isArray(data.motd?.html) ? data.motd.html.join("<br>") : data.motd?.html || "";
         const ping = Math.round(performance.now() - start);
         const online = data.players?.online ?? 0;
         const max = data.players?.max ?? 0;
@@ -123,28 +109,28 @@ async function updateServerStatus() {
         if (mcPlayers) mcPlayers.textContent = `${data.players.online}/${data.players.max}`;
         if (mcPing) mcPing.textContent = `${ping} ms`;
         const bars = document.querySelectorAll(".mc-ping span");
-        mcStatus.innerHTML=motd;
-       let level=5;
+        mcStatus.innerHTML = motd;
+        let level = 5;
 
-if(data.online===false){
-level=0;
-}else if(ping>=1000){
-level=1;
-}else if(ping>=600){
-level=2;
-}else if(ping>=300){
-level=3;
-}else if(ping>=150){
-level=4;
-}
+        if (data.online === false) {
+            level = 0;
+        } else if (ping >= 1000) {
+            level = 1;
+        } else if (ping >= 600) {
+            level = 2;
+        } else if (ping >= 300) {
+            level = 3;
+        } else if (ping >= 150) {
+            level = 4;
+        }
 
-bars.forEach((bar,i)=>{
-bar.style.opacity=i<level?1:.18;
-bar.style.background=data.online?"#55ff55":"#ff5555";
-});
+        bars.forEach((bar, i) => {
+            bar.style.opacity = i < level ? 1 : .18;
+            bar.style.background = data.online ? "#55ff55" : "#ff5555";
+        });
         if (mcOnlinePlayers) {
-            const players=data.players?.list||[];
-mcOnlinePlayers.innerHTML=players.map(player=>`<div class="mc-player"><img src="${getHead(player.name_clean)}"><span>${player.name_clean}</span></div>`).join("");
+            const players = data.players?.list || [];
+            mcOnlinePlayers.innerHTML = players.map(player => `<div class="mc-player"><img src="${getHead(player.name_clean)}"><span>${player.name_clean}</span></div>`).join("");
         }
 
     } catch (e) {
@@ -158,7 +144,7 @@ async function loadSkins() {
         const res = await fetch(`https://amc1.falix.org/skins.json?t=${Date.now()}`);
         skins = await res.json();
 
-        
+
     } catch (e) {
         console.error("loadSkins error:", e);
         skins = {};
@@ -221,27 +207,27 @@ window.addEventListener("load", async () => {
     setInterval(updateServerStatus, 5000);
 });
 
-document.getElementById("startServer").onclick=async()=>{
-const status=document.getElementById("status");
+document.getElementById("startServer").onclick = async () => {
+    const status = document.getElementById("status");
 
-try{
-const r=await fetch("https://hidden-wind-cca1.eldinalam91.workers.dev/",{method:"POST"});
-const data=await r.json();
+    try {
+        const r = await fetch("https://hidden-wind-cca1.eldinalam91.workers.dev/", { method: "POST" });
+        const data = await r.json();
 
-if(r.ok){
-status.textContent="✅ تم إرسال طلب تشغيل السيرفر";
-return;
-}
+        if (r.ok) {
+            status.textContent = "✅ تم إرسال طلب تشغيل السيرفر";
+            return;
+        }
 
-if(data.error?.code==="ad_required"){
-status.textContent="😁 لا نستفيد من أي إعلان ظهر لك";
-window.open(data.error.action_url,"_blank");
-return;
-}
+        if (data.error?.code === "ad_required") {
+            status.textContent = "😁 لا نستفيد من أي إعلان ظهر لك";
+            window.open(data.error.action_url, "_blank");
+            return;
+        }
 
-status.textContent=data.error?.message||"حدث خطأ";
+        status.textContent = data.error?.message || "حدث خطأ";
 
-}catch{
-status.textContent="❌ تعذر الاتصال بالخادم";
-}
+    } catch {
+        status.textContent = "❌ تعذر الاتصال بالخادم";
+    }
 };
