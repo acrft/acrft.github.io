@@ -32,7 +32,7 @@ const translations = {
         downloadCenterBtn: "مركز التحميل",
     },
     en: {
-        title: "AlamCraft Server",
+        title: "AMC Server",
         copyBtn: "Copy IP",
         javaVersion: "☕️ Java:",
         bedrockVersion: "🛏️ Bedrock:",
@@ -88,7 +88,7 @@ function renderAlamChatBtn() {
     a.href = "https://acrft.github.io/achat";
     a.target = "_blank";
     a.className = "social-item alamchat-btn";
-    a.innerHTML = `<img src="images/achat.png" class="link-icon"><span>${currentLang === "ar" ? "منصة علم شات" : "Alam Chat Platform"}</span>`;
+    a.innerHTML = `<img src="images/dirt.png" class="link-icon"><span>${currentLang === "ar" ? "منصة علم شات" : "Alam Chat Platform"}</span>`;
     socialLinks.prepend(a);
 }
 async function updateServerStatus() {
