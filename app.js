@@ -215,7 +215,10 @@ document.getElementById("startServer").onclick = async () => {
 
     try {
         btn.disabled = true;
-        status.textContent = currentLang === "ar" ? "⏳ جاري تشغيل السيرفر..." : "⏳ Starting server...";
+
+        status.textContent = currentLang === "ar"
+            ? "⏳ جاري طلب تشغيل السيرفر..."
+            : "⏳ Requesting server start...";
 
         const r = await fetch("https://hidden-wind-cca1.eldinalam91.workers.dev/", {
             method: "POST"
@@ -224,6 +227,7 @@ document.getElementById("startServer").onclick = async () => {
         const data = await r.json().catch(() => ({}));
         const error = data.error || {};
 
+        // تشغيل السيرفر بنجاح
         if (r.ok) {
             status.textContent = currentLang === "ar"
                 ? "✅ تم إرسال طلب تشغيل السيرفر"
@@ -231,38 +235,30 @@ document.getElementById("startServer").onclick = async () => {
             return;
         }
 
-        const actionUrl =
-            error.action_url ||
-            error.actionUrl ||
-            data.action_url ||
-            data.actionUrl;
-
-        if (actionUrl && /^https?:\/\//i.test(actionUrl)) {
+        // رابط التحقق من Falix
+        if (error.action_url) {
             status.textContent = currentLang === "ar"
-                ? "🔐 أكمل التحقق ثم حاول تشغيل السيرفر مرة أخرى"
-                : "🔐 Complete the verification, then try again";
+                ? "🔐 افتح رابط التحقق ثم حاول تشغيل السيرفر مرة أخرى"
+                : "🔐 Complete the verification, then try starting the server again";
 
-            window.open(actionUrl, "_blank");
+            window.open(error.action_url, "_blank");
             return;
         }
 
-        if (error.code === "ad_required") {
-            status.textContent = currentLang === "ar"
-                ? "⚠️ مطلوب إكمال التحقق أولاً"
-                : "⚠️ Verification is required first";
-            return;
-        }
-
-        status.textContent =
-            error.message ||
+        // في حالة وجود رسالة خطأ بدون رابط
+        status.textContent = error.message ||
             data.message ||
-            (currentLang === "ar" ? "❌ حدث خطأ غير معروف" : "❌ Unknown error");
+            (currentLang === "ar"
+                ? "❌ حدث خطأ أثناء تشغيل السيرفر"
+                : "❌ An error occurred while starting the server");
 
     } catch (e) {
-        console.error(e);
+        console.error("Start server error:", e);
+
         status.textContent = currentLang === "ar"
             ? "❌ تعذر الاتصال بالخادم"
-            : "❌ Could not connect to server";
+            : "❌ Could not connect to the server";
+
     } finally {
         btn.disabled = false;
     }
