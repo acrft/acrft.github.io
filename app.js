@@ -211,25 +211,59 @@ window.addEventListener("load", async () => {
 
 document.getElementById("startServer").onclick = async () => {
     const status = document.getElementById("status");
+    const btn = document.getElementById("startServer");
 
     try {
-        const r = await fetch("https://hidden-wind-cca1.eldinalam91.workers.dev/", { method: "POST" });
-        const data = await r.json();
+        btn.disabled = true;
+        status.textContent = currentLang === "ar" ? "⏳ جاري تشغيل السيرفر..." : "⏳ Starting server...";
+
+        const r = await fetch("https://hidden-wind-cca1.eldinalam91.workers.dev/", {
+            method: "POST"
+        });
+
+        const data = await r.json().catch(() => ({}));
+        const error = data.error || {};
 
         if (r.ok) {
-            status.textContent = "✅ تم إرسال طلب تشغيل السيرفر";
+            status.textContent = currentLang === "ar"
+                ? "✅ تم إرسال طلب تشغيل السيرفر"
+                : "✅ Server start request sent";
             return;
         }
 
-        if (data.error?.code === "ad_required") {
-            status.textContent = "😁 لا نستفيد من أي إعلان ظهر لك";
-            window.open(data.error.action_url, "_blank");
+        const actionUrl =
+            error.action_url ||
+            error.actionUrl ||
+            data.action_url ||
+            data.actionUrl;
+
+        if (actionUrl && /^https?:\/\//i.test(actionUrl)) {
+            status.textContent = currentLang === "ar"
+                ? "🔐 أكمل التحقق ثم حاول تشغيل السيرفر مرة أخرى"
+                : "🔐 Complete the verification, then try again";
+
+            window.open(actionUrl, "_blank");
             return;
         }
 
-        status.textContent = data.error?.message || "حدث خطأ";
+        if (error.code === "ad_required") {
+            status.textContent = currentLang === "ar"
+                ? "⚠️ مطلوب إكمال التحقق أولاً"
+                : "⚠️ Verification is required first";
+            return;
+        }
 
-    } catch {
-        status.textContent = "❌ تعذر الاتصال بالخادم";
+        status.textContent =
+            error.message ||
+            data.message ||
+            (currentLang === "ar" ? "❌ حدث خطأ غير معروف" : "❌ Unknown error");
+
+    } catch (e) {
+        console.error(e);
+        status.textContent = currentLang === "ar"
+            ? "❌ تعذر الاتصال بالخادم"
+            : "❌ Could not connect to server";
+    } finally {
+        btn.disabled = false;
     }
 };
