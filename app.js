@@ -194,9 +194,9 @@ window.addEventListener("scroll", () => {
     progress.style.width = percent + "%";
 });
 
-window.addEventListener("load", async () => {
-    await loadSkins();
+window.addEventListener("load", () => {
     updateContent();
+    loadSkins();
     setInterval(updateServerStatus, 5000);
 });
 
