@@ -173,6 +173,11 @@ time:Date.now()
 reader.readAsDataURL(file);
 imageInput.value="";
 });
+function scrollChat(){
+    requestAnimationFrame(()=>{
+        messagesEl.scrollTop=messagesEl.scrollHeight;
+    });
+}
 function loadMessages(){
 if(loadingMessages)return;
 loadingMessages=true;
@@ -190,13 +195,11 @@ ${m.photo?`<img class="avatar" loading="lazy" src="${m.photo}" onerror="this.src
 <div class="bubble">
 <div class="name">${safeName}</div>
 ${safeText}
-${m.image?`<img class="message-image" loading="lazy" src="${m.image}" alt="${escapeHTML(m.imageName||"image")}">`:""}
+${m.image?`<img class="message-image" src="${m.image}" alt="${escapeHTML(m.imageName||"image")}" onload="scrollChat()">`:""}
 </div>
 `;
 messagesEl.appendChild(div);
-setTimeout(()=>{
-messagesEl.scrollTop=messagesEl.scrollHeight;
-},50);
+scrollChat();
 });
 }
 function loadMobs(){
