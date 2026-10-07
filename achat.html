@@ -125,7 +125,7 @@ chatEl.style.display="none";
 });
 sendBtn.onclick=send;
 imageBtn.onclick=()=>{imageInput.click()};
-siteBtn.onclick=()=>{window.open("https://acrft.github.io","_blank")};
+siteBtn.onclick=()=>{window.open("https://acrft.github.io")};
 msgInput.addEventListener("keydown",e=>{
 if(e.key==="Enter"){
 e.preventDefault();
@@ -165,6 +165,8 @@ uid:currentUser.uid,
 name:currentUser.displayName||"بدون اسم",
 photo:currentUser.photoURL||"https://i.imgur.com/HeIi0wU.png",
 image:e.target.result,
+imageName:file.name,
+imageType:file.type,
 time:Date.now()
 });
 };
@@ -188,7 +190,7 @@ ${m.photo?`<img class="avatar" loading="lazy" src="${m.photo}" onerror="this.src
 <div class="bubble">
 <div class="name">${safeName}</div>
 ${safeText}
-${m.image?`<img class="message-image" loading="lazy" src="${m.image}">`:""}
+${m.image?`<a href="${m.image}" download="${escapeHTML(m.imageName||"image")}" target="_blank"><img class="message-image" loading="lazy" src="${m.image}"></a>`:""}
 </div>
 `;
 messagesEl.appendChild(div);
