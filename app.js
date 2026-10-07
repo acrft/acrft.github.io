@@ -30,6 +30,7 @@ const translations = {
         feature3: "✅ تحديثات مستمرة",
         feature4: "✅ إدارة نشطة",
         downloadCenterBtn: "مركز التحميل",
+        alamchat:"منصة علم شات",
     },
     en: {
         title: "AMC Server",
@@ -62,6 +63,7 @@ const translations = {
         feature3: "✅ Constant Updates",
         feature4: "✅ Active Staff",
         downloadCenterBtn: "Download Center",
+        alamchat:"Alam Chat Platform",
     }
 };
 
@@ -80,16 +82,6 @@ const mcOnlinePlayers = $("#mc-online-players");
 function toggleMenu() {
     sideMenu?.classList.toggle("active");
     menuOverlay?.classList.toggle("active");
-}
-function renderAlamChatBtn() {
-    if (!socialLinks) return;
-    document.querySelector(".alamchat-btn")?.remove();
-    const a = document.createElement("a");
-    a.href = "https://acrft.github.io/achat";
-    a.target = "_blank";
-    a.className = "social-item alamchat-btn";
-    a.innerHTML = `<img src="images/dirt.png" class="link-icon"><span>${currentLang === "ar" ? "منصة علم شات" : "Alam Chat Platform"}</span>`;
-    socialLinks.prepend(a);
 }
 async function updateServerStatus() {
     try {
