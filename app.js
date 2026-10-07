@@ -170,7 +170,6 @@ function updateContent() {
             el.textContent = translations[currentLang][key];
         }
     });
-    renderAlamChatBtn();
     updateServerStatus();
 }
 function toggleLanguage() {
