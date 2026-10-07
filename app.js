@@ -196,8 +196,8 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("load", () => {
     updateContent();
-    loadSkins();
-    setInterval(updateServerStatus, 5000);
+loadSkins();
+setInterval(updateServerStatus,5000);
 });
 
 document.getElementById("startServer").onclick = async () => {
