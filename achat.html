@@ -190,7 +190,7 @@ ${m.photo?`<img class="avatar" loading="lazy" src="${m.photo}" onerror="this.src
 <div class="bubble">
 <div class="name">${safeName}</div>
 ${safeText}
-${m.image?`<a href="${m.image}" download="${escapeHTML(m.imageName||"image")}" target="_blank"><img class="message-image" loading="lazy" src="${m.image}"></a>`:""}
+${m.image?`<img class="message-image" loading="lazy" src="${m.image}" alt="${escapeHTML(m.imageName||"image")}">`:""}
 </div>
 `;
 messagesEl.appendChild(div);
