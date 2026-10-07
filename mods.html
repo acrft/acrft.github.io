@@ -104,9 +104,9 @@ progress.style.width=(window.scrollY/max*100)+"%";
 currentLang=localStorage.getItem("lang")||"ar";
 renderMods();
 function toggleLanguage(){
-const lang=localStorage.getItem("lang")==="ar"?"en":"ar";
-localStorage.setItem("lang",lang);
-location.reload();
+currentLang=currentLang==="ar"?"en":"ar";
+localStorage.setItem("lang",currentLang);
+renderMods();
 }
 </script>
 <style>
