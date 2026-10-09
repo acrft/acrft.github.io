@@ -127,14 +127,14 @@ body {
 
 .ip-wrapper{
 background:var(--bg);
-height:172px!important;
-min-height:172px!important;
-max-height:172px!important;
-padding:12px;
+height:130px!important;
+min-height:130px!important;
+max-height:130px!important;
+padding:10px;
 border-radius:24px;
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:8px;
 align-items:center;
 justify-content:center;
 flex-shrink:0;
