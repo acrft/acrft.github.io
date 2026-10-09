@@ -124,14 +124,31 @@ body {
     text-align: center
 }
 
-.ip-wrapper {
-    background: var(--bg);
-    padding: 12px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center
+
+.ip-wrapper{
+background:var(--bg);
+height:172px;
+min-height:172px;
+max-height:172px;
+padding:12px;
+border-radius:16px;
+display:flex;
+flex-direction:column;
+gap:10px;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+}
+.ip-text{
+height:24px;
+min-height:24px;
+line-height:24px;
+}
+.ip-wrapper .btn-copy{
+height:52px;
+min-height:52px;
+max-height:52px;
+flex-shrink:0;
 }
 
 .ip-text {
@@ -836,7 +853,9 @@ html[lang='en'] {
     user-select: none;
 }
 
-.connection,.rules-card,.social-card,.staff-card,.mods-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+
+.rules-card,.social-card,.staff-card,.mods-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+.connection{height:600px!important;min-height:600px!important;max-height:600px!important;overflow:auto!important}
 .card{min-width:0;height:auto}
 .version-badges{min-height:0}
 .badge{height:auto;min-height:60px;max-height:none;overflow:visible}
