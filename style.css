@@ -854,8 +854,7 @@ html[lang='en'] {
     user-select: none;
 }
 
-
-.rules-card,.social-card,.staff-card,.mods-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+.rules-card,.social-card,.mods-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
 .card{min-width:0;height:auto}
 .version-badges{min-height:0}
 .badge{height:auto;min-height:60px;max-height:none;overflow:visible}
