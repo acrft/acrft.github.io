@@ -501,11 +501,12 @@ html[lang='en'] {
         height: 220px
     }
 
-    .connection {
-        height: 350px;
-        min-height: 350px;
-        max-height: 350px
-    }
+.connection {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+}
 
     .social-card {
         height: 420px
