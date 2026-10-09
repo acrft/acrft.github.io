@@ -127,11 +127,11 @@ body {
 
 .ip-wrapper{
 background:var(--bg);
-height:172px;
-min-height:172px;
-max-height:172px;
+height:172px!important;
+min-height:172px!important;
+max-height:172px!important;
 padding:12px;
-border-radius:16px;
+border-radius:24px;
 display:flex;
 flex-direction:column;
 gap:10px;
@@ -855,7 +855,6 @@ html[lang='en'] {
 
 
 .rules-card,.social-card,.staff-card,.mods-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
-.connection{height:600px!important;min-height:600px!important;max-height:600px!important;overflow:auto!important}
 .card{min-width:0;height:auto}
 .version-badges{min-height:0}
 .badge{height:auto;min-height:60px;max-height:none;overflow:visible}
