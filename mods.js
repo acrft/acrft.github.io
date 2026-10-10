@@ -1,1 +1,94 @@
-
+const mods=[
+{nameAr:"مود علم هيدز إيه بي أي 🧑",nameEn:"AlamHeadsAPI",icon:"images/mods/alamheadsapi.webp",descAr:"يوفر API لصور وجوه اللاعبين باستخدام SkinsRestorer.",descEn:"Provides an API for player avatars using SkinsRestorer.",video:""},
+{nameAr:"مود التيمات 🛡️",nameEn:"AlamTeams",icon:"images/mods/alamteams.webp",descAr:"يضيف نظام الفرق للاعبين داخل السيرفر.",descEn:"Adds a team system for players.",video:""},
+{nameAr:"مود اصلاح السندان 🔨",nameEn:"AnvilUnlocker",icon:"images/mods/anvilunlocker.webp",descAr:"يسمح بإصلاح الأدوات داخل السندان بدون قيود.",descEn:"Allows repairing items without vanilla limits.",video:""},
+{nameAr:"مود إصلاح اللغة العربية 🔤",nameEn:"arabicfix",icon:"images/mods/arabicfix.webp",descAr:"يحسن دعم اللغة العربية والنصوص العربية داخل السيرفر.",descEn:"Improves Arabic language and text support.",video:""},
+{nameAr:"مود نظام المهارات ✨",nameEn:"AuraSkills",icon:"images/mods/auraskills.webp",descAr:"يضيف نظام مهارات ومستويات للاعبين.",descEn:"Adds RPG skills and leveling.",video:"https://youtu.be/UVrUYHuecw4"},
+{nameAr:"مود تسجيل الدخول 🔑",nameEn:"AuthMe",icon:"images/mods/authme.webp",descAr:"يحمي حساب اللاعب بكلمة مرور.",descEn:"Protects player accounts with passwords.",video:"https://youtu.be/Vwq6MskdX8g"},
+{nameAr:"مود القبور ⚰️",nameEn:"AxGraves",icon:"images/mods/axgraves.webp",descAr:"يحفظ أغراض اللاعب داخل قبر عند موته.",descEn:"Stores a player's items in a grave after death.",video:""},
+{nameAr:"مود المقايدة 🤝",nameEn:"AxTrade",icon:"images/mods/axtrade.webp",descAr:"يسمح بالمقايضة الآمنة بين اللاعبين.",descEn:"Safe player trading system.",video:"https://youtu.be/ODaJcxhzNXc"},
+{nameAr:"مود تنظيف اللاج 🧹",nameEn:"ClearLag",icon:"images/mods/clearlag.webp",descAr:"يحسن الأداء ويقلل اللاج.",descEn:"Reduces lag and improves performance.",video:"https://youtu.be/So2c8Jbj3IU"},
+{nameAr:"مود قبول طلبات الانتقال بسهولة ✅",nameEn:"clickaccept",icon:"images/mods/clickaccept.webp",descAr:"يسهل قبول الطلبات والتفاعلات بالضغط.",descEn:"Makes accepting requests and interactions easier with clicks.",video:""},
+{nameAr:"مود حمل الموبات في الانفنتوري 👆",nameEn:"ClickMobs",icon:"images/mods/clickmobs.webp",descAr:"يمكنك حمل بعض المخلوقات.",descEn:"Carry mobs by clicking them.",video:"https://youtu.be/vc_uJS7YrKQ"},
+{nameAr:"مود ربط شات السيرفر بالديسكورد 💜",nameEn:"DiscordSRV",icon:"images/mods/discordsrv.webp",descAr:"يربط شات السيرفر بالديسكورد.",descEn:"Links Minecraft chat with Discord.",video:"https://youtu.be/h50zm-mBT2I"},
+{nameAr:"مود الرؤوس 💀",nameEn:"DropHeads",icon:"images/mods/dropheads.webp",descAr:"إسقاط رؤوس اللاعبين والموبات.",descEn:"Players and mobs can drop heads.",video:"https://youtu.be/mKKYuV-J9wE"},
+{nameAr:"مود الشوب 🛒",nameEn:"EconomyShopGUI",icon:"images/mods/economyshopgui.webp",descAr:"متجر متكامل للبيع والشراء.",descEn:"GUI shop for buying and selling.",video:"https://youtu.be/zhDAtuROTfk"},
+{nameAr:"مود الأوامر الأساسية ⚙️",nameEn:"Essentials",icon:"images/mods/essentials.webp",descAr:"يوفر أهم أوامر السيرفر الأساسية.",descEn:"Provides essential server commands.",video:"https://youtu.be/EqJlSOcZzKA"},
+{nameAr:"مود النقل للسباون 🛏️",nameEn:"EssentialsSpawn",icon:"images/mods/essentialsspawn.webp",descAr:"ينقلك إلى نقطة السباون.",descEn:"Teleports players to spawn.",video:""},
+{nameAr:"مود حماية المزارع 🌾",nameEn:"FarmProtection",icon:"images/mods/farmprotection.webp",descAr:"يحمي المزارع من التلف.",descEn:"Protects farms from grief.",video:""},
+{nameAr:"مود دعم البيدروك 📱🖥️",nameEn:"GeyserMC",icon:"images/mods/geyser.webp",descAr:"يسمح للاعبي بيدروك بالدخول.",descEn:"Allows Bedrock players to join.",video:"https://youtu.be/KVzB7tQYHJ0"},
+{nameAr:"مود حماية الأراضي 🚧",nameEn:"GriefPrevention",icon:"images/mods/griefprevention.webp",descAr:"يحمي الأراضي من السرقة والتخريب.",descEn:"Land claiming and protection.",video:"https://youtu.be/H6WxRIZGFxI"},
+{nameAr:"مود الجلوس 🪑",nameEn:"GSit",icon:"images/mods/gsit.webp",descAr:"يمكنك الجلوس والاستلقاء.",descEn:"Sit and lay anywhere.",video:"https://youtu.be/54XOA7gsDCc"},
+{nameAr:"مود المطرقة 🔨",nameEn:"Hammer",icon:"images/mods/hammer.webp",descAr:"يضيف أداة المطرقة لتكسير البلوكات.",descEn:"Adds a hammer tool for breaking blocks.",video:""},
+{nameAr:"مود طلب التي بي ✈️",nameEn:"JustTPA",icon:"images/mods/justtpa.webp",descAr:"طلبات انتقال بين اللاعبين.",descEn:"Simple teleport request system.",video:""},
+{nameAr:"مود نقل الموبات المربوطة 🐑",nameEn:"Leashed Mobs Teleport",icon:"images/mods/leashedmobsteleport.webp",descAr:"يسمح للموبات المربوطة بالانتقال مع اللاعب.",descEn:"Allows leashed mobs to teleport with the player.",video:""},
+{nameAr:"مود إدارة الصلاحيات 👑",nameEn:"LuckPerms",icon:"images/mods/luckperms.webp",descAr:"إدارة الرتب والصلاحيات.",descEn:"Advanced permissions manager.",video:"https://youtu.be/zYiI3sI7l0E"},
+{nameAr:"مود الحقائب 🎒",nameEn:"Minepacks",icon:"images/mods/minepacks.webp",descAr:"يضيف حقائب محمولة لتخزين الأغراض.",descEn:"Adds portable backpacks for storing items.",video:""},
+{nameAr:"مود تخطي الليل بلاعب واحد 😴",nameEn:"OnePlayerSleep",icon:"images/mods/oneplayersleep.webp",descAr:"يتخطى الليل بنوم لاعب واحد.",descEn:"Skip the night with one player.",video:"https://youtu.be/c85WEjlA_vI"},
+{nameAr:"مود تجميع الموبات 🌹",nameEn:"RoseStacker",icon:"images/mods/rosestacker.webp",descAr:"يجمع الموبات لتقليل اللاج.",descEn:"Stacks mobs to reduce lag.",video:"https://youtu.be/PZbkYtp1pSU"},
+{nameAr:"مود تعيين المنزل 🏠",nameEn:"SetHome",icon:"images/mods/sethome.webp",descAr:"احفظ منزلك والعودة إليه.",descEn:"Set and teleport to homes.",video:""},
+{nameAr:"مود الدردشة الصوتية 🎤",nameEn:"Simple Voice Chat",icon:"images/mods/voicechat.webp",descAr:"يضيف دردشة صوتية داخل اللعبة.",descEn:"Adds in-game voice chat.",video:"https://youtu.be/8bQXMl2bgrw"},
+{nameAr:"مود السكينات 👕",nameEn:"SkinsRestorer",icon:"images/mods/skinsrestorer.webp",descAr:"إظهار السكينات للأوفلاين.",descEn:"Restores player skins.",video:"https://youtu.be/WUdAIxCN4AE"},
+{nameAr:"مود ربط الشوب بالسباونرات 🐣",nameEn:"SpawnerShopBridge",icon:"images/mods/spawnershopbridge.webp",descAr:"ربط السباونرات بالشوب.",descEn:"Links spawners with the shop.",video:""},
+{nameAr:"مود تسهيل قطع الأشجار 🌳",nameEn:"Timber",icon:"images/mods/timber.webp",descAr:"قطع الشجرة بالكامل بضربة واحدة.",descEn:"Breaks an entire tree with one chop.",video:"https://youtu.be/mj1FkN-t12w"},
+{nameAr:"مود تفعيل الـPvP ⚔️",nameEn:"TogglePvp",icon:"images/mods/togglepvp.webp",descAr:"يسمح للاعبين بتفعيل أو تعطيل القتال بينهم.",descEn:"Allows players to toggle PvP on or off.",video:""},
+{nameAr:"مود تكسير الموارد بسهولة ⛏️",nameEn:"VeinMiner",icon:"images/mods/veinminer.webp",descAr:"يكسر كامل العرق المعدني مرة واحدة.",descEn:"Mines an entire ore vein at once.",video:"https://youtu.be/0asb7zFXpw0"},
+{nameAr:"مود دعم جميع الإصدارات 🔄",nameEn:"ViaVersion",icon:"images/mods/viaversion.webp",descAr:"يسمح بدخول إصدارات متعددة.",descEn:"Supports multiple Minecraft versions.",video:"https://youtu.be/LzW4SH7ceEs"}
+];
+let currentLang=localStorage.getItem("lang")||"ar";
+const container=document.getElementById("mods-container");
+function renderMods(){
+container.innerHTML="";
+document.documentElement.lang=currentLang;
+document.documentElement.dir=currentLang==="ar"?"rtl":"ltr";
+document.title=currentLang==="ar"?"مودات سيرفر علم كرافت":"AlamCraft Server Mods";
+document.querySelector("h1").textContent=currentLang==="ar"?"⚙️ مودات سيرفر علم كرافت":"⚙️ AlamCraft Server Mods";
+document.querySelector(".hero p").textContent=currentLang==="ar"?"جميع مودات وإضافات السيرفر مع شرح لكل مود.":"All server plugins with a short description and tutorial video.";
+document.querySelector("#sideMenu a:nth-child(1)").textContent=currentLang==="ar"?"🏠 الصفحة الرئيسية":"🏠 Home";
+document.querySelector("#sideMenu a:nth-child(2)").textContent=currentLang==="ar"?"⚙️ المودات":"⚙️ Mods";
+mods.forEach(mod=>{
+const card=document.createElement("div");
+card.className="mod-card";
+const header=document.createElement("div");
+header.className="mod-header";
+const img=document.createElement("img");
+img.src=mod.icon;
+img.className="mod-icon";
+img.alt=mod.nameEn;
+const text=document.createElement("div");
+text.className="mod-text";
+const h3=document.createElement("h3");
+h3.textContent=currentLang==="ar"?mod.nameAr:mod.nameEn;
+const p=document.createElement("p");
+p.textContent=currentLang==="ar"?mod.descAr:mod.descEn;
+text.append(h3,p);
+header.append(img,text);
+card.append(header);
+if(mod.video){
+const iframe=document.createElement("iframe");
+iframe.className="mod-video";
+iframe.src=mod.video.replace("https://youtu.be/","https://www.youtube.com/embed/").replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/");
+iframe.title=mod.nameEn;
+iframe.loading="lazy";
+iframe.allowFullscreen=true;
+iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+card.append(iframe);
+}
+container.append(card);
+});
+}
+function toggleMenu(){
+document.getElementById("sideMenu").classList.toggle("active");
+document.getElementById("menuOverlay").classList.toggle("active");
+}
+window.addEventListener("scroll",()=>{
+const progress=document.getElementById("scroll-progress");
+const max=document.documentElement.scrollHeight-window.innerHeight;
+progress.style.width=(max>0?window.scrollY/max*100:0)+"%";
+});
+function toggleLanguage(){
+currentLang=currentLang==="ar"?"en":"ar";
+localStorage.setItem("lang",currentLang);
+renderMods();
+}
+renderMods();
