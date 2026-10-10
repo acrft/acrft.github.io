@@ -1,1 +1,23 @@
-
+.mods-page{width:100%;display:flex;justify-content:center}
+#mods-container{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:18px}
+.mod-card{min-width:0;background:linear-gradient(180deg,rgba(22,37,59,.95),rgba(10,20,36,.95));border:2px solid rgba(212,175,55,.25);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.mod-header{display:flex;align-items:center;gap:14px;min-width:0}
+.mod-icon{width:64px;height:64px;border-radius:14px;object-fit:cover;flex-shrink:0}
+.mod-text{flex:1;min-width:0}
+.mod-text h3{margin:0 0 6px;color:#55ff55;font-size:1.25rem;font-family:'MojangBold','Mojangles',sans-serif;overflow-wrap:anywhere}
+.mod-text p{margin:0;color:#ddd;line-height:1.5;overflow-wrap:anywhere}
+.mod-card .minecraft-btn{margin-top:auto}
+.mod-video{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;display:block;background:#000}
+.fixed-controls{position:fixed;bottom:20px;left:20px;z-index:200;display:flex;gap:8px}
+.control-btn{width:46px;height:46px;border:1px solid rgba(212,175,55,.4);border-radius:50%;background:#142238;color:#fff;font-size:20px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.control-btn:active{transform:scale(.95)}
+@media(max-width:768px){
+#mods-container{grid-template-columns:minmax(0,1fr);gap:14px}
+.mod-card{padding:14px;gap:14px}
+.mod-icon{width:56px;height:56px}
+.mod-text h3{font-size:1.1rem}
+.fixed-controls{bottom:14px;left:14px}
+}
+@media(prefers-reduced-motion:reduce){
+.mod-card,.control-btn{scroll-behavior:auto;animation:none;transition:none}
+}
