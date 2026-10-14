@@ -38,3 +38,10 @@ body::before{content:"";position:fixed;inset:0;background:rgba(11,20,26,.40);z-i
 .me .bubble:has(.image-wrap)>.name{direction:ltr;text-align:left;margin:0 auto 4px 0;width:100%}
 .me .bubble:has(.image-wrap) .image-wrap{margin-left:0;margin-right:auto}
 .me .bubble:has(.image-wrap) .image-name{text-align:left!important;direction:ltr}
+.msg{width:fit-content;max-width:85%;min-width:0}
+.bubble{width:fit-content;max-width:100%;min-width:0}
+.me .bubble:has(.image-wrap){width:fit-content;max-width:100%}
+.image-wrap{width:auto;max-width:100%;min-width:0}
+.message-image{width:auto;max-width:220px;max-height:300px;object-fit:contain}
+.me .bubble:has(.image-wrap)>.name{width:100%;text-align:right;direction:rtl;margin:0 0 4px}
+.me .bubble:has(.image-wrap) .image-wrap{margin:0}
