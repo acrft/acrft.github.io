@@ -45,3 +45,5 @@ body::before{content:"";position:fixed;inset:0;background:rgba(11,20,26,.40);z-i
 .message-image{width:auto;max-width:220px;max-height:300px;object-fit:contain}
 .me .bubble:has(.image-wrap)>.name{width:100%;text-align:right;direction:rtl;margin:0 0 4px}
 .me .bubble:has(.image-wrap) .image-wrap{margin:0}
+.me .bubble:has(.name){direction:rtl}
+.me .bubble .name{direction:rtl;text-align:right}
