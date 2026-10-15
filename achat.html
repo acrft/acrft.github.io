@@ -1,13 +1,17 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17252d">
 <title>AlamChat</title>
+<meta name="description" content="AlamChat - دردشة مجتمع Minecraft">
 <meta property="og:title" content="AlamChat">
 <meta property="og:description" content="Minecraft Chat">
 <meta property="og:image" content="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="stylesheet" href="achat.css">
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -17,24 +21,25 @@
 <body>
 <div id="login">
 <div class="card">
-<div class="logo"></div>
+<div class="logo" aria-hidden="true"></div>
 <h2>AlamChat</h2>
-<button id="loginBtn" class="btn">🔵تسجيل🔴الدخول🟡بأستخدام🟢جوجل⚪️</button>
+<p>دردش مع مجتمع AlamChat</p>
+<button id="loginBtn" class="btn" type="button">🔵 تسجيل الدخول باستخدام Google</button>
 </div>
 </div>
 <div id="chat">
-<div class="header">
+<header class="header">
 <div class="user" id="userInfo"></div>
-<button id="logoutBtn" class="logout-btn">🚪</button>
-</div>
-<div id="messages" class="messages"></div>
-<div class="input">
-<input id="msgInput" maxlength="500" placeholder="اكتب...">
+<button id="logoutBtn" class="logout-btn" type="button" aria-label="تسجيل الخروج" title="تسجيل الخروج">🚪</button>
+</header>
+<main id="messages" class="messages" aria-live="polite" aria-label="الرسائل"></main>
+<form class="input" id="messageForm">
+<button class="send" id="siteBtn" type="button" aria-label="موقع AlamCraft" title="موقع AlamCraft">☘️</button>
+<button class="send" id="imageBtn" type="button" aria-label="إرسال صورة" title="إرسال صورة">🖼️</button>
 <input type="file" id="imageInput" accept="image/*" hidden>
-<button class="send" id="siteBtn">☘️</button>
-<button class="send" id="imageBtn">🖼️</button>
-<button class="send" id="sendBtn">📤</button>
-</div>
+<input id="msgInput" maxlength="500" placeholder="اكتب رسالتك..." autocomplete="off" aria-label="اكتب رسالتك">
+<button class="send" id="sendBtn" type="submit" aria-label="إرسال الرسالة" title="إرسال">➤</button>
+</form>
 </div>
 </body>
 </html>
