@@ -108,14 +108,11 @@ await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 const provider=new firebase.auth.GoogleAuthProvider();
 provider.addScope("email");
 provider.setCustomParameters({prompt:"select_account"});
-const result=await auth.signInWithPopup(provider);
-if(result.user)setScreen(result.user);
+await auth.signInWithRedirect(provider);
 }catch(error){
-logError("تسجيل الدخول",error);
-if(error.code==="auth/popup-closed-by-user"||error.code==="auth/cancelled-popup-request")return;
-notify(errorMessage(error));
-}finally{
 setLoginBusy(false);
+logError("تسجيل الدخول",error);
+notify(errorMessage(error));
 }
 }
 
