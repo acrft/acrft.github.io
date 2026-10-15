@@ -116,22 +116,27 @@ notify(errorMessage(error));
 }
 }
 
-function initAuth(){
+async function initAuth(){
 if(authReady)return;
 authReady=true;
-authUnsubscribe=auth.onAuthStateChanged(user=>{
+try{
+const result=await auth.getRedirectResult();
+if(result&&result.user){
+currentUser=result.user;
+}
+}catch(error){
+if(error.code!=="auth/no-auth-event"){
+logError("استعادة تسجيل الدخول",error);
+notify(errorMessage(error));
+}
+}
+auth.onAuthStateChanged(user=>{
 setLoginBusy(false);
 setScreen(user);
 },error=>{
 setLoginBusy(false);
 logError("حالة تسجيل الدخول",error);
 notify(errorMessage(error));
-});
-auth.getRedirectResult().catch(error=>{
-if(error.code!=="auth/no-auth-event"){
-logError("نتيجة تسجيل الدخول",error);
-notify(errorMessage(error));
-}
 });
 }
 
