@@ -203,7 +203,15 @@ direction:ltr!important;
 flex-direction:row!important;
 flex-wrap:nowrap!important;
 }
-#chat form.input #siteBtn{order:1!important}
+#chat form.input #sendBtn{order:1!important}
 #chat form.input #imageBtn{order:2!important}
-#chat form.input #sendBtn{order:3!important}
+#chat form.input #siteBtn{order:3!important}
 #chat form.input #msgInput{order:4!important}
+#chat #msgInput{
+direction:rtl!important;
+text-align:right!important;
+}
+#chat #msgInput::placeholder{
+direction:rtl!important;
+text-align:right!important;
+}
