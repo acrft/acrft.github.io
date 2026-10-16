@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#07130f">
 <meta name="color-scheme" content="dark">
 <meta name="description" content="AlamChat - منصة دردشة للتواصل ومشاركة الرسائل والصور بسهولة.">
-<title>AlamChat | علم شات</title>
+<title>AlamChat | عالم الدردشة</title>
 <link rel="icon" href="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,7 @@
 </head>
 <body>
 <div class="app-shell">
+
 <section id="login" class="login-screen" aria-label="تسجيل الدخول">
 <div class="login-card card">
 <div class="brand">
@@ -31,50 +32,65 @@
 <h1>أهلاً بيك في AlamChat</h1>
 <p class="login-description">سجّل دخولك وابدأ التواصل ومشاركة الرسائل والصور بسهولة.</p>
 <button id="loginBtn" class="btn" type="button">
-<svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" transform="translate(0 4)"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.75 7.18l7.73 6C44.42 37.98 46.98 31.92 46.98 24.55Z"/><path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.9 23.9 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19Z" transform="translate(1 0)"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z" transform="translate(0 -2)"/></svg>
+<svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true">
+<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" transform="translate(0 4)"/>
+<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.75 7.18l7.73 6C44.42 37.98 46.98 31.92 46.98 24.55Z"/>
+<path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.9 23.9 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19Z" transform="translate(1 0)"/>
+<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z" transform="translate(0 -2)"/>
+</svg>
 <span>تسجيل الدخول باستخدام Google</span>
 </button>
 <div class="security-note"><span class="security-dot"></span> تسجيل دخول آمن باستخدام حساب Google</div>
 </div>
 </section>
+
 <section id="chat" class="chat-screen" aria-label="محادثات AlamChat">
+
 <header class="header">
-<div class="header-brand">
-<img class="logo" src="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png" alt="AlamChat" width="44" height="44">
-<div class="header-title">
-<strong>Alam<span>Chat</span></strong>
-<small>مساحة التواصل الخاصة بك</small>
-</div>
-</div>
-<div class="header-actions">
 <div id="userInfo" class="user" aria-label="معلومات المستخدم"></div>
 <button id="logoutBtn" class="logout-btn" type="button" title="تسجيل الخروج" aria-label="تسجيل الخروج">
-<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M10 17l5-5-5-5"/>
+<path d="M15 12H3"/>
+<path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/>
+</svg>
 </button>
-</div>
 </header>
-<div class="chat-subheader">
-<div class="online-indicator"><span></span> المحادثة العامة</div>
-<div class="chat-subtitle">خلّي التواصل أسهل 💚</div>
-</div>
+
 <main id="messages" class="messages" aria-label="الرسائل" aria-live="polite" aria-relevant="additions"></main>
+
 <footer class="chat-footer">
 <form class="input" id="messageForm" autocomplete="off">
 <button id="siteBtn" class="send site-button" type="button" title="زيارة موقع AlamCraft" aria-label="زيارة موقع AlamCraft">
-<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>
+<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="12" cy="12" r="10"/>
+<path d="M2 12h20"/>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
+</svg>
 </button>
+
 <button id="imageBtn" class="send image-button" type="button" title="إرسال صورة" aria-label="إرسال صورة">
-<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="3" y="3" width="18" height="18" rx="3"/>
+<circle cx="8.5" cy="8.5" r="1.5"/>
+<path d="m21 15-5-5L5 21"/>
+</svg>
 </button>
+
 <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
 <label class="visually-hidden" for="msgInput">اكتب رسالتك</label>
 <textarea id="msgInput" name="message" rows="1" maxlength="500" placeholder="اكتب رسالتك هنا..." aria-label="اكتب رسالتك" enterkeyhint="send"></textarea>
+
 <button id="sendBtn" class="send submit-button" type="submit" title="إرسال الرسالة" aria-label="إرسال الرسالة">
-<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="m22 2-7 20-4-9-9-4Z"/>
+<path d="M22 2 11 13"/>
+</svg>
 </button>
 </form>
 <div class="footer-caption">تواصل باحترام، وخلّي المحادثة دايمًا إيجابية 💚</div>
 </footer>
+
 </section>
 </div>
 </body>
