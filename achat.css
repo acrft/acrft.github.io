@@ -62,3 +62,23 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 @media(max-width:480px){:root{--header-h:112px;--composer-h:76px}.header{padding:8px 10px;gap:7px}.header>#userInfo.user{gap:6px}.user>img{width:40px;height:40px;flex-basis:40px}.user-name{font-size:13px}.mob-list{gap:5px;height:29px}.mob{padding:4px 8px;font-size:10px}.messages{padding:10px 5px 14px;gap:5px}.msg{max-width:96%;gap:3px}.avatar{width:27px;height:27px;flex-basis:27px}.bubble{padding:7px 9px 8px;font-size:16px;line-height:1.6}.name{font-size:12px;margin-bottom:3px}.message-image{max-width:min(180px,50vw);max-height:180px}.image-name{max-width:180px}.input{gap:6px;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))}.send{width:43px;height:43px;flex-basis:43px}.input textarea#msgInput{height:45px;min-height:45px;padding:9px 11px;font-size:14px}.logout-btn{width:39px;height:39px;flex-basis:39px}}
 @media(max-width:360px){:root{--header-h:108px;--composer-h:72px}.header{padding:7px;gap:5px}.user>img{width:35px;height:35px;flex-basis:35px}.user-name{font-size:12px}.mob{padding:3px 7px;font-size:10px}.logout-btn{width:35px;height:35px;flex-basis:35px}.input{gap:5px;padding-left:6px;padding-right:6px}.send{width:39px;height:39px;flex-basis:39px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* تحسين هيدر AlamChat على الموبايل */
+:root{--header-h:104px}
+.header{height:var(--header-h);min-height:0;padding:10px 14px;gap:12px;overflow:hidden}
+#userInfo.user{gap:10px;align-items:center}
+#userInfo>img{width:48px;height:48px;flex:0 0 48px}
+.user-name{font-size:16px;line-height:1.5}
+.mob-list{height:34px;margin-top:6px;gap:7px}
+.mob{min-height:31px;padding:5px 12px;font-size:12px;border-radius:20px}
+.logout-btn{width:46px;height:46px;flex:0 0 46px}
+.messages{top:var(--header-h)}
+@media(max-width:480px){
+:root{--header-h:104px}
+.header{height:104px;padding:9px 12px;gap:9px}
+#userInfo.user{gap:8px}
+#userInfo>img{width:45px;height:45px;flex-basis:45px}
+.user-name{font-size:15px}
+.mob-list{height:32px;gap:6px;margin-top:5px}
+.mob{min-height:29px;padding:4px 10px;font-size:11px}
+.logout-btn{width:43px;height:43px;flex-basis:43px}
+}
