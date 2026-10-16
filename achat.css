@@ -215,3 +215,5 @@ text-align:right!important;
 direction:rtl!important;
 text-align:right!important;
 }
+html.auth-loading #login,html.auth-loading #chat{visibility:hidden}
+html.auth-loading body:after{content:"";position:fixed;inset:0;z-index:9999;background:#0b141a;display:block}
