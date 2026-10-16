@@ -122,22 +122,20 @@ async function initAuth(){
 if(authReady)return;
 authReady=true;
 try{
-const result=await auth.getRedirectResult();
-if(result&&result.user){
-currentUser=result.user;
-}
+await auth.getRedirectResult();
 }catch(error){
 if(error.code!=="auth/no-auth-event"){
 logError("استعادة تسجيل الدخول",error);
-notify(errorMessage(error));
 }
 }
 auth.onAuthStateChanged(user=>{
 setLoginBusy(false);
 setScreen(user);
+document.documentElement.classList.remove("auth-loading");
 },error=>{
 setLoginBusy(false);
 logError("حالة تسجيل الدخول",error);
+document.documentElement.classList.remove("auth-loading");
 notify(errorMessage(error));
 });
 }
