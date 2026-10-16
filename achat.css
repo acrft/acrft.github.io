@@ -82,3 +82,57 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 .mob{min-height:29px;padding:4px 10px;font-size:11px}
 .logout-btn{width:43px;height:43px;flex-basis:43px}
 }
+/* Compact AlamChat header — override previous rules */
+:root{--header-h:76px!important}
+#chat .header{
+height:76px!important;
+min-height:76px!important;
+padding:5px 9px!important;
+gap:7px!important;
+flex-wrap:nowrap!important;
+overflow:hidden!important
+}
+#chat #userInfo.user{
+display:flex!important;
+flex-direction:row!important;
+align-items:center!important;
+gap:7px!important;
+min-width:0!important;
+flex:1!important;
+overflow:hidden!important
+}
+#chat #userInfo>img{
+width:34px!important;
+height:34px!important;
+flex:0 0 34px!important
+}
+#chat .user-name{
+font-size:12px!important;
+line-height:1.3!important;
+min-height:0!important
+}
+#chat .mob-list{
+height:25px!important;
+margin-top:3px!important;
+gap:4px!important
+}
+#chat .mob{
+min-height:23px!important;
+padding:2px 7px!important;
+font-size:10px!important
+}
+#chat .logout-btn{
+width:35px!important;
+height:35px!important;
+flex:0 0 35px!important
+}
+#chat .messages{
+top:76px!important;
+bottom:calc(var(--composer-h) + env(safe-area-inset-bottom,0px))!important
+}
+@media(max-width:380px){
+#chat .header{padding:4px 6px!important;gap:5px!important}
+#chat #userInfo>img{width:30px!important;height:30px!important;flex-basis:30px!important}
+#chat .user-name{font-size:11px!important}
+#chat .mob{padding:2px 5px!important;font-size:9px!important}
+}
