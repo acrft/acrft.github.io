@@ -8,7 +8,7 @@ button{touch-action:manipulation;cursor:pointer}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 #login{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,14,19,.68);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .card{width:100%;max-width:390px;padding:32px 25px;background:rgba(23,37,45,.96);border:1px solid var(--line);border-radius:28px;text-align:center;box-shadow:0 25px 80px #0008;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.logo{width:96px;height:96px;margin:0 auto 16px;border-radius:50%;object-fit:cover;background:url("https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png") center/cover no-repeat;box-shadow:0 8px 28px #0005}
+.logo{width:96px;height:96px;margin:0 auto 16px;border-radius:50%;object-fit:cover;background:url("https://acrft.github.io/images/achat.png") center/cover no-repeat;box-shadow:0 8px 28px #0005}
 .card h1,.card h2{margin:8px 0;font-size:clamp(23px,6vw,28px);font-weight:800}
 .card p{margin:0 0 24px;color:var(--muted);font-size:14px}
 .btn{width:100%;min-height:51px;padding:13px 18px;border:1px solid #ffffff12;border-radius:16px;background:linear-gradient(135deg,#2cdb79,#12ad56);color:#fff;font-size:16px;font-weight:800;box-shadow:0 7px 22px #25d36630;transition:transform .18s,filter .18s}
