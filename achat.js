@@ -17,6 +17,7 @@ const el={
 login:$("login"),
 chat:$("chat"),
 loginBtn:$("loginBtn"),
+githubLoginBtn:$("githubLoginBtn"),
 logoutBtn:$("logoutBtn"),
 sendBtn:$("sendBtn"),
 imageBtn:$("imageBtn"),
