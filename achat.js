@@ -130,6 +130,7 @@ setLoginBusy(false);
 }
 }
 
+
 async function loginWithGitHub(){
 if(loginBusy||currentUser)return;
 setLoginBusy(true);
@@ -141,13 +142,32 @@ provider.addScope("user:email");
 await auth.signInWithPopup(provider);
 }catch(error){
 logError("تسجيل الدخول باستخدام GitHub",error);
-if(error.code!=="auth/popup-closed-by-user"&&error.code!=="auth/cancelled-popup-request"){
-notify(errorMessage(error));
+if(error.code==="auth/account-exists-with-different-credential"){
+try{
+const pendingCredential=error.credential;
+const email=error.email;
+const methods=await auth.fetchSignInMethodsForEmail(email);
+if(methods.includes("google.com")){
+const googleProvider=new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({login_hint:email,prompt:"select_account"});
+const result=await auth.signInWithPopup(googleProvider);
+await result.user.linkWithCredential(pendingCredential);
+notify("تم ربط GitHub بحسابك الحالي بنجاح. يمكنك استخدام الطريقتين لتسجيل الدخول.");
+}else{
+notify("هذا البريد مرتبط بطريقة تسجيل دخول أخرى. سجّل الدخول بالطريقة الأصلية أولًا.");
+}
+}catch(linkError){
+logError("ربط حساب GitHub",linkError);
+notify(errorMessage(linkError));
+}
+}else if(error.code!=="auth/popup-closed-by-user"&&error.code!=="auth/cancelled-popup-request"){
+notify(errorMessage(error)+"\nرمز الخطأ: "+(error.code||"غير معروف"));
 }
 }finally{
 setLoginBusy(false);
 }
 }
+
 
 async function initAuth(){
 if(authReady)return;
