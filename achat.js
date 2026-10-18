@@ -49,7 +49,7 @@ alert(message);
 }
 
 function logError(action,error){
-console.error("[AlamChat] "+action,error);
+notify(errorMessage(error)+"\nرمز الخطأ: "+(error.code||"غير معروف")+"\nالتفاصيل: "+(error.message||"لا توجد تفاصيل"));
 }
 
 function errorMessage(error){
@@ -77,6 +77,7 @@ if(text)button.textContent=busy?text:button.dataset.originalText||"";
 if(el.loginBtn)el.loginBtn.dataset.originalText=el.loginBtn.textContent;
 
 
+
 function setLoginBusy(busy){
 loginBusy=busy;
 [el.loginBtn,el.githubLoginBtn].forEach(button=>{
@@ -85,7 +86,10 @@ button.disabled=busy;
 button.classList.toggle("loading",busy);
 button.setAttribute("aria-busy",String(busy));
 });
-if(el.loginBtn)el.loginBtn.textContent=busy?"جارٍ تسجيل الدخول...":"🔵 تسجيل الدخول باستخدام Google";
+if(el.loginBtn){
+const span=el.loginBtn.querySelector("span");
+if(span)span.textContent=busy?"جارٍ تسجيل الدخول...":"تسجيل الدخول باستخدام Google";
+}
 if(el.githubLoginBtn){
 const span=el.githubLoginBtn.querySelector("span");
 if(span)span.textContent=busy?"جارٍ تسجيل الدخول...":"تسجيل الدخول باستخدام GitHub";
