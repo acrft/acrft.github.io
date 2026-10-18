@@ -119,6 +119,25 @@ setLoginBusy(false);
 }
 }
 
+async function loginWithGitHub(){
+if(loginBusy||currentUser)return;
+setLoginBusy(true);
+try{
+await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+const provider=new firebase.auth.GithubAuthProvider();
+provider.addScope("read:user");
+provider.addScope("user:email");
+await auth.signInWithPopup(provider);
+}catch(error){
+logError("تسجيل الدخول باستخدام GitHub",error);
+if(error.code!=="auth/popup-closed-by-user"&&error.code!=="auth/cancelled-popup-request"){
+notify(errorMessage(error));
+}
+}finally{
+setLoginBusy(false);
+}
+}
+
 async function initAuth(){
 if(authReady)return;
 authReady=true;
