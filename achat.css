@@ -215,3 +215,10 @@ text-align:right!important;
 direction:rtl!important;
 text-align:right!important;
 }
+
+/* AlamChat GitHub Login */
+#githubLoginBtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:51px;margin-top:12px;padding:13px 18px;border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(135deg,#30363d,#161b22);color:#fff;font-family:inherit;font-size:15px;font-weight:800;box-shadow:0 5px 18px #0003;transition:transform .18s,filter .18s,background .18s}
+#githubLoginBtn svg{width:22px;height:22px;flex:0 0 22px}
+#githubLoginBtn:active{transform:scale(.97);filter:brightness(.85)}
+#githubLoginBtn:disabled{opacity:.6;cursor:wait}
+#githubLoginBtn:focus-visible{outline:2px solid #25d366;outline-offset:3px}
