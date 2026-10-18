@@ -222,3 +222,7 @@ text-align:right!important;
 #githubLoginBtn:active{transform:scale(.97);filter:brightness(.85)}
 #githubLoginBtn:disabled{opacity:.6;cursor:wait}
 #githubLoginBtn:focus-visible{outline:2px solid #25d366;outline-offset:3px}
+
+#loginBtn{display:flex;align-items:center;justify-content:center;gap:10px}
+#loginBtn .google-icon{display:block;width:22px;height:22px;flex:0 0 22px}
+#loginBtn span{min-width:0}
