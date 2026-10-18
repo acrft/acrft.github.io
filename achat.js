@@ -76,13 +76,20 @@ if(text)button.textContent=busy?text:button.dataset.originalText||"";
 
 if(el.loginBtn)el.loginBtn.dataset.originalText=el.loginBtn.textContent;
 
+
 function setLoginBusy(busy){
 loginBusy=busy;
-if(!el.loginBtn)return;
-el.loginBtn.disabled=busy;
-el.loginBtn.classList.toggle("loading",busy);
-el.loginBtn.setAttribute("aria-busy",String(busy));
-el.loginBtn.textContent=busy?"جارٍ تسجيل الدخول...":"🔵 تسجيل الدخول باستخدام Google";
+[el.loginBtn,el.githubLoginBtn].forEach(button=>{
+if(!button)return;
+button.disabled=busy;
+button.classList.toggle("loading",busy);
+button.setAttribute("aria-busy",String(busy));
+});
+if(el.loginBtn)el.loginBtn.textContent=busy?"جارٍ تسجيل الدخول...":"🔵 تسجيل الدخول باستخدام Google";
+if(el.githubLoginBtn){
+const span=el.githubLoginBtn.querySelector("span");
+if(span)span.textContent=busy?"جارٍ تسجيل الدخول...":"تسجيل الدخول باستخدام GitHub";
+}
 }
 
 function setScreen(user){
@@ -434,6 +441,7 @@ el.logoutBtn.disabled=false;
 
 /* ربط الأحداث مرة واحدة */
 el.loginBtn.addEventListener("click",login);
+el.githubLoginBtn.addEventListener("click",loginWithGitHub);
 el.logoutBtn.addEventListener("click",logout);
 el.form.addEventListener("submit",event=>{
 event.preventDefault();
