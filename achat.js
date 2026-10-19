@@ -32,7 +32,7 @@ form:$("messageForm")
 const chatRef=db.ref("chat");
 const chatQuery=chatRef.limitToLast(100);
 const DEFAULT_PHOTO="https://i.imgur.com/HeIi0wU.png";
-const LOGO_URL="https://image2url.com/r2/default/images/1775529228138-e4aa7777-4540-4bd6-9d5e-d9bdd7095990.png";
+const LOGO_URL="https://acrft.github.io/images/achat.png";
 
 let currentUser=null;
 let loginBusy=false;
