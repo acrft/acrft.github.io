@@ -226,3 +226,7 @@ text-align:right!important;
 #loginBtn{display:flex;align-items:center;justify-content:center;gap:10px}
 #loginBtn .google-icon{display:block;width:22px;height:22px;flex:0 0 22px}
 #loginBtn span{min-width:0}
+
+body.viewer-mode .chat-footer{display:none!important}
+body.viewer-mode .messages{bottom:0!important}
+#viewerBtn{background:#263b33;box-shadow:none}
