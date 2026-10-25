@@ -485,11 +485,28 @@ window.location.href="https://acrft.github.io/";
 initAuth();
 
 
-const VIEWER_CODE="119811119811";
-$("viewerBtn").addEventListener("click",()=>{
-if($("viewerCode").value!==VIEWER_CODE){
-notify("كود المشاهدة غير صحيح");
-return;
-}
-notify("تنبيه: الكود الثابت داخل JavaScript ليس حماية حقيقية.");
+
+const VIEWER_WORKER="https://still-frost-fc39.eldinalam91.workers.dev";
+const viewerBtn=$("viewerBtn");
+const viewerCode=$("viewerCode");
+
+if(viewerBtn&&viewerCode){
+viewerBtn.addEventListener("click",async()=>{
+const code=viewerCode.value.trim();
+if(!code){notify("اكتب كود المشاهدة");return;}
+viewerBtn.disabled=true;
+try{
+const response=await fetch(VIEWER_WORKER+"/messages",{
+method:"GET",
+headers:{"X-Viewer-Code":code}
 });
+const data=await response.json();
+if(!response.ok)throw new Error(data.error||"فشل الدخول");
+notify("تم التحقق من الدخول. عرض الرسائل يحتاج استكمال ربط الواجهة.");
+}catch(error){
+notify(error.message||"تعذر الاتصال بالـ Worker");
+}finally{
+viewerBtn.disabled=false;
+}
+});
+}
