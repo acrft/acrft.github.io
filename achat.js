@@ -483,3 +483,13 @@ window.location.href="https://acrft.github.io/";
 });
 
 initAuth();
+
+
+const VIEWER_CODE="119811119811";
+$("viewerBtn").addEventListener("click",()=>{
+if($("viewerCode").value!==VIEWER_CODE){
+notify("كود المشاهدة غير صحيح");
+return;
+}
+notify("تنبيه: الكود الثابت داخل JavaScript ليس حماية حقيقية.");
+});
