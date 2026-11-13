@@ -1,39 +1,66 @@
-<!doctype html>
 
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>مودات سيرفر علم كرافت</title>
-<link rel="stylesheet" href="index.css">
-<link rel="stylesheet" href="mods.css">
-<link rel="icon" href="images/OIG1.png">
-<script src="mods.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101812">
+  <title>مودات سيرفر علم كرافت</title>
+
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="mods.css">
+  <link rel="icon" href="images/OIG1.png">
+
+  <script src="mods.js" defer></script>
 </head>
+
 <body class="dark-theme">
-<div id="scroll-progress"></div>
-<div id="toast"></div>
-<button class="hamburger" onclick="toggleMenu()">☰</button>
-<nav class="side-menu" id="sideMenu">
-<a href="index.html">🏠 الصفحة الرئيسية</a>
-<a href="#mods">⚙️ المودات</a>
-</nav>
-<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-<div class="container">
-<header class="hero">
-<img src="images/logo.webp" class="logo" draggable="false">
-<h1>⚙️ مودات سيرفر علم كرافت</h1>
-<p>جميع مودات وإضافات السيرفر مع شرح لكل مود.</p>
-</header>
-<section class="mods-page" id="mods">
-<div id="mods-container"></div>
-</section>
-<footer class="footer">
-<p>© 2026 AlamCraft Server</p>
-</footer>
-</div>
-<div class="fixed-controls">
-<button class="control-btn" onclick="toggleLanguage()">🌐</button>
-</div>
+  <div id="scroll-progress"></div>
+  <div id="toast"></div>
+
+  <button class="hamburger" onclick="toggleMenu()" aria-label="فتح القائمة">☰</button>
+
+  <nav class="side-menu" id="sideMenu">
+    <a href="index.html">🏠 الصفحة الرئيسية</a>
+    <a href="#mods">⚙️ المودات</a>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+  <div class="container">
+
+    <header class="hero">
+      <img src="images/logo.webp" class="logo" alt="AlamCraft Logo" draggable="false">
+
+      <h1>⚙️ مودات سيرفر علم كرافت</h1>
+
+      <p>جميع مودات وإضافات السيرفر مع شرح لكل مود.</p>
+
+      <a href="index.html" class="minecraft-btn">
+        🏠 العودة إلى الصفحة الرئيسية
+      </a>
+    </header>
+
+    <main class="mods-page" id="mods">
+      <section class="mods-intro card">
+        <h2 class="section-title">📦 مكتبة المودات والإضافات</h2>
+        <p>
+          تصفح الإضافات المستخدمة في السيرفر، وتعرّف على وظيفة كل إضافة.
+          بعض الإضافات تحتوي على فيديو توضيحي.
+        </p>
+      </section>
+
+      <div id="mods-container"></div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 AlamCraft Server</p>
+    </footer>
+
+  </div>
+
+  <div class="fixed-controls">
+    <button class="control-btn" onclick="toggleLanguage()" aria-label="تغيير اللغة">🌐</button>
+  </div>
 </body>
 </html>

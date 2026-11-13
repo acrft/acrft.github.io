@@ -861,3 +861,43 @@ img {
     }
 }
 
+/* New homepage sections */
+.server-status-section {
+  margin: 24px 0;
+}
+
+.server-status-section .mc-server {
+  margin-top: 16px;
+}
+
+.hero-description,
+.connection-description {
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.mods-card p,
+.mods-intro p {
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+.download-section {
+  margin: 36px 0;
+}
+
+.download-section .section-title {
+  margin-bottom: 20px;
+}
+
+/* Better section spacing on smaller screens */
+@media (max-width: 768px) {
+  .server-status-section,
+  .connection,
+  .rules-card,
+  .social-card,
+  .mods-card,
+  .staff-card {
+    margin-bottom: 18px;
+  }
+}
