@@ -1,196 +1,288 @@
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+
+    --bg: #080e0b;
+    --surface: #101a14;
+    --surface-light: #17251c;
+
+    --primary: #65c982;
+    --primary-dark: #3da965;
+
+    --text: #f1f5f2;
+    --muted: #a1b0a5;
+    --border: rgba(255,255,255,.08);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: #f2f2f2;
-    font-family: 'Poppins', sans-serif;
-    color: #111;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(ellipse at 50% -15%, #1d3b29 0%, transparent 55%),
+        var(--bg);
+
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    line-height: 1.7;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Navigation */
 
 .topbar {
     width: 100%;
-    background: #17171d;
-    padding: 18px 25px;
+    padding: 18px max(24px, calc((100% - 1160px) / 2));
+
+    background: rgba(10,24,16,.9);
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    color: white;
-    font-size: 32px;
+    color: var(--text);
+    font-size: 26px;
     font-weight: 800;
 }
 
 .logo span {
-    color: #47c766;
+    color: var(--primary);
 }
+
+/* Main content */
 
 .container {
-    width: 94%;
-    max-width: 1100px;
+    width: min(92%, 1160px);
     margin: auto;
-    padding: 25px 0;
+    padding: 35px 0 20px;
 }
 
+/* Hero */
+
 .hero {
-    background: white;
-    border-radius: 24px;
-    padding: 35px;
+    margin-bottom: 30px;
+    padding: clamp(30px, 5vw, 58px);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    margin-bottom: 25px;
+
+    background: linear-gradient(145deg, #172f21, #0d1c13);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    box-shadow: 0 18px 45px rgba(0,0,0,.22);
 }
 
 .hero-left {
     flex: 1;
+    max-width: 760px;
 }
 
 .hero h1 {
-    font-size: 48px;
-    line-height: 1.1;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
     font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .hero h1 span {
-    color: #2ea043;
+    color: var(--primary);
 }
 
 .hero p {
-    color: #666;
-    font-size: 17px;
+    max-width: 680px;
+    margin-bottom: 24px;
+
+    color: var(--muted);
+    font-size: 16px;
     line-height: 1.8;
-    margin-bottom: 25px;
 }
 
 .hero-btn {
-    display: inline-block;
-    background: #2ea043;
-    color: white;
-    text-decoration: none;
-    padding: 16px 30px;
-    border-radius: 14px;
-    font-weight: 700;
+    min-height: 50px;
+    padding: 13px 23px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-dark);
+    border-radius: 11px;
+
+    color: #07150c;
+    font-weight: 800;
+
+    transition: .2s ease;
 }
 
 .hero-btn:hover {
-    background: #238636;
+    background: var(--primary);
+    transform: translateY(-2px);
 }
+
+/* Download list */
 
 .posts {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 13px;
 }
 
 .section-title {
-    font-size: 30px;
     margin-bottom: 8px;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
 }
 
 .download-card {
-    background: white;
-    border-radius: 20px;
-    padding: 18px;
+    padding: 18px 20px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .05);
-    transition: .2s;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    transition: .2s ease;
 }
 
 .download-card:hover {
-    transform: translateY(-3px);
+    background: var(--surface-light);
+    border-color: rgba(101,201,130,.35);
+    transform: translateY(-2px);
 }
 
 .card-left {
+    min-width: 0;
+
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
 .card-left img {
-    width: 75px;
-    height: 75px;
-    border-radius: 16px;
+    width: 68px;
+    height: 68px;
+    flex: 0 0 68px;
+
     object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 13px;
 }
 
 .version {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    color: var(--text);
+    font-size: 21px;
+    font-weight: 750;
 }
 
 .info {
-    color: #666;
+    color: var(--muted);
     font-size: 14px;
+    line-height: 1.6;
 }
 
 .download-btn {
-    background: #58c472;
-    color: white;
-    text-decoration: none;
-    padding: 14px 24px;
-    border-radius: 12px;
-    font-weight: 700;
+    min-width: 130px;
+    padding: 12px 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-dark);
+    border-radius: 11px;
+
+    color: #07150c;
+    font-weight: 800;
     white-space: nowrap;
+
+    transition: .2s ease;
 }
 
 .download-btn:hover {
-    background: #45b961;
+    background: var(--primary);
+    transform: translateY(-2px);
 }
+
+/* Footer */
 
 footer {
+    padding: 32px 20px;
+    color: var(--muted);
     text-align: center;
-    color: #777;
-    padding: 35px 20px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-@media(max-width:900px) {
+/* Responsive */
+
+@media (max-width: 700px) {
+    .topbar {
+        padding: 16px 5%;
+    }
+
+    .container {
+        padding-top: 22px;
+    }
+
     .hero {
-        flex-direction: column;
+        padding: 28px 22px;
         text-align: center;
     }
 
-    .hero h1 {
-        font-size: 42px;
+    .download-card {
+        align-items: stretch;
+        flex-direction: column;
     }
 
-    @media(max-width:650px) {
-        .logo {
-            font-size: 26px;
-        }
+    .download-btn {
+        width: 100%;
+    }
+}
 
-        .hero {
-            padding: 25px;
-        }
+@media (max-width: 420px) {
+    .card-left {
+        align-items: flex-start;
+        gap: 12px;
+    }
 
-        .hero h1 {
-            font-size: 34px;
-        }
+    .card-left img {
+        width: 56px;
+        height: 56px;
+        flex-basis: 56px;
+    }
 
-        .hero p {
-            font-size: 15px;
-        }
+    .version {
+        font-size: 18px;
+    }
 
-        .section-title {
-            font-size: 24px;
-        }
+    .info {
+        font-size: 13px;
+    }
+}
 
-        .download-card {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .download-btn {
-            width: 100%;
-            text-align: center;
-        }
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }
