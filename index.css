@@ -901,3 +901,453 @@ img {
     margin-bottom: 18px;
   }
 }
+
+
+/* =========================================
+   ALAMCRAFT HOMEPAGE — PROFESSIONAL LAYOUT
+========================================= */
+
+:root {
+  --bg: #080e0b;
+  --surface: #101a14;
+  --surface-light: #17251c;
+  --primary: #70d88c;
+  --primary-dark: #3da965;
+  --border: rgba(255,255,255,.09);
+  --muted: #a1b0a5;
+}
+
+/* Hero */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 510px;
+  padding: 75px 24px 65px;
+  margin-bottom: 25px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(26,62,39,.82), rgba(8,18,12,.96)),
+    var(--surface);
+}
+
+.hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 450px;
+  height: 450px;
+  top: -240px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(91,214,126,.16);
+  filter: blur(65px);
+}
+
+.hero-label,
+.section-eyebrow {
+  color: var(--primary);
+  font: 700 11px/1.5 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.hero .logo {
+  width: 125px;
+  margin: 8px 0;
+  border-radius: 25px;
+  box-shadow: 0 15px 45px rgba(0,0,0,.35);
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  letter-spacing: -.5px;
+}
+
+.hero-description {
+  max-width: 580px;
+  color: #c0d0c4;
+  font-size: 1.05rem;
+}
+
+.hero .pulse {
+  margin-top: 12px;
+}
+
+.pulse li {
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+}
+
+.hero-actions {
+  width: min(100%, 460px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.hero-actions > * {
+  width: 100%;
+  min-width: 0;
+}
+
+#status {
+  min-height: 25px;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* Section headings */
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.section-heading .section-title {
+  margin: 0;
+}
+
+.section-title {
+  font-size: 1.5rem;
+}
+
+/* Cards */
+
+.card {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.025), transparent 55%),
+    var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.18);
+}
+
+.server-status-section,
+.connection {
+  margin: 25px 0;
+}
+
+/* Server status */
+
+.server-status-section {
+  padding: 25px;
+}
+
+.mc-server {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px;
+  background: #0b140e;
+  border: 1px solid rgba(112,216,140,.18);
+  border-radius: 15px;
+}
+
+.mc-icon img {
+  width: 66px;
+  height: 66px;
+  border-radius: 12px;
+}
+
+.mc-name {
+  font-size: 20px;
+}
+
+/* Connection */
+
+.connection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 32px;
+}
+
+.connection-heading {
+  text-align: center;
+}
+
+.connection-heading .section-title {
+  margin: 5px 0;
+}
+
+.connection-description {
+  color: var(--muted);
+}
+
+.ip-wrapper {
+  width: min(100%, 560px);
+  min-height: 155px;
+  gap: 10px;
+  background: #0a140e;
+  border: 1px solid rgba(112,216,140,.2);
+  border-radius: 16px;
+}
+
+.ip-label {
+  color: var(--muted);
+  font: 700 10px 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
+.ip-text {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.ip-wrapper .btn-copy {
+  min-width: 155px;
+}
+
+.version-badges {
+  width: min(100%, 560px);
+}
+
+.badge {
+  min-height: 75px;
+  border-radius: 13px;
+}
+
+.btn-bedrock {
+  width: min(100%, 560px);
+  min-height: 50px;
+  border-radius: 11px;
+}
+
+/* Main content */
+
+.content-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr);
+  gap: 22px;
+}
+
+.content-grid > .card,
+.side-column > .card {
+  padding: 25px;
+}
+
+.side-column {
+  gap: 18px;
+}
+
+.rules-list {
+  gap: 9px;
+}
+
+.rules-list li {
+  justify-content: flex-start;
+  text-align: start;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.055);
+  border-radius: 10px;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.rules-list li:hover {
+  background: rgba(112,216,140,.07);
+  border-color: rgba(112,216,140,.2);
+}
+
+/* Community links */
+
+.social-links {
+  gap: 9px;
+}
+
+.social-item {
+  justify-content: flex-start;
+  min-height: 54px;
+  padding: 12px 15px;
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.055);
+  border-radius: 11px;
+}
+
+.social-item:hover {
+  background: rgba(112,216,140,.08);
+  border-color: rgba(112,216,140,.3);
+}
+
+.link-icon {
+  width: 25px;
+  height: 25px;
+}
+
+/* Feature cards */
+
+.mods-card,
+.download-card,
+.staff-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.mods-card .section-title,
+.download-card .section-title,
+.staff-card .section-title {
+  margin: 0;
+}
+
+.mods-card p,
+.download-card p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.feature-icon {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  background: rgba(112,216,140,.09);
+  border: 1px solid rgba(112,216,140,.17);
+  border-radius: 15px;
+  font-size: 25px;
+}
+
+.mods-card .minecraft-btn,
+.download-card .minecraft-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Staff */
+
+.admins-text {
+  color: #d5e3d9;
+  line-height: 2;
+}
+
+/* Navigation */
+
+.menu-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  padding: 12px;
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.menu-brand img {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+}
+
+.side-menu a {
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.side-menu a:hover {
+  border-color: rgba(112,216,140,.3);
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-top: 35px;
+  padding: 30px 15px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.footer span {
+  color: #66766b;
+  font: 11px 'Segoe UI', Arial, sans-serif;
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .side-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .rules-card {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 10px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 65px 17px 35px;
+    border-radius: 19px;
+  }
+
+  .hero .logo {
+    width: 105px;
+  }
+
+  .hero-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hero .pulse {
+    grid-template-columns: 1fr;
+  }
+
+  .server-status-section,
+  .connection {
+    padding: 19px;
+  }
+
+  .side-column {
+    grid-template-columns: 1fr;
+  }
+
+  .content-grid > .card,
+  .side-column > .card {
+    padding: 19px;
+  }
+
+  .mc-server {
+    padding: 11px;
+  }
+
+  .mc-icon img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mc-top {
+    align-items: flex-start;
+  }
+
+  .version-badges {
+    grid-template-columns: 1fr 1fr;
+  }
+}
