@@ -1351,3 +1351,26 @@ img {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Keep Download Center and The Team side by side */
+.side-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+}
+
+.side-column > .social-card,
+.side-column > .mods-card {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 560px) {
+    .side-column {
+        grid-template-columns: 1fr;
+    }
+
+    .side-column > .social-card,
+    .side-column > .mods-card {
+        grid-column: auto;
+    }
+}
