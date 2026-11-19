@@ -34,6 +34,20 @@
   </div>
 </section>
 
+<section id="plink" class="center" hidden>
+  <div class="card">
+    <h2>اربط رقم هاتفك</h2>
+    <p class="muted small">مطلوب لكل الحسابات. هيوصلك كود التأكيد على بوت تلجرام.</p>
+    <input id="plPhone" type="tel" dir="ltr" placeholder="+20123456789 (مع كود الدولة)">
+    <button id="plBtn" class="btn">إرسال الكود عبر تلجرام</button>
+    <div id="plBox" hidden>
+      <input id="plCode" inputmode="numeric" maxlength="6" dir="ltr" placeholder="الكود (6 أرقام)">
+      <button id="plCodeBtn" class="btn">تأكيد وربط الرقم</button>
+    </div>
+    <button id="plOut" class="btn ghost">خروج</button>
+  </div>
+</section>
+
 <section id="setup" class="center" hidden>
   <div class="card">
     <h2>أنشئ ملفك الشخصي</h2>
@@ -53,7 +67,7 @@
       <button id="profBtn" class="icon" title="البروفايل">⚙️</button>
     </header>
     <div class="search">
-      <input id="findIn" dir="ltr" placeholder="ابحث بـ @username لبدء محادثة">
+      <input id="findIn" dir="ltr" placeholder="ابحث بـ @username أو رقم هاتف">
     </div>
     <div id="chatList" class="list"></div>
   </aside>
