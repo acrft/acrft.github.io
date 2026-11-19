@@ -1,512 +1,195 @@
 "use strict";
+/* AlamChat v2 — Firebase Compat 8.10.1 */
+firebase.initializeApp({
+  apiKey: "AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
+  authDomain: "alamchat1.firebaseapp.com",
+  databaseURL: "https://alamchat1-default-rtdb.firebaseio.com"
+});
+const auth = firebase.auth(), db = firebase.database(), $ = id => document.getElementById(id);
+const WORKER = "https://still-frost-fc39.eldinalam91.workers.dev";
+const NOAV = "https://i.imgur.com/HeIi0wU.png";
+const TS = firebase.database.ServerValue.TIMESTAMP;
 
-/* AlamChat PRO — Firebase Compat 8.10.1 */
-const firebaseConfig={
-apiKey:"AIzaSyCMkymWe_AEfY9X09UC-jnCN85zfCLU2h0",
-authDomain:"alamchat1.firebaseapp.com",
-databaseURL:"https://alamchat1-default-rtdb.firebaseio.com"
+let me = null, prof = null, peer = null, cur = null, msgRef = null, listRef = null, phone = "";
+const cache = {};
+
+function toast(t) {
+  const e = $("toast"); e.textContent = t; e.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove("show"), 3500);
+}
+function show(id) { ["login", "setup", "app"].forEach(s => $(s).hidden = s !== id); }
+async function api(path, body) {
+  const r = await fetch(WORKER + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.error || "حدث خطأ");
+  return d;
+}
+function shrink(file, max, q) {
+  return new Promise((res, rej) => {
+    if (!file || !file.type.startsWith("image/")) return rej(new Error("اختر صورة صالحة"));
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onerror = () => rej(new Error("صورة غير مدعومة"));
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); res(c.toDataURL("image/jpeg", q));
+    };
+    img.src = url;
+  });
+}
+const cid = (a, b) => [a, b].sort().join("_");
+async function getUser(uid) {
+  if (!cache[uid]) { const s = await db.ref("users/" + uid).once("value"); cache[uid] = { uid, ...(s.val() || { name: "مستخدم" }) }; }
+  return cache[uid];
+}
+const fmt = t => t ? new Date(t).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) : "";
+
+/* ---------- تسجيل الدخول ---------- */
+async function social(provider) {
+  try { await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); await auth.signInWithPopup(provider); }
+  catch (e) { if (!/popup-closed|cancelled/.test(e.code || "")) toast(e.message || "فشل الدخول"); }
+}
+$("googleBtn").onclick = () => social(new firebase.auth.GoogleAuthProvider());
+$("githubBtn").onclick = () => social(new firebase.auth.GithubAuthProvider());
+$("phoneBtn").onclick = async () => {
+  phone = $("phoneIn").value.replace(/\D/g, "");
+  if (phone.length < 8) return toast("اكتب رقمك مع كود الدولة");
+  try { const d = await api("/otp/start", { phone }); window.open(d.link, "_blank"); $("codeBox").hidden = false; }
+  catch (e) { toast(e.message); }
+};
+$("codeBtn").onclick = async () => {
+  try {
+    const d = await api("/otp/verify", { phone, code: $("codeIn").value.trim() });
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    await auth.signInWithCustomToken(d.token);
+  } catch (e) { toast(e.message); }
+};
+$("suOut").onclick = $("pOut").onclick = () => auth.signOut();
+
+/* ---------- إنشاء الحساب ---------- */
+$("suBtn").onclick = async () => {
+  const u = $("suUser").value.trim().toLowerCase().replace(/^@/, "");
+  if (!/^[a-z0-9_]{3,20}$/.test(u)) return toast("اليوزر 3-20 حرف: إنجليزي وأرقام و _");
+  const name = $("suName").value.trim() || me.displayName || u;
+  try {
+    const r = await db.ref("usernames/" + u).transaction(v => v === null ? me.uid : undefined);
+    if (!r.committed) return toast("اليوزر مستخدم، جرّب غيره");
+    await db.ref("users/" + me.uid).set({ name, username: u, photo: me.photoURL || "", bio: "" });
+    boot();
+  } catch (e) { toast(e.message); }
 };
 
-if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+auth.onAuthStateChanged(user => {
+  me = user; stopAll();
+  if (!user) return show("login");
+  boot();
+});
+async function boot() {
+  const s = await db.ref("users/" + me.uid).once("value");
+  if (!s.exists()) { $("suName").value = me.displayName || ""; return show("setup"); }
+  prof = s.val(); cache[me.uid] = { uid: me.uid, ...prof };
+  $("meAv").src = prof.photo || NOAV;
+  show("app"); watchList();
+}
+function stopAll() {
+  if (msgRef) msgRef.off(); if (listRef) listRef.off();
+  msgRef = listRef = null; cur = peer = null;
+  $("room").hidden = true; $("empty").hidden = false; $("chatList").replaceChildren();
+}
 
-const auth=firebase.auth();
-const db=firebase.database();
-const $=id=>document.getElementById(id);
+/* ---------- قائمة المحادثات ---------- */
+function watchList() {
+  listRef = db.ref("userChats/" + me.uid);
+  listRef.on("value", async s => {
+    const items = []; s.forEach(c => { items.push({ id: c.key, ...c.val() }); });
+    items.sort((a, b) => b.time - a.time);
+    const users = await Promise.all(items.map(i => getUser(i.with)));
+    const box = $("chatList"); box.replaceChildren();
+    items.forEach((i, n) => {
+      const u = users[n], row = document.createElement("div");
+      row.className = "row" + (i.id === cur ? " on" : "");
+      const av = document.createElement("img"); av.className = "av"; av.src = u.photo || NOAV;
+      const t = document.createElement("div"); t.className = "t";
+      const nm = document.createElement("b"); nm.textContent = u.name;
+      const l = document.createElement("div"); l.className = "l"; l.textContent = i.last || "";
+      const tm = document.createElement("small"); tm.className = "muted"; tm.textContent = fmt(i.time);
+      t.append(nm, l); row.append(av, t, tm);
+      row.onclick = () => openChat(u.uid);
+      box.append(row);
+    });
+  });
+}
+$("findIn").addEventListener("keydown", async e => {
+  if (e.key !== "Enter") return;
+  e.preventDefault();
+  const q = e.target.value.trim().toLowerCase().replace(/^@/, "");
+  if (!q) return;
+  const s = await db.ref("usernames/" + q).once("value");
+  if (!s.exists()) return toast("مفيش مستخدم بالاسم ده");
+  if (s.val() === me.uid) return toast("ده حسابك 😄");
+  e.target.value = ""; openChat(s.val());
+});
 
-const el={
-login:$("login"),
-chat:$("chat"),
-loginBtn:$("loginBtn"),
-githubLoginBtn:$("githubLoginBtn"),
-logoutBtn:$("logoutBtn"),
-sendBtn:$("sendBtn"),
-imageBtn:$("imageBtn"),
-siteBtn:$("siteBtn"),
-imageInput:$("imageInput"),
-msgInput:$("msgInput"),
-messages:$("messages"),
-userInfo:$("userInfo"),
-form:$("messageForm")
+/* ---------- المحادثة ---------- */
+async function openChat(uid) {
+  peer = await getUser(uid); cur = cid(me.uid, uid);
+  $("empty").hidden = true; $("room").hidden = false; $("app").classList.add("open");
+  $("peerName").textContent = peer.name; $("peerUser").textContent = peer.username ? "@" + peer.username : "";
+  $("peerAv").src = peer.photo || NOAV;
+  if (msgRef) msgRef.off();
+  const box = $("msgs"); box.replaceChildren();
+  msgRef = db.ref("chats/" + cur + "/messages").limitToLast(100);
+  msgRef.on("child_added", s => {
+    const m = s.val(); if (!m || !m.uid) return;
+    const d = document.createElement("div"); d.className = "m " + (m.uid === me.uid ? "me" : "");
+    if (typeof m.image === "string" && m.image.startsWith("data:image/")) {
+      const im = document.createElement("img"); im.src = m.image; im.loading = "lazy";
+      im.onload = () => box.scrollTop = box.scrollHeight; d.append(im);
+    }
+    if (m.text) d.append(document.createTextNode(String(m.text).slice(0, 500)));
+    const tm = document.createElement("i"); tm.textContent = fmt(m.time); d.append(tm);
+    box.append(d); box.scrollTop = box.scrollHeight;
+  });
+}
+$("backBtn").onclick = () => $("app").classList.remove("open");
+async function push(m) {
+  if (!cur || !peer) return;
+  const up = {}, last = m.text || "📷 صورة", id = db.ref().push().key;
+  up["chats/" + cur + "/messages/" + id] = { uid: me.uid, ...m, time: TS };
+  up["userChats/" + me.uid + "/" + cur] = { with: peer.uid, last, time: TS };
+  up["userChats/" + peer.uid + "/" + cur] = { with: me.uid, last, time: TS };
+  await db.ref().update(up);
+}
+$("form").onsubmit = async e => {
+  e.preventDefault();
+  const text = $("msgIn").value.trim(); if (!text) return;
+  $("msgIn").value = "";
+  try { await push({ text: text.slice(0, 500) }); } catch (er) { toast("تعذر الإرسال"); }
+};
+$("imgBtn").onclick = () => $("imgIn").click();
+$("imgIn").onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  try { await push({ image: await shrink(f, 1000, .7) }); } catch (er) { toast(er.message || "تعذر إرسال الصورة"); }
 };
 
-const chatRef=db.ref("chat");
-const chatQuery=chatRef.limitToLast(100);
-const DEFAULT_PHOTO="https://i.imgur.com/HeIi0wU.png";
-const LOGO_URL="https://acrft.github.io/images/achat.png";
-
-let currentUser=null;
-let loginBusy=false;
-let sending=false;
-let uploading=false;
-let authReady=false;
-let messageListener=null;
-let authUnsubscribe=null;
-let messageGeneration=0;
-const renderedMessages=new Set();
-
-function notify(message){
-alert(message);
-}
-
-function logError(action,error){
-notify(errorMessage(error)+"\nرمز الخطأ: "+(error.code||"غير معروف")+"\nالتفاصيل: "+(error.message||"لا توجد تفاصيل"));
-}
-
-function errorMessage(error){
-const messages={
-"auth/unauthorized-domain":"الدومين غير مسموح به. أضف acrft.github.io إلى Authorized domains في Firebase.",
-"auth/operation-not-allowed":"فعّل تسجيل الدخول باستخدام Google من Firebase Console.",
-"auth/network-request-failed":"مشكلة في الإنترنت. حاول مرة أخرى.",
-"auth/too-many-requests":"محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.",
-"auth/popup-blocked":"المتصفح منع نافذة تسجيل الدخول.",
-"auth/web-storage-unsupported":"التخزين المحلي غير متاح في المتصفح.",
-"auth/invalid-credential":"بيانات تسجيل الدخول غير صالحة. حاول مجددًا.",
-"PERMISSION_DENIED":"ليس لديك إذن لتنفيذ العملية. راجع Firebase Database Rules."
+/* ---------- البروفايل ---------- */
+let newPhoto = null;
+$("profBtn").onclick = () => {
+  newPhoto = null; $("pAv").src = prof.photo || NOAV; $("pName").value = prof.name;
+  $("pBio").value = prof.bio || ""; $("pUser").textContent = "@" + prof.username; $("modal").hidden = false;
 };
-return messages[error?.code]||messages[error?.message]||"حدث خطأ غير متوقع. حاول مرة أخرى.";
-}
-
-function setBusy(button,busy,text){
-if(!button)return;
-button.disabled=busy;
-button.classList.toggle("loading",busy);
-button.setAttribute("aria-busy",String(busy));
-if(text)button.textContent=busy?text:button.dataset.originalText||"";
-}
-
-if(el.loginBtn)el.loginBtn.dataset.originalText=el.loginBtn.textContent;
-
-
-
-function setLoginBusy(busy){
-loginBusy=busy;
-[el.loginBtn,el.githubLoginBtn].forEach(button=>{
-if(!button)return;
-button.disabled=busy;
-button.classList.toggle("loading",busy);
-button.setAttribute("aria-busy",String(busy));
-});
-if(el.loginBtn){
-const span=el.loginBtn.querySelector("span");
-if(span)span.textContent=busy?"جارٍ تسجيل الدخول...":"تسجيل الدخول باستخدام Google";
-}
-if(el.githubLoginBtn){
-const span=el.githubLoginBtn.querySelector("span");
-if(span)span.textContent=busy?"جارٍ تسجيل الدخول...":"تسجيل الدخول باستخدام GitHub";
-}
-}
-
-function setScreen(user){
-currentUser=user||null;
-if(currentUser){
-el.login.style.display="none";
-el.chat.style.display="block";
-renderUserInfo();
-loadMobs();
-startMessages();
-}else{
-el.login.style.display="flex";
-el.chat.style.display="none";
-stopMessages();
-el.messages.replaceChildren();
-}
-}
-
-async function login(){
-if(loginBusy||currentUser)return;
-setLoginBusy(true);
-try{
-await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-const provider=new firebase.auth.GoogleAuthProvider();
-provider.addScope("email");
-provider.setCustomParameters({prompt:"select_account"});
-await auth.signInWithPopup(provider);
-}catch(error){
-logError("تسجيل الدخول",error);
-if(error.code==="auth/popup-closed-by-user"||error.code==="auth/cancelled-popup-request")return;
-notify(errorMessage(error));
-}finally{
-setLoginBusy(false);
-}
-}
-
-
-async function loginWithGitHub(){
-if(loginBusy||currentUser)return;
-setLoginBusy(true);
-try{
-await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-const provider=new firebase.auth.GithubAuthProvider();
-provider.addScope("read:user");
-provider.addScope("user:email");
-await auth.signInWithPopup(provider);
-}catch(error){
-logError("تسجيل الدخول باستخدام GitHub",error);
-if(error.code==="auth/account-exists-with-different-credential"){
-try{
-const pendingCredential=error.credential;
-const email=error.email;
-const methods=await auth.fetchSignInMethodsForEmail(email);
-if(methods.includes("google.com")){
-const googleProvider=new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({login_hint:email,prompt:"select_account"});
-const result=await auth.signInWithPopup(googleProvider);
-await result.user.linkWithCredential(pendingCredential);
-notify("تم ربط GitHub بحسابك الحالي بنجاح. يمكنك استخدام الطريقتين لتسجيل الدخول.");
-}else{
-notify("هذا البريد مرتبط بطريقة تسجيل دخول أخرى. سجّل الدخول بالطريقة الأصلية أولًا.");
-}
-}catch(linkError){
-logError("ربط حساب GitHub",linkError);
-notify(errorMessage(linkError));
-}
-}else if(error.code!=="auth/popup-closed-by-user"&&error.code!=="auth/cancelled-popup-request"){
-notify(errorMessage(error)+"\nرمز الخطأ: "+(error.code||"غير معروف"));
-}
-}finally{
-setLoginBusy(false);
-}
-}
-
-
-async function initAuth(){
-if(authReady)return;
-authReady=true;
-try{
-await auth.getRedirectResult();
-}catch(error){
-if(error.code!=="auth/no-auth-event"){
-logError("استعادة تسجيل الدخول",error);
-}
-}
-auth.onAuthStateChanged(user=>{
-setLoginBusy(false);
-setScreen(user);
-document.documentElement.classList.remove("auth-loading");
-},error=>{
-setLoginBusy(false);
-logError("حالة تسجيل الدخول",error);
-document.documentElement.classList.remove("auth-loading");
-notify(errorMessage(error));
-});
-}
-
-function renderUserInfo(){
-if(!el.userInfo)return;
-el.userInfo.replaceChildren();
-
-const logo=document.createElement("img");
-logo.src=LOGO_URL;
-logo.alt="AlamChat";
-logo.loading="eager";
-
-const details=document.createElement("div");
-const title=document.createElement("div");
-title.className="user-name";
-title.textContent="💬☘️AlamChat";
-
-const mobs=document.createElement("div");
-mobs.className="mob-list";
-mobs.id="mobList";
-
-details.append(title,mobs);
-el.userInfo.append(logo,details);
-}
-
-function escapeText(value){
-return String(value??"");
-}
-
-function scrollChat(){
-requestAnimationFrame(()=>{
-if(el.messages)el.messages.scrollTop=el.messages.scrollHeight;
-});
-}
-
-function createMessage(snapshot){
-const message=snapshot.val();
-if(!message||!message.uid)return null;
-
-const div=document.createElement("div");
-div.className="msg "+(message.uid===currentUser.uid?"me":"other");
-div.dataset.messageId=snapshot.key;
-
-const avatar=document.createElement("img");
-avatar.className="avatar";
-avatar.loading="lazy";
-avatar.alt="";
-avatar.src=message.photo||DEFAULT_PHOTO;
-avatar.onerror=()=>{avatar.onerror=null;avatar.src=DEFAULT_PHOTO};
-
-const bubble=document.createElement("div");
-bubble.className="bubble";
-
-const name=document.createElement("div");
-name.className="name";
-name.textContent=escapeText(message.name||"بدون اسم");
-bubble.appendChild(name);
-
-if(typeof message.text==="string"&&message.text.length){
-const text=document.createElement("div");
-text.className="message-text";
-text.dir="auto";
-text.style.whiteSpace="pre-wrap";
-text.textContent=message.text.slice(0,500);
-bubble.appendChild(text);
-}
-
-if(typeof message.image==="string"&&message.image.startsWith("data:image/")){
-const wrap=document.createElement("div");
-wrap.className="image-wrap";
-
-const image=document.createElement("img");
-image.className="message-image";
-image.loading="lazy";
-image.decoding="async";
-image.alt=escapeText(message.imageName||"صورة");
-image.src=message.image;
-image.addEventListener("load",scrollChat,{once:true});
-
-const imageName=document.createElement("div");
-imageName.className="image-name";
-imageName.textContent=escapeText(message.imageName||"صورة");
-
-wrap.append(image,imageName);
-bubble.appendChild(wrap);
-}
-
-div.append(avatar,bubble);
-return div;
-}
-
-function startMessages(){
-if(!currentUser||messageListener)return;
-const generation=++messageGeneration;
-renderedMessages.clear();
-el.messages.replaceChildren();
-
-messageListener=snapshot=>{
-if(generation!==messageGeneration||!currentUser)return;
-const id=snapshot.key;
-if(!id||renderedMessages.has(id))return;
-const node=createMessage(snapshot);
-if(!node)return;
-renderedMessages.add(id);
-el.messages.appendChild(node);
-
-while(el.messages.children.length>100){
-const first=el.messages.firstElementChild;
-if(first){
-renderedMessages.delete(first.dataset.messageId);
-first.remove();
-}
-}
-scrollChat();
+$("pClose").onclick = () => $("modal").hidden = true;
+$("pPhoto").onclick = () => $("pPhotoIn").click();
+$("pPhotoIn").onchange = async e => {
+  try { newPhoto = await shrink(e.target.files[0], 192, .8); $("pAv").src = newPhoto; } catch (er) { toast(er.message); }
 };
-
-chatQuery.on("child_added",messageListener,error=>{
-logError("تحميل الرسائل",error);
-notify(errorMessage(error));
-});
-}
-
-function stopMessages(){
-messageGeneration++;
-if(messageListener){
-chatQuery.off("child_added",messageListener);
-messageListener=null;
-}
-renderedMessages.clear();
-}
-
-async function send(){
-const text=el.msgInput.value.trim();
-if(!text||!currentUser||sending)return;
-
-sending=true;
-el.sendBtn.disabled=true;
-
-try{
-await chatRef.push({
-uid:currentUser.uid,
-name:currentUser.displayName||"بدون اسم",
-photo:currentUser.photoURL||DEFAULT_PHOTO,
-text:text.slice(0,500),
-time:firebase.database.ServerValue.TIMESTAMP
-});
-el.msgInput.value="";
-}catch(error){
-logError("إرسال الرسالة",error);
-notify(errorMessage(error));
-}finally{
-sending=false;
-el.sendBtn.disabled=false;
-}
-}
-
-/* ضغط الصورة قبل إرسالها */
-function compressImage(file){
-return new Promise((resolve,reject)=>{
-if(!file.type.startsWith("image/")){
-reject(new Error("اختر صورة صالحة."));
-return;
-}
-const reader=new FileReader();
-reader.onerror=()=>reject(new Error("تعذرت قراءة الصورة."));
-reader.onload=()=>{
-const img=new Image();
-img.onerror=()=>reject(new Error("الصورة غير صالحة أو غير مدعومة."));
-img.onload=()=>{
-const maxSide=1280;
-const scale=Math.min(1,maxSide/Math.max(img.width,img.height));
-const canvas=document.createElement("canvas");
-canvas.width=Math.max(1,Math.round(img.width*scale));
-canvas.height=Math.max(1,Math.round(img.height*scale));
-const ctx=canvas.getContext("2d");
-if(!ctx){
-reject(new Error("تعذر تجهيز الصورة."));
-return;
-}
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
-try{
-resolve({
-data:canvas.toDataURL("image/jpeg",.78),
-name:file.name.replace(/\.[^.]+$/,"")+".jpg",
-type:"image/jpeg"
-});
-}catch(error){
-reject(error);
-}
+$("pSave").onclick = async () => {
+  const up = { name: $("pName").value.trim() || prof.name, bio: $("pBio").value.trim() };
+  if (newPhoto) up.photo = newPhoto;
+  try {
+    await db.ref("users/" + me.uid).update(up);
+    prof = { ...prof, ...up }; cache[me.uid] = { uid: me.uid, ...prof };
+    $("meAv").src = prof.photo || NOAV; $("modal").hidden = true; toast("تم الحفظ ✅");
+  } catch (e) { toast("تعذر الحفظ"); }
 };
-img.src=reader.result;
-};
-reader.readAsDataURL(file);
-});
-}
-
-async function uploadImage(file){
-if(!currentUser||uploading)return;
-if(file.size>8*1024*1024){
-notify("حجم الصورة الأصلية كبير جدًا. اختر صورة أقل من 8 ميجابايت.");
-return;
-}
-uploading=true;
-el.imageBtn.disabled=true;
-try{
-const image=await compressImage(file);
-if(!currentUser)return;
-await chatRef.push({
-uid:currentUser.uid,
-name:currentUser.displayName||"بدون اسم",
-photo:currentUser.photoURL||DEFAULT_PHOTO,
-image:image.data,
-imageName:image.name,
-imageType:image.type,
-time:firebase.database.ServerValue.TIMESTAMP
-});
-}catch(error){
-logError("إرسال الصورة",error);
-notify(error.message||errorMessage(error));
-}finally{
-uploading=false;
-el.imageBtn.disabled=false;
-el.imageInput.value="";
-}
-}
-
-function loadMobs(){
-const mobs=[
-{emoji:"🧟",name:"Zombie"},
-{emoji:"💣",name:"Creeper"},
-{emoji:"🕷️",name:"Spider"},
-{emoji:"💀",name:"Skeleton"},
-{emoji:"🔥",name:"Blaze"},
-{emoji:"🐷",name:"Piglin"},
-{emoji:"👁️",name:"Enderman"},
-{emoji:"🐉",name:"Dragon"},
-{emoji:"🐺",name:"Wolf"},
-{emoji:"🐱",name:"Cat"},
-{emoji:"🐝",name:"Bee"},
-{emoji:"🐼",name:"Panda"}
-];
-const container=$("mobList");
-if(!container)return;
-let selected;
-try{
-selected=JSON.parse(sessionStorage.getItem("savedMobs")||"null");
-}catch{
-selected=null;
-}
-if(!Array.isArray(selected)||selected.length!==3||!selected.every(m=>mobs.some(x=>x.name===m.name))){
-selected=[...mobs].sort(()=>Math.random()-.5).slice(0,3);
-try{sessionStorage.setItem("savedMobs",JSON.stringify(selected));}catch{}
-}
-container.replaceChildren();
-selected.forEach(mob=>{
-const chip=document.createElement("div");
-chip.className="mob";
-chip.textContent=mob.emoji+" "+mob.name;
-container.appendChild(chip);
-});
-}
-
-async function logout(){
-if(!currentUser||el.logoutBtn.disabled)return;
-el.logoutBtn.disabled=true;
-try{
-await auth.signOut();
-}catch(error){
-logError("تسجيل الخروج",error);
-notify(errorMessage(error));
-}finally{
-el.logoutBtn.disabled=false;
-}
-}
-
-/* ربط الأحداث مرة واحدة */
-el.loginBtn.addEventListener("click",login);
-el.githubLoginBtn.addEventListener("click",loginWithGitHub);
-el.logoutBtn.addEventListener("click",logout);
-el.form.addEventListener("submit",event=>{
-event.preventDefault();
-send();
-});
-el.imageBtn.addEventListener("click",()=>{
-if(currentUser&&!uploading)el.imageInput.click();
-});
-el.imageInput.addEventListener("change",()=>{
-const file=el.imageInput.files?.[0];
-if(file)uploadImage(file);
-});
-el.siteBtn.addEventListener("click",()=>{
-window.location.href="https://acrft.github.io/";
-});
-
-initAuth();
-
-
-
-const VIEWER_WORKER="https://still-frost-fc39.eldinalam91.workers.dev";
-const viewerBtn=$("viewerBtn");
-const viewerCode=$("viewerCode");
-
-if(viewerBtn&&viewerCode){
-viewerBtn.addEventListener("click",async()=>{
-const code=viewerCode.value.trim();
-if(!code){notify("اكتب كود المشاهدة");return;}
-viewerBtn.disabled=true;
-try{
-const response=await fetch(VIEWER_WORKER+"/messages",{
-method:"GET",
-headers:{"X-Viewer-Code":code}
-});
-const data=await response.json();
-if(!response.ok)throw new Error(data.error||"فشل الدخول");
-notify("تم التحقق من الدخول. عرض الرسائل يحتاج استكمال ربط الواجهة.");
-}catch(error){
-notify(error.message||"تعذر الاتصال بالـ Worker");
-}finally{
-viewerBtn.disabled=false;
-}
-});
-}
