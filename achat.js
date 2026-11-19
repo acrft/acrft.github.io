@@ -17,7 +17,7 @@ function toast(t) {
   const e = $("toast"); e.textContent = t; e.classList.add("show");
   clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove("show"), 3500);
 }
-function show(id) { ["login", "setup", "app"].forEach(s => $(s).hidden = s !== id); }
+function show(id) { ["login", "plink", "setup", "app"].forEach(s => $(s).hidden = s !== id); }
 async function api(path, body) {
   const r = await fetch(WORKER + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const d = await r.json().catch(() => ({}));
@@ -86,6 +86,8 @@ auth.onAuthStateChanged(user => {
   boot();
 });
 async function boot() {
+  const pn = await db.ref("userPhone/" + me.uid).once("value");
+  if (!pn.exists()) return show("plink");
   const s = await db.ref("users/" + me.uid).once("value");
   if (!s.exists()) { $("suName").value = me.displayName || ""; return show("setup"); }
   prof = s.val(); cache[me.uid] = { uid: me.uid, ...prof };
@@ -125,7 +127,8 @@ $("findIn").addEventListener("keydown", async e => {
   e.preventDefault();
   const q = e.target.value.trim().toLowerCase().replace(/^@/, "");
   if (!q) return;
-  const s = await db.ref("usernames/" + q).once("value");
+  const isP = /^\+?\d{8,15}$/.test(q);
+  const s = await db.ref(isP ? "phones/" + q.replace(/\D/g, "") : "usernames/" + q).once("value");
   if (!s.exists()) return toast("مفيش مستخدم بالاسم ده");
   if (s.val() === me.uid) return toast("ده حسابك 😄");
   e.target.value = ""; openChat(s.val());
@@ -193,3 +196,17 @@ $("pSave").onclick = async () => {
     $("meAv").src = prof.photo || NOAV; $("modal").hidden = true; toast("تم الحفظ ✅");
   } catch (e) { toast("تعذر الحفظ"); }
 };
+
+/* ---------- ربط رقم الهاتف ---------- */
+let lp = "";
+$("plBtn").onclick = async () => {
+  lp = $("plPhone").value.replace(/\D/g, "");
+  if (lp.length < 8) return toast("اكتب رقمك مع كود الدولة");
+  try { const d = await api("/otp/start", { phone: lp }); window.open(d.link, "_blank"); $("plBox").hidden = false; }
+  catch (e) { toast(e.message); }
+};
+$("plCodeBtn").onclick = async () => {
+  try { await api("/otp/link", { phone: lp, code: $("plCode").value.trim(), idToken: await me.getIdToken() }); boot(); }
+  catch (e) { toast(e.message); }
+};
+$("plOut").onclick = () => auth.signOut();
