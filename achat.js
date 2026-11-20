@@ -13,6 +13,7 @@ const TS = firebase.database.ServerValue.TIMESTAMP;
 
 let me = null, prof = null, peer = null, cur = null, msgRef = null, listRef = null, phone = "";
 const cache = {};
+let myPhone = "";
 
 function toast(t) {
   const e = $("toast"); e.textContent = t; e.classList.add("show");
@@ -49,14 +50,26 @@ const fmt = t => t ? new Date(t).toLocaleTimeString("ar-EG", { hour: "2-digit", 
 /* ---------- تسجيل الدخول ---------- */
 async function social(provider) {
   try { await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); await auth.signInWithPopup(provider); }
-  catch (e) { if (!/popup-closed|cancelled/.test(e.code || "")) toast(e.message || "فشل الدخول"); }
+  catch (e) {
+    if (e.code === "auth/account-exists-with-different-credential") {
+      try {
+        const first = (await auth.fetchSignInMethodsForEmail(e.email))[0];
+        const p = first === "google.com" ? new firebase.auth.GoogleAuthProvider() : first === "github.com" ? new firebase.auth.GithubAuthProvider() : null;
+        if (!p) return toast("الإيميل ده مسجل بطريقة تانية. سجّل بيها وبعدين اربط من البروفايل");
+        toast("سجّل بالطريقة الأصلية عشان نربط الحسابين");
+        const r = await auth.signInWithPopup(p); await r.user.linkWithCredential(e.credential);
+      } catch (x) { toast(x.message || "فشل الربط"); }
+      return;
+    }
+    if (!/popup-closed|cancelled/.test(e.code || "")) toast(e.message || "فشل الدخول");
+  }
 }
 $("googleBtn").onclick = () => social(new firebase.auth.GoogleAuthProvider());
 $("githubBtn").onclick = () => social(new firebase.auth.GithubAuthProvider());
 $("phoneBtn").onclick = async () => {
   phone = $("phoneIn").value.replace(/\D/g, "");
   if (phone.length < 8) return toast("اكتب رقمك مع كود الدولة");
-  try { const d = await api("/otp/start", { phone }); window.open(d.link, "_blank"); $("codeBox").hidden = false; }
+  try { const d = await api("/otp/start", { phone }); if (d.link) window.open(d.link, "_blank"); else toast("اتبعتلك الكود على تلجرام ✅"); $("codeBox").hidden = false; }
   catch (e) { toast(e.message); }
 };
 $("codeBtn").onclick = async () => {
@@ -87,8 +100,7 @@ auth.onAuthStateChanged(user => {
   boot();
 });
 async function boot() {
-  const pn = await db.ref("userPhone/" + me.uid).once("value");
-  if (!pn.exists()) return show("plink");
+  myPhone = (await db.ref("userPhone/" + me.uid).once("value")).val() || "";
   const s = await db.ref("users/" + me.uid).once("value");
   if (!s.exists()) { $("suName").value = me.displayName || ""; return show("setup"); }
   prof = s.val(); cache[me.uid] = { uid: me.uid, ...prof };
@@ -189,9 +201,26 @@ $("imgIn").onchange = async e => {
 
 /* ---------- البروفايل ---------- */
 let newPhoto = null;
+function renderLinked() {
+  const box = $("linked"); box.replaceChildren();
+  const ids = (auth.currentUser.providerData || []).map(x => x.providerId);
+  [["google.com", "Google", () => new firebase.auth.GoogleAuthProvider()], ["github.com", "GitHub", () => new firebase.auth.GithubAuthProvider()]].forEach(([id, name, mk]) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "btn ghost";
+    b.textContent = ids.includes(id) ? "✅ " + name + " مربوط" : "ربط حساب " + name; b.disabled = ids.includes(id);
+    b.onclick = async () => {
+      try { await auth.currentUser.linkWithPopup(mk()); toast("تم الربط ✅"); renderLinked(); }
+      catch (e) { toast(e.code === "auth/credential-already-in-use" ? "الحساب ده مربوط بحساب تاني في علم شات" : (e.message || "فشل الربط")); }
+    };
+    box.append(b);
+  });
+  const pb = document.createElement("button"); pb.type = "button"; pb.className = "btn ghost"; pb.disabled = !!myPhone;
+  pb.textContent = myPhone ? "✅ الهاتف +" + myPhone : "ربط رقم هاتف (اختياري)";
+  pb.onclick = () => { $("modal").hidden = true; show("plink"); };
+  box.append(pb);
+}
 $("profBtn").onclick = () => {
   newPhoto = null; $("pAv").src = prof.photo || NOAV; $("pName").value = prof.name;
-  $("pBio").value = prof.bio || ""; $("pUser").textContent = "@" + prof.username; $("modal").hidden = false;
+  $("pBio").value = prof.bio || ""; $("pUserIn").value = prof.username; renderLinked(); $("modal").hidden = false;
 };
 $("pClose").onclick = () => $("modal").hidden = true;
 $("pPhoto").onclick = () => $("pPhotoIn").click();
@@ -201,23 +230,34 @@ $("pPhotoIn").onchange = async e => {
 $("pSave").onclick = async () => {
   const up = { name: $("pName").value.trim() || prof.name, bio: $("pBio").value.trim() };
   if (newPhoto) up.photo = newPhoto;
+  const nu = $("pUserIn").value.trim().toLowerCase().replace(/^@/, ""), old = prof.username;
   try {
+    if (nu !== old) {
+      if (!/^[a-z0-9_]{3,20}$/.test(nu)) return toast("اليوزر 3-20 حرف: إنجليزي وأرقام و _");
+      const r = await db.ref("usernames/" + nu).transaction(v => v === null ? me.uid : undefined);
+      if (!r.committed) return toast("اليوزر مستخدم، جرّب غيره");
+      up.username = nu;
+    }
     await db.ref("users/" + me.uid).update(up);
+    if (up.username) await db.ref("usernames/" + old).remove();
     prof = { ...prof, ...up }; cache[me.uid] = { uid: me.uid, ...prof };
     $("meAv").src = prof.photo || NOAV; $("modal").hidden = true; toast("تم الحفظ ✅");
   } catch (e) { toast("تعذر الحفظ"); }
 };
 
-/* ---------- ربط رقم الهاتف ---------- */
+/* ---------- ربط رقم الهاتف (اختياري) ---------- */
 let lp = "";
 $("plBtn").onclick = async () => {
   lp = $("plPhone").value.replace(/\D/g, "");
   if (lp.length < 8) return toast("اكتب رقمك مع كود الدولة");
-  try { const d = await api("/otp/start", { phone: lp }); window.open(d.link, "_blank"); $("plBox").hidden = false; }
+  try { const d = await api("/otp/start", { phone: lp }); if (d.link) window.open(d.link, "_blank"); else toast("اتبعتلك الكود على تلجرام ✅"); $("plBox").hidden = false; }
   catch (e) { toast(e.message); }
 };
 $("plCodeBtn").onclick = async () => {
-  try { await api("/otp/link", { phone: lp, code: $("plCode").value.trim(), idToken: await me.getIdToken() }); boot(); }
-  catch (e) { toast(e.message); }
+  try {
+    await api("/otp/link", { phone: lp, code: $("plCode").value.trim(), idToken: await auth.currentUser.getIdToken() });
+    myPhone = lp; $("plBox").hidden = true; $("plCode").value = ""; toast("تم ربط الرقم ✅");
+    show("app"); renderLinked(); $("modal").hidden = false;
+  } catch (e) { toast(e.message); }
 };
-$("plOut").onclick = () => auth.signOut();
+$("plOut").onclick = () => show("app");
