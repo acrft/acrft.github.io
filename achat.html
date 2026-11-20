@@ -4,9 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07130f">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="AlamChat - منصة دردشة للتواصل ومشاركة الرسائل والصور بسهولة.">
 <title>AlamChat | علم شات</title>
 <link rel="icon" href="https://acrft.github.io/images/achat.png">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap"></noscript>
 <link rel="stylesheet" href="achat.css">
 <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -16,9 +22,9 @@
 <body>
 <div id="toast"></div>
 
-<section id="login" class="center" hidden>
+<main id="login" class="center" hidden>
   <div class="card">
-    <img class="logo" src="https://acrft.github.io/images/achat.png" alt="AlamChat">
+    <img class="logo" src="https://acrft.github.io/images/achat.png" alt="AlamChat" width="84" height="84" decoding="async">
     <h1>Alam<span>Chat</span></h1>
     <p class="muted">عالمك، محادثاتك، في مكان واحد</p>
     <button id="googleBtn" class="btn">تسجيل الدخول باستخدام Google</button>
@@ -32,9 +38,9 @@
       <button id="codeBtn" class="btn">تأكيد الكود</button>
     </div>
   </div>
-</section>
+</main>
 
-<section id="plink" class="center" hidden>
+<main id="plink" class="center" hidden>
   <div class="card">
     <h2>ربط رقم الهاتف</h2>
     <p class="muted small">اختياري. هيوصلك كود التأكيد على بوت تلجرام.</p>
@@ -46,9 +52,9 @@
     </div>
     <button id="plOut" class="btn ghost">رجوع</button>
   </div>
-</section>
+</main>
 
-<section id="setup" class="center" hidden>
+<main id="setup" class="center" hidden>
   <div class="card">
     <h2>أنشئ ملفك الشخصي</h2>
     <input id="suName" maxlength="30" placeholder="الاسم">
@@ -57,7 +63,7 @@
     <button id="suBtn" class="btn">ابدأ</button>
     <button id="suOut" class="btn ghost">خروج</button>
   </div>
-</section>
+</main>
 
 <section id="app" class="app" hidden>
   <aside class="side">
